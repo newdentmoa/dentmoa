@@ -27,6 +27,12 @@ class Institution:
     homepage: str = ""
     recruit_url: str = ""
     operator: str = ""
+    watch: bool = True  # 채용 게시판을 직접 확인할지
+
+    @property
+    def inst_type(self) -> str:
+        """분류 체계(taxonomy.INST_TYPES)의 기관 종류."""
+        return {"dental_school": "dental_univ_hospital"}.get(self.kind, self.kind)
 
 
 @lru_cache(maxsize=1)
@@ -46,6 +52,7 @@ def load() -> list[Institution]:
                 homepage=item.get("homepage", ""),
                 recruit_url=item.get("recruit_url", ""),
                 operator=item.get("operator", ""),
+                watch=bool(item.get("watch", True)),
             )
         )
     return out

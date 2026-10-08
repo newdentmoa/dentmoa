@@ -195,7 +195,7 @@ def detect_inst(title: str, hint: str, body: str, *, scope_body: bool, default: 
         probe += "\n" + body[:600]
     inst = institutions.find(probe)
     if inst:
-        return inst.kind, inst.name, f"기관 목록: {inst.name}"
+        return inst.inst_type, inst.name, f"기관 목록: {inst.name}"
 
     for kind, rx in INST_RULES:
         if kind == "dental_clinic" and scope_body:
@@ -239,6 +239,7 @@ CONTRACT_RE = re.compile(
     r"촉탁(?:의|\s*의사|\s*치과의사|\s*전문의|직)?|계약직|임기제|시간\s*선택제|시간제\s*(?:의사|치과의사|전문의|공무원)|"
     r"기간제\s*(?:의사|치과의사|전문의)|의무\s*(?:사무관|직)|공무원"
 )
+STAFF_STRONG_RE = re.compile(r"봉직의?|페이\s*닥터|페닥|진료\s*원장|부원장|월급\s*원장|급여\s*원장")
 STAFF_RE = re.compile(
     r"봉직의?|페이\s*닥터|페닥|진료\s*원장|부원장|월급\s*원장|급여\s*원장|"
     r"원장님?\s*(?:을|를)?\s*(?:모십니다|모셔요|모심|모십|모시|구합니다|구해요|구함|구인|모집|초빙|찾습니다|찾아요|찾음)|"
@@ -273,6 +274,10 @@ def detect_positions(text: str, c: Classification) -> list[str]:
         if m:
             found.append(key)
             c.note("positions", m.group(0))
+    # '선생님 모집' 같은 일반 표현만으로 잡힌 봉직의는, 더 구체적인 직위가 있으면 뺀다
+    specific = {"faculty", "clinical_professor", "fellow", "contract", "resident"}
+    if "staff_dentist" in found and specific.intersection(found) and not STAFF_STRONG_RE.search(work):
+        found.remove("staff_dentist")
     return list(dict.fromkeys(found))
 
 
@@ -442,7 +447,7 @@ def _record(key, role, snippet, targets, hints, negated, c):
 
 LOCUM_RE = re.compile(r"대진(?!대)")
 PART_RE = re.compile(
-    r"파트\s*타임|파트(?:\s*(?:원장|구인|근무|진료|모집|가능|로))|\bpart\s*-?\s*time\b|\bpart\b|"
+    r"파트\s*타임|(?<![가-힣])파트(?!너|장)|\bpart\s*-?\s*time\b|\bpart\b|"
     r"주\s*[1-3]\s*(?:일|회|번)|주\s*[1-3]\s*[~\-]\s*[1-3]\s*(?:일|회)|요일제|시간제|시간\s*선택제|반일|오전만|오후만|"
     r"(?:토요일?|일요일?|야간)\s*(?:만|파트|전담)|하루\s*(?:만|근무)|단기\s*(?:근무|알바)|알바",
     re.I,

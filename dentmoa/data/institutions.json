@@ -1,1 +1,2527 @@
-[]
+[
+ {
+  "name": "강동경희대학교치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "서울",
+  "sigungu": "강동구",
+  "aliases": [
+   "강동경희대치과병원",
+   "강동경희대학교병원 치과병원",
+   "강동경희대학교치과병원",
+   "강동경희치과"
+  ],
+  "homepage": "https://dent.khnmc.or.kr/",
+  "recruit_url": "https://www.khnmc.or.kr/recruit/recruit01.do",
+  "watch": true,
+  "operator": "강동경희대학교병원",
+  "note": "own board (강동경희대학교병원 채용정보; also https://recruit.khnmc.or.kr/bbs/bbsHubList.do?bi"
+ },
+ {
+  "name": "경희대학교치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "서울",
+  "sigungu": "동대문구",
+  "aliases": [
+   "경희대치과병원",
+   "경희대학교 치과병원",
+   "경희대학교치과병원",
+   "경희의료원 치과병원",
+   "경희치대병원",
+   "회기 경희치과"
+  ],
+  "homepage": "https://dent.khmc.or.kr/",
+  "recruit_url": "https://recruit.incruit.com/khmc/job/",
+  "watch": false,
+  "operator": "경희의료원",
+  "note": "incruit (경희의료원 채용; older posts used khmc.recruiter.co.kr)"
+ },
+ {
+  "name": "관악서울대학교치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "서울",
+  "sigungu": "관악구",
+  "aliases": [
+   "관악 서울대치과",
+   "관악SNUDH",
+   "관악서울대치과병원",
+   "관악서울대학교치과병원",
+   "서울대치과병원 관악분원"
+  ],
+  "homepage": "https://www.snudh.org/",
+  "recruit_url": "https://www.snudh.org/portal/blindEmpmn/list.do?menuNo=29060337",
+  "watch": false,
+  "operator": "서울대학교치과병원",
+  "note": "서울대학교치과병원 통합 채용 (snudh.org board + snudh.recruiter.co.kr) / 게시판 공유: 서울대학교치과병원"
+ },
+ {
+  "name": "서울대학교치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "서울",
+  "sigungu": "종로구",
+  "aliases": [
+   "SNUDH",
+   "서울대 치과병원",
+   "서울대치과",
+   "서울대치과병원",
+   "서울대학교 치과병원",
+   "서울대학교치과병원",
+   "서울치대병원"
+  ],
+  "homepage": "https://www.snudh.org/",
+  "recruit_url": "https://www.snudh.org/portal/blindEmpmn/list.do?menuNo=29060337",
+  "watch": true,
+  "operator": "",
+  "note": "own board (snudh.org 채용공고) + recruiter.co.kr (https://snudh.recruiter.co.kr/) fo"
+ },
+ {
+  "name": "연세대학교 치과대학병원",
+  "kind": "dental_univ_hospital",
+  "sido": "서울",
+  "sigungu": "서대문구",
+  "aliases": [
+   "세브란스 치과병원",
+   "세브란스치과병원",
+   "신촌 치과대학병원",
+   "연세대 치과병원",
+   "연세대치과대학병원",
+   "연세대치과병원",
+   "연세대학교치과대학병원",
+   "연세대학교치과병원",
+   "연세치대병원",
+   "치과대학병원(신촌)"
+  ],
+  "homepage": "https://dental.severance.healthcare/dental/index.do",
+  "recruit_url": "https://recruit.severance.healthcare/recruit/recruit.do",
+  "watch": false,
+  "operator": "연세대학교 의료원",
+  "note": "own (연세의료원 세브란스 채용 포털; filter 치과대학병원; notices at https://recruit.severance.healt"
+ },
+ {
+  "name": "경북대학교치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "대구",
+  "sigungu": "중구",
+  "aliases": [
+   "KNUDH",
+   "경북대치과병원",
+   "경북대학교 치과병원",
+   "경북대학교치과병원",
+   "경북치대병원"
+  ],
+  "homepage": "https://knudh.kr/",
+  "recruit_url": "https://knudh.kr/content/05info/02_01.php",
+  "watch": true,
+  "operator": "",
+  "note": "own board (채용공고, 800+ posts) + 잡알리오"
+ },
+ {
+  "name": "전남대학교치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "광주",
+  "sigungu": "북구",
+  "aliases": [
+   "CNUDH",
+   "전남대치과병원",
+   "전남대학교 치과병원",
+   "전남대학교치과병원",
+   "전남치대병원"
+  ],
+  "homepage": "https://www.cnudh.co.kr/main.cs",
+  "recruit_url": "https://www.cnudh.co.kr/board/B0057.cs",
+  "watch": true,
+  "operator": "",
+  "note": "잡알리오 + own board (공지/소식 B0057) + shared CNUH CMS 채용 board (https://www.cnuh.com/"
+ },
+ {
+  "name": "조선대학교치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "광주",
+  "sigungu": "동구",
+  "aliases": [
+   "조선대치과병원",
+   "조선대학교 치과병원",
+   "조선대학교부속치과병원",
+   "조선대학교치과병원",
+   "조선치대병원"
+  ],
+  "homepage": "",
+  "recruit_url": "https://www3.chosun.ac.kr/chosun/219/subview.do",
+  "watch": true,
+  "operator": "",
+  "note": "조선대학교 교내채용 board (posts prefixed '[조선대학교치과병원]'); occasionally the 조선대병원 board ht"
+ },
+ {
+  "name": "원광대학교 대전치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "대전",
+  "sigungu": "서구",
+  "aliases": [
+   "대전 원광치과",
+   "원광대 대전치과병원",
+   "원광대대전치과병원",
+   "원광대학교 치과대학 대전치과병원",
+   "원광대학교대전치과병원"
+  ],
+  "homepage": "http://www.wkudh.ac.kr/",
+  "recruit_url": "http://www.wkudh.ac.kr/gnuwd2/bbs/board.php?bo_table=notice",
+  "watch": true,
+  "operator": "원광대학교 치과대학",
+  "note": "own board (gnuboard '공지 및 채용')"
+ },
+ {
+  "name": "단국대학교 세종치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "세종",
+  "sigungu": "",
+  "aliases": [
+   "단국대 세종치과병원",
+   "단국대세종치과병원",
+   "단국대학교세종치과병원",
+   "단대 세종치과",
+   "세종치과병원"
+  ],
+  "homepage": "https://sjdh.dankook.ac.kr/",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "단국대학교 (치과대학 부속치과병원 세종분원)",
+  "note": "own site (병원소식 > 채용정보 / 상시채용 menus; 새소식 also carries 채용 posts)"
+ },
+ {
+  "name": "단국대학교 치과대학 죽전치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "경기",
+  "sigungu": "용인시",
+  "aliases": [
+   "단국대 죽전치과병원",
+   "단국대치과대학죽전치과병원",
+   "단국대학교 죽전치과병원",
+   "단국대학교치과대학죽전치과병원",
+   "단대 죽전치과",
+   "죽전치과병원"
+  ],
+  "homepage": "http://dkdh.dankook.ac.kr/",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "단국대학교",
+  "note": "unknown (likely own board, plus apply.dankook.ac.kr 치과병원 menu)"
+ },
+ {
+  "name": "원광대학교 산본치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "경기",
+  "sigungu": "군포시",
+  "aliases": [
+   "산본치과병원",
+   "원광대 산본치과병원",
+   "원광대산본치과병원",
+   "원광대학교산본치과병원",
+   "원광대학교치과대학 산본치과병원"
+  ],
+  "homepage": "https://sbdh.co.kr/",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "원광대학교 치과대학",
+  "note": "own site (board tot.*.asp, 채용 category sc_gubun=4)"
+ },
+ {
+  "name": "강원대학교치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "강원",
+  "sigungu": "강릉시",
+  "aliases": [
+   "GWNUDH",
+   "강릉 치과대학병원",
+   "강릉원주대치과병원",
+   "강릉원주대학교치과병원",
+   "강원대치과병원",
+   "강원대학교치과병원"
+  ],
+  "homepage": "https://www.gwnudh.or.kr/default.asp",
+  "recruit_url": "https://www.gwnudh.or.kr/default.asp",
+  "watch": true,
+  "operator": "",
+  "note": "own homepage 공지사항 (직원 모집 posts) + 잡알리오"
+ },
+ {
+  "name": "단국대학교치과대학병원",
+  "kind": "dental_univ_hospital",
+  "sido": "충남",
+  "sigungu": "천안시",
+  "aliases": [
+   "단국대 천안치과병원",
+   "단국대치과대학병원",
+   "단국대치과병원",
+   "단국대학교 치과병원",
+   "단국대학교치과대학병원",
+   "단대치과병원",
+   "천안 단국대치과"
+  ],
+  "homepage": "https://dudh.dankook.ac.kr/",
+  "recruit_url": "https://dudh.dankook.ac.kr/board/bbs/board.php?bo_table=incruit",
+  "watch": true,
+  "operator": "",
+  "note": "own board (gnuboard bo_table=incruit) + 단국대 교직원채용 '법인/산단/치과병원' menu (https://app"
+ },
+ {
+  "name": "원광대학교치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "전북",
+  "sigungu": "익산시",
+  "aliases": [
+   "원광대치과병원",
+   "원광대학교 익산치과병원",
+   "원광대학교 치과대학병원",
+   "원광대학교치과병원",
+   "원광치대병원",
+   "익산 원광대치과"
+  ],
+  "homepage": "http://www.wkdh.ac.kr/",
+  "recruit_url": "http://www.wkdh.ac.kr/?sid=sub06_6",
+  "watch": true,
+  "operator": "",
+  "note": "own board (고객센터 > 채용공고)"
+ },
+ {
+  "name": "전북대학교치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "전북",
+  "sigungu": "전주시",
+  "aliases": [
+   "전북대병원 치과병원",
+   "전북대치과병원",
+   "전북대학교병원 치과병원",
+   "전북대학교치과병원",
+   "전북치대병원"
+  ],
+  "homepage": "https://www.jbuh.co.kr/dent.do",
+  "recruit_url": "https://www.jbuh.co.kr/bbs/BBSMSTR_000000000124/list.do",
+  "watch": true,
+  "operator": "전북대학교병원",
+  "note": "own board (치과병원 > 병원소식 > 채용공고) + 전북대학교병원 채용 (https://www.jbuh.co.kr/cuh/employ/)"
+ },
+ {
+  "name": "부산대학교치과병원",
+  "kind": "dental_univ_hospital",
+  "sido": "경남",
+  "sigungu": "양산시",
+  "aliases": [
+   "PNUDH",
+   "부산대치과병원",
+   "부산대학교 치과병원",
+   "부산대학교치과병원",
+   "부산치대병원",
+   "양산 부산대치과병원"
+  ],
+  "homepage": "https://www.pnudh.co.kr/",
+  "recruit_url": "https://www.pnudh.co.kr/pnudh/board/list.do?cmnx=29",
+  "watch": true,
+  "operator": "",
+  "note": "own board (열린공간 > 채용정보) + 잡알리오"
+ },
+ {
+  "name": "경희대학교 치과대학",
+  "kind": "dental_school",
+  "sido": "서울",
+  "sigungu": "동대문구",
+  "aliases": [
+   "경희대 치과대학",
+   "경희대 치의학전문대학원",
+   "경희대치과대학",
+   "경희대학교치과대학",
+   "경희치대"
+  ],
+  "homepage": "https://dental.khu.ac.kr/",
+  "recruit_url": "https://k-recruit.khu.ac.kr/hjis2/professor/board_list2.jsp",
+  "watch": false,
+  "operator": "",
+  "note": "경희대 교직원채용 (k-recruit; 교원채용(전임) / 비전임·강사)"
+ },
+ {
+  "name": "서울대학교 치의학대학원",
+  "kind": "dental_school",
+  "sido": "서울",
+  "sigungu": "종로구",
+  "aliases": [
+   "SNU School of Dentistry",
+   "서울대 치의학대학원",
+   "서울대치의학대학원",
+   "서울대학교치의학대학원",
+   "서울치대"
+  ],
+  "homepage": "https://dentistry.snu.ac.kr/",
+  "recruit_url": "https://dentistry.snu.ac.kr/fnt/nac/selectNoticeList.do?bbsId=BBS_0000000000001",
+  "watch": true,
+  "operator": "",
+  "note": "own notice board + SNU 교원채용 (https://facultyrecruitment.snu.ac.kr ; SHINE https:"
+ },
+ {
+  "name": "연세대학교 치과대학",
+  "kind": "dental_school",
+  "sido": "서울",
+  "sigungu": "서대문구",
+  "aliases": [
+   "연세대 치과대학",
+   "연세대치과대학",
+   "연세대학교치과대학",
+   "연세치대"
+  ],
+  "homepage": "https://dentistry.yonsei.ac.kr/dentistry/index.do",
+  "recruit_url": "https://dentistry.yonsei.ac.kr/dentistry/news/recruit.do",
+  "watch": true,
+  "operator": "",
+  "note": "own 채용공고 board (연구교수, 강사, 임상교수, 임상지도교원) + 연세대 교원채용 https://faculty.yonsei.ac.kr "
+ },
+ {
+  "name": "경북대학교 치과대학",
+  "kind": "dental_school",
+  "sido": "대구",
+  "sigungu": "중구",
+  "aliases": [
+   "경북대 치과대학",
+   "경북대 치의학전문대학원",
+   "경북대치과대학",
+   "경북대학교치과대학",
+   "경북치대"
+  ],
+  "homepage": "https://dent.knu.ac.kr/",
+  "recruit_url": "https://prad.knu.ac.kr/hmpg/main/main.knu",
+  "watch": false,
+  "operator": "",
+  "note": "경북대 교수초빙 홈페이지 (prad) + 경북대채용 board (https://www.knu.ac.kr/wbbs/wbbs/bbs/btin/lis"
+ },
+ {
+  "name": "전남대학교 치의학전문대학원",
+  "kind": "dental_school",
+  "sido": "광주",
+  "sigungu": "북구",
+  "aliases": [
+   "전남대 치전원",
+   "전남대치의학전문대학원",
+   "전남대학교치의학전문대학원",
+   "전남치대",
+   "전남치전원"
+  ],
+  "homepage": "https://dent.jnu.ac.kr/sites/dent/index.do",
+  "recruit_url": "https://hangj.jnu.ac.kr/ICIW/",
+  "watch": false,
+  "operator": "",
+  "note": "전남대 교원공채 시스템 (ICIW)"
+ },
+ {
+  "name": "조선대학교 치과대학",
+  "kind": "dental_school",
+  "sido": "광주",
+  "sigungu": "동구",
+  "aliases": [
+   "조선대 치과대학",
+   "조선대 치의학전문대학원",
+   "조선대치과대학",
+   "조선대학교치과대학",
+   "조선치대"
+  ],
+  "homepage": "https://dentistry.chosun.ac.kr/dentistry/index.do",
+  "recruit_url": "https://www3.chosun.ac.kr/chosun/633/subview.do",
+  "watch": true,
+  "operator": "",
+  "note": "조선대 전임교원채용 board + 교원임용 site https://pr.chosun.ac.kr/ ; 비전임 https://www3.chosun."
+ },
+ {
+  "name": "강원대학교 치과대학",
+  "kind": "dental_school",
+  "sido": "강원",
+  "sigungu": "강릉시",
+  "aliases": [
+   "강릉원주대학교 치과대학",
+   "강릉원주치대",
+   "강원대 치과대학",
+   "강원대치과대학",
+   "강원대학교치과대학",
+   "강원치대"
+  ],
+  "homepage": "https://dentistry.gwnu.ac.kr/dentistry/",
+  "recruit_url": "https://faculty.kangwon.ac.kr/bbs/board.php?bo_table=notice",
+  "watch": true,
+  "operator": "",
+  "note": "강원대 교원채용 홈페이지 (faculty.kangwon.ac.kr); pre-merger: https://professorrecruit.gwnu"
+ },
+ {
+  "name": "단국대학교 치과대학",
+  "kind": "dental_school",
+  "sido": "충남",
+  "sigungu": "천안시",
+  "aliases": [
+   "단국대 치과대학",
+   "단국대치과대학",
+   "단국대학교치과대학",
+   "단국치대"
+  ],
+  "homepage": "https://cms.dankook.ac.kr/ko/web/dentistry",
+  "recruit_url": "https://apply.dankook.ac.kr/tiad/empm/findEmplPannList.do",
+  "watch": false,
+  "operator": "",
+  "note": "단국대 교직원채용 (apply.dankook.ac.kr; 교원/직원/법인·산단·치과병원 menus)"
+ },
+ {
+  "name": "원광대학교 치과대학",
+  "kind": "dental_school",
+  "sido": "전북",
+  "sigungu": "익산시",
+  "aliases": [
+   "원광대 치과대학",
+   "원광대치과대학",
+   "원광대학교치과대학",
+   "원광치대"
+  ],
+  "homepage": "https://dentistry.wku.ac.kr/",
+  "recruit_url": "https://faculty.wku.ac.kr/InvProf/pool/pool_index.jsp",
+  "watch": false,
+  "operator": "",
+  "note": "원광대 교수초빙시스템 + 대학 채용공고 board https://www.wku.ac.kr/category/notice/recruit"
+ },
+ {
+  "name": "전북대학교 치과대학",
+  "kind": "dental_school",
+  "sido": "전북",
+  "sigungu": "전주시",
+  "aliases": [
+   "전북대 치과대학",
+   "전북대치과대학",
+   "전북대학교치과대학",
+   "전북치대"
+  ],
+  "homepage": "https://dent.jbnu.ac.kr/dent/index.do",
+  "recruit_url": "https://professor.jbnu.ac.kr/professor/2321/subview.do",
+  "watch": true,
+  "operator": "",
+  "note": "전북대 교수초빙안내 + 교내채용 board https://www.jbnu.ac.kr/web/news/notice/sub03.do (치과대학 외래"
+ },
+ {
+  "name": "부산대학교 치의학전문대학원",
+  "kind": "dental_school",
+  "sido": "경남",
+  "sigungu": "양산시",
+  "aliases": [
+   "부산대 치전원",
+   "부산대치의학전문대학원",
+   "부산대학교치의학전문대학원",
+   "부산치대",
+   "부산치전원"
+  ],
+  "homepage": "https://dent.pusan.ac.kr/newdent/",
+  "recruit_url": "https://ppes.pusan.ac.kr/",
+  "watch": false,
+  "operator": "",
+  "note": "부산대 교원초빙 site + 교수초빙/직원채용 board https://www.pusan.ac.kr/kor/CMS/Board/Board.do?m"
+ },
+ {
+  "name": "국립재활원",
+  "kind": "disabled_dental",
+  "sido": "서울",
+  "sigungu": "강북구",
+  "aliases": [
+   "국립재활원",
+   "국립재활원 치과"
+  ],
+  "homepage": "https://www.nrc.go.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "보건복지부 국립재활원",
+  "note": "나라일터 (gojobs.go.kr) + 국립재활원 own notice board"
+ },
+ {
+  "name": "서울시 장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "서울",
+  "sigungu": "서대문구",
+  "aliases": [
+   "서울권역장애인구강진료센터",
+   "서울시장애인구강진료센터",
+   "세브란스 치과 장애인진료센터",
+   "연세대치과병원 장애인구강진료센터"
+  ],
+  "homepage": "https://dental.severance.healthcare",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "연세대학교치과대학병원 (연세의료원)",
+  "note": "연세의료원 own recruitment site (exact URL unverified)"
+ },
+ {
+  "name": "서울특별시 서부장애인치과병원",
+  "kind": "disabled_dental",
+  "sido": "서울",
+  "sigungu": "강서구",
+  "aliases": [
+   "서부장애인치과병원",
+   "서울 서부 장애인치과",
+   "서울시 서부장애인치과병원",
+   "서울시 제2장애인치과병원",
+   "서울시서부장애인치과병원",
+   "서울특별시서부장애인치과병원"
+  ],
+  "homepage": "",
+  "recruit_url": "https://snudh.recruiter.co.kr/",
+  "watch": false,
+  "operator": "서울대학교치과병원 (서울시 위탁)",
+  "note": "recruiter.co.kr (서울대치과병원 채용사이트)"
+ },
+ {
+  "name": "서울특별시장애인치과병원",
+  "kind": "disabled_dental",
+  "sido": "서울",
+  "sigungu": "성동구",
+  "aliases": [
+   "서울시 장애인치과병원",
+   "서울시립장애인치과병원",
+   "서울시장애인치과병원",
+   "서울장애인치과병원",
+   "서울특별시장애인치과병원",
+   "시립장애인치과병원"
+  ],
+  "homepage": "",
+  "recruit_url": "https://snudh.recruiter.co.kr/",
+  "watch": false,
+  "operator": "서울대학교치과병원 (서울시 위탁)",
+  "note": "recruiter.co.kr (서울대치과병원 채용사이트)"
+ },
+ {
+  "name": "중앙장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "서울",
+  "sigungu": "종로구",
+  "aliases": [
+   "SNUDH 장애인치과",
+   "서울대치과병원 장애인구강진료센터",
+   "중앙센터",
+   "중앙장애인구강진료센터"
+  ],
+  "homepage": "https://sndcc.org",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "서울대학교치과병원",
+  "note": "서울대학교치과병원 own board + 잡알리오 (hiring is done by SNUDH)"
+ },
+ {
+  "name": "부산권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "부산",
+  "sigungu": "서구",
+  "aliases": [
+   "부산권역 장애인구강진료센터",
+   "부산권역장애인구강진료센터",
+   "부산대병원 장애인구강진료센터"
+  ],
+  "homepage": "https://www.pnuh.or.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "부산대학교병원",
+  "note": "부산대학교병원 own board + 잡알리오"
+ },
+ {
+  "name": "대구권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "대구",
+  "sigungu": "중구",
+  "aliases": [
+   "경북대치과병원 장애인구강진료센터",
+   "대구권역 장애인구강진료센터",
+   "대구권역장애인구강진료센터"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "경북대학교치과병원",
+  "note": "경북대학교치과병원 own board + 잡알리오"
+ },
+ {
+  "name": "인천권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "인천",
+  "sigungu": "남동구",
+  "aliases": [
+   "가천대 길병원 치과병원",
+   "길병원 장애인구강진료센터",
+   "인천권역 장애인구강진료센터",
+   "인천권역장애인구강진료센터"
+  ],
+  "homepage": "https://www.gilhospital.com",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "가천대길병원 (가천대학교)",
+  "note": "가천대길병원 own recruitment (unverified)"
+ },
+ {
+  "name": "광주권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "광주",
+  "sigungu": "북구",
+  "aliases": [
+   "광주·전남권역장애인구강진료센터",
+   "광주권역장애인구강진료센터",
+   "전남대치과병원 장애인구강진료센터"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "전남대학교치과병원",
+  "note": "전남대학교치과병원 own board + 잡알리오"
+ },
+ {
+  "name": "대전권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "대전",
+  "sigungu": "서구",
+  "aliases": [
+   "대전권역 장애인구강진료센터",
+   "대전권역장애인구강진료센터",
+   "원광대 대전치과병원 장애인구강진료센터"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "원광대학교 대전치과병원",
+  "note": "원광대학교치과병원 own board (unverified)"
+ },
+ {
+  "name": "울산권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "울산",
+  "sigungu": "동구",
+  "aliases": [
+   "울산권역 장애인구강진료센터",
+   "울산권역장애인구강진료센터",
+   "울산대병원 장애인구강진료센터"
+  ],
+  "homepage": "https://www.uuh.ulsan.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "울산대학교병원",
+  "note": "울산대학교병원 own board (unverified)"
+ },
+ {
+  "name": "세종권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "세종",
+  "sigungu": "",
+  "aliases": [
+   "단국대 세종치과병원",
+   "세종권역 장애인구강진료센터",
+   "세종권역장애인구강진료센터"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "단국대학교 치과대학 (세종치과병원)",
+  "note": "단국대학교치과병원 own board (unverified)"
+ },
+ {
+  "name": "경기권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "경기",
+  "sigungu": "용인시",
+  "aliases": [
+   "경기권역 장애인구강진료센터",
+   "경기권역장애인구강진료센터",
+   "경기장애인구강진료센터",
+   "단국대 죽전치과병원"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "단국대학교 죽전치과병원",
+  "note": "단국대학교치과병원 own board (unverified)"
+ },
+ {
+  "name": "경기도의료원 수원병원",
+  "kind": "disabled_dental",
+  "sido": "경기",
+  "sigungu": "수원시",
+  "aliases": [
+   "경기도의료원 수원병원 치과",
+   "경기도의료원 장애인치과",
+   "경기도의료원수원병원",
+   "수원의료원"
+  ],
+  "homepage": "https://www.medical.or.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "경기도의료원",
+  "note": "경기도의료원 own board + 클린아이 잡플러스 (unverified)"
+ },
+ {
+  "name": "경기도의료원 의정부병원",
+  "kind": "disabled_dental",
+  "sido": "경기",
+  "sigungu": "의정부시",
+  "aliases": [
+   "경기도의료원 의정부병원 치과",
+   "경기도의료원의정부병원",
+   "의정부의료원"
+  ],
+  "homepage": "https://www.medical.or.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "경기도의료원",
+  "note": "경기도의료원 own board + 클린아이 잡플러스 (unverified)"
+ },
+ {
+  "name": "강원권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "강원",
+  "sigungu": "강릉시",
+  "aliases": [
+   "강릉원주대치과병원 장애인구강진료센터",
+   "강원권역 장애인구강진료센터",
+   "강원권역장애인구강진료센터"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "강릉원주대학교치과병원",
+  "note": "강릉원주대학교치과병원 own board + 잡알리오"
+ },
+ {
+  "name": "충북권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "충북",
+  "sigungu": "청주시",
+  "aliases": [
+   "충북권역 장애인구강진료센터",
+   "충북권역장애인구강진료센터",
+   "한국병원 장애인구강진료센터"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "청주한국병원",
+  "note": "청주한국병원 own board / general job sites (unverified)"
+ },
+ {
+  "name": "충남권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "충남",
+  "sigungu": "천안시",
+  "aliases": [
+   "단국대치과병원 장애인구강진료센터",
+   "충남권역 장애인구강진료센터",
+   "충남권역장애인구강진료센터"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "단국대학교 치과병원 (천안)",
+  "note": "단국대학교치과병원 own board (unverified)"
+ },
+ {
+  "name": "전북권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "전북",
+  "sigungu": "전주시",
+  "aliases": [
+   "전북권역 장애인구강진료센터",
+   "전북권역장애인구강진료센터",
+   "전북대치과병원 장애인구강진료센터"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "전북대학교치과병원",
+  "note": "전북대학교치과병원 own board + 잡알리오"
+ },
+ {
+  "name": "전남권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "전남",
+  "sigungu": "순천시",
+  "aliases": [
+   "순천의료원 장애인구강진료센터",
+   "전남권역 장애인구강진료센터",
+   "전남권역장애인구강진료센터"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "순천의료원 (전라남도 지방의료원)",
+  "note": "순천의료원 own board + 클린아이 잡플러스 (지방공공기관) - unverified"
+ },
+ {
+  "name": "경북권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "경북",
+  "sigungu": "안동시",
+  "aliases": [
+   "경북권역 장애인구강진료센터",
+   "경북권역장애인구강진료센터",
+   "안동병원 장애인구강진료센터"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "안동병원 (학교법인/의료법인 강남; private)",
+  "note": "안동병원 own board / general job sites (unverified)"
+ },
+ {
+  "name": "경남권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "경남",
+  "sigungu": "양산시",
+  "aliases": [
+   "경남권역 장애인구강진료센터",
+   "경남권역장애인구강진료센터",
+   "부산대치과병원 장애인구강진료센터",
+   "양산 부산대치과병원"
+  ],
+  "homepage": "https://www.pnudh.co.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "부산대학교치과병원",
+  "note": "부산대학교치과병원 own board + 잡알리오"
+ },
+ {
+  "name": "제주권역장애인구강진료센터",
+  "kind": "disabled_dental",
+  "sido": "제주",
+  "sigungu": "제주시",
+  "aliases": [
+   "제주권역 장애인구강진료센터",
+   "제주권역장애인구강진료센터",
+   "제주대병원 장애인구강진료센터"
+  ],
+  "homepage": "https://www.jejunuh.co.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "제주대학교병원",
+  "note": "제주대학교병원 own board + 잡알리오"
+ },
+ {
+  "name": "가톨릭대학교 서울성모병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "서초구",
+  "aliases": [
+   "가톨릭대서울성모병원",
+   "가톨릭대학교서울성모병원",
+   "가톨릭중앙의료원",
+   "강남성모",
+   "서울성모",
+   "서울성모병원"
+  ],
+  "homepage": "https://www.cmcseoul.or.kr",
+  "recruit_url": "https://recruit.cmcnu.or.kr/cmcseoul/application/appList.do",
+  "watch": true,
+  "operator": "",
+  "note": "own (recruit.cmcnu.or.kr, 병원별 하위경로)"
+ },
+ {
+  "name": "가톨릭대학교 여의도성모병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "영등포구",
+  "aliases": [
+   "가톨릭대여의도성모병원",
+   "가톨릭대학교여의도성모병원",
+   "여의도성모",
+   "여의도성모병원"
+  ],
+  "homepage": "https://www.cmcsungmo.or.kr",
+  "recruit_url": "https://recruit.cmcnu.or.kr/cmcsungmo/application/appList.do",
+  "watch": true,
+  "operator": "",
+  "note": "own (recruit.cmcnu.or.kr)"
+ },
+ {
+  "name": "가톨릭대학교 은평성모병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "은평구",
+  "aliases": [
+   "가톨릭대은평성모병원",
+   "가톨릭대학교은평성모병원",
+   "은평성모",
+   "은평성모병원"
+  ],
+  "homepage": "https://www.cmcep.or.kr",
+  "recruit_url": "https://recruit.cmcnu.or.kr/cmcep/application/appList.do",
+  "watch": true,
+  "operator": "",
+  "note": "own (recruit.cmcnu.or.kr)"
+ },
+ {
+  "name": "강남세브란스병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "강남구",
+  "aliases": [
+   "강남세브란스",
+   "강남세브란스병원",
+   "연세대 강남세브란스"
+  ],
+  "homepage": "https://gs.severance.healthcare",
+  "recruit_url": "https://yuhs.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (yuhs)"
+ },
+ {
+  "name": "강남세브란스병원 치과병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "강남구",
+  "aliases": [
+   "강남세브란스 치과",
+   "강남세브란스 치과병원",
+   "강남세브란스병원치과병원"
+  ],
+  "homepage": "https://gs-dent.severance.healthcare/gs-dent/index.do",
+  "recruit_url": "https://recruit.severance.healthcare/recruit/recruit.do",
+  "watch": false,
+  "operator": "연세대학교 의료원",
+  "note": "own (연세의료원 세브란스 채용 포털, filter 강남세브란스)"
+ },
+ {
+  "name": "강동경희대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "강동구",
+  "aliases": [
+   "강동경희",
+   "강동경희대병원",
+   "강동경희대학교병원"
+  ],
+  "homepage": "https://www.khnmc.or.kr",
+  "recruit_url": "https://recruit.khnmc.or.kr/recruit/recruit01.do",
+  "watch": true,
+  "operator": "",
+  "note": "own (recruit.khnmc.or.kr)"
+ },
+ {
+  "name": "강동성심병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "강동구",
+  "aliases": [
+   "강동성심",
+   "강동성심병원",
+   "한림대강동성심병원"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "",
+  "note": "unknown (2015년엔 의료원 채용사이트로 지원하고 서류는 따로 제출)"
+ },
+ {
+  "name": "강북삼성병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "종로구",
+  "aliases": [
+   "KBSMC",
+   "강북삼성",
+   "강북삼성병원",
+   "성균관대 강북삼성병원"
+  ],
+  "homepage": "https://www.kbsmc.co.kr",
+  "recruit_url": "https://recruit.kbsmc.co.kr/jsp/recruit/recruitList.jsp",
+  "watch": true,
+  "operator": "",
+  "note": "own (recruit.kbsmc.co.kr, 의사직 카테고리)"
+ },
+ {
+  "name": "건국대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "광진구",
+  "aliases": [
+   "건국대병원",
+   "건국대학교병원",
+   "건대병원"
+  ],
+  "homepage": "https://www.kuh.ac.kr",
+  "recruit_url": "https://www.kuh.ac.kr/recruit/docApply/noticeList.do",
+  "watch": true,
+  "operator": "",
+  "note": "own board (의사직 채용공고 게시판 따로 있음)"
+ },
+ {
+  "name": "경희대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "동대문구",
+  "aliases": [
+   "KHMC",
+   "경희대병원",
+   "경희대학교병원",
+   "경희의료원"
+  ],
+  "homepage": "https://www.khmc.or.kr",
+  "recruit_url": "https://khmc.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (khmc)"
+ },
+ {
+  "name": "고려대학교 구로병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "구로구",
+  "aliases": [
+   "고대구로병원",
+   "고려대구로병원",
+   "고려대학교구로병원",
+   "구로병원"
+  ],
+  "homepage": "https://guro.kumc.or.kr",
+  "recruit_url": "https://kumc.recruiter.co.kr/career/job",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (kumc)"
+ },
+ {
+  "name": "고려대학교 안암병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "성북구",
+  "aliases": [
+   "KUMC",
+   "고대안암병원",
+   "고려대안암병원",
+   "고려대학교안암병원",
+   "고려대학교의료원",
+   "안암병원"
+  ],
+  "homepage": "https://anam.kumc.or.kr",
+  "recruit_url": "https://kumc.recruiter.co.kr/career/job",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (kumc); 구 시스템 recruit2.kumc.or.kr"
+ },
+ {
+  "name": "노원을지대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "노원구",
+  "aliases": [
+   "노원을지",
+   "노원을지대병원",
+   "노원을지대학교병원",
+   "을지대학교의료원",
+   "을지병원"
+  ],
+  "homepage": "https://www.eulji.or.kr",
+  "recruit_url": "https://www.eulji.or.kr/info/info_pg06_04.jsp",
+  "watch": true,
+  "operator": "",
+  "note": "own board (을지대학교의료원 인재채용)"
+ },
+ {
+  "name": "삼성서울병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "강남구",
+  "aliases": [
+   "삼성서울",
+   "삼성서울병원",
+   "성균관대 삼성서울병원"
+  ],
+  "homepage": "https://www.samsunghospital.com",
+  "recruit_url": "https://www.samsunghospital.com/home/recruit/recruitInfo/recruitNotice.do",
+  "watch": true,
+  "operator": "",
+  "note": "own board"
+ },
+ {
+  "name": "서울대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "종로구",
+  "aliases": [
+   "SNUH",
+   "서울대병원",
+   "서울대학교병원"
+  ],
+  "homepage": "https://www.snuh.org",
+  "recruit_url": "https://recruit.snuh.org/joining/recruit/list.do",
+  "watch": true,
+  "operator": "",
+  "note": "own (recruit.snuh.org)"
+ },
+ {
+  "name": "서울아산병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "송파구",
+  "aliases": [
+   "서울아산",
+   "서울아산병원",
+   "아산병원",
+   "울산대학교 서울아산병원"
+  ],
+  "homepage": "https://www.amc.seoul.kr",
+  "recruit_url": "https://recruit.amc.seoul.kr/recruit/career/list.do",
+  "watch": true,
+  "operator": "",
+  "note": "own board (recruit.amc.seoul.kr); 의사직 수련/전임의 안내는 교육수련실 edtr.amc.seoul.kr"
+ },
+ {
+  "name": "세브란스병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "서대문구",
+  "aliases": [
+   "YUHS",
+   "세브란스",
+   "세브란스병원",
+   "신촌세브란스",
+   "연세의료원"
+  ],
+  "homepage": "https://sev.severance.healthcare",
+  "recruit_url": "https://yuhs.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (yuhs.recruiter.co.kr); 의대 임상강사는 medicine.yonsei.ac.kr/medicine/"
+ },
+ {
+  "name": "순천향대학교 부속 서울병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "용산구",
+  "aliases": [
+   "순천향대부속서울병원",
+   "순천향대서울병원",
+   "순천향대학교부속서울병원",
+   "순천향대학교중앙의료원",
+   "순천향서울"
+  ],
+  "homepage": "https://www.schmc.ac.kr/seoul",
+  "recruit_url": "https://jobapplication.schmc.ac.kr/",
+  "watch": false,
+  "operator": "",
+  "note": "own (jobapplication.schmc.ac.kr, 병원별 필터)"
+ },
+ {
+  "name": "이화여자대학교 목동병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "양천구",
+  "aliases": [
+   "EUMC",
+   "이대목동",
+   "이대목동병원",
+   "이화여자대목동병원",
+   "이화여자대학교목동병원",
+   "이화의료원"
+  ],
+  "homepage": "https://mokdong.eumc.ac.kr",
+  "recruit_url": "https://www.eumc.ac.kr/intro/recrut/list.do",
+  "watch": true,
+  "operator": "",
+  "note": "own board (eumc.ac.kr/intro/recrut)"
+ },
+ {
+  "name": "이화여자대학교 서울병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "강서구",
+  "aliases": [
+   "이대서울",
+   "이대서울병원",
+   "이화여자대서울병원",
+   "이화여자대학교서울병원"
+  ],
+  "homepage": "https://seoul.eumc.ac.kr",
+  "recruit_url": "https://www.eumc.ac.kr/intro/recrut/list.do",
+  "watch": false,
+  "operator": "",
+  "note": "own board (eumc.ac.kr) / 게시판 공유: 이화여자대학교 목동병원"
+ },
+ {
+  "name": "인제대학교 상계백병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "노원구",
+  "aliases": [
+   "상계백병원",
+   "인제대상계백병원",
+   "인제대학교상계백병원"
+  ],
+  "homepage": "https://www.paik.ac.kr/sanggye",
+  "recruit_url": "https://paik.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (paik)"
+ },
+ {
+  "name": "중앙대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "동작구",
+  "aliases": [
+   "CAUH",
+   "중대병원",
+   "중앙대병원",
+   "중앙대학교병원",
+   "중앙대학교의료원"
+  ],
+  "homepage": "https://ch.cauhs.or.kr",
+  "recruit_url": "https://caumc.recruiter.co.kr/career/home",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (caumc); 구 사이트 recruit.caumc.or.kr"
+ },
+ {
+  "name": "한림대학교강남성심병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "영등포구",
+  "aliases": [
+   "강남성심병원",
+   "한림대강남성심",
+   "한림대강남성심병원",
+   "한림대학교강남성심병원"
+  ],
+  "homepage": "https://kangnam.hallym.or.kr",
+  "recruit_url": "https://kangnam.hallym.or.kr/hallymuniv_sub.asp?left_menu=left_news&screen=ptm200",
+  "watch": true,
+  "operator": "",
+  "note": "own board"
+ },
+ {
+  "name": "한양대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "서울",
+  "sigungu": "성동구",
+  "aliases": [
+   "HYUMC",
+   "한양대병원",
+   "한양대학교병원",
+   "한양대학교의료원"
+  ],
+  "homepage": "https://seoul.hyumc.com",
+  "recruit_url": "https://hyumc.recruiter.co.kr/career/home",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (hyumc), '교수직' 카테고리 있음"
+ },
+ {
+  "name": "고신대학교복음병원",
+  "kind": "univ_hospital_dept",
+  "sido": "부산",
+  "sigungu": "서구",
+  "aliases": [
+   "고신대병원",
+   "고신대복음병원",
+   "고신대학교복음병원",
+   "복음병원"
+  ],
+  "homepage": "https://www.kosinmed.or.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "",
+  "note": "own (홈페이지 공지)"
+ },
+ {
+  "name": "동아대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "부산",
+  "sigungu": "서구",
+  "aliases": [
+   "DAMC",
+   "동아대병원",
+   "동아대학교병원",
+   "동아대학교의료원"
+  ],
+  "homepage": "https://www.damc.or.kr",
+  "recruit_url": "https://www.damc.or.kr/08/04.php",
+  "watch": true,
+  "operator": "",
+  "note": "own board"
+ },
+ {
+  "name": "부산대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "부산",
+  "sigungu": "서구",
+  "aliases": [
+   "PNUH",
+   "부산대병원",
+   "부산대학교병원"
+  ],
+  "homepage": "https://www.pnuh.or.kr",
+  "recruit_url": "https://pnuh.recruiter.co.kr/app/jobnotice/list",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (pnuh) + 잡알리오"
+ },
+ {
+  "name": "인제대학교 부산백병원",
+  "kind": "univ_hospital_dept",
+  "sido": "부산",
+  "sigungu": "부산진구",
+  "aliases": [
+   "부산백병원",
+   "인제대백병원",
+   "인제대부산백병원",
+   "인제대학교부산백병원"
+  ],
+  "homepage": "https://www.paik.ac.kr/busan",
+  "recruit_url": "https://paik.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (paik)"
+ },
+ {
+  "name": "인제대학교 해운대백병원",
+  "kind": "univ_hospital_dept",
+  "sido": "부산",
+  "sigungu": "해운대구",
+  "aliases": [
+   "인제대학교해운대백병원",
+   "인제대해운대백병원",
+   "해운대백병원"
+  ],
+  "homepage": "https://www.paik.ac.kr/haeundae",
+  "recruit_url": "https://paik.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (paik)"
+ },
+ {
+  "name": "경북대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "대구",
+  "sigungu": "중구",
+  "aliases": [
+   "KNUH(대구)",
+   "경북대병원",
+   "경북대학교병원"
+  ],
+  "homepage": "https://www.knuh.kr",
+  "recruit_url": "https://knuh.kr/content/04information/02_01.asp",
+  "watch": true,
+  "operator": "",
+  "note": "own board + recruiter.co.kr (knuh.recruiter.co.kr) + 잡알리오"
+ },
+ {
+  "name": "계명대학교 동산병원",
+  "kind": "univ_hospital_dept",
+  "sido": "대구",
+  "sigungu": "달서구",
+  "aliases": [
+   "DSMC",
+   "계명대동산병원",
+   "계명대학교동산병원",
+   "동산병원",
+   "동산의료원"
+  ],
+  "homepage": "https://dsmc.or.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "",
+  "note": "own (dsmc.or.kr 채용)"
+ },
+ {
+  "name": "대구가톨릭대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "대구",
+  "sigungu": "남구",
+  "aliases": [
+   "DCMC",
+   "대구가톨릭대병원",
+   "대구가톨릭대학교병원"
+  ],
+  "homepage": "https://www.dcmc.co.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "",
+  "note": "own (소식 > 채용, 합격확인 /content/07community/01_06.asp)"
+ },
+ {
+  "name": "영남대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "대구",
+  "sigungu": "남구",
+  "aliases": [
+   "YUMC",
+   "영남대병원",
+   "영남대의료원",
+   "영남대학교병원"
+  ],
+  "homepage": "https://yumc.ac.kr",
+  "recruit_url": "https://yumc.ac.kr/apply/web/recruit/RecruitList.do",
+  "watch": true,
+  "operator": "",
+  "note": "own (채용사이트)"
+ },
+ {
+  "name": "칠곡경북대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "대구",
+  "sigungu": "북구",
+  "aliases": [
+   "칠곡경북대병원",
+   "칠곡경북대학교병원"
+  ],
+  "homepage": "https://www.knuch.kr",
+  "recruit_url": "https://knuh.kr/content/04information/02_01.asp",
+  "watch": false,
+  "operator": "",
+  "note": "경북대병원 채용(공동) / 게시판 공유: 경북대학교병원"
+ },
+ {
+  "name": "가천대 길병원",
+  "kind": "univ_hospital_dept",
+  "sido": "인천",
+  "sigungu": "남동구",
+  "aliases": [
+   "가천대길병원",
+   "가천의대길병원"
+  ],
+  "homepage": "https://www.gilhospital.com",
+  "recruit_url": "https://gilhospital.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (gilhospital)"
+ },
+ {
+  "name": "가톨릭대학교 인천성모병원",
+  "kind": "univ_hospital_dept",
+  "sido": "인천",
+  "sigungu": "부평구",
+  "aliases": [
+   "가톨릭대인천성모병원",
+   "가톨릭대학교인천성모병원",
+   "인천성모",
+   "인천성모병원"
+  ],
+  "homepage": "https://www.cmcism.or.kr",
+  "recruit_url": "https://cmcism.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr"
+ },
+ {
+  "name": "인하대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "인천",
+  "sigungu": "중구",
+  "aliases": [
+   "인하대병원",
+   "인하대학교병원",
+   "인하대학교의과대학부속병원"
+  ],
+  "homepage": "https://www.inha.com",
+  "recruit_url": "https://www.inha.com/page/about/recruit/list",
+  "watch": true,
+  "operator": "",
+  "note": "own board + recruiter.co.kr (inhauh.recruiter.co.kr)"
+ },
+ {
+  "name": "전남대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "광주",
+  "sigungu": "동구",
+  "aliases": [
+   "CNUH(광주)",
+   "전남대병원",
+   "전남대학교병원"
+  ],
+  "homepage": "https://www.cnuh.com",
+  "recruit_url": "https://www.cnuh.com/board/B0148.cs",
+  "watch": true,
+  "operator": "",
+  "note": "own board + 온라인접수 /recruit/info.cs + recruiter.co.kr (cnuh.recruiter.co.kr) + 잡알"
+ },
+ {
+  "name": "조선대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "광주",
+  "sigungu": "동구",
+  "aliases": [
+   "CSUH",
+   "조선대병원",
+   "조선대학교병원"
+  ],
+  "homepage": "https://hosp.chosun.ac.kr",
+  "recruit_url": "https://csuh.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (csuh)"
+ },
+ {
+  "name": "가톨릭대학교 대전성모병원",
+  "kind": "univ_hospital_dept",
+  "sido": "대전",
+  "sigungu": "중구",
+  "aliases": [
+   "가톨릭대대전성모병원",
+   "가톨릭대학교대전성모병원",
+   "대전성모",
+   "대전성모병원"
+  ],
+  "homepage": "https://www.cmcdj.or.kr",
+  "recruit_url": "https://www.cmcdj.or.kr/m/bbs/bbs_list.jsp?bfid=RECRUIT_09",
+  "watch": true,
+  "operator": "",
+  "note": "own board (bfid=RECRUIT_09) + 병원 채용사이트"
+ },
+ {
+  "name": "건양대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "대전",
+  "sigungu": "서구",
+  "aliases": [
+   "KYUH",
+   "건양대병원",
+   "건양대학교병원"
+  ],
+  "homepage": "https://www.kyuh.ac.kr",
+  "recruit_url": "https://www.kyuh.ac.kr/bbs/BBSMSTR_000000000167/list.do",
+  "watch": true,
+  "operator": "",
+  "note": "own board"
+ },
+ {
+  "name": "대전을지대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "대전",
+  "sigungu": "서구",
+  "aliases": [
+   "대전을지",
+   "대전을지대병원",
+   "대전을지대학교병원",
+   "을지대학교병원"
+  ],
+  "homepage": "https://www.eulji.or.kr",
+  "recruit_url": "https://www.eulji.or.kr/info/info_pg06_04.jsp",
+  "watch": false,
+  "operator": "",
+  "note": "own board (을지대학교의료원 인재채용) / 게시판 공유: 노원을지대학교병원"
+ },
+ {
+  "name": "충남대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "대전",
+  "sigungu": "중구",
+  "aliases": [
+   "CNUH(대전)",
+   "충남대병원",
+   "충남대학교병원"
+  ],
+  "homepage": "https://www.cnuh.co.kr",
+  "recruit_url": "https://www.cnuh.co.kr/prog/recruitNotice/01/D/list.do",
+  "watch": true,
+  "operator": "",
+  "note": "own (prog/recruitNotice/{병원코드}/D=의사) + 잡알리오"
+ },
+ {
+  "name": "울산대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "울산",
+  "sigungu": "동구",
+  "aliases": [
+   "울산대병원",
+   "울산대학교병원"
+  ],
+  "homepage": "https://www.uuh.ulsan.kr",
+  "recruit_url": "https://edu.uuh.ulsan.kr/edu/index.php?pCode=MN0000034&mode=list",
+  "watch": true,
+  "operator": "",
+  "note": "own (교육수련부 공지; 직원 채용 게시판은 따로 있을 것으로 보임)"
+ },
+ {
+  "name": "세종충남대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "세종",
+  "sigungu": "",
+  "aliases": [
+   "세종충남대병원",
+   "세종충남대학교병원"
+  ],
+  "homepage": "https://www.cnuh.co.kr",
+  "recruit_url": "https://www.cnuh.co.kr/prog/recruitNotice/02/D/list.do",
+  "watch": true,
+  "operator": "",
+  "note": "own (충남대병원 채용 시스템)"
+ },
+ {
+  "name": "가톨릭대학교 부천성모병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "부천시",
+  "aliases": [
+   "가톨릭대부천성모병원",
+   "가톨릭대학교부천성모병원",
+   "부천성모",
+   "부천성모병원"
+  ],
+  "homepage": "https://www.cmcbucheon.or.kr",
+  "recruit_url": "https://recruit.cmcnu.or.kr/cmcbucheon/application/appList.do",
+  "watch": true,
+  "operator": "",
+  "note": "own (recruit.cmcnu.or.kr)"
+ },
+ {
+  "name": "가톨릭대학교 성빈센트병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "수원시",
+  "aliases": [
+   "가톨릭대성빈센트병원",
+   "가톨릭대학교성빈센트병원",
+   "성빈센트",
+   "성빈센트병원"
+  ],
+  "homepage": "https://www.cmcvincent.or.kr",
+  "recruit_url": "https://recruit.cmcnu.or.kr/cmcvincent/application/appList.do",
+  "watch": true,
+  "operator": "",
+  "note": "own (recruit.cmcnu.or.kr)"
+ },
+ {
+  "name": "가톨릭대학교 의정부성모병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "의정부시",
+  "aliases": [
+   "가톨릭대의정부성모병원",
+   "가톨릭대학교의정부성모병원",
+   "의정부성모",
+   "의정부성모병원"
+  ],
+  "homepage": "https://www.cmcujb.or.kr",
+  "recruit_url": "https://recruit.cmcnu.or.kr/cmcujb/application/appList.do",
+  "watch": true,
+  "operator": "",
+  "note": "own (recruit.cmcnu.or.kr)"
+ },
+ {
+  "name": "고려대학교 안산병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "안산시",
+  "aliases": [
+   "고대안산병원",
+   "고려대안산병원",
+   "고려대학교안산병원",
+   "안산병원(고대)"
+  ],
+  "homepage": "https://ansan.kumc.or.kr",
+  "recruit_url": "https://kumc.recruiter.co.kr/career/job",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (kumc) + own board https://ansan.kumc.or.kr/kr/introduction/news"
+ },
+ {
+  "name": "동국대학교일산병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "고양시",
+  "aliases": [
+   "동국대일산병원",
+   "동국대학교의료원",
+   "동국대학교일산병원"
+  ],
+  "homepage": "https://www.dumc.or.kr",
+  "recruit_url": "http://www.dumc.or.kr/hospital/recruit/hospitalRecruitList.jsp?nowPageInfo=ILSH",
+  "watch": true,
+  "operator": "",
+  "note": "own board"
+ },
+ {
+  "name": "분당서울대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "성남시",
+  "aliases": [
+   "SNUBH",
+   "분당서울대",
+   "분당서울대병원",
+   "분당서울대학교병원",
+   "서울대학교병원 분당"
+  ],
+  "homepage": "https://www.snubh.org",
+  "recruit_url": "https://snubh.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (snubh) + own board (snubh.org/intro/news/recruitView.do)"
+ },
+ {
+  "name": "분당차병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "성남시",
+  "aliases": [
+   "분당차병원",
+   "차의과학대학교 분당차병원"
+  ],
+  "homepage": "https://bundang.chamc.co.kr",
+  "recruit_url": "https://recruit.chamc.co.kr/notice/insa/",
+  "watch": false,
+  "operator": "",
+  "note": "own (차그룹 채용)"
+ },
+ {
+  "name": "순천향대학교 부속 부천병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "부천시",
+  "aliases": [
+   "순천향대부속부천병원",
+   "순천향대부천병원",
+   "순천향대학교부속부천병원",
+   "순천향부천병원"
+  ],
+  "homepage": "https://www.schmc.ac.kr/bucheon",
+  "recruit_url": "https://jobapplication.schmc.ac.kr/",
+  "watch": false,
+  "operator": "",
+  "note": "own (jobapplication.schmc.ac.kr)"
+ },
+ {
+  "name": "아주대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "수원시",
+  "aliases": [
+   "AJOUMC",
+   "아주대병원",
+   "아주대학교병원",
+   "아주대학교의료원"
+  ],
+  "homepage": "https://hosp.ajoumc.or.kr",
+  "recruit_url": "https://www.ajoumc.or.kr/recruit/univ/list.do",
+  "watch": true,
+  "operator": "",
+  "note": "own (ajoumc.or.kr/recruit)"
+ },
+ {
+  "name": "용인세브란스병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "용인시",
+  "aliases": [
+   "용인세브란스",
+   "용인세브란스병원"
+  ],
+  "homepage": "https://yi.severance.healthcare",
+  "recruit_url": "https://yuhs.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (yuhs); 임상강사는 의대 recruit 게시판"
+ },
+ {
+  "name": "의정부을지대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "의정부시",
+  "aliases": [
+   "을지대의정부병원",
+   "의정부을지",
+   "의정부을지대병원",
+   "의정부을지대학교병원"
+  ],
+  "homepage": "",
+  "recruit_url": "https://www.eulji.or.kr/info/info_pg06_04.jsp",
+  "watch": false,
+  "operator": "",
+  "note": "own board (을지대학교의료원)"
+ },
+ {
+  "name": "인제대학교 일산백병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "고양시",
+  "aliases": [
+   "인제대일산백병원",
+   "인제대학교일산백병원",
+   "일산백병원"
+  ],
+  "homepage": "https://www.paik.ac.kr/ilsan",
+  "recruit_url": "https://paik.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (paik)"
+ },
+ {
+  "name": "중앙대학교광명병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "광명시",
+  "aliases": [
+   "광명중앙대병원",
+   "중앙대광명병원",
+   "중앙대학교광명병원"
+  ],
+  "homepage": "https://gh.cauhs.or.kr",
+  "recruit_url": "https://caumc.recruiter.co.kr/career/home",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (caumc)"
+ },
+ {
+  "name": "한림대학교동탄성심병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "화성시",
+  "aliases": [
+   "동탄성심병원",
+   "한림대동탄성심",
+   "한림대동탄성심병원",
+   "한림대학교동탄성심병원"
+  ],
+  "homepage": "https://dongtan.hallym.or.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "",
+  "note": "own board (병원소식)"
+ },
+ {
+  "name": "한림대학교성심병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "안양시",
+  "aliases": [
+   "평촌성심병원",
+   "한림대성심병원",
+   "한림대학교성심병원",
+   "한림대학교의료원"
+  ],
+  "homepage": "https://hallym.hallym.or.kr",
+  "recruit_url": "https://www.hallym.or.kr/hallymuniv_sub.asp?left_menu=left_pr&screen=ptp113",
+  "watch": true,
+  "operator": "",
+  "note": "own (의료원소식 게시판의 [채용] 글) + 의료원 채용사이트(과거 recruit.hallym.or.kr) + 교원채용 상시POOL"
+ },
+ {
+  "name": "한양대학교구리병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "구리시",
+  "aliases": [
+   "구리한양대병원",
+   "한양대구리병원",
+   "한양대학교구리병원"
+  ],
+  "homepage": "https://guri.hyumc.com",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "",
+  "note": "own (hyumc.com 인재채용 > 구리병원 채용)"
+ },
+ {
+  "name": "강릉아산병원",
+  "kind": "univ_hospital_dept",
+  "sido": "강원",
+  "sigungu": "강릉시",
+  "aliases": [
+   "강릉아산",
+   "강릉아산병원"
+  ],
+  "homepage": "https://www.gnah.co.kr",
+  "recruit_url": "https://www.gnah.co.kr/kor/CMS/RecruitMgr/list.do?mCode=MN122",
+  "watch": true,
+  "operator": "",
+  "note": "own board"
+ },
+ {
+  "name": "강원대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "강원",
+  "sigungu": "춘천시",
+  "aliases": [
+   "KNUH(춘천)",
+   "강원대병원",
+   "강원대학교병원"
+  ],
+  "homepage": "https://www.knuh.or.kr",
+  "recruit_url": "https://www.knuh.or.kr/hospitalinfo/hospitalinfo_03_05.asp?bid=5",
+  "watch": true,
+  "operator": "",
+  "note": "own board + 잡알리오(공고에 알리오 게재 명시)"
+ },
+ {
+  "name": "원주세브란스기독병원",
+  "kind": "univ_hospital_dept",
+  "sido": "강원",
+  "sigungu": "원주시",
+  "aliases": [
+   "연세대 원주의과대학",
+   "원주세브란스",
+   "원주세브란스기독병원",
+   "원주연세의료원"
+  ],
+  "homepage": "https://www.ywmc.or.kr",
+  "recruit_url": "https://www.ywmc.or.kr/web/www/employment_professor",
+  "watch": true,
+  "operator": "",
+  "note": "own board (진료교수/임상강사) + recruiter.co.kr (ywmc.recruiter.co.kr)"
+ },
+ {
+  "name": "한림대학교춘천성심병원",
+  "kind": "univ_hospital_dept",
+  "sido": "강원",
+  "sigungu": "춘천시",
+  "aliases": [
+   "춘천성심병원",
+   "한림대춘천성심",
+   "한림대춘천성심병원",
+   "한림대학교춘천성심병원"
+  ],
+  "homepage": "https://chuncheon.hallym.or.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "",
+  "note": "own board (병원소식)"
+ },
+ {
+  "name": "충북대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "충북",
+  "sigungu": "청주시",
+  "aliases": [
+   "CBNUH",
+   "충북대병원",
+   "충북대학교병원"
+  ],
+  "homepage": "https://www.cbnuh.or.kr",
+  "recruit_url": "https://cbnuh.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (cbnuh) + own board(기타채용 BBSMSTR_000000000357) + 잡알리오"
+ },
+ {
+  "name": "단국대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "충남",
+  "sigungu": "천안시",
+  "aliases": [
+   "DKUH",
+   "단국대병원",
+   "단국대학교병원"
+  ],
+  "homepage": "https://www.dkuh.co.kr",
+  "recruit_url": "https://www.dkuh.co.kr/board5/bbs/board.php?bo_table=01_03_05",
+  "watch": true,
+  "operator": "",
+  "note": "own board"
+ },
+ {
+  "name": "순천향대학교 부속 천안병원",
+  "kind": "univ_hospital_dept",
+  "sido": "충남",
+  "sigungu": "천안시",
+  "aliases": [
+   "순천향대부속천안병원",
+   "순천향대천안병원",
+   "순천향대학교부속천안병원",
+   "순천향천안병원"
+  ],
+  "homepage": "https://www.schmc.ac.kr/cheonan",
+  "recruit_url": "https://jobapplication.schmc.ac.kr/",
+  "watch": false,
+  "operator": "",
+  "note": "own (jobapplication.schmc.ac.kr)"
+ },
+ {
+  "name": "원광대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "전북",
+  "sigungu": "익산시",
+  "aliases": [
+   "WKUH",
+   "원광대병원",
+   "원광대학교병원"
+  ],
+  "homepage": "https://www.wkuh.org",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "",
+  "note": "own (wkuh.org 채용 메뉴; 전공의 /edu/contents.do)"
+ },
+ {
+  "name": "전북대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "전북",
+  "sigungu": "전주시",
+  "aliases": [
+   "JBUH",
+   "전북대병원",
+   "전북대학교병원"
+  ],
+  "homepage": "https://www.jbuh.co.kr",
+  "recruit_url": "https://jbuh.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (jbuh) + own (www.jbuh.co.kr/cuh/employ/sub01/sub01.jsp) + 잡알리오"
+ },
+ {
+  "name": "화순전남대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "전남",
+  "sigungu": "화순군",
+  "aliases": [
+   "화순전남대병원",
+   "화순전남대학교병원"
+  ],
+  "homepage": "https://www.cnuhh.com",
+  "recruit_url": "https://www.cnuh.com/board/B0148.cs",
+  "watch": false,
+  "operator": "",
+  "note": "전남대병원 채용(공동 추정) / 게시판 공유: 전남대학교병원"
+ },
+ {
+  "name": "순천향대학교 부속 구미병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경북",
+  "sigungu": "구미시",
+  "aliases": [
+   "순천향구미병원",
+   "순천향대구미병원",
+   "순천향대부속구미병원",
+   "순천향대학교부속구미병원"
+  ],
+  "homepage": "https://www.schmc.ac.kr/gumi",
+  "recruit_url": "https://jobapplication.schmc.ac.kr/",
+  "watch": false,
+  "operator": "",
+  "note": "own (jobapplication.schmc.ac.kr)"
+ },
+ {
+  "name": "경상국립대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경남",
+  "sigungu": "진주시",
+  "aliases": [
+   "GNUH",
+   "경상국립대병원",
+   "경상국립대학교병원",
+   "경상대병원"
+  ],
+  "homepage": "https://www.gnuh.co.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "",
+  "note": "own (홈페이지 채용공고) + 잡알리오; 임상교수는 방문/우편 접수"
+ },
+ {
+  "name": "삼성창원병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경남",
+  "sigungu": "창원시",
+  "aliases": [
+   "삼성창원병원",
+   "성균관대 삼성창원병원",
+   "창원삼성병원"
+  ],
+  "homepage": "https://smc.skku.edu",
+  "recruit_url": "https://smc.skku.edu/smc/board/list.do?mId=58",
+  "watch": true,
+  "operator": "",
+  "note": "own board"
+ },
+ {
+  "name": "양산부산대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경남",
+  "sigungu": "양산시",
+  "aliases": [
+   "PNUYH",
+   "양산부산대병원",
+   "양산부산대학교병원"
+  ],
+  "homepage": "https://www.pnuyh.or.kr",
+  "recruit_url": "https://pnuyh.recruiter.co.kr/career/home",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (pnuyh); 구 사이트 recruit.pnuyh.or.kr"
+ },
+ {
+  "name": "창원경상국립대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "경남",
+  "sigungu": "창원시",
+  "aliases": [
+   "창원경상국립대병원",
+   "창원경상국립대학교병원",
+   "창원경상대병원"
+  ],
+  "homepage": "https://www.gnuch.co.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "",
+  "note": "경상국립대병원 채용(공동)"
+ },
+ {
+  "name": "제주대학교병원",
+  "kind": "univ_hospital_dept",
+  "sido": "제주",
+  "sigungu": "제주시",
+  "aliases": [
+   "제주대병원",
+   "제주대학교병원"
+  ],
+  "homepage": "https://www.jejunuh.co.kr",
+  "recruit_url": "https://www.jejunuh.co.kr/news/recruit/_/list.do",
+  "watch": true,
+  "operator": "",
+  "note": "own board + 잡알리오"
+ },
+ {
+  "name": "국립경찰병원",
+  "kind": "public_hospital",
+  "sido": "서울",
+  "sigungu": "송파구",
+  "aliases": [
+   "경찰병원",
+   "국립경찰병원"
+  ],
+  "homepage": "https://www.nph.go.kr",
+  "recruit_url": "https://www.nph.go.kr/nph/bbs/B0000018/list.do?menuNo=200110",
+  "watch": true,
+  "operator": "경찰청",
+  "note": "own board (공무원 경력경쟁채용·공무직); 국가공무원 채용시스템 gongmuwon.gosi.kr"
+ },
+ {
+  "name": "국립중앙의료원",
+  "kind": "public_hospital",
+  "sido": "서울",
+  "sigungu": "중구",
+  "aliases": [
+   "국립의료원",
+   "국립중앙의료원",
+   "중앙의료원"
+  ],
+  "homepage": "https://www.nmc.or.kr",
+  "recruit_url": "https://nmc.recruiter.co.kr",
+  "watch": false,
+  "operator": "",
+  "note": "recruiter.co.kr (nmc) + 홈페이지 게시판 www.nmc.or.kr/nmc/board/B0000007 + 잡알리오"
+ },
+ {
+  "name": "서울특별시 동부병원",
+  "kind": "public_hospital",
+  "sido": "서울",
+  "sigungu": "동대문구",
+  "aliases": [
+   "동부병원",
+   "서울시동부병원",
+   "서울특별시동부병원"
+  ],
+  "homepage": "",
+  "recruit_url": "https://dbhosp.recruiter.co.kr",
+  "watch": false,
+  "operator": "서울특별시",
+  "note": "recruiter.co.kr (dbhosp, 추정)"
+ },
+ {
+  "name": "서울특별시 북부병원",
+  "kind": "public_hospital",
+  "sido": "서울",
+  "sigungu": "중랑구",
+  "aliases": [
+   "북부병원",
+   "서울시북부병원",
+   "서울특별시북부병원"
+  ],
+  "homepage": "",
+  "recruit_url": "https://seoulbbh.recruiter.co.kr",
+  "watch": false,
+  "operator": "서울특별시",
+  "note": "recruiter.co.kr (seoulbbh)"
+ },
+ {
+  "name": "서울특별시 서울의료원",
+  "kind": "public_hospital",
+  "sido": "서울",
+  "sigungu": "중랑구",
+  "aliases": [
+   "서울시서울의료원",
+   "서울의료원",
+   "서울특별시서울의료원",
+   "시립서울의료원"
+  ],
+  "homepage": "https://www.seoulmc.or.kr",
+  "recruit_url": "https://www.seoulmc.or.kr/site/recruit/list.do",
+  "watch": true,
+  "operator": "서울특별시",
+  "note": "own board + 채용사이트 recruitoffice.seoulmc.or.kr"
+ },
+ {
+  "name": "서울특별시보라매병원",
+  "kind": "public_hospital",
+  "sido": "서울",
+  "sigungu": "동작구",
+  "aliases": [
+   "보라매병원",
+   "서울대학교병원운영 서울특별시보라매병원",
+   "서울시보라매병원",
+   "서울특별시보라매병원"
+  ],
+  "homepage": "https://www.brmh.org",
+  "recruit_url": "https://www.brmh.org/job/list.do?site=001",
+  "watch": true,
+  "operator": "",
+  "note": "own board"
+ },
+ {
+  "name": "중앙보훈병원",
+  "kind": "public_hospital",
+  "sido": "서울",
+  "sigungu": "강동구",
+  "aliases": [
+   "보훈병원",
+   "서울보훈병원",
+   "중앙보훈병원",
+   "한국보훈복지의료공단"
+  ],
+  "homepage": "https://www.bohun.or.kr/seoul/main.do",
+  "recruit_url": "https://www.bohun.or.kr/seoul/na/ntt/selectNttList.do?mi=32253&bbsId=1158",
+  "watch": true,
+  "operator": "한국보훈복지의료공단",
+  "note": "own board + 지원은 bohun.fairyhr.com + 잡알리오"
+ },
+ {
+  "name": "한국원자력의학원 원자력병원",
+  "kind": "public_hospital",
+  "sido": "서울",
+  "sigungu": "노원구",
+  "aliases": [
+   "KIRAMS",
+   "원자력병원",
+   "한국원자력의학원원자력병원"
+  ],
+  "homepage": "https://www.kirams.re.kr",
+  "recruit_url": "https://kirams.recruiter.co.kr",
+  "watch": false,
+  "operator": "한국원자력의학원",
+  "note": "recruiter.co.kr (kirams) + 잡알리오"
+ },
+ {
+  "name": "부산보훈병원",
+  "kind": "public_hospital",
+  "sido": "부산",
+  "sigungu": "사상구",
+  "aliases": [
+   "부산보훈",
+   "부산보훈병원"
+  ],
+  "homepage": "https://www.bohun.or.kr/busan/main.do",
+  "recruit_url": "https://www.bohun.or.kr/busan/na/ntt/selectNttList.do?mi=33215&bbsId=1158",
+  "watch": true,
+  "operator": "한국보훈복지의료공단",
+  "note": "own board + bohun.fairyhr.com"
+ },
+ {
+  "name": "대구보훈병원",
+  "kind": "public_hospital",
+  "sido": "대구",
+  "sigungu": "달서구",
+  "aliases": [
+   "대구보훈",
+   "대구보훈병원"
+  ],
+  "homepage": "https://www.bohun.or.kr/daegu/main.do",
+  "recruit_url": "https://www.bohun.or.kr/daegu/na/ntt/selectNttList.do?mi=33151&bbsId=1158",
+  "watch": true,
+  "operator": "한국보훈복지의료공단",
+  "note": "own board + bohun.fairyhr.com"
+ },
+ {
+  "name": "근로복지공단 소속병원",
+  "kind": "public_hospital",
+  "sido": "인천",
+  "sigungu": "부평구",
+  "aliases": [
+   "근로복지공단 대구병원",
+   "근로복지공단 대전병원",
+   "근로복지공단 동해병원",
+   "근로복지공단 순천병원",
+   "근로복지공단 안산병원",
+   "근로복지공단 울산병원",
+   "근로복지공단 인천병원",
+   "근로복지공단 정선병원",
+   "근로복지공단 창원병원",
+   "근로복지공단 태백병원",
+   "근로복지공단소속병원",
+   "산재병원"
+  ],
+  "homepage": "https://www.kcomwel.or.kr",
+  "recruit_url": "https://www.kcomwel.or.kr/hrm_recruit/RLIST.kws",
+  "watch": false,
+  "operator": "근로복지공단",
+  "note": "own (kcomwel.or.kr 채용 홈페이지, 병원별 www.kcomwel.or.kr/{incheon,ansan,daegu,changwon,"
+ },
+ {
+  "name": "인천광역시의료원",
+  "kind": "public_hospital",
+  "sido": "인천",
+  "sigungu": "동구",
+  "aliases": [
+   "인천광역시의료원",
+   "인천시의료원",
+   "인천의료원"
+  ],
+  "homepage": "https://www.icmc.or.kr",
+  "recruit_url": "https://icmc.recruiter.co.kr",
+  "watch": false,
+  "operator": "인천광역시",
+  "note": "recruiter.co.kr (icmc) + 인천시 일자리 게시판(incheon.go.kr/job) + 클린아이 잡플러스"
+ },
+ {
+  "name": "인천보훈병원",
+  "kind": "public_hospital",
+  "sido": "인천",
+  "sigungu": "미추홀구",
+  "aliases": [
+   "인천보훈",
+   "인천보훈병원"
+  ],
+  "homepage": "https://www.bohun.or.kr/incheon/main.do",
+  "recruit_url": "https://www.bohun.or.kr/incheon/na/ntt/selectNttList.do?mi=33641&bbsId=1158",
+  "watch": true,
+  "operator": "한국보훈복지의료공단",
+  "note": "own board + bohun.fairyhr.com"
+ },
+ {
+  "name": "광주보훈병원",
+  "kind": "public_hospital",
+  "sido": "광주",
+  "sigungu": "광산구",
+  "aliases": [
+   "광주보훈",
+   "광주보훈병원"
+  ],
+  "homepage": "https://www.bohun.or.kr/gwangju/main.do",
+  "recruit_url": "https://www.bohun.or.kr/gwangju/na/ntt/selectNttList.do?mi=32890&bbsId=1158",
+  "watch": true,
+  "operator": "한국보훈복지의료공단",
+  "note": "own board + bohun.fairyhr.com"
+ },
+ {
+  "name": "대전보훈병원",
+  "kind": "public_hospital",
+  "sido": "대전",
+  "sigungu": "대덕구",
+  "aliases": [
+   "대전보훈",
+   "대전보훈병원"
+  ],
+  "homepage": "https://www.bohun.or.kr/daejeon/main.do",
+  "recruit_url": "https://www.bohun.or.kr/daejeon/na/ntt/selectNttList.do?mi=33414&bbsId=1158",
+  "watch": true,
+  "operator": "한국보훈복지의료공단",
+  "note": "own board + bohun.fairyhr.com"
+ },
+ {
+  "name": "경기도의료원",
+  "kind": "public_hospital",
+  "sido": "경기",
+  "sigungu": "수원시",
+  "aliases": [
+   "경기도의료원",
+   "경기도의료원 안성병원",
+   "경기도의료원 이천병원",
+   "경기도의료원 파주병원",
+   "경기도의료원 포천병원"
+  ],
+  "homepage": "https://www.medical.or.kr",
+  "recruit_url": "https://www.medical.or.kr/hire/index.do",
+  "watch": true,
+  "operator": "경기도",
+  "note": "own (경기도의료원 채용사이트) + 클린아이 잡플러스 + 경기도 통합채용(gg.saramin.co.kr)"
+ },
+ {
+  "name": "국군수도병원",
+  "kind": "public_hospital",
+  "sido": "경기",
+  "sigungu": "성남시",
+  "aliases": [
+   "국군수도병원",
+   "국군의무사령부",
+   "수도병원"
+  ],
+  "homepage": "https://afmd.mnd.go.kr",
+  "recruit_url": "https://afmd.mnd.go.kr/user/boardList.action?boardId=I_5108105&siteId=afmd&id=afmd_040500000000",
+  "watch": true,
+  "operator": "국군의무사령부",
+  "note": "own board + 국방부 채용게시판 + 국방통합모집포털(m-recruit.mnd.go.kr)"
+ },
+ {
+  "name": "국군수도치과병원",
+  "kind": "public_hospital",
+  "sido": "경기",
+  "sigungu": "성남시",
+  "aliases": [
+   "국군수도치과병원",
+   "수도치과병원"
+  ],
+  "homepage": "https://afmd.mnd.go.kr",
+  "recruit_url": "https://afmd.mnd.go.kr/user/boardList.action?boardId=I_5108105&siteId=afmd&id=afmd_040500000000",
+  "watch": false,
+  "operator": "국군의무사령부",
+  "note": "국군수도병원/국방부 채용게시판"
+ },
+ {
+  "name": "국립암센터",
+  "kind": "public_hospital",
+  "sido": "경기",
+  "sigungu": "고양시",
+  "aliases": [
+   "국립암센터",
+   "국립암센터병원"
+  ],
+  "homepage": "https://www.ncc.re.kr",
+  "recruit_url": "https://www.ncc.re.kr/boardList.ncc?uri=notice06",
+  "watch": true,
+  "operator": "",
+  "note": "own board (uri=notice06) + 잡알리오"
+ },
+ {
+  "name": "국민건강보험 일산병원",
+  "kind": "public_hospital",
+  "sido": "경기",
+  "sigungu": "고양시",
+  "aliases": [
+   "NHIS일산병원",
+   "건보일산병원",
+   "국민건강보험공단 일산병원",
+   "국민건강보험일산병원",
+   "일산병원"
+  ],
+  "homepage": "https://www.nhimc.or.kr",
+  "recruit_url": "https://nhimc.recruiter.co.kr",
+  "watch": false,
+  "operator": "국민건강보험공단",
+  "note": "recruiter.co.kr (nhimc)"
+ },
+ {
+  "name": "성남시의료원",
+  "kind": "public_hospital",
+  "sido": "경기",
+  "sigungu": "성남시",
+  "aliases": [
+   "성남시의료원",
+   "성남의료원"
+  ],
+  "homepage": "",
+  "recruit_url": "https://scmc.recruiter.co.kr/career/job",
+  "watch": false,
+  "operator": "성남시",
+  "note": "recruiter.co.kr (scmc)"
+ },
+ {
+  "name": "명지병원",
+  "kind": "general_hospital",
+  "sido": "경기",
+  "sigungu": "고양시",
+  "aliases": [
+   "명지병원",
+   "명지의료재단 명지병원"
+  ],
+  "homepage": "https://mjh.or.kr",
+  "recruit_url": "https://mjh.or.kr/employ/recruit_notice/list.do?v_rc_type=doctor",
+  "watch": true,
+  "operator": "",
+  "note": "own board (의사직 필터)"
+ }
+]
