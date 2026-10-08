@@ -1,0 +1,9 @@
+[project]
+name = "dentmoa"
+version = "0.1.0"
+description = "치과의사 구인공고 알리미 (개인용)"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
