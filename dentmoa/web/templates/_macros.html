@@ -1,0 +1,85 @@
+{% macro csrf() %}<input type="hidden" name="{{ CSRF_FIELD }}" value="{{ csrf_token() }}">{% endmacro %}
+
+{# 체크박스 묶음. options: (값, 이름) 목록 #}
+{% macro check_group(name, options, selected, compact=false) %}
+<div class="checks{% if compact %} checks-compact{% endif %}" data-group="{{ name }}">
+  {% for key, label in options %}
+  <label class="check"><input type="checkbox" name="{{ name }}" value="{{ key }}"{% if key in selected %} checked{% endif %}><span>{{ label }}</span></label>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{# 검색 창 안의 접히는 체크박스 묶음 #}
+{% macro filter_group(title, name, options, selected) %}
+<details class="sub"{% if selected %} open{% endif %}>
+  <summary>{{ title }}{% if selected %} <span class="pill">{{ selected|length }}</span>{% endif %}</summary>
+  {{ check_group(name, options, selected, compact=true) }}
+</details>
+{% endmacro %}
+
+{# 관심(★)·숨기기 버튼 #}
+{% macro toggle_buttons(p, next_url) %}
+<form method="post" action="{{ url_for('postings.star', pid=p.id) }}" data-toggle="star">
+  {{ csrf() }}<input type="hidden" name="next" value="{{ next_url }}">
+  <button type="submit" class="btn btn-small btn-star{% if p.starred %} on{% endif %}" aria-pressed="{{ 'true' if p.starred else 'false' }}">
+    <span data-label>{{ '★ 관심' if p.starred else '☆ 관심' }}</span>
+  </button>
+</form>
+<form method="post" action="{{ url_for('postings.hide', pid=p.id) }}" data-toggle="hide">
+  {{ csrf() }}<input type="hidden" name="next" value="{{ next_url }}">
+  <button type="submit" class="btn btn-small" aria-pressed="{{ 'true' if p.hidden else 'false' }}">
+    <span data-label>{{ '숨김 취소' if p.hidden else '숨기기' }}</span>
+  </button>
+</form>
+{% endmacro %}
+
+{# 공고 카드 #}
+{% macro posting_card(c, next_url, actions=true) %}
+{% set p = c.p %}
+{% set badge = deadline_badge(p) %}
+<article class="card posting{% if p.hidden %} is-hidden{% endif %}" id="p{{ p.id }}">
+  <div class="posting-head">
+    <h2 class="posting-title"><a href="{{ url_for('postings.detail', pid=p.id, back=next_url) }}">{{ p.title }}</a></h2>
+    {% if badge %}<span class="badge {{ badge.cls }}" title="{{ badge.title }}">{{ badge.text }}</span>{% endif %}
+  </div>
+  <div class="posting-meta">
+    {% if p.institution %}<span class="inst">{{ p.institution }}</span>{% endif %}
+    <span class="region">{{ p.region_labels|join(', ') if p.region_labels else '지역 미상' }}</span>
+  </div>
+  <ul class="tags">
+    {% for t in posting_tags(p) %}<li class="tag {{ t.cls }}">{{ t.text }}</li>{% endfor %}
+    {% if p.post_kind != 'hiring' %}<li class="tag tag-warn">{{ tx.SHORT_LABELS.get(p.post_kind, p.post_kind) }} 글</li>{% endif %}
+    {% if not p.is_dentist %}<li class="tag tag-warn">치과의사 외 직종</li>{% endif %}
+    {% if c.m and c.m.region_uncertain %}<li class="tag tag-warn" title="공고의 지역이 불분명해서 고른 지역과 맞는지 확인이 필요해요">지역 확인 필요</li>{% endif %}
+    {% if c.m and c.m.forced %}<li class="tag tag-ok" title="{{ c.m.reasons|join(', ') }}">포함 키워드</li>{% endif %}
+    {% if p.hidden %}<li class="tag">숨김</li>{% endif %}
+  </ul>
+  {% if p.summary %}
+  <ul class="summary">
+    {% for line in p.summary[:3] %}<li>{{ line }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+  {% if c.dups %}
+  <p class="dups">다른 출처에도 있음: {{ c.dups|map(attribute='source')|unique|map('source_label')|join(', ') }}</p>
+  {% endif %}
+  <div class="posting-foot">
+    <span class="when">{{ p.effective_date|fmt_date }} · {{ p.source|source_label }}</span>
+    {% if actions %}
+    <div class="actions">
+      {{ toggle_buttons(p, next_url) }}
+      <a class="btn btn-small" href="{{ p.url|safe_url }}" target="_blank" rel="noopener noreferrer">원문 보기</a>
+    </div>
+    {% endif %}
+  </div>
+</article>
+{% endmacro %}
+
+{% macro pagination(page, pages) %}
+{% if pages > 1 %}
+<nav class="pager" aria-label="쪽 이동">
+  {% if page > 1 %}<a class="btn" href="{{ url_with(page=page - 1) }}">← 이전</a>{% else %}<span class="btn disabled">← 이전</span>{% endif %}
+  <span class="pager-info">{{ page }} / {{ pages }}</span>
+  {% if page < pages %}<a class="btn" href="{{ url_with(page=page + 1) }}">다음 →</a>{% else %}<span class="btn disabled">다음 →</span>{% endif %}
+</nav>
+{% endif %}
+{% endmacro %}

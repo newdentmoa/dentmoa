@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% from "_macros.html" import posting_card, filter_group, pagination %}
+{% block title %}공고{% endblock %}
+{% block content %}
+{% set here = request.full_path.rstrip('?') %}
+<nav class="tabs" aria-label="공고 보기">
+  {% for key, label in views.items() %}
+  <a href="{{ url_with(view=key, page=None) }}"{% if lq.view == key %} class="active" aria-current="page"{% endif %}>{{ label }}</a>
+  {% endfor %}
+</nav>
+
+<details class="card filters" data-auto-open{% if lq.narrowed %} open{% endif %}>
+  <summary>검색·필터{% if lq.narrowed %} <span class="pill">사용 중</span>{% endif %}</summary>
+  <form method="get" action="{{ url_for('postings.index') }}" class="filter-form">
+    <input type="hidden" name="view" value="{{ lq.view }}">
+    <label class="field">
+      <span class="field-label">검색어</span>
+      <input type="search" name="q" value="{{ lq.q }}" placeholder="예: 소아 강남, 서울대학교치과병원" enterkeyhint="search">
+    </label>
+    {{ filter_group('기관 종류', 'inst', tx.INST_TYPES.items(), lq.inst) }}
+    {{ filter_group('직위', 'pos', tx.POSITIONS.items(), lq.pos) }}
+    {{ filter_group('분과', 'spec', tx.SPECIALTIES.items(), lq.spec) }}
+    {{ filter_group('근무 형태', 'work', tx.WORK_TYPES.items(), lq.work) }}
+    {{ filter_group('시·도', 'sido', sidos, lq.sido) }}
+    {{ filter_group('출처', 'src', sources, lq.src) }}
+    <div class="filter-row">
+      <label class="field field-inline">
+        <span class="field-label">기간</span>
+        <select name="days">
+          {% for d in periods %}<option value="{{ d }}"{% if lq.days == d %} selected{% endif %}>최근 {{ '1년' if d == 365 else d ~ '일' }}</option>{% endfor %}
+        </select>
+      </label>
+      <label class="check"><input type="checkbox" name="hidden" value="1"{% if lq.show_hidden %} checked{% endif %}><span>숨긴 글 보기</span></label>
+      <label class="check"><input type="checkbox" name="other" value="1"{% if lq.include_other %} checked{% endif %}><span>구직·기타 글 포함</span></label>
+    </div>
+    <p class="hint">'구직·기타 글 포함'을 고르면 구직 글, 양도·공지 같은 글, 치과의사가 아닌 직종 공고도 함께 보여요.</p>
+    <div class="button-row">
+      <button type="submit" class="btn btn-primary">검색</button>
+      <a class="btn" href="{{ url_for('postings.index', view=lq.view) }}">초기화</a>
+    </div>
+  </form>
+</details>
+
+<p class="result-count">
+  {% if lq.view == 'star' %}관심(★) 공고 <strong>{{ total }}건</strong>
+  {% else %}최근 {{ '1년' if lq.days == 365 else lq.days ~ '일' }} · {{ views[lq.view] }} <strong>{{ total }}건</strong>{% endif %}
+</p>
+
+{% if not any_postings %}
+<div class="empty card">
+  <p class="empty-title">아직 수집된 공고가 없어요.</p>
+  <p>상태 화면에서 '지금 수집·알림 실행'을 눌러보세요. 사이트 계정은 '계정·연결'에서 먼저 저장해 주세요.</p>
+  <div class="button-row">
+    <a class="btn btn-primary" href="{{ url_for('status.index') }}">상태 화면으로</a>
+    <a class="btn" href="{{ url_for('accounts.index') }}">계정·연결</a>
+  </div>
+</div>
+{% elif not cards %}
+<div class="empty card">
+  {% if lq.view == 'star' %}
+  <p class="empty-title">아직 관심(★) 표시한 공고가 없어요.</p>
+  <p>공고 카드의 '☆ 관심' 버튼을 누르면 여기에 모여요.</p>
+  {% elif lq.view == 'match' %}
+  <p class="empty-title">이 기간에 내 조건에 맞는 공고가 없어요.</p>
+  <p>'전체 공고'를 보거나, 기간을 늘리거나, 알림 조건을 넓혀 보세요.</p>
+  <div class="button-row">
+    <a class="btn" href="{{ url_with(view='all', page=None) }}">전체 공고 보기</a>
+    <a class="btn" href="{{ url_for('settings.index') }}">알림 조건</a>
+  </div>
+  {% else %}
+  <p class="empty-title">검색 조건에 맞는 공고가 없어요.</p>
+  <p>검색어나 필터를 줄이거나 기간을 늘려 보세요.</p>
+  {% endif %}
+</div>
+{% else %}
+<div class="posting-list">
+  {% for c in cards %}{{ posting_card(c, here) }}{% endfor %}
+</div>
+{{ pagination(page, pages) }}
+{% endif %}
+{% endblock %}

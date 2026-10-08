@@ -41,3 +41,12 @@ dentmoa/
 2. 저장된 HTML 을 보고 sources/*.py 의 선택자(selector)·URL 을 실제 구조에 맞게 고친다
 3. 개인정보를 지운 HTML 일부를 tests/fixtures 에 넣고 테스트를 추가한다
 계정 정보는 환경변수 MOREDEN_ID, MOREDEN_PW, DENTPHOTO_ID, DENTPHOTO_PW 로 받는다.
+
+## 병원 게시판 (data/institutions.json)
+- 리서치로 모은 150개 기관(치과대학병원·치과대학·장애인치과·대학병원·공공병원)의 이름/별칭/위치/채용 주소.
+- `watch: true` 인 63곳은 hospitals 수집기가 직접 읽는다(서버 렌더링 게시판으로 추정되는 곳).
+- `watch: false` 로 둔 곳: 채용 플랫폼(recruiter.co.kr, incruit, recruit.severance.healthcare, 대학 교원채용 시스템 등)
+  을 쓰는 곳 — 자바스크립트 화면이라 일반 방법으로 못 읽는다. 특히 **연세대 치과대학병원(세브란스 채용 포털)**,
+  **경희대치과병원(incruit)**, 서울시장애인치과병원(snudh.recruiter.co.kr) 은 중요하므로
+  네트워크가 열린 세션에서 플랫폼별 수집기(예: recruiter.co.kr 공통 수집기)를 만드는 것이 다음 할 일.
+- 기관 목록을 다시 만들 때: 리서치 JSON → scratchpad 의 build 스크립트 방식(이름 정리, 별칭 자동 생성, 같은 게시판 공유 시 한 곳만 watch).

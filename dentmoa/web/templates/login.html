@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf %}
+{% block title %}로그인{% endblock %}
+{% block content %}
+<div class="auth-box card">
+  <h1 class="page-title">로그인</h1>
+  {% if error %}<div class="flash flash-error" role="alert">{{ error }}</div>{% endif %}
+  <form method="post" action="{{ url_for('auth.login') }}" class="narrow-form">
+    {{ csrf() }}
+    <input type="hidden" name="next" value="{{ next }}">
+    <label class="field"><span class="field-label">대시보드 비밀번호</span>
+      <input type="password" name="password" autocomplete="current-password" required autofocus></label>
+    <button type="submit" class="btn btn-primary btn-block">로그인</button>
+  </form>
+  <p class="hint">비밀번호를 잊었다면 서버에서 <code>python -m dentmoa set-password</code> 로 다시 정할 수 있어요.</p>
+</div>
+{% endblock %}

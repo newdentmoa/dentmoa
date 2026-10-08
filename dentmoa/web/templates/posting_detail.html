@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% from "_macros.html" import toggle_buttons %}
+{% block title %}{{ p.title }}{% endblock %}
+{% block content %}
+{% set here = request.full_path.rstrip('?') %}
+{% set badge = deadline_badge(p) %}
+<p class="back"><a href="{{ back }}">← 목록으로</a></p>
+
+<article class="card detail-head">
+  <h1 class="detail-title">{{ p.title }}</h1>
+  <div class="badges">
+    {% if badge %}<span class="badge {{ badge.cls }}" title="{{ badge.title }}">{{ badge.text }}</span>{% endif %}
+    {% if m.ok %}<a class="badge badge-ok" href="#match">내 알림 조건에 맞음</a>{% else %}<a class="badge badge-passed" href="#match">알림 조건 밖</a>{% endif %}
+    {% if p.starred %}<span class="badge badge-star">★ 관심</span>{% endif %}
+    {% if p.hidden %}<span class="badge badge-passed">숨김</span>{% endif %}
+  </div>
+  <dl class="meta">
+    <dt>기관</dt>
+    <dd>{{ p.institution or '이름 미상' }} <span class="muted">({{ tx.INST_TYPES.get(p.inst_type, p.inst_type) }})</span></dd>
+    <dt>직위</dt><dd>{{ labels(p.positions, tx.POSITIONS) or '—' }}</dd>
+    <dt>분과</dt>
+    <dd>{{ labels(p.specialties, tx.SPECIALTIES) or '—' }}
+      {% if p.specialty_hints %}<br><span class="muted">참고(우대·가능): {{ labels(p.specialty_hints, tx.SPECIALTIES) }}</span>{% endif %}</dd>
+    <dt>근무 형태</dt><dd>{{ labels(p.work_types, tx.WORK_TYPES) or '—' }}</dd>
+    <dt>지역</dt><dd>{{ p.region_labels|join(', ') if p.region_labels else '알 수 없음' }}</dd>
+    <dt>마감</dt>
+    <dd>
+      {% if p.deadline_kind == 'date' and p.deadline %}{{ p.deadline|fmt_full_date }}
+      {% elif p.deadline_kind == 'until_filled' %}채용시 마감
+      {% else %}<span class="muted">글에 적혀 있지 않음</span>{% endif %}
+    </dd>
+    <dt>올린 날</dt><dd>{{ p.posted_at|fmt_dt if p.posted_at else '알 수 없음' }}</dd>
+    <dt>처음 본 시각</dt><dd>{{ p.first_seen_at|fmt_dt }}</dd>
+    <dt>출처</dt><dd>{{ p.source|source_label }}{% if p.author %} · {{ p.author }}{% endif %}</dd>
+    {% if p.notified_at %}<dt>알림</dt><dd>{{ p.notified_at|fmt_dt }}에 보냄</dd>{% endif %}
+  </dl>
+  <div class="actions">
+    {{ toggle_buttons(p, here) }}
+    <a class="btn btn-small btn-primary" href="{{ p.url|safe_url }}" target="_blank" rel="noopener noreferrer">원문 보기</a>
+  </div>
+</article>
+
+{% if p.summary %}
+<section class="card">
+  <h2>3줄 요약</h2>
+  <ol class="summary summary-numbered">
+    {% for line in p.summary[:3] %}<li>{{ line }}</li>{% endfor %}
+  </ol>
+</section>
+{% endif %}
+
+<section class="card">
+  <h2>본문</h2>
+  {% if p.body %}
+  <div class="body-text">{{ p.body }}</div>
+  {% else %}
+  <p class="muted">본문을 가져오지 못했어요. '원문 보기'를 눌러 확인해 주세요.</p>
+  {% endif %}
+</section>
+
+<section class="card" id="why">
+  <h2>왜 이렇게 분류됐나요?</h2>
+  <div class="table-wrap">
+    <table class="table evidence">
+      <thead><tr><th scope="col">항목</th><th scope="col">분류</th><th scope="col">근거 (글에서 찾은 말)</th></tr></thead>
+      <tbody>
+        {% for r in rows %}
+        <tr>
+          <th scope="row">{{ r.title }}</th>
+          <td>{{ r.value }}{% if r.guessed %} <span class="tag tag-warn">추정</span>{% endif %}</td>
+          <td class="ev">
+            {% for e in r.evidence %}<q>{{ e }}</q>{% else %}<span class="muted">—</span>{% endfor %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="hint">'추정'은 글에서 단서를 찾지 못해 기본값으로 정한 항목이에요. 분류가 틀렸다면 '알림 조건'의 포함·제외 키워드로 바로잡을 수 있어요.</p>
+</section>
+
+<section class="card" id="match">
+  <h2>알림 조건과 비교</h2>
+  {% if m.ok %}
+  <p class="result-ok">✓ 지금 알림 조건에 맞는 공고예요.</p>
+  {% else %}
+  <p class="result-no">알림 조건에 맞지 않아요. 맞지 않는 항목:</p>
+  {% endif %}
+  {% if m.reasons %}
+  <ul class="reasons">{% for r in m.reasons %}<li>{{ r }}</li>{% endfor %}</ul>
+  {% endif %}
+  {% if m.region_uncertain %}<p class="hint">공고의 지역이 불분명해요. '지역이 불분명한 공고도 받기'가 켜져 있어서 포함됐어요.</p>{% endif %}
+  {% if p.dup_of %}<p class="hint">다른 출처에 먼저 올라온 같은 공고가 있어서 알림에서는 빠져요.</p>{% endif %}
+  {% if p.hidden %}<p class="hint">숨긴 공고라 목록과 알림에서 빠져요.</p>{% endif %}
+  <p><a href="{{ url_for('settings.index') }}">알림 조건 바꾸기 →</a></p>
+</section>
+
+{% if original or dups %}
+<section class="card">
+  <h2>같은 공고</h2>
+  <ul class="plain-list">
+    {% if original %}<li>원본: <a href="{{ url_for('postings.detail', pid=original.id) }}">{{ original.title }}</a> <span class="muted">({{ original.source|source_label }})</span></li>{% endif %}
+    {% for d in dups %}<li>다른 출처: <a href="{{ url_for('postings.detail', pid=d.id) }}">{{ d.title }}</a> <span class="muted">({{ d.source|source_label }})</span></li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

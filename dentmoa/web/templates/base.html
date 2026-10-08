@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="same-origin">
+  <title>{% block title %}{% endblock %}{% if self.title() %} · {% endif %}덴트모아</title>
+  <link rel="icon" href="{{ url_for('static', filename='icon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="{{ url_for('postings.index') if g.get('logged_in') else url_for('auth.login') }}">
+        <img class="brand-mark" src="{{ url_for('static', filename='icon.svg') }}" alt="" width="26" height="26">덴트모아
+      </a>
+      {% if g.get('logged_in') %}
+      <form class="logout" method="post" action="{{ url_for('auth.logout') }}">
+        <input type="hidden" name="{{ CSRF_FIELD }}" value="{{ csrf_token() }}">
+        <button type="submit" class="link-button">로그아웃</button>
+      </form>
+      {% endif %}
+    </div>
+    {% if g.get('logged_in') %}
+    <nav class="mainnav" aria-label="주 메뉴">
+      {% for item in nav_items() %}
+      <a href="{{ url_for(item.endpoint) }}"{% if item.active %} class="active" aria-current="page"{% endif %}>{{ item.label }}</a>
+      {% endfor %}
+    </nav>
+    {% endif %}
+  </header>
+
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flashes" role="status">
+      {% for cat, msg in messages %}
+      <div class="flash flash-{{ cat if cat in ('ok', 'error', 'info') else 'info' }}">{{ msg }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">덴트모아 · 개인용 치과의사 구인공고 알리미</footer>
+</body>
+</html>

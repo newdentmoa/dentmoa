@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% from "_macros.html" import posting_card %}
+{% block title %}알림 미리보기{% endblock %}
+{% block content %}
+{% set here = request.full_path.rstrip('?') %}
+<p class="back"><a href="{{ url_for('status.index') }}">← 상태로</a></p>
+<h1 class="page-title">알림 미리보기</h1>
+
+{% if error %}
+<div class="flash flash-error">미리보기를 만들지 못했어요: {{ error }}</div>
+{% else %}
+<p class="card preview">
+  지금 알림을 보낸다면 아래 <strong>{{ cards|length }}건</strong>이 들어가요. 실제로 보내지는 않아요.
+  {% if cards|length > max_items %}<br>알림 한 번에는 최근 {{ max_items }}건까지만 보여 줘요.{% endif %}
+  <br><span class="muted small">아직 알림 판단을 하지 않은 새 글 {{ considered }}건 중에서 골랐어요.</span>
+</p>
+{% if cards %}
+<div class="posting-list">
+  {% for c in cards %}{{ posting_card(c, here) }}{% endfor %}
+</div>
+{% else %}
+<div class="empty card">
+  <p class="empty-title">보낼 새 공고가 없어요.</p>
+  <p>이미 알림을 보냈거나, 새로 모은 공고 중 조건에 맞는 것이 없어요.</p>
+</div>
+{% endif %}
+{% endif %}
+{% endblock %}

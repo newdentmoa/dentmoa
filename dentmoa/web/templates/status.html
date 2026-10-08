@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf %}
+{% block title %}상태{% endblock %}
+{% block content %}
+<h1 class="page-title">상태</h1>
+
+<section class="card">
+  <h2>다음 실행</h2>
+  {% if next_runs %}
+  <ul class="plain-list">{% for r in next_runs %}<li>{{ r }}</li>{% endfor %}</ul>
+  {% else %}
+  <p class="muted">예약 정보 없음</p>
+  <p class="hint">설정한 알림 시각: {{ times|join(', ') }}</p>
+  {% endif %}
+  <div class="button-row">
+    <form method="post" action="{{ url_for('status.run_now') }}" data-busy="시작하는 중…">
+      {{ csrf() }}
+      <button type="submit" class="btn btn-primary"{% if running %} disabled{% endif %}>{{ '실행 중…' if running else '지금 수집·알림 실행' }}</button>
+    </form>
+    <a class="btn" href="{{ url_for('status.preview') }}">알림 미리보기</a>
+  </div>
+  <p class="hint">모아 둔 공고 <strong>{{ total }}건</strong>. '지금 수집·알림 실행'은 예약 시각과 똑같이 수집하고, 새로 맞는 공고가 있으면 알림을 보내요.</p>
+</section>
+
+<section class="card">
+  <h2>출처별 마지막 수집</h2>
+  <ul class="source-list">
+    {% for s in sources %}
+    <li>
+      <div class="source-row">
+        <strong>{{ s.label }}</strong>
+        {% if not s.enabled %}<span class="tag">끔</span>{% endif %}
+        {% if s.run %}<span class="status {{ s.run.status_cls }}">{{ s.run.status_label }}</span>
+        {% else %}<span class="status st-empty">아직 실행 안 함</span>{% endif %}
+      </div>
+      {% if s.run %}
+      <div class="small muted">{{ s.run.started }}{% if s.run.summary %} · {{ s.run.summary }}{% endif %}</div>
+      {% if s.run.status == 'error' %}
+      <div class="small muted">마지막 성공: {{ s.last_ok.started if s.last_ok else '없음' }}</div>
+      {% endif %}
+      {% if s.run.detail %}<details class="log-details"><summary>자세히</summary><pre class="log">{{ s.run.detail }}</pre></details>{% endif %}
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="card">
+  <h2>최근 실행 기록</h2>
+  {% if runs %}
+  <div class="table-wrap">
+    <table class="table runs">
+      <thead><tr><th scope="col">시작</th><th scope="col">종류</th><th scope="col">결과</th><th scope="col">새 글</th><th scope="col">내용</th></tr></thead>
+      <tbody>
+        {% for r in runs %}
+        <tr>
+          <td class="nowrap">{{ r.started }}</td>
+          <td>{{ r.kind_label }}{% if r.source_label %}<br><span class="muted small">{{ r.source_label }}</span>{% endif %}</td>
+          <td><span class="status {{ r.status_cls }}">{{ r.status_label }}</span></td>
+          <td>{{ r.new }}</td>
+          <td class="msg">{{ r.summary }}{% if r.detail %}<details class="log-details"><summary>자세히</summary><pre class="log">{{ r.detail }}</pre></details>{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="muted">아직 실행 기록이 없어요.</p>
+  {% endif %}
+</section>
+
+<section class="card" id="password">
+  <h2>대시보드 비밀번호 바꾸기</h2>
+  <form method="post" action="{{ url_for('auth.change_password') }}" class="narrow-form">
+    {{ csrf() }}
+    <label class="field"><span class="field-label">지금 비밀번호</span><input type="password" name="current" autocomplete="current-password" required></label>
+    <label class="field"><span class="field-label">새 비밀번호 (8자 이상)</span><input type="password" name="password" autocomplete="new-password" minlength="8" required></label>
+    <label class="field"><span class="field-label">새 비밀번호 한 번 더</span><input type="password" name="password2" autocomplete="new-password" minlength="8" required></label>
+    <button type="submit" class="btn btn-primary">비밀번호 바꾸기</button>
+  </form>
+</section>
+{% endblock %}

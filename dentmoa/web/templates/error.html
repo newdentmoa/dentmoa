@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="empty card">
+  <p class="empty-title">{{ title }}</p>
+  <p>{{ message }}</p>
+  <div class="button-row">
+    <a class="btn btn-primary" href="{{ url_for('postings.index') }}">처음 화면으로</a>
+  </div>
+  <p class="muted small">오류 코드 {{ code }}</p>
+</div>
+{% endblock %}

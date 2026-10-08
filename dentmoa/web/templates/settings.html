@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf, check_group %}
+{% block title %}알림 조건{% endblock %}
+{% block content %}
+{% set f = s.filters %}
+{% set n = s.notify %}
+{% set c = s.collect %}
+<h1 class="page-title">알림 조건</h1>
+
+{% if errors %}
+<div class="flash flash-error" role="alert">
+  <strong>저장하지 못했어요. 아래 내용을 확인해 주세요.</strong>
+  <ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+</div>
+{% elif preview is not none %}
+<p class="card preview">현재 조건으로 최근 30일 공고 중 <strong>{{ preview }}건</strong>이 해당돼요. <a href="{{ url_for('postings.index') }}">목록 보기 →</a></p>
+{% endif %}
+
+<form method="post" action="{{ url_for('settings.index') }}" class="settings-form" data-busy="저장하는 중…">
+  {{ csrf() }}
+
+  <section class="card">
+    <h2>받을 글 종류</h2>
+    {{ check_group('post_kinds', post_kinds.items(), f.post_kinds) }}
+    <label class="check check-wide"><input type="checkbox" name="dentist_only" value="1"{% if f.dentist_only %} checked{% endif %}><span>치과의사 공고만 받기 <small class="muted">(위생사·간호사 등 다른 직종 공고는 빼기)</small></span></label>
+  </section>
+
+  {% for key, title, table in tx_fields %}
+  <section class="card">
+    <div class="section-head">
+      <h2>{{ title }}</h2>
+      <div class="mini-buttons">
+        <button type="button" class="btn btn-small" data-check-all="{{ key }}">전체 선택</button>
+        <button type="button" class="btn btn-small" data-uncheck-all="{{ key }}">전체 해제</button>
+      </div>
+    </div>
+    {% if key == 'specialties' %}
+    <p class="hint">'일반의 혹은 분과무관'은 전문의를 따로 요구하지 않는 공고예요. 대부분의 봉직의(GP) 공고가 여기에 들어가요. 소아치과 공고만 받으려면 '소아치과'만 고르세요.</p>
+    {% elif key == 'positions' %}
+    <p class="hint">공고에 직위가 적혀 있지 않으면 '봉직의'(공공기관은 '촉탁의·계약직')로 봐요.</p>
+    {% elif key == 'work_types' %}
+    <p class="hint">근무 형태가 적혀 있지 않으면 '풀타임'으로 봐요.</p>
+    {% endif %}
+    {{ check_group(key, table.items(), f[key]) }}
+    {% if key == 'specialties' %}
+    <label class="check check-wide"><input type="checkbox" name="include_hints" value="1"{% if f.include_hints %} checked{% endif %}><span>'교정 가능자 우대'처럼 참고 분야만 맞아도 받기</span></label>
+    {% endif %}
+  </section>
+  {% endfor %}
+
+  <section class="card" id="regions" data-region-picker>
+    <h2>지역</h2>
+    <p class="hint">여러 곳을 함께 고를 수 있어요. '서울 전체'처럼 시·도 전체를 고르면 그 안의 모든 구·시·군이 포함되고, 특정 구만 고를 수도 있어요.</p>
+    <p class="region-summary" data-region-summary aria-live="polite"></p>
+    <label class="check check-strong"><input type="checkbox" name="regions" value="전국" data-region-all{% if '전국' in selected_regions %} checked{% endif %}><span>전국 (모든 지역)</span></label>
+    <div class="region-list">
+      {% for opt in region_options %}
+      {% set ns = namespace(n=0) %}
+      {% for sg in opt.sigungu %}{% if (opt.sido ~ ' ' ~ sg) in selected_regions %}{% set ns.n = ns.n + 1 %}{% endif %}{% endfor %}
+      <div class="sido" data-sido="{{ opt.sido }}">
+        <label class="check"><input type="checkbox" name="regions" value="{{ opt.sido }}" data-sido-all="{{ opt.sido }}"{% if opt.sido in selected_regions %} checked{% endif %}><span>{{ opt.sido }} 전체</span></label>
+        <details{% if ns.n %} open{% endif %}>
+          <summary>구·시·군 고르기 <span class="count" data-count>{% if ns.n %}{{ ns.n }}곳{% endif %}</span></summary>
+          <div class="checks checks-compact">
+            {% for sg in opt.sigungu %}
+            {% set v = opt.sido ~ ' ' ~ sg %}
+            <label class="check"><input type="checkbox" name="regions" value="{{ v }}" data-sigungu-of="{{ opt.sido }}"{% if v in selected_regions %} checked{% endif %}><span>{{ sg }}</span></label>
+            {% endfor %}
+          </div>
+        </details>
+      </div>
+      {% endfor %}
+    </div>
+    <label class="check check-wide"><input type="checkbox" name="include_uncertain_region" value="1"{% if f.include_uncertain_region %} checked{% endif %}><span>지역이 불분명한 공고도 받기</span></label>
+    <p class="hint">공고에 지역이 없거나 '서울'처럼 시·도만 적혀 있어서 고른 구와 맞는지 알 수 없을 때도 받아요. 이런 공고에는 '지역 확인 필요'가 붙어요.</p>
+  </section>
+
+  <section class="card">
+    <h2>키워드</h2>
+    <label class="field">
+      <span class="field-label">무조건 포함 키워드</span>
+      <textarea name="include_keywords" rows="3" placeholder="예: 서울대학교치과병원, 소아치과">{{ f.include_keywords|join('\n') }}</textarea>
+    </label>
+    <p class="hint">무조건 포함 키워드가 있으면 다른 조건과 상관없이 받습니다(글 종류 조건은 적용). 쉼표(,)나 줄바꿈으로 여러 개를 적을 수 있어요.</p>
+    <label class="field">
+      <span class="field-label">제외 키워드</span>
+      <textarea name="exclude_keywords" rows="3" placeholder="예: 양도, 동업">{{ f.exclude_keywords|join('\n') }}</textarea>
+    </label>
+    <p class="hint">제외 키워드가 있으면 받지 않습니다. 제목·기관 이름·본문 어디에 있어도 해당돼요.</p>
+  </section>
+
+  <section class="card">
+    <h2>알림</h2>
+    <div class="field">
+      <span class="field-label">알림 시각 (1~4개)</span>
+      <div class="times">
+        {% for t in times %}<input type="time" name="times" value="{{ t }}" aria-label="알림 시각 {{ loop.index }}">{% endfor %}
+      </div>
+    </div>
+    <p class="hint">정한 시각마다 사이트를 확인하고 새 공고를 모아서 보내요. 사이트를 조용히 읽도록 하루 2~3번을 권해요. 실제 시각은 몇 분 정도 달라질 수 있어요. 안 쓰는 칸은 비워 두세요.</p>
+    <div class="checks">
+      <label class="check"><input type="checkbox" name="telegram" value="1"{% if n.telegram %} checked{% endif %}><span>텔레그램으로 받기</span></label>
+      <label class="check"><input type="checkbox" name="email" value="1"{% if n.email %} checked{% endif %}><span>메일로 받기</span></label>
+    </div>
+    <label class="check check-wide"><input type="checkbox" name="send_empty" value="1"{% if n.send_empty %} checked{% endif %}><span>새 공고가 없어도 '새 공고 없음' 알림 받기</span></label>
+    <h3>마감 임박 알림</h3>
+    <label class="check check-wide"><input type="checkbox" name="reminder_enabled" value="1"{% if n.reminder_enabled %} checked{% endif %}><span>마감이 다가오면 한 번 더 알려 주기</span></label>
+    <div class="filter-row">
+      <label class="field field-inline">
+        <span class="field-label">마감</span>
+        <input type="number" name="reminder_days" value="{{ n.reminder_days }}" min="1" max="30" inputmode="numeric" class="input-short">
+        <span>일 전부터</span>
+      </label>
+      <label class="check"><input type="checkbox" name="reminder_starred_only" value="1"{% if n.reminder_starred_only %} checked{% endif %}><span>관심(★) 공고만</span></label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>수집</h2>
+    <span class="field-label">확인할 사이트</span>
+    <div class="checks">
+      {% for key, label in source_options %}
+      <label class="check"><input type="checkbox" name="source_{{ key }}" value="1"{% if c.sources.get(key) %} checked{% endif %}><span>{{ label }}</span></label>
+      {% endfor %}
+    </div>
+    <label class="field field-inline">
+      <span class="field-label">처음 수집할 때 가져올 기간</span>
+      <input type="number" name="backfill_days" value="{{ c.backfill_days }}" min="1" max="90" inputmode="numeric" class="input-short">
+      <span>일</span>
+    </label>
+    <div class="field">
+      <span class="field-label">글을 열 때마다 쉬는 시간 (초)</span>
+      <div class="filter-row">
+        <label class="field-inline">최소 <input type="number" name="min_delay_sec" value="{{ c.min_delay_sec }}" min="1" max="60" step="0.5" inputmode="decimal" class="input-short"></label>
+        <label class="field-inline">최대 <input type="number" name="max_delay_sec" value="{{ c.max_delay_sec }}" min="1" max="120" step="0.5" inputmode="decimal" class="input-short"></label>
+      </div>
+    </div>
+    <p class="hint">사이트에 부담을 주지 않고 사람처럼 보이도록, 글을 하나 열 때마다 이 범위에서 무작위로 쉬어요. 이미 본 글은 다시 열지 않아요.</p>
+  </section>
+
+  <div class="save-bar">
+    <button type="submit" class="btn btn-primary btn-block">저장</button>
+  </div>
+</form>
+{% endblock %}

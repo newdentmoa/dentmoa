@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf %}
+{% block title %}처음 설정{% endblock %}
+{% block content %}
+<div class="auth-box card">
+  <h1 class="page-title">덴트모아에 오신 것을 환영해요</h1>
+  <p>이 화면은 나만 볼 수 있도록 먼저 <b>대시보드 비밀번호</b>를 정해 주세요. 다음부터 이 비밀번호로 로그인해요.</p>
+  {% if error %}<div class="flash flash-error" role="alert">{{ error }}</div>{% endif %}
+  <form method="post" action="{{ url_for('auth.setup') }}" class="narrow-form" data-busy="저장하는 중…">
+    {{ csrf() }}
+    <label class="field"><span class="field-label">비밀번호 (8자 이상)</span>
+      <input type="password" name="password" autocomplete="new-password" minlength="8" required autofocus></label>
+    <label class="field"><span class="field-label">비밀번호 한 번 더</span>
+      <input type="password" name="password2" autocomplete="new-password" minlength="8" required></label>
+    <button type="submit" class="btn btn-primary btn-block">비밀번호 정하기</button>
+  </form>
+  <p class="hint">휴대폰과 컴퓨터에서 한 번 로그인하면 30일 동안 유지돼요.</p>
+</div>
+{% endblock %}
