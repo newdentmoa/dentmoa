@@ -296,3 +296,47 @@ def test_hospital_boards(fakeweb, monkeypatch):
 
     status = db.kv_get("board_status")
     assert status["고장난병원"]["ok"] is False and status["다라병원"]["ok"] is True
+
+
+# ───────────── 하이브레인넷 ─────────────
+
+HIBRAIN_LIST = """<ul class="recruitList">
+<li class="row"><a href="/recruitment/recruits/3600299?listType=ING">2027학년도 1학기 전임교원 초빙</a><span class="org">경북대학교</span><span>2026.10.06</span></li>
+<li class="row"><a href="/recruitment/recruits/3600298?listType=ING">기계공학과 연구교수 초빙</a><span class="org">한국공과대학교</span><span>2026.10.06</span></li>
+<li class="row"><a href="/recruitment/recruits/3600297?listType=ING">치의학전문대학원 기금교수 채용</a><span class="org">부산대학교</span><span>2026.10.05</span></li>
+<li class="row"><a href="/recruitment/recruits/3600296?listType=ING">영어영문학과 강사 채용</a><span class="org">서울대학교</span><span>2026.10.05</span></li>
+</ul>"""
+
+
+def test_hibrain_filters_titles(fakeweb):
+    from dentmoa.sources import hibrain
+
+    web = fakeweb([
+        ("https://www.hibrain.net/recruitment/recruits?", (200, HIBRAIN_LIST)),
+        ("https://www.hibrain.net/recruitment/recruits/3600299", (200, "<div class='content'>치과대학 소아치과학 분야 1명</div>")),
+        ("https://www.hibrain.net/recruitment/recruits/3600297", (200, "<div class='content'>구강악안면외과학 기금교수</div>")),
+    ])
+    got = list(hibrain.HibrainSource().fetch(ctx(max_pages=1)))
+    assert {g.source_id for g in got} == {"3600299", "3600297"}
+    assert not any("3600298" in u or "3600296" in u for _, u, _ in web.calls)
+
+
+# ───────────── 나라일터 ─────────────
+
+GOJOBS_LIST = """<table><tr><th>번호</th><th>제목</th><th>기관</th><th>등록일</th><th>마감일</th><th>조회</th></tr>
+<tr><td>3</td><td><a href="#" onclick="fn_apmView('020','305296');return false;">보건소 치과의사(임기제공무원) 채용 공고</a></td><td>서울특별시 강남구</td><td>2026.10.07</td><td>2026.10.17</td><td>12</td></tr>
+<tr><td>2</td><td><a href="#" onclick="fn_apmView('020','305295');return false;">기간제 행정직 채용</a></td><td>OO시청</td><td>2026.10.07</td><td>2026.10.14</td><td>5</td></tr>
+</table>"""
+
+
+def test_gojobs(fakeweb):
+    from dentmoa.sources import gojobs
+
+    fakeweb([
+        ("https://www.gojobs.go.kr/apmList.do?menuNo=401&pageIndex=1", (200, GOJOBS_LIST)),
+        ("https://www.gojobs.go.kr/apmList.do", (200, "<table></table>")),
+        ("https://www.gojobs.go.kr/apmView.do?empmnsn=305296", (200, "<div class='content'>근무지 : 서울특별시 강남구 보건소\n치과의사 1명</div>")),
+    ])
+    got = list(gojobs.GojobsSource().fetch(ctx(max_pages=1)))
+    assert [g.source_id for g in got] == ["305296"]
+    assert got[0].institution_hint == "서울특별시 강남구"

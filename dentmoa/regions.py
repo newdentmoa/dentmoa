@@ -210,6 +210,9 @@ def parse_regions(text: str, max_results: int = 6) -> list[Region]:
             for sido in group_sidos:
                 hits.append((m.start(), Region(sido)))
 
+    if any(r == Region("경기", "광주시") for _, r in hits):
+        hits = [(pos, r) for pos, r in hits if r != Region("광주")]
+
     hits.sort(key=lambda h: h[0])
     ordered = list(dict.fromkeys(r for _, r in hits))
     # 같은 시·도의 구체적인 시군구가 있으면 시·도만 있는 항목은 뺀다

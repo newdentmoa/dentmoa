@@ -1,0 +1,1961 @@
+[
+ {
+  "title": "[구인] 광주 상무지구 치과 페이닥터 원장님 모십니다",
+  "body": "광주광역시 서구 치평동 상무지구 위치\n주4.5일 (목요일 오후 휴진), 야간진료 화 1회\n세후 1200 보장 + 인센 협의, 4대보험\nGP 원장님 환영, 신규 졸업 가능\n채용시 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "광주",
+  "expected_sigungu": "서구",
+  "expected_deadline": "",
+  "why_tricky": "광주+상무지구 → 광주광역시 서구(서구는 부산·대구·대전·인천에도 있음). 야간진료는 근무 조건일 뿐 파트가 아님. 채용시 마감 → 날짜 없음"
+ },
+ {
+  "title": "경기 광주 오포 치과 봉직의 구합니다",
+  "body": "경기도 광주시 오포읍 신현리, 체어 6대\n주5일 (토요일 격주), 세후 1000 + 인센\n임플란트 가능자 우대, 교정 X\n10/20(화)까지 문자로 지원 부탁드립니다",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "광주시",
+  "expected_deadline": "2026-10-20",
+  "why_tricky": "'광주'는 광주광역시가 아니라 경기 광주시. '교정 X'는 부정이라 ortho 아님. 마감일 형식 10/20(화)까지"
+ },
+ {
+  "title": "광주시 태전동 신규 개원 치과 진료원장님 모셔요",
+  "body": "위치: 광주시 태전동 (분당·판교에서 차로 20분)\n주4일 근무 가능, 세후 1100 보장\n전문의 무관, 성실하신 원장님이면 됩니다\n~10.31",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "광주시",
+  "expected_deadline": "2026-10-31",
+  "why_tricky": "'광주시'만으로는 모호하지만 태전동은 경기 광주시. 같은 근무지 줄의 '분당·판교'는 거리 설명이므로 성남시를 넣으면 오답. '~10.31'은 마감일"
+ },
+ {
+  "title": "광주 수완지구 소아 환자 많은 치과 원장님 구인",
+  "body": "광주 광산구 수완동, 소아 환자 비율 높음\n주5일, 월 세후 1300 보장\n일반의 지원 가능, 소아 진료 경험 있으시면 우대\n마감 2026.10.20",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "광주",
+  "expected_sigungu": "광산구",
+  "expected_deadline": "2026-10-20",
+  "why_tricky": "'소아 환자 많음', '소아 진료 경험 우대'는 참고 정보(hint)일 뿐 소아치과 전문의 구인이 아님 → gp. '광산'은 RISKY_SHORT라 전체 이름으로 인식해야 함"
+ },
+ {
+  "title": "서울 중구 명동역 치과 페닥 구합니다",
+  "body": "서울 중구 명동2가, 직장인 환자 위주\n주4.5 (토요일 오전 근무), 야간 없음\n네트 1100~1300 (경력에 따라 협의)\n보철·보존 위주 일반진료, 전문의 아니어도 됩니다",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "중구",
+  "expected_deadline": "",
+  "why_tricky": "페닥=페이닥터, 네트=세후. 중구는 여러 광역시에 있어 '서울' 문맥이 필요함. '보철·보존 위주'는 진료 내용이지 보철과·보존과 전문의 구인이 아님. '1100~1300'을 날짜 범위로 읽으면 안 됨"
+ },
+ {
+  "title": "대구 동성로 치과 원장님 모십니다",
+  "body": "대구광역시 중구 동성로2가, 반월당역 도보 3분\n주5일, 세후 1000 보장 + 인센 20%\n신규 졸업 GP 환영\n2026. 10. 15.(목) 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "대구",
+  "expected_sigungu": "중구",
+  "expected_deadline": "2026-10-15",
+  "why_tricky": "제목에는 동성로만 있고 본문으로 대구 중구가 정해짐. 마감일이 점·공백 형식 '2026. 10. 15.(목)'"
+ },
+ {
+  "title": "대전 둔산동 치과 봉직의 모집 (주4일)",
+  "body": "대전 서구 둔산동 갤러리아 인근\n주4일 근무 / 세후 1200 / 퇴직금 별도\nGP 환영, 전문의 무관\n접수 ~ 10월 23일(금)",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "대전",
+  "expected_sigungu": "서구",
+  "expected_deadline": "2026-10-23",
+  "why_tricky": "대전 서구를 다른 광역시의 서구와 구분해야 함. 한글 날짜 형식이고, 주4일은 풀타임"
+ },
+ {
+  "title": "부산역 앞 치과 대진 원장님 구합니다 (10/19~10/24)",
+  "body": "부산 동구 초량동, 부산역 도보 5분\n원장님 학회 일정으로 1주일 대진 부탁드립니다\n일당 세후 70, 점심 제공\n임플란트 수술 X, 일반 진료만 해주시면 됩니다",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "locum"
+  ],
+  "expected_sido": "부산",
+  "expected_sigungu": "동구",
+  "expected_deadline": "",
+  "why_tricky": "제목의 10/19~10/24는 대진 근무 기간이지 지원 마감일이 아님. 동구는 여러 광역시에 있음"
+ },
+ {
+  "title": "울산 동구 방어동 치과 원장님 구인 (숙소 제공)",
+  "body": "울산광역시 동구 방어동, 조선소 인근\n주5.5일, 세후 1400 보장, 원룸 숙소 제공\n1년 이상 근무 가능하신 GP 원장님\n채용 시 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "울산",
+  "expected_sigungu": "동구",
+  "expected_deadline": "",
+  "why_tricky": "울산 동구. 숙소 제공은 복지 조건이고, '채용 시 마감'(띄어 씀)은 날짜 없음"
+ },
+ {
+  "title": "분당 정자역 치과 주4 진료원장 모집",
+  "body": "정자역 3번 출구 앞, 체어 7대\n주4일 (월화목금), 야간 1회\n세후 1300 + 인센, 4대보험·퇴직금 별도\n10/16 마감, 문의 010-1234-5678",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "성남시",
+  "expected_deadline": "2026-10-16",
+  "why_tricky": "시·도 이름 없이 '분당/정자역' 별칭만 있음 → 성남시(일반구는 시로 묶음). 전화번호를 날짜로 읽으면 안 됨"
+ },
+ {
+  "title": "일산 라페스타 치과 토요일 파트 원장님",
+  "body": "고양시 일산동구 장항동 라페스타 상가\n토요일만 파트 (09:00~14:00), 일급 협의\n일반 진료, 신환 상담 가능하신 분\n연락 주시면 바로 면접 가능합니다",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "parttime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "고양시",
+  "expected_deadline": "",
+  "why_tricky": "일산동구 → 고양시. 토요일 파트는 parttime만이고 풀타임 기본값을 붙이면 안 됨. 09:00~14:00은 날짜가 아님"
+ },
+ {
+  "title": "동탄 어린이 환자 많은 치과 페이닥터 모십니다",
+  "body": "화성시 동탄구 영천동 (동탄2신도시)\n주5일, 세후 1200 보장 + 인센\n소아 환자 많지만 소아치과 전문의 아니셔도 됩니다\n성인 일반 진료 위주, 마감 10/30",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "화성시",
+  "expected_deadline": "2026-10-30",
+  "why_tricky": "화성시 동탄구(2026년 신설 일반구) → 화성시. '소아치과 전문의 아니셔도 됩니다'는 부정이라 pedo가 아님(현재 NEG_AFTER에 '아니셔도'가 없음)"
+ },
+ {
+  "title": "송도 국제도시 치과 일반진료 원장님 모십니다",
+  "body": "인천 연수구 송도동, 센트럴파크역 인근\n주4.5일 / 세후 1300\n교정과 전문의 상주, 일반진료 원장님 1명 구인\n접수기간 2026. 10. 5.(월) ~ 10. 16.(금) 18:00",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "인천",
+  "expected_sigungu": "연수구",
+  "expected_deadline": "2026-10-16",
+  "why_tricky": "교정과 전문의는 이미 상주하는 인력이라 ortho가 아님. 기간형 마감에서는 끝 날짜를 고르고, 18:00은 무시"
+ },
+ {
+  "title": "서면 치과 봉직의 구합니다",
+  "body": "서면역 7번 출구 도보 2분\n주5일, 세후 1100+α\n대표원장님 보존과 전문의, 일반 진료하실 원장님 모십니다\n~10/30",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "부산",
+  "expected_sigungu": "부산진구",
+  "expected_deadline": "2026-10-30",
+  "why_tricky": "시·도 이름 없이 '서면역'만 있음 → 부산진구. '대표원장님 보존과 전문의'는 기존 인력이라 endo 아님"
+ },
+ {
+  "title": "영종도 운서역 치과 원장님 구인",
+  "body": "인천 영종구 운서동 (7월 행정구역 개편 전 중구)\n주5일, 세후 1200, 숙소 지원 가능\n일반의 환영, 경력 무관\n상시 모집",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "인천",
+  "expected_sigungu": "영종구",
+  "expected_deadline": "",
+  "why_tricky": "2026-07 개편으로 영종구가 됨. 본문의 '중구' 때문에 제물포구나 다른 시의 중구로 잡으면 오답. 상시 모집 → 날짜 없음"
+ },
+ {
+  "title": "인천 중구 신포동 치과 페이닥터 모집",
+  "body": "인천광역시 중구 신포로 (2026.7.1부터 제물포구)\n주4.5일, 세후 1000~1200\n임플란트 가능하신 GP 원장님\n2026.10.20 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "인천",
+  "expected_sigungu": "제물포구",
+  "expected_deadline": "2026-10-20",
+  "why_tricky": "옛 이름 '인천 중구'의 내륙 지역은 제물포구. 별칭은 제물포구·영종구 둘 다 후보이므로 문맥으로 좁혀야 함. 지난 날짜 2026.7.1은 마감일이 아님"
+ },
+ {
+  "title": "검단신도시 치과 원장님 모셔요",
+  "body": "인천 서구 당하동 검단신도시 (2026년 7월 검단구 분구)\n주5일, 야간 주2회 (21시까지)\n세후 1200 보장 + 인센\n교정 제외 일반진료",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "인천",
+  "expected_sigungu": "검단구",
+  "expected_deadline": "",
+  "why_tricky": "글에 '인천 서구'가 있지만 검단은 분구되어 검단구. '교정 제외'는 부정. '21시까지'에 '까지'가 있지만 날짜가 아님"
+ },
+ {
+  "title": "청라 치과 주4.5 봉직의 구합니다",
+  "body": "인천 서구 청라동 커낼웨이 인근\n세후 1300, 주4.5일\n소아치과 전문의 원장님과 협진 중이며 성인 진료 원장님을 구합니다\n10월 말까지 면접 진행",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "인천",
+  "expected_sigungu": "서구",
+  "expected_deadline": "",
+  "why_tricky": "청라는 분구 뒤에도 서구. '소아치과 전문의와 협진 중'은 기존 인력이라 pedo 아님. '10월 말까지 면접'은 정확한 지원 마감일이 아님"
+ },
+ {
+  "title": "마곡나루역 치과 GP 원장님 구인",
+  "body": "서울 강서구 마곡동, 마곡나루역 1분\n주5일 (수요일 야간), 세후 1250 보장\n일반 진료 원장님, 분과 무관\n마감: 10.22(목)",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "강서구",
+  "expected_deadline": "2026-10-22",
+  "why_tricky": "강서구는 서울·부산 둘 다 있음 → 서울. 점 형식 날짜 10.22(목)"
+ },
+ {
+  "title": "명지국제신도시 치과 진료원장 구함",
+  "body": "부산 강서구 명지동, 명지국제신도시 상가\n주4.5일, 세후 1150 + 인센\n교정은 외부 교정 원장님이 월 2회 오십니다\n일반 진료 원장님 지원 바랍니다",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "부산",
+  "expected_sigungu": "강서구",
+  "expected_deadline": "",
+  "why_tricky": "'교정 원장님이 월 2회 오십니다'는 외부 기존 인력. 지금 EXISTING 규칙에 '오십니다/내원'이 없어 ortho로 잘못 잡힐 수 있음. 부산 강서구"
+ },
+ {
+  "title": "마산 합성동 치과 봉직의 모십니다",
+  "body": "창원시 마산회원구 합성동, 마산역 인근\n주5일, 세후 1100\n일반 진료, 신규 졸업 환영\n10.26(월) 마감, 인센 10.5% 별도",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경남",
+  "expected_sigungu": "창원시",
+  "expected_deadline": "2026-10-26",
+  "why_tricky": "마산은 창원시로 통합됨(일반구 마산회원구). 같은 줄의 '10.5%'를 10월 5일로 읽으면 안 됨"
+ },
+ {
+  "title": "군위 치과 원장님 구합니다 (관사 제공)",
+  "body": "대구광역시 군위군 군위읍 (2023년 경북에서 대구로 편입)\n주5일, 세후 1500 보장, 관사 제공\n일반의 환영\n채용시까지",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "대구",
+  "expected_sigungu": "군위군",
+  "expected_deadline": "",
+  "why_tricky": "군위군은 2023년부터 경북이 아니라 대구. 본문의 '경북'을 지역으로 잡으면 오답"
+ },
+ {
+  "title": "경남 고성 치과 원장님 구인 (숙소제공)",
+  "body": "경상남도 고성군 고성읍\n주5일, 세후 1400 + 숙소 제공\n임플란트 가능하신 원장님 우대\n2026-10-30 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경남",
+  "expected_sigungu": "고성군",
+  "expected_deadline": "2026-10-30",
+  "why_tricky": "고성군은 강원·경남 둘 다 있음 → 경남. ISO 날짜 형식"
+ },
+ {
+  "title": "세종시 나성동 치과 GP 원장님 모십니다",
+  "body": "세종특별자치시 나성동, 정부청사 인근\n주4.5일, 세후 1200\n일반진료 원장님 (통합치의학과 전문의 아니어도 무방)\n10/23(금)까지",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "세종",
+  "expected_sigungu": "",
+  "expected_deadline": "2026-10-23",
+  "why_tricky": "세종은 시군구가 없어 sigungu가 빈 값. '통합치의학과 전문의 아니어도 무방'은 부정이라 integrated 아님"
+ },
+ {
+  "title": "제주 노형동 치과 페이닥터 구인",
+  "body": "제주특별자치도 제주시 노형동\n주5일, 세후 1300, 항공권·숙소 지원\n일반의, 1년 이상 근무 가능자\n접수마감 2026년 10월 19일",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "제주",
+  "expected_sigungu": "제주시",
+  "expected_deadline": "2026-10-19",
+  "why_tricky": "제주시는 행정시. 마감일이 '년 월 일' 한글 형식"
+ },
+ {
+  "title": "인천 동구 송림동 치과 봉직의 모집",
+  "body": "인천 동구 송림동 (현 제물포구), 동인천역 인근\n주5일, 세후 1100\nGP 원장님\n10/21 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "인천",
+  "expected_sigungu": "제물포구",
+  "expected_deadline": "2026-10-21",
+  "why_tricky": "인천 동구는 2026-07 개편으로 제물포구. 부산·대구 등 다른 광역시의 동구와 헷갈리기 쉬움"
+ },
+ {
+  "title": "수원 영통 치과 주4일 원장님 모십니다",
+  "body": "수원시 영통구 망포동\n주4일 근무, 야간 없음, 세후 1200\n신규 졸업 GP 가능\n'26.10.15 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "수원시",
+  "expected_deadline": "2026-10-15",
+  "why_tricky": "영통구는 일반구라 수원시로 묶음. 두 자리 연도 '26.10.15"
+ },
+ {
+  "title": "천안 불당동 치과 원장님 구인",
+  "body": "충남 천안시 서북구 불당동\n주4.5일 / 세후 1200 + 인센\n교정 가능 원장님 우대 (필수 아님)\n10월 16일(금) 18시 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "충남",
+  "expected_sigungu": "천안시",
+  "expected_deadline": "2026-10-16",
+  "why_tricky": "'교정 가능 원장님 우대'는 기술 선호(hint)이지 교정과 전문의 구인이 아님 → gp"
+ },
+ {
+  "title": "청주 오창 치과 진료원장님 모십니다",
+  "body": "충북 청주시 청원구 오창읍\n주5일, 세후 1200\n교정과 전문의 또는 교정 진료 가능하신 GP 원장님\n채용 시 조기마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "ortho",
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "충북",
+  "expected_sigungu": "청주시",
+  "expected_deadline": "",
+  "why_tricky": "'교정과 전문의 또는 GP'라서 교정 전문의와 일반의가 모두 대상 → ortho와 gp 둘 다"
+ },
+ {
+  "title": "연대 치대 동문 원장님들 계신 치과, 페이닥터 구합니다",
+  "body": "서울 서초구 방배동\n대표원장 연세대 치과대학 출신, 2인 원장 체제\n주4.5일, 세후 1200 + 인센\nGP 원장님 환영",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "서초구",
+  "expected_deadline": "",
+  "why_tricky": "'연세대 치과대학 출신'은 학력이지 기관이 아님. dental_univ_hospital로 잡거나 지역을 서대문구로 잡으면 오답"
+ },
+ {
+  "title": "아산병원 맞은편 치과 원장님 구인",
+  "body": "서울 송파구 풍납동, 서울아산병원 정문 맞은편\n주5일, 세후 1150\n일반 진료, 신규 졸업 가능\n10/19(월) 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "송파구",
+  "expected_deadline": "2026-10-19",
+  "why_tricky": "'아산병원'은 위치 설명이라 univ_hospital_dept가 아님. '아산'을 충남 아산시로 잡아도 오답"
+ },
+ {
+  "title": "강남역 라온치과병원 진료원장님 모집 (전문의 우대, 과 무관)",
+  "body": "서울 강남구 역삼동, 원장 8인 체제 치과병원\n주4.5일, 세후 1400~1800 (경력 협의)\n전문의 우대 (과 무관), GP 지원 가능\n2026.10.30까지",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_hospital",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "강남구",
+  "expected_deadline": "2026-10-30",
+  "why_tricky": "치과의원이 아닌 치과병원. '전문의 우대(과 무관)'는 분과를 지정하지 않았으므로 gp"
+ },
+ {
+  "title": "구강외과 전문의 원장님 모십니다 (임플란트·사랑니 위주)",
+  "body": "서울 강남구 신사동, 수술 위주 치과\n구강악안면외과 전문의 1명, 주5일\n세후 1800 보장 + 수술 인센\n경력 3년 이상 우대, 채용시 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "oms"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "강남구",
+  "expected_deadline": "",
+  "why_tricky": "로컬 의원의 전문의 구인 → 분과 oms. 직위는 여전히 봉직의(staff_dentist)"
+ },
+ {
+  "title": "구외 원장님 구합니다 - 천안 (주2~3일 파트)",
+  "body": "충남 천안시 동남구 신부동\n매복 사랑니·임플란트 수술 담당하실 구외 원장님\n주2~3일 파트, 일당 세후 80\n10/23 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "oms"
+  ],
+  "expected_work_types": [
+   "parttime"
+  ],
+  "expected_sido": "충남",
+  "expected_sigungu": "천안시",
+  "expected_deadline": "2026-10-23",
+  "why_tricky": "'구외'는 구강외과 줄임말(뒤에 원장님이 와서 대상). 주2~3일은 파트"
+ },
+ {
+  "title": "보철과 전문의 원장님 모십니다 (주4.5)",
+  "body": "경기 용인시 수지구 풍덕천동, 수지구청역\n치과보철과 전문의 원장님, 전악 수복·심미보철 케이스 많음\n세후 1500 + 인센\n마감 10/23(금)",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "prostho"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "용인시",
+  "expected_deadline": "2026-10-23",
+  "why_tricky": "수지구는 일반구라 용인시로 묶음. 제목 괄호 '(주4.5)'가 근무형태 단서"
+ },
+ {
+  "title": "교정과 전문의 파트 원장님 구합니다 (주1회)",
+  "body": "서울 송파구 잠실동, 잠실새내역\n교정 환자 진료 담당, 매주 목요일 1회\n일당 협의 (진단·상담 포함)\n일반 진료 원장님 2인 근무 중",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "ortho"
+  ],
+  "expected_work_types": [
+   "parttime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "송파구",
+  "expected_deadline": "",
+  "why_tricky": "'일반 진료 원장님 2인 근무 중'은 기존 인력이므로 gp를 붙이면 안 되고 ortho만. 주1회는 파트"
+ },
+ {
+  "title": "바른라인교정치과 진료원장 모집 (교정 전문의)",
+  "body": "대구 수성구 범어동 교정 전문 치과\n치과교정과 전문의 원장님 1명\n주4.5일, 연봉 협의\n2026.10.31 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "ortho"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "대구",
+  "expected_sigungu": "수성구",
+  "expected_deadline": "2026-10-31",
+  "why_tricky": "기관 이름에 들어간 '교정치과'도 교정 신호. 치과병원이 아니라 의원"
+ },
+ {
+  "title": "소아청소년치과 전문의 원장님 모십니다",
+  "body": "경기 김포시 구래동 한강신도시\n어린이 전문 진료, 진정치료 시설 완비\n소아청소년치과 전문의 원장님 (인정의 포함)\n주4일, 세후 1600 보장 + 인센\n~10.28",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "pedo"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "김포시",
+  "expected_deadline": "2026-10-28",
+  "why_tricky": "'소아청소년치과'는 소아치과의 다른 이름. 한강신도시·구래동 → 김포시"
+ },
+ {
+  "title": "치주과 전문의 원장님 모십니다 (센텀)",
+  "body": "부산 해운대구 우동 센텀시티\n치주과 전문의, 치주수술·임플란트 담당\n주5일 세후 1600 보장\n접수: 10/12(월)~10/21(수)",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "perio"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "부산",
+  "expected_sigungu": "해운대구",
+  "expected_deadline": "2026-10-21",
+  "why_tricky": "슬래시 형식의 접수 기간이라 끝 날짜가 마감일"
+ },
+ {
+  "title": "보존과 전문의 / 엔도 원장님 구합니다",
+  "body": "서울 서초구 서초동, 강남역 5분\n근관치료 위주 진료, 미세현미경 보유\n보존과 전문의 원장님 주3일 파트\n일당 세후 90, 채용시 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "endo"
+  ],
+  "expected_work_types": [
+   "parttime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "서초구",
+  "expected_deadline": "",
+  "why_tricky": "엔도=보존과. 제목의 ' / '가 문장 구분자로 쓰임. 강남역이 있어도 주소는 서초구"
+ },
+ {
+  "title": "턱관절 클리닉 구강내과 전문의 모십니다",
+  "body": "경기 고양시 일산서구 주엽동\n턱관절·구강안면통증 클리닉 담당\n구강내과 전문의 원장님 주2일 파트\n10월 20일까지 이메일 접수",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "oral_medicine"
+  ],
+  "expected_work_types": [
+   "parttime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "고양시",
+  "expected_deadline": "2026-10-20",
+  "why_tricky": "구강내과는 흔치 않은 분과. 일산서구 → 고양시"
+ },
+ {
+  "title": "영상치의학과 전문의 채용 (CBCT 판독)",
+  "body": "서울 강남구 대치동 미래영상치과병원 영상치의학과\nCBCT·파노라마 판독 및 소견서 작성\n주5일 정규직, 일부 재택 판독 가능\n채용시 마감",
+  "source_kind": "aggregator",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_hospital",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "radiology"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "강남구",
+  "expected_deadline": "",
+  "why_tricky": "구인사이트에 올라온 치과병원의 영상치의학과 정규직 구인"
+ },
+ {
+  "title": "통치 전문의 원장님 모십니다 (AGD 수료자 우대)",
+  "body": "경기 평택시 고덕동\n통합치의학과 전문의 또는 AGD 수료하신 원장님\n주4.5일, 세후 1300 + 인센\n마감 2026.10.22",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "integrated"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "평택시",
+  "expected_deadline": "2026-10-22",
+  "why_tricky": "통치=통합치의학과, AGD=통합치의학 수련. 통합치의학과를 gp와 혼동하면 안 됨"
+ },
+ {
+  "title": "보존·보철 전문의 각 1명 모집 - 청주 새봄치과병원",
+  "body": "충북 청주시 흥덕구 복대동 새봄치과병원\n치과보존과 전문의 1명, 치과보철과 전문의 1명\n주5일, 세후 1500~\n2026-10-14 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_hospital",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "endo",
+   "prostho"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "충북",
+  "expected_sigungu": "청주시",
+  "expected_deadline": "2026-10-14",
+  "why_tricky": "'보존·보철 전문의'처럼 분과가 나열됨(목록 끝까지 건너뛰는 처리 필요). 치과병원"
+ },
+ {
+  "title": "소치 전문의 구합니다 - 분당 어린이치과",
+  "body": "성남시 분당구 서현동 별빛어린이치과\n소아치과 전문의 원장님 (진정요법·N2O 가능자)\n주4.5일, 세후 1600 보장 + 인센\n대표원장도 소아치과 전문의입니다",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "pedo"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "성남시",
+  "expected_deadline": "",
+  "why_tricky": "소치=소아치과. 대표원장(기존 인력)도 소아치과 전문의지만 구인 대상도 소아치과이므로 pedo 유지"
+ },
+ {
+  "title": "튼튼어린이치과 진료원장님 모십니다 (GP 가능)",
+  "body": "경기 남양주시 다산동\n어린이 전문 치과, 소아 진료 가능하신 원장님\n소아치과 전문의 우대, 일반의 지원 가능\n10/16(금) 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "pedo",
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "남양주시",
+  "expected_deadline": "2026-10-16",
+  "why_tricky": "소아 전문 의원의 구인이고 소아치과 전문의 우대 + 일반의 가능 → pedo와 gp 둘 다"
+ },
+ {
+  "title": "키즈치과 토요일 오전 파트 원장님",
+  "body": "인천 남동구 구월동 해맑은키즈치과\n토요일 오전 파트 (격주 가능)\n소아 진료 경험 있으신 원장님\n일급 세후 70",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "pedo"
+  ],
+  "expected_work_types": [
+   "parttime"
+  ],
+  "expected_sido": "인천",
+  "expected_sigungu": "남동구",
+  "expected_deadline": "",
+  "why_tricky": "전문의 요구가 없어도 소아 전문 의원(키즈치과)의 구인은 소아 진료 인력이므로 pedo. 소아 환자가 많은 일반 치과(hint만, gp)와 구분. '남동'은 RISKY_SHORT"
+ },
+ {
+  "title": "봉명동 어린이치과 소아치과 전문의 충원",
+  "body": "대전 유성구 봉명동\n교정과 전문의 원장님 월 2회 내원 진료 중\n소아치과 전문의 1명 충원 (주5일)\n세후 1500 + 인센, 퇴직금 별도",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "pedo"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "대전",
+  "expected_sigungu": "유성구",
+  "expected_deadline": "",
+  "why_tricky": "교정과 전문의는 내원해 진료 중인 기존 인력이라 ortho가 아님. '충원'도 구인어"
+ },
+ {
+  "title": "평촌 치과 일반진료 원장님 구함",
+  "body": "경기 안양시 동안구 평촌동\n대표원장 교정과 전문의, 교정은 대표원장님이 직접 진료합니다\n보존·보철·발치 등 일반진료 하실 원장님\n주5일 세후 1200",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "안양시",
+  "expected_deadline": "",
+  "why_tricky": "교정은 기존 대표원장 몫이고, 보존·보철은 진료 내용 나열이라 gp"
+ },
+ {
+  "title": "일반 진료 원장님 모십니다 - 용봉동 치과병원",
+  "body": "광주 북구 용봉동 용봉치과병원\n구강악안면외과 전문의 2인 근무 중이며 수술은 구강외과에서 담당\n보존·보철 일반 진료 원장님 1명\n2026년 10월 30일 17시 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_hospital",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "광주",
+  "expected_sigungu": "북구",
+  "expected_deadline": "2026-10-30",
+  "why_tricky": "구강외과 전문의 2인은 근무 중인 기존 인력. 두 번째 언급 '구강외과에서 담당'도 대상이 아님"
+ },
+ {
+  "title": "보존 위주 원장님 구합니다 (임플란트 X, 교정 X, 소아 X)",
+  "body": "서울 노원구 상계동\n진료범위: 보존·크라운 위주 (임플란트 X, 교정 X, 소아 X)\n주4일 근무, 세후 1000\n신규 졸업 환영",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "노원구",
+  "expected_deadline": "",
+  "why_tricky": "'X'로 부정한 항목들이 나열됨. '보존 위주'는 진료 내용(hint)이라 endo 아님"
+ },
+ {
+  "title": "[구직] 소아치과 전문의 구직합니다",
+  "body": "소아치과 전문의 3년차입니다.\n서울 지역 어린이치과 주4일 근무 희망합니다\n진정요법·전신마취 진료 경험 있습니다\n쪽지 부탁드립니다",
+  "source_kind": "local_board",
+  "expected_post_kind": "seeking",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "pedo"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "",
+  "expected_deadline": "",
+  "why_tricky": "구직 글. 구직 글의 분과는 글쓴이의 분과로 둠. 사용자와 같은 분과의 경쟁 구직 글이므로 '구인만' 알림에서는 빠져야 함"
+ },
+ {
+  "title": "대진 가능합니다 (10월 중순~11월, 지역 무관)",
+  "body": "GP 7년차, 임플란트 수술 가능합니다\n10월 중순부터 11월 말까지 대진 가능합니다\n지역 무관, 숙소 제공 시 지방도 가능\n연락 주세요",
+  "source_kind": "local_board",
+  "expected_post_kind": "seeking",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "locum"
+  ],
+  "expected_sido": "",
+  "expected_sigungu": "",
+  "expected_deadline": "",
+  "why_tricky": "'대진 가능합니다'는 구인이 아니라 구직. 지역 무관이라 지역은 빈 값"
+ },
+ {
+  "title": "봉직 자리 구합니다 - 부산 광안리 근처",
+  "body": "GP 2년차입니다. 부산 수영구 광안리 근처 봉직 자리 알아봅니다\n주4.5~5일 가능, 이력서 보내드리겠습니다",
+  "source_kind": "local_board",
+  "expected_post_kind": "seeking",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "부산",
+  "expected_sigungu": "수영구",
+  "expected_deadline": "",
+  "why_tricky": "'구합니다'가 구인어와 겹치지만 '자리 구합니다'는 구직. '수영'은 RISKY_SHORT라 '부산 수영구' 전체로 인식해야 함"
+ },
+ {
+  "title": "통합치의학과 전문의, 주2일 파트 근무 희망합니다",
+  "body": "대전 지역에서 화·목 주2일 파트 근무 희망합니다\n통합치의학과 전문의, 임플란트·보철 가능\n연락처는 쪽지로 드리겠습니다",
+  "source_kind": "local_board",
+  "expected_post_kind": "seeking",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "integrated"
+  ],
+  "expected_work_types": [
+   "parttime"
+  ],
+  "expected_sido": "대전",
+  "expected_sigungu": "",
+  "expected_deadline": "",
+  "why_tricky": "'근무 희망합니다'는 구직. 본문의 '보철 가능'은 hint라 prostho 아님"
+ },
+ {
+  "title": "안녕하세요, 신규 졸업 GP입니다",
+  "body": "올해 국시 합격한 신규 치과의사입니다\n경기 수원 근처에서 근무처 찾습니다\n성실하게 배우면서 일하겠습니다. 쪽지 주세요",
+  "source_kind": "local_board",
+  "expected_post_kind": "seeking",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [],
+  "expected_sido": "경기",
+  "expected_sigungu": "수원시",
+  "expected_deadline": "",
+  "why_tricky": "제목에 구인·구직 단어가 없음. '근무처 찾습니다'로 구직 판단('찾습니다'는 구인 규칙에도 걸림). 근무형태 언급 없음"
+ },
+ {
+  "title": "구직 중인 원장님들 보세요! 마포 치과 페이닥터 모십니다",
+  "body": "서울 마포구 합정역 2분\n주4.5일, 세후 1200 보장 + 인센\nGP 환영\n10/20 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "마포구",
+  "expected_deadline": "2026-10-20",
+  "why_tricky": "제목에 '구직 중'이 있지만 실제로는 구인 글. 지금 SEEKING_RE가 '구직 중'을 먼저 잡아 구직으로 오분류함"
+ },
+ {
+  "title": "출산휴가 대진 원장님 구합니다 (3개월)",
+  "body": "경기 파주시 운정신도시\n11월~1월 3개월 출산휴가 대진, 주5일\n일당 정산 (월 세후 1200 상당)\n일반진료, 임플란트 수술 없음\n10/20까지 연락 주세요",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime",
+   "locum"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "파주시",
+  "expected_deadline": "2026-10-20",
+  "why_tricky": "3개월 대진이지만 주5일 근무라 locum과 fulltime 둘 다. 11월~1월은 근무 기간이고 마감은 10/20까지"
+ },
+ {
+  "title": "신림역 치과 야간 파트 원장님 (화·목 18~21시)",
+  "body": "서울 관악구 신림동\n야간진료 파트 원장님, 화·목 저녁 3시간씩\n시급 세후 15만원\n일반 진료",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "parttime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "관악구",
+  "expected_deadline": "",
+  "why_tricky": "야간 파트 → parttime(야간진료 조건과 다름). '18~21시'는 시간 범위"
+ },
+ {
+  "title": "김해 장유 치과 원장님 구인 (풀타임·파트 모두 가능)",
+  "body": "경남 김해시 율하동 (장유)\n주4.5일 풀타임 또는 주2~3일 파트 모두 가능\n세후 1200 (풀타임 기준)\n10/27(화) 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime",
+   "parttime"
+  ],
+  "expected_sido": "경남",
+  "expected_sigungu": "김해시",
+  "expected_deadline": "2026-10-27",
+  "why_tricky": "근무형태가 둘 다 가능함"
+ },
+ {
+  "title": "아산 배방 치과 단기 대진 (10/12~10/14, 3일)",
+  "body": "충남 아산시 배방읍, 탕정 인근\n원장님 개인 사정으로 3일간 대진 부탁드립니다\n일당 80, 숙소 제공\n일반 진료",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "locum"
+  ],
+  "expected_sido": "충남",
+  "expected_sigungu": "아산시",
+  "expected_deadline": "",
+  "why_tricky": "제목의 날짜 범위는 근무일이지 마감일이 아님. 여기서 '아산'은 충남 아산시"
+ },
+ {
+  "title": "[양도] 의정부 민락동 치과 양도합니다 (체어 5대)",
+  "body": "경기 의정부시 민락동, 개원 5년차\n체어 5대, CT 보유, 월 매출 1억 내외\n권리금 협의, 장비 일체 포함\n관심 있으신 원장님 쪽지 주세요",
+  "source_kind": "local_board",
+  "expected_post_kind": "other",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "other"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [],
+  "expected_sido": "경기",
+  "expected_sigungu": "의정부시",
+  "expected_deadline": "",
+  "why_tricky": "'원장님'·'쪽지 주세요'가 있어도 양도 글이라 구인이 아님. 직위 other는 OTHER_POS_RE(양도) 설계를 따름. 분과 언급이 없어 gp"
+ },
+ {
+  "title": "세종 공동개원(동업) 하실 원장님 찾습니다",
+  "body": "세종특별자치시 반곡동 신규 상가, 2027년 3월 개원 예정\n지분 50:50 공동개원, 주5일 진료\nGP·전문의 무관\n관심 있으시면 연락 주세요",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "other"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "세종",
+  "expected_sigungu": "",
+  "expected_deadline": "",
+  "why_tricky": "동업 파트너를 찾는 글이라 고용(봉직)이 아님 → 직위 other, staff_dentist 아님. 글 종류는 사람을 찾는 글이라 hiring으로 둠(양도와 다름). '50:50'과 '2027년 3월'은 날짜가 아님"
+ },
+ {
+  "title": "[매매] 치과 장비 일괄 판매 (유니트체어·파노라마)",
+  "body": "대구 달서구 상인동, 폐업 정리\n유니트체어 4대, 파노라마, 오토클레이브 일괄\n가격 협의, 10/31까지 정리 예정",
+  "source_kind": "local_board",
+  "expected_post_kind": "other",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [],
+  "expected_sido": "대구",
+  "expected_sigungu": "달서구",
+  "expected_deadline": "",
+  "why_tricky": "장비 판매 글. '10/31까지'는 정리 일정이고, 구인 글이 아니므로 마감일 없음"
+ },
+ {
+  "title": "서울대학교치과병원 2027년도 임상교수요원(소아치과) 채용 공고",
+  "body": "모집분야: 소아치과 1명\n자격요건: 소아치과 전문의 자격 소지자\n접수기간: 2026. 10. 5.(월) ~ 10. 16.(금) 18:00\n제출서류: 지원서, 연구실적목록, 자기소개서",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_univ_hospital",
+  "expected_positions": [
+   "clinical_professor"
+  ],
+  "expected_specialties": [
+   "pedo"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "종로구",
+  "expected_deadline": "2026-10-16",
+  "why_tricky": "'임상교수요원'은 비전임 임상교수(전임교원 아님). 본문에 주소가 없어 기관 위치(종로구 대학로 101)로 지역을 정함"
+ },
+ {
+  "title": "연세대학교 치과대학병원 진료교수(비전임) 초빙 공고 - 구강악안면외과",
+  "body": "초빙분야: 구강악안면외과 1명\n임용예정일: 2027. 3. 1.\n지원서 접수: 2026. 10. 12.(월) ~ 2026. 10. 23.(금)\n문의: 치과대학병원 인사팀",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_univ_hospital",
+  "expected_positions": [
+   "clinical_professor"
+  ],
+  "expected_specialties": [
+   "oms"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "서대문구",
+  "expected_deadline": "2026-10-23",
+  "why_tricky": "임용예정일 2027.3.1은 마감일이 아님(가장 늦은 날짜를 고르면 오답). 진료교수는 비전임"
+ },
+ {
+  "title": "경희대학교치과병원 2027학년도 전임의(임상강사) 모집",
+  "body": "모집과: 치과보존과, 치주과, 치과보철과 각 O명\n자격: 해당과 전문의 또는 2027년 2월 전문의 취득 예정자\n원서접수: 10월 14일(수)까지 방문 또는 이메일 접수",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_univ_hospital",
+  "expected_positions": [
+   "fellow"
+  ],
+  "expected_specialties": [
+   "endo",
+   "perio",
+   "prostho"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "동대문구",
+  "expected_deadline": "2026-10-14",
+  "why_tricky": "여러 과를 함께 모집. '2027년 2월'은 마감일이 아님. 전임의=임상강사"
+ },
+ {
+  "title": "부산대학교치과병원 기금교수(임상) 채용 공고 - 치과교정과",
+  "body": "근무지: 경남 양산시 물금읍 (양산캠퍼스)\n채용분야: 치과교정과 기금교수 1명\n자격: 치과교정과 전문의, 박사학위 소지자 우대\n마감: 2026.10.20(화) 17:00",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_univ_hospital",
+  "expected_positions": [
+   "clinical_professor"
+  ],
+  "expected_specialties": [
+   "ortho"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경남",
+  "expected_sigungu": "양산시",
+  "expected_deadline": "2026-10-20",
+  "why_tricky": "이름에 '부산'이 있지만 병원은 경남 양산시에 있음. 기금교수는 비전임이라 clinical_professor"
+ },
+ {
+  "title": "분당서울대학교병원 치과 진료교수 채용 (구강내과)",
+  "body": "근무부서: 치과 구강내과\n자격: 구강내과 전문의\n근무형태: 전일제\n접수마감: 2026.10.15(목)",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "univ_hospital_dept",
+  "expected_positions": [
+   "clinical_professor"
+  ],
+  "expected_specialties": [
+   "oral_medicine"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "성남시",
+  "expected_deadline": "2026-10-15",
+  "why_tricky": "이름에 '서울'이 있지만 성남시 분당구에 있음. 의대 부속병원 치과라 univ_hospital_dept(치과대학병원 아님)"
+ },
+ {
+  "title": "인하대병원 치과 임상강사(구강악안면외과) 모집",
+  "body": "인하대학교 의과대학 부속병원 치과\n근무지: 인천 중구 인항로 27 (현 제물포구)\n모집: 구강악안면외과 임상강사(전임의) 1명\n~10.23",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "univ_hospital_dept",
+  "expected_positions": [
+   "fellow"
+  ],
+  "expected_specialties": [
+   "oms"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "인천",
+  "expected_sigungu": "제물포구",
+  "expected_deadline": "2026-10-23",
+  "why_tricky": "옛 인천 중구 내륙의 병원 → 제물포구. 주소 번지 '27'을 날짜로 읽으면 안 됨"
+ },
+ {
+  "title": "서울아산병원 치과 촉탁의(치과보철과) 채용",
+  "body": "근무부서: 치과 보철과\n자격: 치과보철과 전문의\n근무형태: 주 3일 비상근\n채용시 마감",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "univ_hospital_dept",
+  "expected_positions": [
+   "contract"
+  ],
+  "expected_specialties": [
+   "prostho"
+  ],
+  "expected_work_types": [
+   "parttime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "송파구",
+  "expected_deadline": "",
+  "why_tricky": "촉탁의 → contract. 주3일 비상근 → 파트. 지역은 기관 위치"
+ },
+ {
+  "title": "조선대학교치과병원 구강병리과 임상강사 모집",
+  "body": "모집분야: 구강병리과 임상강사 1명\n자격: 구강병리과 전문의 또는 취득 예정자\n접수: 11. 6.(금) 18:00까지 이메일 접수",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_univ_hospital",
+  "expected_positions": [
+   "fellow"
+  ],
+  "expected_specialties": [
+   "pathology"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "광주",
+  "expected_sigungu": "동구",
+  "expected_deadline": "2026-11-06",
+  "why_tricky": "점·공백 형식 '11. 6.(금)'에 '까지'. 조선대치과병원은 광주 동구"
+ },
+ {
+  "title": "경북대학교치과병원 예방치과 전임의 모집 공고",
+  "body": "모집과: 예방치과 1명\n지원자격: 치과의사 면허 소지자 (예방치과 전문의 우대)\n원서접수: 10.13(화) ~ 10.19(월) 마감",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_univ_hospital",
+  "expected_positions": [
+   "fellow"
+  ],
+  "expected_specialties": [
+   "preventive"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "대구",
+  "expected_sigungu": "중구",
+  "expected_deadline": "2026-10-19",
+  "why_tricky": "이름이 '경북대'라도 치과병원은 대구 중구(삼덕동). 경북으로 잡으면 오답"
+ },
+ {
+  "title": "단국대학교치과병원 영상치의학과 임상교수 채용",
+  "body": "채용분야: 영상치의학과 임상조교수 1명\n근무지: 충남 천안시 동남구\n접수기간: 2026.10.05 ~ 2026.10.16\n임용일: 2026.11.01",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_univ_hospital",
+  "expected_positions": [
+   "clinical_professor"
+  ],
+  "expected_specialties": [
+   "radiology"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "충남",
+  "expected_sigungu": "천안시",
+  "expected_deadline": "2026-10-16",
+  "why_tricky": "'임상조교수'를 전임 조교수(faculty)로 잡으면 오답. 임용일 11.01은 마감일 아님"
+ },
+ {
+  "title": "원광대학교치과병원 통합치의학과 전공의(AGD) 추가 모집",
+  "body": "모집과: 통합치의학과 전공의 1명\n자격: 치과의사 면허 소지자 (인턴 수료자)\n접수: 2026년 10월 13일(화)까지\n근무지: 전북 익산시",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_univ_hospital",
+  "expected_positions": [
+   "resident"
+  ],
+  "expected_specialties": [
+   "integrated"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "전북",
+  "expected_sigungu": "익산시",
+  "expected_deadline": "2026-10-13",
+  "why_tricky": "AGD 전공의 = 수련(resident). '인턴 수료자'는 자격 요건일 뿐 별도 직위가 아님"
+ },
+ {
+  "title": "2027학년도 전임의 최종 합격자 발표",
+  "body": "전남대학교치과병원 2027학년도 전임의 최종 합격자를 다음과 같이 발표합니다.\n합격자는 10월 20일까지 임용서류를 제출하시기 바랍니다.",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "other",
+  "expected_inst_type": "dental_univ_hospital",
+  "expected_positions": [
+   "fellow"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [],
+  "expected_sido": "광주",
+  "expected_sigungu": "북구",
+  "expected_deadline": "",
+  "why_tricky": "합격자 발표라 구인 글이 아님. '10월 20일까지'는 합격자 서류 제출 기한이지 지원 마감일이 아님"
+ },
+ {
+  "title": "강릉원주대학교 치과대학 2027학년도 1학기 전임교원 초빙 공고",
+  "body": "초빙분야: 소아치과학 1명\n지원자격: 치의학 박사학위 소지자로서 소아치과 전문의\n접수기간: 2026. 10. 19.(월) ~ 10. 30.(금) 18:00\n임용예정일: 2027. 3. 1.",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_univ_hospital",
+  "expected_positions": [
+   "faculty"
+  ],
+  "expected_specialties": [
+   "pedo"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "강원",
+  "expected_sigungu": "강릉시",
+  "expected_deadline": "2026-10-30",
+  "why_tricky": "제목에는 분과가 없고 본문 '소아치과학' 분야로 pedo. '원주'가 있어도 학교는 강릉시"
+ },
+ {
+  "title": "서울대학교 치의학대학원 전임교원 공개채용",
+  "body": "모집분야: 구강해부학 1명, 치과생체재료과학 1명\n직급: 조교수 이상\n원서접수 마감: 2026. 10. 28.(수) 17:00\n근무지: 연건캠퍼스",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_univ_hospital",
+  "expected_positions": [
+   "faculty"
+  ],
+  "expected_specialties": [
+   "basic_science"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "종로구",
+  "expected_deadline": "2026-10-28",
+  "why_tricky": "기초치의학 분야 → basic_science(gp 아님). 지역은 연건캠퍼스(종로구)라는 기관 정보로 정해야 함"
+ },
+ {
+  "title": "전남대학교 치의학전문대학원 신임교원 초빙 (치과교정학, 구강미생물학)",
+  "body": "초빙분야: 치과교정학 1명, 구강미생물학 1명\n지원서 접수: 10/21(수)까지 (우편 접수는 당일 도착분 유효)\n문의: 교무과",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_univ_hospital",
+  "expected_positions": [
+   "faculty"
+  ],
+  "expected_specialties": [
+   "ortho",
+   "basic_science"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "광주",
+  "expected_sigungu": "북구",
+  "expected_deadline": "2026-10-21",
+  "why_tricky": "임상 분야(교정학)와 기초 분야(미생물학)가 함께 있음. 치의학전문대학원 → dental_univ_hospital"
+ },
+ {
+  "title": "경희대학교 치과대학 전임교원(조교수) 초빙 - 영상치의학 분야",
+  "body": "초빙분야: 영상치의학 1명\n자격: 영상치의학과 전문의, 박사학위 소지자\n지원마감: 2026.10.20",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_univ_hospital",
+  "expected_positions": [
+   "faculty"
+  ],
+  "expected_specialties": [
+   "radiology"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "동대문구",
+  "expected_deadline": "2026-10-20",
+  "why_tricky": "'영상치의학 분야' 표기로 분과를 인식해야 함. 전임 조교수는 faculty"
+ },
+ {
+  "title": "2026년 강동구 보건소 시간선택제임기제공무원(치과의사) 채용 공고",
+  "body": "서울특별시 강동구 공고 제2026-1234호\n채용분야: 치과의사 (시간선택제임기제 가급) 1명\n근무시간: 주 20시간 (월~금 09:00~13:00)\n접수기간: 2026. 10. 12.(월) ~ 10. 14.(수)",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "public_hospital",
+  "expected_positions": [
+   "contract"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "parttime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "강동구",
+  "expected_deadline": "2026-10-14",
+  "why_tricky": "'월~금'이 FULL_RE에 걸리지만 실제는 주20시간 시간선택제라 parttime만. 공고번호 2026-1234를 날짜로 읽으면 안 됨"
+ },
+ {
+  "title": "신안군 보건소 일반임기제공무원(치과의사) 채용 공고",
+  "body": "전라남도 신안군 공고\n채용인원: 치과의사 1명 (일반임기제 6호)\n근무지: 신안군 보건소 구강보건실\n원서접수: 2026. 10. 7. ~ 2026. 10. 13. 18:00\n※ 관사 제공",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "public_hospital",
+  "expected_positions": [
+   "contract"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "전남",
+  "expected_sigungu": "신안군",
+  "expected_deadline": "2026-10-13",
+  "why_tricky": "임기제 → contract. 분과 요구가 없어 gp. 기간형 마감에서는 끝 날짜"
+ },
+ {
+  "title": "시흥시 보건소 구강보건센터 치과의사(전문임기제 다급) 채용",
+  "body": "경기도 시흥시 공고\n채용분야: 치과의사 1명 (예방치과 전문의 우대)\n근무: 주 40시간, 전일제\n접수: 10월 22일(목) 18시까지",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "public_hospital",
+  "expected_positions": [
+   "contract"
+  ],
+  "expected_specialties": [
+   "preventive"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "시흥시",
+  "expected_deadline": "2026-10-22",
+  "why_tricky": "과를 지정한 우대('예방치과 전문의 우대')라 preventive. 보건소 공고"
+ },
+ {
+  "title": "법무부 공주교도소 의료과 치과의사(일반임기제) 채용",
+  "body": "근무지: 충청남도 공주시 공주교도소 의료과\n교정시설 수용자 구강진료 담당 치과의사 1명\n임기: 2년 (성과에 따라 연장)\n접수기간: 2026.10.13 ~ 2026.10.23",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "public_hospital",
+  "expected_positions": [
+   "contract"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "충남",
+  "expected_sigungu": "공주시",
+  "expected_deadline": "2026-10-23",
+  "why_tricky": "'교정시설'의 교정을 치과교정(ortho)으로 잡으면 오답. '공주'는 RISKY_SHORT라 전체 이름이 필요. 교도소 → public_hospital"
+ },
+ {
+  "title": "포천 요양병원 치과 촉탁의 모집 (주1회 오전)",
+  "body": "경기 포천시 소흘읍 OO요양병원\n입원 어르신 구강진료·틀니 조정\n매주 수요일 오전 4시간, 시급 협의\n채용시 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "general_hospital",
+  "expected_positions": [
+   "contract"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "parttime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "포천시",
+  "expected_deadline": "",
+  "why_tricky": "로컬 게시판 글이지만 요양병원 → general_hospital. 촉탁의 → contract. 주1회 → 파트"
+ },
+ {
+  "title": "충청남도 서산의료원 치과 전문의(치주과) 채용 공고",
+  "body": "근무지: 충남 서산시\n채용분야: 치과 치주과 전문의 1명\n고용형태: 계약직 2년 (연장 가능)\n접수기간: 2026.10.05 ~ 2026.10.16",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "public_hospital",
+  "expected_positions": [
+   "contract"
+  ],
+  "expected_specialties": [
+   "perio"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "충남",
+  "expected_sigungu": "서산시",
+  "expected_deadline": "2026-10-16",
+  "why_tricky": "지방의료원 → public_hospital. 계약직 → contract"
+ },
+ {
+  "title": "중앙보훈병원 치과 촉탁의 채용 (구강악안면외과)",
+  "body": "근무부서: 치과 구강악안면외과\n자격: 구강악안면외과 전문의\n근무형태: 주 2회 (화·금 오후)\n마감: 10/23(금) 18:00",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "public_hospital",
+  "expected_positions": [
+   "contract"
+  ],
+  "expected_specialties": [
+   "oms"
+  ],
+  "expected_work_types": [
+   "parttime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "강동구",
+  "expected_deadline": "2026-10-23",
+  "why_tricky": "보훈병원 → public_hospital. 본문에 주소가 없어 기관 위치(강동구 둔촌동)로 지역을 정함"
+ },
+ {
+  "title": "[화순 OO병원] 치과 진료과장 채용 (일반의 가능)",
+  "body": "근무지역: 전남 > 화순군\n고용형태: 정규직\n자격: 치과의사 면허 소지자, 전문의 우대(과 무관)\n급여: 면접 후 결정\n마감일: 2026-10-31 (채용시 마감)",
+  "source_kind": "aggregator",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "general_hospital",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "전남",
+  "expected_sigungu": "화순군",
+  "expected_deadline": "2026-10-31",
+  "why_tricky": "구인사이트 지역 형식 '전남 > 화순군'. 날짜와 '채용시 마감'이 같이 있으면 날짜가 우선. 진료과장은 병원에 고용된 봉직의"
+ },
+ {
+  "title": "[미소가득치과의원] 치과의사(페이닥터) 모집",
+  "body": "근무지역: 경기 > 구리시 인창동\n고용형태: 정규직 (주 4.5일)\n급여: 월 1,200만원 이상 (세후)\n마감일: ~2026.10.30(금)",
+  "source_kind": "aggregator",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "구리시",
+  "expected_deadline": "2026-10-30",
+  "why_tricky": "구인사이트 형식. '1,200만원'은 날짜가 아님. '주 4.5일'을 띄어 씀"
+ },
+ {
+  "title": "2027년 3월 개원 예정 신규 치과, 진료원장님 미리 모십니다",
+  "body": "경남 양산시 물금읍 신도시 상가, 체어 8대\n2027년 3월 개원, 주5일 근무\n세후 1300 보장 + 인센\n지원 마감 1/15(금)까지",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경남",
+  "expected_sigungu": "양산시",
+  "expected_deadline": "2027-01-15",
+  "why_tricky": "게시일 2026-10-01 기준으로 '1/15'는 다음 해 2027-01-15. '2027년 3월'은 개원 시기"
+ },
+ {
+  "title": "서울대학교치과병원 중앙장애인구강진료센터 진료교수 채용",
+  "body": "근무부서: 중앙장애인구강진료센터\n모집분야: 소아치과 1명, 치과보존과 1명\n자격: 해당과 전문의, 장애인 진료 경험자 우대\n접수마감: 2026. 10. 21.(수) 18:00",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "disabled_dental",
+  "expected_positions": [
+   "clinical_professor"
+  ],
+  "expected_specialties": [
+   "pedo",
+   "endo"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "서울",
+  "expected_sigungu": "종로구",
+  "expected_deadline": "2026-10-21",
+  "why_tricky": "서울대치과병원 이름이 있어도 근무처가 장애인구강진료센터라 disabled_dental이 우선"
+ },
+ {
+  "title": "충남 장애인 구강진료센터 치과의사(계약직) 채용",
+  "body": "근무지: 충청남도 천안시 동남구\n모집: 치과의사(일반의) 1명 - 진정·전신마취 하 장애인 치과진료\n고용형태: 계약직 1년 (재계약 가능), 주5일\n채용 시까지 상시 접수",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "disabled_dental",
+  "expected_positions": [
+   "contract"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "충남",
+  "expected_sigungu": "천안시",
+  "expected_deadline": "",
+  "why_tricky": "'장애인 구강진료센터'를 띄어 씀. 진정·전신마취는 소아치과를 떠올리게 하지만 분과 요구가 없어 gp"
+ },
+ {
+  "title": "[OO시립 장애인치과병원] 소아치과 전문의 채용 (정규직)",
+  "body": "근무지: 대구광역시 북구\n채용분야: 소아치과 전문의 1명\n근무형태: 정규직, 주5일 (토 휴무)\n마감: 10월 26일(월)",
+  "source_kind": "aggregator",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "disabled_dental",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "pedo"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "대구",
+  "expected_sigungu": "북구",
+  "expected_deadline": "2026-10-26",
+  "why_tricky": "'시립'이 public_hospital 규칙에 걸리지만 장애인치과병원이 우선. 정규직 진료의는 staff_dentist"
+ },
+ {
+  "title": "한결치과병원 2027년도 수련치과의사(인턴) 모집",
+  "body": "모집인원: 인턴 2명\n자격: 2027년 치과의사 국가시험 응시 예정자 또는 면허 소지자\n원서접수: 2026.12.01 ~ 2026.12.11\n병원 위치: 경기 수원시 팔달구",
+  "source_kind": "hospital_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_hospital",
+  "expected_positions": [
+   "resident"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "수원시",
+  "expected_deadline": "2026-12-11",
+  "why_tricky": "인턴은 분과가 없어 gp. 마감이 두 달 뒤라도 같은 해. 팔달구는 일반구라 수원시로 묶음"
+ },
+ {
+  "title": "울산 삼산동 치과 지피 원장님 구합니다",
+  "body": "울산 남구 삼산동 버스터미널 인근\n지피 원장님, 주5일 세후 1150\n야간 주1회, 토요일 격주\n10/29(목) 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "울산",
+  "expected_sigungu": "남구",
+  "expected_deadline": "2026-10-29",
+  "why_tricky": "지피=GP. 남구는 부산·대구·광주·울산에 다 있음 → 울산"
+ },
+ {
+  "title": "봉선동 어린이치과 소아치과 전문의 모십니다",
+  "body": "광주 남구 봉선동\n소아치과 전문의 원장님 모십니다 (진정요법 가능자 우대)\n주4.5일, 세후 1500 보장\n10월 30일까지",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "pedo"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "광주",
+  "expected_sigungu": "남구",
+  "expected_deadline": "2026-10-30",
+  "why_tricky": "광주 남구(울산·부산 남구와 구분). 대전 유성구의 봉명동과 이름이 비슷함"
+ },
+ {
+  "title": "전주 효자동 치과 치과의사·치과위생사 구인",
+  "body": "전북 전주시 완산구 효자동\n치과의사 1명 (GP, 주4.5일 세후 1100)\n치과위생사 2명 (경력 무관)\n채용시 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_clinic",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "전북",
+  "expected_sigungu": "전주시",
+  "expected_deadline": "",
+  "why_tricky": "위생사 구인이 섞여 있어도 치과의사 구인이 포함되어 있음(비치과의사 글로 버리면 오답). 완산구는 일반구라 전주시로 묶음"
+ },
+ {
+  "title": "대학병원 교수 출신 원장진 치과병원, 페이닥터 모십니다",
+  "body": "경기 고양시 덕양구 삼송동 하늘치과병원\n전 대학병원 교수 출신 원장 5인 진료\n주5일 세후 1300, 교육 지원\n2026.10.23 마감",
+  "source_kind": "local_board",
+  "expected_post_kind": "hiring",
+  "expected_inst_type": "dental_hospital",
+  "expected_positions": [
+   "staff_dentist"
+  ],
+  "expected_specialties": [
+   "gp"
+  ],
+  "expected_work_types": [
+   "fulltime"
+  ],
+  "expected_sido": "경기",
+  "expected_sigungu": "고양시",
+  "expected_deadline": "2026-10-23",
+  "why_tricky": "'대학병원'·'교수 출신'은 원장진 경력 설명. univ_hospital_dept나 faculty로 잡으면 오답(지금 INST_RULES에서는 대학병원이 치과병원보다 먼저 걸림)"
+ }
+]

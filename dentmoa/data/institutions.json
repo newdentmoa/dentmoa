@@ -112,7 +112,7 @@
   "recruit_url": "https://knudh.kr/content/05info/02_01.php",
   "watch": true,
   "operator": "",
-  "note": "own board (채용공고, 800+ posts) + 잡알리오"
+  "note": "own board (채용공고) + 잡알리오"
  },
  {
   "name": "전남대학교치과병원",
@@ -574,6 +574,7 @@
    "서울시립장애인치과병원",
    "서울시장애인치과병원",
    "서울장애인치과병원",
+   "서울특별시 장애인치과병원",
    "서울특별시장애인치과병원",
    "시립장애인치과병원"
   ],
@@ -687,15 +688,16 @@
   "sido": "울산",
   "sigungu": "동구",
   "aliases": [
+   "울산 장애인구강진료센터",
    "울산권역 장애인구강진료센터",
    "울산권역장애인구강진료센터",
    "울산대병원 장애인구강진료센터"
   ],
-  "homepage": "https://www.uuh.ulsan.kr",
+  "homepage": "https://www.uuh.ulsan.kr/",
   "recruit_url": "",
   "watch": false,
-  "operator": "울산대학교병원",
-  "note": "울산대학교병원 own board (unverified)"
+  "operator": "울산대학교병원 (unverified)",
+  "note": "울산대학교병원 채용 (own)"
  },
  {
   "name": "세종권역장애인구강진료센터",
@@ -785,15 +787,17 @@
   "sido": "충북",
   "sigungu": "청주시",
   "aliases": [
+   "충북 장애인구강진료센터",
    "충북권역 장애인구강진료센터",
    "충북권역장애인구강진료센터",
+   "충북대병원 장애인구강진료센터",
    "한국병원 장애인구강진료센터"
   ],
-  "homepage": "",
+  "homepage": "https://www.cbnuh.or.kr/",
   "recruit_url": "",
   "watch": false,
-  "operator": "청주한국병원",
-  "note": "청주한국병원 own board / general job sites (unverified)"
+  "operator": "충북대학교병원 (unverified)",
+  "note": "충북대학교병원 채용 (own) + 잡알리오"
  },
  {
   "name": "충남권역장애인구강진료센터",
@@ -882,15 +886,16 @@
   "sido": "제주",
   "sigungu": "제주시",
   "aliases": [
+   "제주 장애인구강진료센터",
    "제주권역 장애인구강진료센터",
    "제주권역장애인구강진료센터",
    "제주대병원 장애인구강진료센터"
   ],
-  "homepage": "https://www.jejunuh.co.kr",
+  "homepage": "https://www.jejunuh.co.kr/",
   "recruit_url": "",
   "watch": false,
-  "operator": "제주대학교병원",
-  "note": "제주대학교병원 own board + 잡알리오"
+  "operator": "제주대학교병원 (unverified)",
+  "note": "제주대학교병원 채용 (own) + 잡알리오"
  },
  {
   "name": "가톨릭대학교 서울성모병원",
@@ -1746,6 +1751,25 @@
   "note": "recruiter.co.kr (snubh) + own board (snubh.org/intro/news/recruitView.do)"
  },
  {
+  "name": "분당서울대학교병원 치과",
+  "kind": "univ_hospital_dept",
+  "sido": "경기",
+  "sigungu": "성남시",
+  "aliases": [
+   "SNUBH 치과",
+   "분당서울대 치과",
+   "분당서울대병원 치과",
+   "분당서울대병원치과",
+   "분당서울대학교병원 치과진료부",
+   "분당서울대학교병원치과"
+  ],
+  "homepage": "https://www.snubh.org/",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "서울대학교병원",
+  "note": "own (snubh.org 채용) + 잡알리오 (서울대학교병원 계열)"
+ },
+ {
   "name": "분당차병원",
   "kind": "univ_hospital_dept",
   "sido": "경기",
@@ -2279,6 +2303,24 @@
   "watch": true,
   "operator": "한국보훈복지의료공단",
   "note": "own board + 지원은 bohun.fairyhr.com + 잡알리오"
+ },
+ {
+  "name": "중앙보훈병원 치과병원",
+  "kind": "public_hospital",
+  "sido": "서울",
+  "sigungu": "강동구",
+  "aliases": [
+   "보훈공단 치과",
+   "보훈병원 치과병원",
+   "서울보훈병원 치과",
+   "중앙보훈병원 치과",
+   "중앙보훈병원치과병원"
+  ],
+  "homepage": "https://seoul.bohun.or.kr/",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "한국보훈복지의료공단",
+  "note": "한국보훈복지의료공단 통합 채용 + 잡알리오"
  },
  {
   "name": "한국원자력의학원 원자력병원",

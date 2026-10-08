@@ -176,12 +176,12 @@ def digest(collect_report: CollectReport | None = None, *, dry_run: bool = False
     rep = DigestReport(considered=len(pending), matched=matched)
     warnings = _fresh_warnings(collect_report)
 
+    if dry_run:
+        rep.skipped_reason = "미리보기"
+        return rep
     if not matched and not warnings and not settings["notify"]["send_empty"]:
         db.mark_processed([p.id for p in pending], [])
         rep.skipped_reason = "새로 맞는 공고 없음"
-        return rep
-    if dry_run:
-        rep.skipped_reason = "미리보기"
         return rep
 
     rep.sent = send_digest(matched, warnings, settings)

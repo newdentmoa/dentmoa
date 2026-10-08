@@ -26,7 +26,7 @@ _MD_KOR = r"(?P<m2>1[0-2]|0?[1-9])\s*월\s*(?P<d2>3[01]|[12]\d|0?[1-9])\s*일"
 DATE_RE = re.compile(r"(?<!\d)" + _Y + r"(?:" + _MD_NUM + r"|" + _MD_KOR + r")")
 
 KEYWORD_RE = re.compile(r"마감|접수\s*(?:기간|기한|마감)|모집\s*기간|지원\s*(?:기간|기한|마감)|서류\s*(?:접수|제출)|까지|~|∼|〜|－|-\s*\d")
-STRONG_KEYWORD_RE = re.compile(r"마감|접수\s*(?:기간|기한)|모집\s*기간|지원\s*(?:기간|기한)|원서\s*접수|서류\s*접수|제출\s*기한")
+STRONG_KEYWORD_RE = re.compile(r"마감|접수\s*(?:기간|기한|[:：])|지원\s*[:：]|모집\s*기간|지원\s*(?:기간|기한)|원서\s*접수|서류\s*접수|제출\s*기한")
 RANGE_SEP_RE = re.compile(r"\s*(?:~|∼|〜|부터|－|―|-(?=\s*\d))\s*")
 
 
@@ -94,10 +94,11 @@ def find_deadline(text: str, posted: date) -> tuple[str, date | None]:
             score = 3
         elif re.search(r"까지", ln):
             score = 2
-        elif KEYWORD_RE.search(ln) and len(dates) >= 2:
-            score = 1
-        if re.search(r"(?:~|∼|〜)\s*$", ln[:dates[-1][0]]):
-            score = max(score, 2)  # '~10.31' 처럼 끝 날짜만 있는 기간
+        prev_end = dates[-2][1] if len(dates) >= 2 else 0
+        gap = ln[prev_end:dates[-1][0]]
+        is_range = len(dates) >= 2 and re.fullmatch(r"\s*(?:\([^)]*\))?\s*[~∼〜\-]\s*", gap)
+        if not is_range and re.search(r"(?:~|∼|〜)\s*$", gap):
+            score = max(score, 2)  # '~10.31' 처럼 끝 날짜만 있는 기간 (키워드 없는 '10/19~10/24'는 근무 기간일 수 있음)
         if score == 0:
             continue
         # 기간이면 마지막 날짜가 마감일

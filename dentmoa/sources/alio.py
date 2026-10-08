@@ -17,11 +17,12 @@ class AlioSource(AggregatorSource):
     homepage = LIST_URL
     default_inst_type = "public_hospital"
     item_href = r"recruitview\.do\?.*idx=\d+"
+    # keyword= 는 공개된 수집 코드들에서 확인된 검색 매개변수 (pageSet=한 페이지 글 수)
     queries = [
+        Query(LIST_URL, {"keyword": kw, "pageSet": "50", "pageNo": "{page}", "order": "REG_DATE", "sort": "DESC"})
+        for kw in ("치과", "치의")
+    ] + [
         # 기관 이름에 '치과병원'이 들어간 곳의 모든 공고 (제목에 '치과'가 없어도)
-        Query(LIST_URL, {"pageNo": "{page}", "search_yn": "Y", "org_name": "치과병원", "order": "REG_DATE"}),
-        # 제목에 '치과'가 들어간 공고 (보훈병원·의료원 치과 등)
-        Query(LIST_URL, {"pageNo": "{page}", "search_yn": "Y", "title": "치과", "order": "REG_DATE"}),
-        Query(LIST_URL, {"pageNo": "{page}", "search_yn": "Y", "title": "치의", "order": "REG_DATE"}),
+        Query(LIST_URL, {"org_name": "치과병원", "pageSet": "50", "pageNo": "{page}", "order": "REG_DATE", "sort": "DESC"}),
     ]
     content_selectors = [".recruitView", ".recruit_view", ".view_con", ".tbl_view", "#contents", ".board_view"]

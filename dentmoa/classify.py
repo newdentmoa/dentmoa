@@ -55,11 +55,17 @@ class Classification:
 TAG_HIRING_RE = re.compile(r"[\[(【<]\s*(?:구인|모집|채용|초빙)\s*[\])】>]")
 TAG_SEEKING_RE = re.compile(r"[\[(【<]\s*구직\s*[\])】>]")
 SEEKING_RE = re.compile(
-    r"구직\s*(?:합니다|해요|중|글|원합니다|희망)|"
+    r"구직\s*(?:합니다|해요|중(?!\s*인)|글|원합니다|희망)|"
     r"(?:자리|일자리|근무처|직장|근무지|병원|치과)\s*(?:를|을)?\s*(?:구합니다|구해요|구함|찾습니다|찾아요|찾음|알아봅니다|알아보고)|"
     r"(?:봉직|페이|대진|파트|근무)\s*(?:자리|할\s*곳|할\s*치과)\s*(?:구|찾|알아)|"
     r"(?:근무|대진|파트|봉직)\s*(?:가능|희망)\s*(?:합니다|해요|함|합니당|입니다)|"
     r"(?:근무|일)\s*하고\s*싶습니다|이력서\s*(?:보내|드립|드려)|저를\s*(?:필요|찾)"
+)
+# 누구를 뽑는지가 분명한 구인 표현 ('원장님 모십니다', '페이닥터 구합니다')
+HIRING_STRONG_RE = re.compile(
+    r"(?:원장|선생|페이\s*닥터|페닥|봉직의|치과\s*의사|전문의|GP|지피|전임의|교수|교원)님?\s*(?:을|를|분)?\s*"
+    r"(?:모십니다|모셔요|모심|모십|구합니다|구해요|구함|모집|초빙|채용|찾습니다)",
+    re.I,
 )
 HIRING_RE = re.compile(
     r"구인|모집|채용|초빙|모십니다|모셔요|모심|모시고|모십|구합니다|구해요|구함|구하고|찾습니다|찾아요|찾고\s*있|"
@@ -86,7 +92,7 @@ def detect_post_kind(title: str, body: str, *, default: str) -> tuple[str, str]:
     if m:
         return "other", m.group(0)
     m = SEEKING_RE.search(t)
-    if m:
+    if m and not HIRING_STRONG_RE.search(t):
         return "seeking", m.group(0)
     hm = HIRING_RE.search(t)
     om = OTHER_KIND_RE.search(t)
@@ -166,7 +172,7 @@ INST_RULES: list[tuple[str, re.Pattern]] = [
         ),
     ),
     ("dental_hospital", re.compile(r"치과\s*병원")),
-    ("general_hospital", re.compile(r"종합\s*병원|요양\s*병원|한방\s*병원|[가-힣A-Za-z]{2,}병원\s*(?:내\s*)?치과|병원\s*치과")),
+    ("general_hospital", re.compile(r"종합\s*병원|요양\s*병원|한방\s*병원|[가-힣A-Za-z]{2,}병원\s*[\])]?\s*(?:내\s*)?치과|병원\s*치과")),
     ("dental_clinic", re.compile(r"치과\s*의원|[가-힣A-Za-z]{1,}치과(?!\s*(?:병원|대학|위생|기공|재료|의사|전문의|진료|치료))")),
 ]
 
@@ -188,27 +194,49 @@ GENERIC_NAMES = {
 }
 
 
-def detect_inst(title: str, hint: str, body: str, *, scope_body: bool, default: str) -> tuple[str, str, str]:
-    """(기관 종류, 기관명, 근거)"""
-    probe = f"{hint}\n{title}"
-    if scope_body:
-        probe += "\n" + body[:600]
+# 기관 이름 바로 뒤에 오면 '그 기관'이 아니라 위치·경력 설명
+LANDMARK_AFTER = re.compile(
+    r"^\s*(?:정문|후문|본관|바로)?\s*(?:맞은편|건너편|앞|옆|인근|근처|근방|부근|도보|사거리|역|방면|쪽)"
+)
+CAREER_AFTER = re.compile(r"^\s*(?:교수|전임의|과장|수련|전공의)?\s*(?:출신|경력|수련|이상|급|근무\s*경력)")
+
+
+def _is_context_mention(text: str, end: int) -> bool:
+    after = text[end:end + 12]
+    return bool(LANDMARK_AFTER.search(after) or CAREER_AFTER.search(after))
+
+
+def _inst_in_text(inst, text: str) -> bool:
+    """기관 이름이 위치·경력 설명이 아닌 곳에 한 번이라도 나오는지."""
+    for name in (inst.name, *inst.aliases):
+        pat = r"\s*".join(re.escape(ch) for ch in re.sub(r"\s+", "", name))
+        for m in re.finditer(pat, text):
+            if not _is_context_mention(text, m.end()):
+                return True
+    return False
+
+
+def detect_inst(title: str, hint: str, body: str, *, scope_body: bool, default: str):
+    """(기관 종류, 기관명, 근거, 알려진 기관 또는 None)"""
+    head = f"{hint}\n{title}"
+    probe = head + ("\n" + body[:600] if scope_body else "")
     inst = institutions.find(probe)
-    if inst:
-        return inst.inst_type, inst.name, f"기관 목록: {inst.name}"
+    if inst and ((hint and institutions.find(hint) is inst) or _inst_in_text(inst, probe)):
+        return inst.inst_type, inst.name, f"기관 목록: {inst.name}", inst
 
     for kind, rx in INST_RULES:
         if kind == "dental_clinic" and scope_body:
             rx = re.compile(r"치과\s*의원")  # 병원·기관 게시판에서는 '치과의원'이라고 써야만 의원으로 본다
-        m = rx.search(f"{hint}\n{title}")
-        if m:
-            return kind, _guess_name(f"{hint}\n{title}"), m.group(0)
+        for m in rx.finditer(head):
+            if not _is_context_mention(head, m.end()):
+                return kind, _guess_name(head), m.group(0), None
     if scope_body:
+        part = body[:600]
         for kind, rx in INST_RULES[:5]:  # 본문에서는 확실한 것만
-            m = rx.search(body[:600])
-            if m:
-                return kind, _guess_name(body[:600]), m.group(0)
-    return default, _guess_name(f"{hint}\n{title}\n{body[:300]}"), ""
+            for m in rx.finditer(part):
+                if not _is_context_mention(part, m.end()):
+                    return kind, _guess_name(part), m.group(0), None
+    return default, _guess_name(f"{head}\n{body[:300]}"), "", None
 
 
 def _guess_name(text: str) -> str:
@@ -275,7 +303,7 @@ def detect_positions(text: str, c: Classification) -> list[str]:
             found.append(key)
             c.note("positions", m.group(0))
     # '선생님 모집' 같은 일반 표현만으로 잡힌 봉직의는, 더 구체적인 직위가 있으면 뺀다
-    specific = {"faculty", "clinical_professor", "fellow", "contract", "resident"}
+    specific = {"faculty", "clinical_professor", "fellow", "contract", "resident", "other"}
     if "staff_dentist" in found and specific.intersection(found) and not STAFF_STRONG_RE.search(work):
         found.remove("staff_dentist")
     return list(dict.fromkeys(found))
@@ -320,11 +348,16 @@ GP_RE = re.compile(
     r"전문의\s*(?:무관|아니어도|아니셔도|상관\s*없|불문|여부\s*무관)|(?:과|전공|분과|전문\s*과목)\s*(?:무관|상관\s*없|불문)",
     re.I,
 )
-NEG_AFTER = re.compile(r"^\s*(?:진료\s*)?(?:은|는|도)?\s*(?:제외|불가|안\s*함|안함|않|하지\s*않|X\b|x\b|없음|없습니다|불필요|무관|노\b|NO\b)", re.I)
-EXISTING_AFTER = re.compile(
-    r"^.{0,14}?(?:상주|협진|대표\s*원장|근무\s*중|진료\s*중|계십니다|계시고|계시며|계심|계셔|계신|있습니다|있으며|있고|있음|있어|재직|보유|별도|따로|함께\s*하고|운영\s*중)"
+NEG_AFTER = re.compile(
+    r"^\s*(?:전문의\s*)?(?:진료\s*)?(?:은|는|도|가|이)?\s*"
+    r"(?:제외|불가|안\s*함|안함|않|하지\s*않|X\b|x\b|없음|없습니다|불필요|무관|노\b|NO\b|"
+    r"아니(?:셔도|어도|라도|여도|더라도)|무방|상관\s*없|관계\s*없|불문)",
+    re.I,
 )
-EXISTING_BEFORE = re.compile(r"(?:대표\s*원장님?\s*(?:은|이|께서|님)?|상주\s*(?:중인|하는)|근무\s*중인|재직\s*중인|계신|함께\s*하는|협진\s*(?:가능한|하는))\s*$")
+EXISTING_AFTER = re.compile(
+    r"^.{0,14}?(?:상주|협진|대표\s*원장|오십니다|오시는|오셔서|방문\s*진료|출장|에서\s*담당|근무\s*중|진료\s*중|계십니다|계시고|계시며|계심|계셔|계신|있습니다|있으며|있고|있음|있어|재직|보유|별도|따로|함께\s*하고|운영\s*중)"
+)
+EXISTING_BEFORE = re.compile(r"(?:외부|대표\s*원장님?\s*(?:은|이|께서|님)?|상주\s*(?:중인|하는)|근무\s*중인|재직\s*중인|계신|함께\s*하는|협진\s*(?:가능한|하는))\s*$")
 RECRUIT_NEAR = re.compile(r"모집|구인|구합|구함|모십|모심|모셔|초빙|채용|찾습|찾아|우대|선호|오실|지원")
 # 분과 이름이 여러 개 나열된 경우('보존, 보철 전문의') 목록 끝까지 건너뛰기
 LIST_ITEMS_RE = re.compile(
@@ -365,7 +398,7 @@ def _role(text: str, start: int, end: int, strong: bool) -> str:
 
 
 def _clauses(text: str) -> list[str]:
-    parts = re.split(r"[\n\r]+|(?<=[.!?])\s+|\s+/\s+|\s*\|\s*|(?<=[며고서])\s+(?=[^\s])", text)
+    parts = re.split(r"[\n\r]+|(?<=[.!?])\s+|\s+/\s+|\s*\|\s*|(?<=[며고])\s+(?=[^\s])", text)
     return [p for p in parts if p and p.strip()]
 
 
@@ -418,7 +451,14 @@ def detect_specialties(title: str, body: str, inst_name: str, c: Classification)
     targets = list(dict.fromkeys(targets))
     hints = [h for h in dict.fromkeys(hints) if h not in targets]
 
-    gp = GP_RE.search(f"{title}\n{body}")
+    gp = None
+    for clause in [title] + _clauses(body):
+        for m in GP_RE.finditer(clause):
+            if _role(clause, m.start(), m.end(), strong=True) == "target":
+                gp = m
+                break
+        if gp:
+            break
     if gp:
         c.note("specialties", gp.group(0))
         if "gp" not in targets:
@@ -447,25 +487,47 @@ def _record(key, role, snippet, targets, hints, negated, c):
 
 LOCUM_RE = re.compile(r"대진(?!대)")
 PART_RE = re.compile(
-    r"파트\s*타임|(?<![가-힣])파트(?!너|장)|\bpart\s*-?\s*time\b|\bpart\b|"
+    r"파트\s*타임|(?<![가-힣])파트(?!너|장)|비상근|주\s*(?:[1-2]\d|30)\s*시간|\bpart\s*-?\s*time\b|\bpart\b|"
     r"주\s*[1-3]\s*(?:일|회|번)|주\s*[1-3]\s*[~\-]\s*[1-3]\s*(?:일|회)|요일제|시간제|시간\s*선택제|반일|오전만|오후만|"
     r"(?:토요일?|일요일?|야간)\s*(?:만|파트|전담)|하루\s*(?:만|근무)|단기\s*(?:근무|알바)|알바",
     re.I,
 )
 FULL_RE = re.compile(
-    r"풀\s*타임|full\s*-?\s*time|주\s*(?:4|4\.5|5|5\.5|6)\s*(?:일|회)|주\s*(?:4|4\.5|5|5\.5|6)(?![\d.])|정규직|상근|전일제|"
-    r"월\s*~\s*금|주\s*40\s*시간|전임(?!\s*의)",
+    r"풀\s*타임|full\s*-?\s*time|주\s*(?:4|4\.5|5|5\.5|6)\s*(?:일|회)|주\s*(?:4|4\.5|5|5\.5|6)(?![\d.])|정규직|전일제|"
+    r"주\s*40\s*시간|전임(?!\s*의)",
     re.I,
 )
+FULL_WEAK_RE = re.compile(r"(?<!비)상근|월\s*~\s*금")
+PART_STRONG_RE = re.compile(r"비상근|시간\s*선택제|시간제|주\s*(?:[1-2]\d|30)\s*시간|반일|오전만|오후만|파트\s*타임")
+
+
+NOT_PART_BEFORE = re.compile(r"(?:야간|토요일?|일요일?|당직|격주|휴일|주말)\s*$")
 
 
 def detect_work_types(text: str, c: Classification) -> list[str]:
     out = []
-    for key, rx in (("fulltime", FULL_RE), ("parttime", PART_RE), ("locum", LOCUM_RE)):
-        m = rx.search(text)
-        if m:
-            out.append(key)
-            c.note("work_types", m.group(0))
+    m = FULL_RE.search(text)
+    if m:
+        out.append("fulltime")
+        c.note("work_types", m.group(0))
+    part = None
+    for pm in PART_RE.finditer(text):
+        # '야간 주2회', '토요일 월 2회'는 근무 조건이지 파트타임이 아님
+        if re.match(r"주\s*[1-3]", pm.group(0)) and NOT_PART_BEFORE.search(text[max(0, pm.start() - 6):pm.start()]):
+            continue
+        part = pm
+        break
+    if part:
+        out.append("parttime")
+        c.note("work_types", part.group(0))
+    weak = FULL_WEAK_RE.search(text)
+    if weak and "fulltime" not in out and not (part and PART_STRONG_RE.search(text)):
+        out.insert(0, "fulltime")
+        c.note("work_types", weak.group(0))
+    m = LOCUM_RE.search(text)
+    if m:
+        out.append("locum")
+        c.note("work_types", m.group(0))
     return out
 
 
@@ -532,7 +594,7 @@ def classify(
 
     # 기관
     default_inst = default_inst_type or ("dental_clinic" if source_kind == "local_board" else "other")
-    c.inst_type, c.institution, why = detect_inst(
+    c.inst_type, c.institution, why, inst = detect_inst(
         title, institution_hint, body, scope_body=source_kind != "local_board", default=default_inst
     )
     if not why:
@@ -540,7 +602,6 @@ def classify(
     c.note("inst_types", why or "기본값")
     if institution_hint and not c.institution:
         c.institution = institution_hint[:40]
-    inst = institutions.find(f"{institution_hint}\n{title}")
 
     # 치과의사 공고 여부
     c.is_dentist, why = detect_dentist(text, title, c.inst_type, dentist_only)
@@ -570,7 +631,8 @@ def classify(
     c.note("regions", why)
 
     # 마감일
-    c.deadline_kind, c.deadline = find_deadline(text, posted)
+    if c.post_kind == "hiring":
+        c.deadline_kind, c.deadline = find_deadline(text, posted)
 
     # 요약
     c.summary = summarize(body, n=3, title=title)

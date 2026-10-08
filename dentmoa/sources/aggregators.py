@@ -32,6 +32,11 @@ class AggregatorSource(Source):
     inst_labels = ["기관명", "기관", "채용기관", "대학명", "학교명", "소속"]
     region_labels = ["근무지", "근무지역", "근무 지역", "지역", "소재지"]
     deadline_labels = ["마감일", "접수마감", "접수기간", "모집기간", "지원기간", "원서접수"]
+    pages_factor = 1  # 목록 페이지를 max_pages 의 몇 배까지 볼지
+
+    def wanted(self, it: ListItem) -> bool:
+        """본문까지 열어볼 글인지 (기본: 전부)."""
+        return True
 
     def fetch(self, ctx: FetchContext) -> Iterable[RawPosting]:
         http = PoliteSession(self.key, ctx, persist_cookies=False)
@@ -40,7 +45,7 @@ class AggregatorSource(Source):
         errors = []
         for q in self.queries:
             try:
-                for page in range(1, ctx.max_pages + 1):
+                for page in range(1, ctx.max_pages * self.pages_factor + 1):
                     items = self._list(http, ctx, q, page)
                     if items is None:
                         break
@@ -54,6 +59,8 @@ class AggregatorSource(Source):
                         if it.posted_at:
                             oldest = it.posted_at if oldest is None else min(oldest, it.posted_at)
                         if it.posted_at and it.posted_at < ctx.since:
+                            continue
+                        if not self.wanted(it):
                             continue
                         if it.source_id in ctx.known_ids:
                             yield RawPosting(self.key, it.source_id, it.url, it.title, posted_at=it.posted_at,
