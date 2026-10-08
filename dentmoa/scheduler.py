@@ -79,8 +79,9 @@ def start() -> None:
     with _lock:
         if scheduler.running:
             return
+        settings = settings_store.load()
         scheduler.start()
-        _add_cycle_jobs(settings_store.load())
+        _add_cycle_jobs(settings)
         scheduler.add_job(
             _maintenance_job,
             CronTrigger(hour=3, minute=20, timezone=config.TZ),

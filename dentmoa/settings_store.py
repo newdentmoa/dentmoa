@@ -17,7 +17,7 @@ from . import db
 from .regions import is_valid_selection
 from .taxonomy import INST_TYPES, POSITIONS, POST_KINDS, SPECIALTIES, WORK_TYPES
 
-SOURCE_KEYS = ["moreden", "dentphoto", "alio", "hibrain", "hospitals"]
+SOURCE_KEYS = ["moreden", "dentphoto", "alio", "hibrain", "gojobs", "hospitals"]
 
 DEFAULT_SETTINGS: dict = {
     "filters": {

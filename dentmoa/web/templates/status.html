@@ -48,22 +48,19 @@
 <section class="card">
   <h2>최근 실행 기록</h2>
   {% if runs %}
-  <div class="table-wrap">
-    <table class="table runs">
-      <thead><tr><th scope="col">시작</th><th scope="col">종류</th><th scope="col">결과</th><th scope="col">새 글</th><th scope="col">내용</th></tr></thead>
-      <tbody>
-        {% for r in runs %}
-        <tr>
-          <td class="nowrap">{{ r.started }}</td>
-          <td>{{ r.kind_label }}{% if r.source_label %}<br><span class="muted small">{{ r.source_label }}</span>{% endif %}</td>
-          <td><span class="status {{ r.status_cls }}">{{ r.status_label }}</span></td>
-          <td>{{ r.new }}</td>
-          <td class="msg">{{ r.summary }}{% if r.detail %}<details class="log-details"><summary>자세히</summary><pre class="log">{{ r.detail }}</pre></details>{% endif %}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+  <ul class="source-list runs">
+    {% for r in runs %}
+    <li>
+      <div class="source-row">
+        <span class="status {{ r.status_cls }}">{{ r.status_label }}</span>
+        <strong>{{ r.kind_label }}{% if r.source_label %} · {{ r.source_label }}{% endif %}</strong>
+        <span class="muted small">{{ r.started }}</span>
+      </div>
+      {% if r.summary %}<div class="small">{{ r.summary }}</div>{% endif %}
+      {% if r.detail %}<details class="log-details"><summary>자세히</summary><pre class="log">{{ r.detail }}</pre></details>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
   {% else %}
   <p class="muted">아직 실행 기록이 없어요.</p>
   {% endif %}

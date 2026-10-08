@@ -368,7 +368,7 @@ def test_send_message_ok(tg_api):
     assert telegram.send_message("123:abc", "42", "<b>안녕</b>") == 1
     url, payload = tg_api["calls"][0]
     assert url == "https://api.telegram.org/bot123:abc/sendMessage"
-    assert payload == {"chat_id": "42", "text": "<b>안녕</b>", "parse_mode": "HTML", "disable_web_page_preview": True}
+    assert payload == {"chat_id": "42", "text": "<b>안녕</b>", "parse_mode": "HTML", "link_preview_options": {"is_disabled": True}}
 
 
 def test_send_message_bad_token(tg_api):

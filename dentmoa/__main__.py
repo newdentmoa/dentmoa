@@ -22,7 +22,7 @@ import re
 import sys
 import time
 import unicodedata
-from datetime import date
+from datetime import date, datetime
 
 from . import config
 
@@ -108,6 +108,13 @@ def _print_sent(sent: dict[str, str], skipped: str) -> None:
             print("  → 대시보드의 계정·연결 화면에서 텔레그램이나 메일을 설정해 주세요.")
 
 
+class _KstFormatter(logging.Formatter):
+    """로그 시각을 한국 시간으로."""
+
+    def formatTime(self, record, datefmt=None):
+        return datetime.fromtimestamp(record.created, config.TZ).strftime(datefmt or "%Y-%m-%d %H:%M:%S")
+
+
 def _failed(sent: dict[str, str]) -> bool:
     """채널을 시도했는데 하나도 성공하지 못했는지."""
     return bool(sent) and not any(v == "ok" for v in sent.values())
@@ -121,7 +128,9 @@ def cmd_serve(args) -> int:
 
     from . import db, scheduler, settings_store
 
-    logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(name)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+    handler = logging.StreamHandler()
+    handler.setFormatter(_KstFormatter("[%(asctime)s] %(name)s: %(message)s"))
+    logging.basicConfig(level=logging.INFO, handlers=[handler])
     logging.getLogger("apscheduler").setLevel(logging.WARNING)
 
     config.ensure_dirs()

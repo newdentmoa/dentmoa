@@ -163,7 +163,7 @@ def send_chunks(token: str, chat_id: str, chunks: Iterable[str], *, disable_prev
                 "chat_id": str(chat_id).strip(),
                 "text": part,
                 "parse_mode": "HTML",
-                "disable_web_page_preview": disable_preview,
+                "link_preview_options": {"is_disabled": disable_preview},
             },
         )
     return len(parts)

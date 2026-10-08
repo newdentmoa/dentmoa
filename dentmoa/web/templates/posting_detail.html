@@ -16,7 +16,7 @@
   </div>
   <dl class="meta">
     <dt>기관</dt>
-    <dd>{{ p.institution or '이름 미상' }} <span class="muted">({{ tx.INST_TYPES.get(p.inst_type, p.inst_type) }})</span></dd>
+    <dd>{% if p.institution %}{{ p.institution }} <span class="muted">· {{ tx.INST_TYPES.get(p.inst_type, p.inst_type) }}</span>{% else %}{{ tx.INST_TYPES.get(p.inst_type, p.inst_type) }} <span class="muted">· 이름 미상</span>{% endif %}</dd>
     <dt>직위</dt><dd>{{ labels(p.positions, tx.POSITIONS) or '—' }}</dd>
     <dt>분과</dt>
     <dd>{{ labels(p.specialties, tx.SPECIALTIES) or '—' }}

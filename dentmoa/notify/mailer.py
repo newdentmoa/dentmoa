@@ -33,8 +33,8 @@ def build_message(sender: str, to: list[str], subject: str, html: str, text: str
     msg["To"] = ", ".join(to)
     msg["Date"] = formatdate(localtime=True)
     msg["Message-ID"] = make_msgid(domain=sender.rpartition("@")[2] or None)
-    msg.set_content(text, charset="utf-8")
-    msg.add_alternative(html, subtype="html", charset="utf-8")  # multipart/alternative
+    msg.set_content(text, charset="utf-8", cte="base64")
+    msg.add_alternative(html, subtype="html", charset="utf-8", cte="base64")  # multipart/alternative
     return msg
 
 
