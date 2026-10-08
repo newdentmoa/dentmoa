@@ -260,6 +260,8 @@ textarea { resize: vertical; }
   margin: 6px 0 10px;
 }
 .checks-compact { grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); }
+.checks-wide { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.check-desc { display: block; color: var(--muted); font-size: .8rem; font-weight: 400; margin-top: 2px; }
 .check {
   display: flex;
   align-items: center;
@@ -405,6 +407,8 @@ textarea { resize: vertical; }
 .st-warn { background: var(--warn-soft); color: var(--warn); }
 .st-running { background: var(--primary-soft); color: var(--primary-strong); }
 .log-details summary { font-size: .84rem; color: var(--muted); }
+.board-list { list-style: none; padding: 0; margin: 6px 0 0; font-size: .88rem; }
+.board-list li { padding: 3px 0; border: 0; }
 .log { white-space: pre-wrap; word-break: break-word; font-size: .8rem; background: var(--surface-2); padding: 8px; border-radius: 8px; max-height: 18em; overflow: auto; }
 
 /* ───────── 계정·로그인 ───────── */

@@ -40,6 +40,16 @@
       {% endif %}
       {% if s.run.detail %}<details class="log-details"><summary>자세히</summary><pre class="log">{{ s.run.detail }}</pre></details>{% endif %}
       {% endif %}
+      {% if s.key == 'hospitals' and boards %}
+      <details class="log-details">
+        <summary>병원별 결과 (성공 {{ boards.ok }}곳 / 전체 {{ boards.total }}곳)</summary>
+        <ul class="board-list">
+          {% for b in boards.rows %}
+          <li><span class="status {{ 'st-ok' if b.ok else 'st-error' }}">{{ '성공' if b.ok else '실패' }}</span> {{ b.name }} <span class="muted small">{{ b.message }}</span></li>
+          {% endfor %}
+        </ul>
+      </details>
+      {% endif %}
     </li>
     {% endfor %}
   </ul>

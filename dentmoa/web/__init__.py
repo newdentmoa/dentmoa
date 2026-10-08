@@ -43,7 +43,7 @@ def create_app(testing: bool = False) -> Flask:
         SESSION_COOKIE_SECURE=os.environ.get("DENTMOA_SECURE_COOKIES") == "1",
         PERMANENT_SESSION_LIFETIME=timedelta(days=30),
         MAX_CONTENT_LENGTH=2 * 1024 * 1024,
-        SEND_FILE_MAX_AGE_DEFAULT=timedelta(hours=1),
+        SEND_FILE_MAX_AGE_DEFAULT=timedelta(days=7),  # 주소에 수정 시각이 붙어 있어 길게 둬도 된다
     )
     if os.environ.get("DENTMOA_BEHIND_PROXY") == "1":
         from werkzeug.middleware.proxy_fix import ProxyFix
@@ -71,6 +71,7 @@ def create_app(testing: bool = False) -> Flask:
 
     _error(400, "요청을 처리하지 못했어요", "화면이 오래 열려 있었거나 로그인 정보가 바뀌었어요. 페이지를 새로고침한 뒤 다시 시도해 주세요.")
     _error(404, "찾을 수 없어요", "주소가 바뀌었거나 지워진 화면이에요.")
+    _error(405, "이렇게 열 수 없는 주소예요", "화면의 버튼을 눌러서 이용해 주세요.")
     _error(413, "보낸 내용이 너무 커요", "입력한 내용을 줄여서 다시 시도해 주세요.")
     _error(500, "문제가 생겼어요", "잠시 뒤 다시 시도해 주세요. 계속되면 '상태' 화면의 실행 기록을 확인해 주세요.")
     return app

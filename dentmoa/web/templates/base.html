@@ -7,15 +7,15 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="referrer" content="same-origin">
   <title>{% block title %}{% endblock %}{% if self.title() %} · {% endif %}덴트모아</title>
-  <link rel="icon" href="{{ url_for('static', filename='icon.svg') }}" type="image/svg+xml">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+  <link rel="icon" href="{{ static_url('icon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ static_url('style.css') }}">
+  <script src="{{ static_url('app.js') }}" defer></script>
 </head>
 <body>
   <header class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="{{ url_for('postings.index') if g.get('logged_in') else url_for('auth.login') }}">
-        <img class="brand-mark" src="{{ url_for('static', filename='icon.svg') }}" alt="" width="26" height="26">덴트모아
+        <img class="brand-mark" src="{{ static_url('icon.svg') }}" alt="" width="26" height="26">덴트모아
       </a>
       {% if g.get('logged_in') %}
       <form class="logout" method="post" action="{{ url_for('auth.logout') }}">

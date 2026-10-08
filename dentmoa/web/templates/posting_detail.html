@@ -69,7 +69,7 @@
           <th scope="row">{{ r.title }}</th>
           <td>{{ r.value }}{% if r.guessed %} <span class="tag tag-warn">추정</span>{% endif %}</td>
           <td class="ev">
-            {% for e in r.evidence %}<q>{{ e }}</q>{% else %}<span class="muted">—</span>{% endfor %}
+            {% for e in r.evidence %}<q>{{ e }}</q>{% else %}<span class="muted">{{ '단서 없음 (기본값)' if r.guessed else '—' }}</span>{% endfor %}
           </td>
         </tr>
         {% endfor %}

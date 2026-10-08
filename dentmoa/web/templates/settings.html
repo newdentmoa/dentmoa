@@ -118,9 +118,9 @@
   <section class="card">
     <h2>수집</h2>
     <span class="field-label">확인할 사이트</span>
-    <div class="checks">
-      {% for key, label in source_options %}
-      <label class="check"><input type="checkbox" name="source_{{ key }}" value="1"{% if c.sources.get(key) %} checked{% endif %}><span>{{ label }}</span></label>
+    <div class="checks checks-wide">
+      {% for key, label, desc in source_options %}
+      <label class="check"><input type="checkbox" name="source_{{ key }}" value="1"{% if c.sources.get(key) %} checked{% endif %}><span>{{ label }}{% if desc %}<small class="check-desc">{{ desc }}</small>{% endif %}</span></label>
       {% endfor %}
     </div>
     <label class="field field-inline">

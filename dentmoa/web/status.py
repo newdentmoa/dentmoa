@@ -64,6 +64,20 @@ def run_view(run: dict | None) -> dict | None:
     }
 
 
+def board_status() -> dict | None:
+    """병원 게시판 수집기가 남긴 게시판별 결과 (실패한 곳 먼저)."""
+    status = db.kv_get("board_status") or {}
+    if not isinstance(status, dict):
+        return None
+    rows = sorted(
+        ({"name": name, **v} for name, v in status.items() if isinstance(v, dict)),
+        key=lambda r: (bool(r.get("ok")), r["name"]),
+    )
+    if not rows:
+        return None
+    return {"rows": rows, "ok": sum(1 for r in rows if r.get("ok")), "total": len(rows)}
+
+
 def cycle_running() -> bool:
     try:
         from dentmoa import pipeline
@@ -93,6 +107,7 @@ def index():
         next_runs=next_runs(),
         times=settings["notify"]["times"],
         sources=sources,
+        boards=board_status(),
         runs=[run_view(r) for r in db.recent_runs(30)],
         total=db.count_postings(),
         running=cycle_running(),

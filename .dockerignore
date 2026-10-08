@@ -1,0 +1,18 @@
+# 서버 이미지에 넣지 않을 것 (이미지에는 requirements.txt 와 dentmoa/ 만 들어간다)
+.git
+.gitignore
+.venv
+**/__pycache__
+**/*.pyc
+.pytest_cache
+.mypy_cache
+.ruff_cache
+tests
+data
+backups
+debug
+docs
+*.md
+# 서버 설정(.env 에는 비밀번호가 들어갈 수 있다)과 배포 파일
+deploy/.env
+deploy

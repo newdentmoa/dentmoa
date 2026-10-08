@@ -31,6 +31,9 @@ SKIP_RE = re.compile(
 )
 
 
+DEADLINE_ONLY_RE = re.compile(r"^(?:접수\s*)?마감(?:일)?\s*[:：]?\s*[\d./~\-\s()월일화수목금토월]*$")
+
+
 def _clean(line: str) -> str:
     line = re.sub(r"\s+", " ", line).strip(" -•·*▶▷►■□◆◇○●※>#\t")
     if len(line) > LINE_MAX:
@@ -63,6 +66,8 @@ def summarize(body: str, n: int = 3, title: str = "") -> list[str]:
             s += 1  # '항목: 내용' 형식은 정보가 많음
         if len(ln) < 8:
             s -= 1
+        if DEADLINE_ONLY_RE.match(ln):
+            s -= 6  # 마감일은 알림에 따로 표시되므로 요약에서 뺀다
         scored.append((s, i, ln))
 
     picked = sorted(scored, key=lambda x: (-x[0], x[1]))[:n]

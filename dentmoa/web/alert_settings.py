@@ -10,7 +10,7 @@ from flask import Blueprint, flash, redirect, render_template, request, url_for
 from .. import regions, settings_store
 from ..settings_store import SOURCE_KEYS, TIME_RE
 from ..taxonomy import INST_TYPES, POSITIONS, POST_KINDS, SPECIALTIES, WORK_TYPES
-from .helpers import SOURCE_LABELS
+from .helpers import source_description, source_label
 from .postings import matching_count
 
 bp = Blueprint("settings", __name__)
@@ -94,7 +94,7 @@ def _render(s: dict, errors: list[str] | None = None, status: int = 200):
         region_options=regions.all_options(),
         selected_regions=set(s["filters"]["regions"]),
         times=(s["notify"]["times"] + [""] * MAX_TIMES)[:MAX_TIMES],
-        source_options=[(k, SOURCE_LABELS.get(k, k)) for k in SOURCE_KEYS],
+        source_options=[(k, source_label(k), source_description(k)) for k in SOURCE_KEYS],
         preview=matching_count(s["filters"]) if not errors else None,
     ), status
 

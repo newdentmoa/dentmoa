@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import date, datetime
+from pathlib import Path
 from urllib.parse import urlencode, urlsplit
 
-from flask import Flask, g, request
+from flask import Flask, current_app, g, request, url_for
 
 from .. import config, taxonomy
 from ..matching import MatchResult
@@ -17,9 +18,20 @@ from ..settings_store import SOURCE_KEYS
 SOURCE_LABELS: dict[str, str] = {
     "moreden": "모어덴",
     "dentphoto": "덴트포토",
-    "alio": "잡알리오(공공기관)",
-    "hibrain": "하이브레인넷(대학 교원)",
+    "alio": "잡알리오",
+    "hibrain": "하이브레인넷",
+    "gojobs": "나라일터",
     "hospitals": "병원 채용게시판",
+}
+
+# 알림 조건 화면에 붙일 짧은 설명
+SOURCE_DESCRIPTIONS: dict[str, str] = {
+    "moreden": "치과의사 커뮤니티 구인 게시판 (로그인 필요)",
+    "dentphoto": "치과의사 커뮤니티 구인 게시판 (로그인 필요)",
+    "alio": "공공기관 채용정보 — 국립대병원·공공병원 공고",
+    "hibrain": "대학 교원·연구직 채용 — 치과대학 교수 공고",
+    "gojobs": "공무원·공공기관 채용 — 보건소·국립병원 공고",
+    "hospitals": "치과대학병원·대학병원·공공병원 홈페이지의 채용 게시판을 직접 확인",
 }
 
 WEEKDAYS = "월화수목금토일"
@@ -60,6 +72,19 @@ def source_labels() -> dict[str, str]:
 
 def source_label(key: str) -> str:
     return source_labels().get(key, key)
+
+
+def source_description(key: str) -> str:
+    return SOURCE_DESCRIPTIONS.get(key, "")
+
+
+def static_url(filename: str) -> str:
+    """정적 파일 주소. 수정 시각을 붙여서 업데이트 뒤 예전 파일이 캐시에 남지 않게 한다."""
+    try:
+        version = int((Path(current_app.static_folder or "") / filename).stat().st_mtime)
+    except OSError:
+        version = 0
+    return url_for("static", filename=filename, v=version)
 
 
 def source_keys() -> list[str]:
@@ -195,6 +220,7 @@ def init_app(app: Flask) -> None:
         url_with=url_with,
         nav_items=nav_items,
         source_label=source_label,
+        static_url=static_url,
         tx=taxonomy,
     )
     app.jinja_env.trim_blocks = True

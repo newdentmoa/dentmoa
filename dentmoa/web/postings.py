@@ -181,6 +181,7 @@ EVIDENCE_ROWS = [
     ("work_types", "근무 형태"),
     ("regions", "지역"),
 ]
+DEFAULT_EVIDENCE = "기본값"  # 분류기가 단서를 못 찾았을 때 남기는 말
 
 
 def _evidence_value(p: Posting, key: str) -> str:
@@ -209,7 +210,7 @@ def _evidence_value(p: Posting, key: str) -> str:
 def evidence_rows(p: Posting) -> list[dict]:
     rows = []
     for key, title in EVIDENCE_ROWS:
-        ev = p.evidence.get(key) or []
+        ev = [e for e in p.evidence.get(key) or [] if e != DEFAULT_EVIDENCE]
         if key == "specialty_ignored" and not ev:
             continue
         rows.append({

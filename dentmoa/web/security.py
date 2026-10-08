@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import hmac
+import math
 import secrets
 import threading
 import time
@@ -43,7 +44,7 @@ class LoginLimiter:
             if left <= 0:
                 self._locked.pop(ip, None)
                 return 0
-            return int(left) + 1
+            return math.ceil(left)
 
     def fail(self, ip: str) -> None:
         now = self._clock()
@@ -130,6 +131,8 @@ def safe_next(target: str | None, default: str) -> str:
     """로그인 후·버튼 처리 후 돌아갈 주소. 이 사이트 안의 주소만 허용한다."""
     if not target or not target.startswith("/") or target.startswith("//") or "\\" in target:
         return default
+    if any(ch.isspace() or ord(ch) < 32 or ord(ch) == 127 for ch in target):
+        return default  # 브라우저는 탭·줄바꿈을 지우므로 '/\t/다른사이트' 같은 주소를 막는다
     parts = urlsplit(target)
     if parts.scheme or parts.netloc:
         return default
