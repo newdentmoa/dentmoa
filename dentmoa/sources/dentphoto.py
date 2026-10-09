@@ -1,7 +1,15 @@
 """덴트포토 (board.dentphoto.com) — 게시판 > 치과의사 구인구직.
 
 일반적인 PHP 게시판이라 requests 로 읽는다.
-1) 목록을 연다 → 로그인 화면이면 로그인 폼을 찾아 아이디·비밀번호를 보낸다
+
+2026-10 실제 사이트 확인 (로그인 전까지):
+- 목록: board.dentphoto.com/recruit_dental/list.php, 본문: 같은 폴더의 content.php (view.php·read.php 는 없음)
+- 로그인 안 된 상태로 열면 본문 없이 <script>location.replace('https://member.dentphoto.com/login/login.php?login_url=...')</script>
+- 로그인 폼: member.dentphoto.com/login/login.php → login_check.php 로 POST (login_url, dp_id, dp_password)
+- 틀리면 <script>alert('아이디 또는 비밀번호가 맞지 않습니다.');history.back();</script>
+- 로그인 후 목록의 모양은 아직 확인하지 못했다 → 일반적인 게시판 읽기(find_list_items)로 content.php 링크를 찾는다.
+
+1) 목록을 연다 → 로그인 화면(또는 로그인 화면으로 보내는 스크립트)이면 로그인 폼을 찾아 아이디·비밀번호를 보낸다
    (폼을 못 찾으면 브라우저로 로그인한 뒤 쿠키를 넘겨받는다)
 2) 목록에서 글 링크를 찾고, 처음 보는 글만 열어서 본문을 읽는다
 """
@@ -10,6 +18,7 @@ from __future__ import annotations
 
 import re
 from typing import Iterable
+from urllib.parse import quote, urljoin
 
 from ..models import RawPosting
 from .base import FetchContext, LoginError, MissingCredentials, PoliteSession, Source, SourceError, StructureError, decode
@@ -19,24 +28,27 @@ from .htmlutil import (
     find_label_value,
     find_list_items,
     find_login_form,
+    js_redirect_url,
     looks_like_login_page,
     parse_board_date,
     soup,
 )
 
 LIST_URL = "https://board.dentphoto.com/recruit_dental/list.php"
-LOGIN_URLS = [
-    "https://board.dentphoto.com/login.php",
-    "https://board.dentphoto.com/member/login.php",
-    "https://www.dentphoto.com/login.php",
-    "https://www.dentphoto.com/member/login.php",
-    "https://www.dentphoto.com/bbs/login.php",
-    "https://dentphoto.com/login.php",
-]
-ITEM_HREF = r"recruit_dental/(?:view|read|content)\.php|recruit_dental/.*[?&](?:no|idx|wr_id|uid|num)=\d+"
+LOGIN_URL = "https://member.dentphoto.com/login/login.php?login_url=" + quote(LIST_URL, safe="")
+LOGIN_URLS = [LOGIN_URL, "https://member.dentphoto.com/login/login.php"]
+ITEM_HREF = r"recruit_dental/(?:content|view|read)\.php|recruit_dental/.*[?&](?:no|idx|wr_id|uid|num)=\d+"
 REGION_LABELS = ["근무지역", "근무 지역", "근무지", "지역", "위치", "주소", "소재지"]
 INST_LABELS = ["병원명", "치과명", "기관명", "업체명"]
 CONTENT_SELECTORS = ["#view_content", ".view_content", "#bo_v_con", ".board_view_content", "td.content", ".content"]
+ALERT_RE = re.compile(r"alert\(\s*['\"]([^'\"]{2,120})['\"]")
+LOGIN_FAIL_RE = re.compile(r"(비밀번호|아이디).{0,20}(맞지\s*않|틀|일치하지|잘못|확인)|존재하지\s*않|탈퇴|정지|승인")
+
+
+def _is_login_redirect(html: str) -> str:
+    """로그인 화면으로 보내는 스크립트만 있는 응답이면 그 주소."""
+    url = js_redirect_url(html)
+    return url if "login" in url.lower() else ""
 
 
 class DentphotoSource(Source):
@@ -95,29 +107,40 @@ class DentphotoSource(Source):
             items = find_list_items(html, url)
         return items
 
+    def _needs_login(self, r, html: str) -> bool:
+        return (
+            r.status_code in (401, 403)
+            or "member.dentphoto.com/login" in r.url
+            or bool(_is_login_redirect(html))
+            or looks_like_login_page(html)
+        )
+
     def _get_list(self, http: PoliteSession, ctx: FetchContext, page_no: int, user: str, pw: str) -> tuple[str, str]:
         r = http.get(self._list_url(page_no))
         html = decode(r)
-        if r.status_code in (401, 403) or looks_like_login_page(html) or not self._items(html, r.url):
-            if page_no > 1 and not looks_like_login_page(html):
+        if self._needs_login(r, html) or (page_no == 1 and not self._items(html, r.url)):
+            if page_no > 1 and not self._needs_login(r, html):
                 return html, r.url
             ctx.log("로그인 필요 — 로그인 시도")
             self._login(http, ctx, html, r.url, user, pw)
             r = http.get(self._list_url(page_no))
             html = decode(r)
-            if looks_like_login_page(html) and not self._items(html, r.url):
+            if self._needs_login(r, html) and not self._items(html, r.url):
                 ctx.dump("dentphoto-after-login.html", html)
-                raise LoginError("덴트포토 로그인에 실패했습니다. 아이디·비밀번호를 확인해 주세요.")
+                raise LoginError("덴트포토 로그인 후에도 게시판이 열리지 않습니다. 아이디·비밀번호를 확인해 주세요.")
             http.save_cookies()
         return html, r.url
 
     def _login(self, http: PoliteSession, ctx: FetchContext, html: str, url: str, user: str, pw: str) -> None:
         form = find_login_form(html, url)
         pages = [(html, url)]
+        redirect = _is_login_redirect(html)
+        candidates = ([redirect] if redirect else []) + [u for u in LOGIN_URLS if u != redirect]
+        login_page = url
         if not form:
-            for cand in LOGIN_URLS:
+            for cand in candidates:
                 try:
-                    r = http.get(cand)
+                    r = http.get(cand, headers={"Referer": LIST_URL})
                 except SourceError:
                     continue
                 if r.status_code >= 400:
@@ -126,26 +149,37 @@ class DentphotoSource(Source):
                 pages.append((h, r.url))
                 form = find_login_form(h, r.url)
                 if form:
+                    login_page = r.url
                     break
         if form:
             data = dict(form.fields)
             data[form.user_field] = user
             data[form.pass_field] = pw
-            for k in ("url", "return_url", "returnUrl", "ret_url", "redirect", "referer", "go_url"):
+            for k in ("login_url", "url", "return_url", "returnUrl", "ret_url", "redirect", "referer", "go_url"):
                 if k in data and not data[k]:
-                    data[k] = LIST_URL
+                    data[k] = quote(LIST_URL, safe="") if k == "login_url" else LIST_URL
             if form.method == "get":
                 resp = http.get(form.action, params=data)
             else:
-                resp = http.post(form.action, data=data, headers={"Referer": url})
+                resp = http.post(form.action, data=data, headers={"Referer": login_page})
             body = decode(resp)
-            if re.search(r"(비밀번호|아이디).{0,20}(틀|일치하지|잘못|확인)", body) and len(body) < 5000:
+            alert = ALERT_RE.search(body)
+            if alert and len(body) < 5000 and ("history.back" in body or LOGIN_FAIL_RE.search(alert.group(1))):
+                raise LoginError(f"덴트포토 로그인에 실패했습니다: {alert.group(1)} 아이디·비밀번호를 확인해 주세요.")
+            if LOGIN_FAIL_RE.search(body) and len(body) < 5000:
                 raise LoginError("덴트포토 로그인에 실패했습니다. 아이디·비밀번호를 확인해 주세요.")
+            # 성공하면 스크립트로 다음 화면에 보낸다 — 게시판 쪽 쿠키를 그 화면에서 받을 수 있으니 브라우저처럼 한 번 따라간다
+            nxt = js_redirect_url(body)
+            if nxt and "login" not in nxt.lower():
+                try:
+                    http.get(urljoin(resp.url, nxt), headers={"Referer": resp.url})
+                except SourceError:
+                    pass
             return
         # 폼을 못 찾음 → 브라우저로 로그인 후 쿠키 넘겨받기
         for i, (h, _) in enumerate(pages):
             ctx.dump(f"dentphoto-login-{i}.html", h)
-        self._browser_login(http, ctx, url, user, pw)
+        self._browser_login(http, ctx, candidates[0], user, pw)
 
     def _browser_login(self, http: PoliteSession, ctx: FetchContext, url: str, user: str, pw: str) -> None:
         from .browser import generic_login, open_browser
@@ -169,7 +203,7 @@ class DentphotoSource(Source):
     # ─────────────── 본문 ───────────────
 
     def _detail(self, http: PoliteSession, ctx: FetchContext, it: ListItem) -> RawPosting:
-        r = http.get(it.url)
+        r = http.get(it.url, headers={"Referer": LIST_URL})
         html = decode(r)
         if ctx.save_debug:
             ctx.dump(f"dentphoto-detail-{it.source_id}.html", html)
