@@ -177,6 +177,9 @@ def test_work_types(title, body, expected):
         ("[분당] OO치과병원 페이닥터", "", "local_board", "dental_hospital", ["경기 성남시"]),
         ("[대구] OO병원 치과 봉직의", "", "local_board", "general_hospital", ["대구"]),
         ("[서울 강남] 미소치과의원 원장님 구인", "", "local_board", "dental_clinic", ["서울 강남구"]),
+        # 모어덴 실제 글(2026-10): 개인 치과 이름 속의 '세브란스'
+        ("토요일 근무 가능하신 선생님 모십니다.", "연세세브란스치과의원 공덕점", "local_board", "dental_clinic", []),
+        ("강남세브란스병원 치과 임상강사 모집", "", "local_board", "univ_hospital_dept", ["서울 강남구"]),
     ],
 )
 def test_institution_and_region(title, hint, kind, inst_type, regions):

@@ -149,7 +149,7 @@ def generic_login(sess: BrowserSession, login_url: str, user: str, password: str
 
 # ──────────────────────────── JSON 에서 글 목록 찾기 ────────────────────────────
 
-ID_KEYS = ("id", "recruitId", "recruit_id", "postId", "post_id", "articleId", "seq", "no", "idx", "uid", "boardId")
+ID_KEYS = ("id", "bid", "recruitId", "recruit_id", "postId", "post_id", "articleId", "seq", "no", "idx", "uid", "boardId")
 TITLE_KEYS = ("title", "subject", "recruitTitle", "postTitle", "name")
 BODY_KEYS = ("content", "contents", "body", "description", "detail", "text", "html", "recruitContent")
 REGION_KEYS = ("region", "regionName", "area", "areaName", "location", "address", "addr", "sido", "city", "district", "workPlace")

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>Dentphoto</title></head>
+<body>
+<!-- 실제 사이트 화면(2026-10)에서 필요한 부분만 남기고 전화번호·이메일은 지움 -->
+<form action="login_check.php" id="login" method="post" name="loginform" onsubmit="return send(this.form);">
+<input name="login_url" type="hidden" value="https%3A%2F%2Fboard.dentphoto.com%2Frecruit_dental%2Flist.php"/>
+<div class="label1">
+ <div class="txt">회원 로그인</div>
+</div>
+<div class="label_base"> <input autofocus="" class="field required" id="login_username" name="dp_id" title="덴트포토 아이디를 입력해주세요." type="text" value=""/> <div class="label2">아이디(ID)</div></div>
+<div class="label_base"> <input class="field required" id="login_password" name="dp_password" title="비밀번호를 입력해주세요." type="password"/> <div class="label2">비밀번호(Password)</div></div>
+<div class="label_base2"><a href="/join/join.php" style="float:left;">회원가입</a> <a href="find_account/find_pass.php" style="float:right;"> / 비밀번호 찾기</a> <a href="find_account/find_id.php" style="float:right; margin: 0px 5px;"> 아이디</a></div>
+<button type="submit">로그인</button>
+</form>
+</body></html>

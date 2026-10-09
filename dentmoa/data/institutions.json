@@ -11,10 +11,11 @@
    "강동경희치과"
   ],
   "homepage": "https://dent.khnmc.or.kr/",
-  "recruit_url": "https://www.khnmc.or.kr/recruit/recruit01.do",
+  "recruit_url": "https://recruit.incruit.com/khnmc/job/",
   "watch": true,
   "operator": "강동경희대학교병원",
-  "note": "own board (강동경희대학교병원 채용정보; also https://recruit.khnmc.or.kr/bbs/bbsHubList.do?bi"
+  "note": "own board (강동경희대학교병원 채용정보; also https://recruit.khnmc.or.kr/bbs/bbsHubList.do?bi | 2026-10 확인: www.khnmc.or.kr/recruit 는 없어짐 → 강동경희대병원 incruit 목록, 치과 관련 제목만",
+  "title_filter": "dental"
  },
  {
   "name": "경희대학교치과병원",
@@ -31,9 +32,10 @@
   ],
   "homepage": "https://dent.khmc.or.kr/",
   "recruit_url": "https://recruit.incruit.com/khmc/job/",
-  "watch": false,
+  "watch": true,
   "operator": "경희의료원",
-  "note": "incruit (경희의료원 채용; older posts used khmc.recruiter.co.kr)"
+  "note": "incruit (경희의료원 채용; older posts used khmc.recruiter.co.kr) | 2026-10 확인: 경희의료원 전체가 쓰는 incruit 목록 → 제목에 치과·치의·구강이 있는 글만 이 병원 글로 봄 (khmc.recruiter.co.kr 은 비어 있음)",
+  "title_filter": "dental"
  },
  {
   "name": "관악서울대학교치과병원",
@@ -51,7 +53,7 @@
   "recruit_url": "https://www.snudh.org/portal/blindEmpmn/list.do?menuNo=29060337",
   "watch": false,
   "operator": "서울대학교치과병원",
-  "note": "서울대학교치과병원 통합 채용 (snudh.org board + snudh.recruiter.co.kr) / 게시판 공유: 서울대학교치과병원"
+  "note": "서울대학교치과병원 통합 채용 (snudh.org board + snudh.recruiter.co.kr) / 게시판 공유: 서울대학교치과병원 | 2026-10 확인: snudh.recruiter.co.kr 은 서울특별시장애인치과병원 항목이 읽음"
  },
  {
   "name": "서울대학교치과병원",
@@ -91,10 +93,11 @@
    "치과대학병원(신촌)"
   ],
   "homepage": "https://dental.severance.healthcare/dental/index.do",
-  "recruit_url": "https://recruit.severance.healthcare/recruit/recruit.do",
-  "watch": false,
+  "recruit_url": "https://yuhs.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "연세대학교 의료원",
-  "note": "own (연세의료원 세브란스 채용 포털; filter 치과대학병원; notices at https://recruit.severance.healt"
+  "note": "own (연세의료원 세브란스 채용 포털; filter 치과대학병원; notices at https://recruit.severance.healt | 2026-10 확인: 세브란스 채용 포털의 공고는 yuhs.recruiter.co.kr 에 있음 (세브란스·강남·용인·치과대학병원 공동, 이 항목으로 읽음)",
+  "shared": true
  },
  {
   "name": "경북대학교치과병원",
@@ -260,7 +263,8 @@
   "recruit_url": "https://dudh.dankook.ac.kr/board/bbs/board.php?bo_table=incruit",
   "watch": true,
   "operator": "",
-  "note": "own board (gnuboard bo_table=incruit) + 단국대 교직원채용 '법인/산단/치과병원' menu (https://app"
+  "note": "own board (gnuboard bo_table=incruit) + 단국대 교직원채용 '법인/산단/치과병원' menu (https://app | 2026-10 확인: 자동등록방지(쿠키 확인) 화면 → 브라우저로 열면 바로 게시판이 나옴",
+  "fetch": "browser"
  },
  {
   "name": "원광대학교치과병원",
@@ -276,10 +280,10 @@
    "익산 원광대치과"
   ],
   "homepage": "http://www.wkdh.ac.kr/",
-  "recruit_url": "http://www.wkdh.ac.kr/?sid=sub06_6",
+  "recruit_url": "http://www.wkdh.ac.kr/bbs/kboard.php?tbl=board1_job",
   "watch": true,
   "operator": "",
-  "note": "own board (고객센터 > 채용공고)"
+  "note": "own board (고객센터 > 채용공고) | 2026-10 확인: 채용공고 화면은 iframe → 안쪽 게시판 주소로 바꿈"
  },
  {
   "name": "전북대학교치과병원",
@@ -367,9 +371,9 @@
   ],
   "homepage": "https://dentistry.yonsei.ac.kr/dentistry/index.do",
   "recruit_url": "https://dentistry.yonsei.ac.kr/dentistry/news/recruit.do",
-  "watch": true,
+  "watch": false,
   "operator": "",
-  "note": "own 채용공고 board (연구교수, 강사, 임상교수, 임상지도교원) + 연세대 교원채용 https://faculty.yonsei.ac.kr "
+  "note": "own 채용공고 board (연구교수, 강사, 임상교수, 임상지도교원) + 연세대 교원채용 https://faculty.yonsei.ac.kr | 2026-10 확인: 끔 — 게시판이 2020년 글에서 멈춤 (교원 채용은 faculty.yonsei.ac.kr·하이브레인넷)"
  },
  {
   "name": "경북대학교 치과대학",
@@ -421,9 +425,9 @@
   ],
   "homepage": "https://dentistry.chosun.ac.kr/dentistry/index.do",
   "recruit_url": "https://www3.chosun.ac.kr/chosun/633/subview.do",
-  "watch": true,
+  "watch": false,
   "operator": "",
-  "note": "조선대 전임교원채용 board + 교원임용 site https://pr.chosun.ac.kr/ ; 비전임 https://www3.chosun."
+  "note": "조선대 전임교원채용 board + 교원임용 site https://pr.chosun.ac.kr/ ; 비전임 https://www3.chosun. | 2026-10 확인: 끔 — 전임교원채용 목록에 글 링크가 없음 (하이브레인넷으로 모임)"
  },
  {
   "name": "강원대학교 치과대학",
@@ -491,9 +495,9 @@
   ],
   "homepage": "https://dent.jbnu.ac.kr/dent/index.do",
   "recruit_url": "https://professor.jbnu.ac.kr/professor/2321/subview.do",
-  "watch": true,
+  "watch": false,
   "operator": "",
-  "note": "전북대 교수초빙안내 + 교내채용 board https://www.jbnu.ac.kr/web/news/notice/sub03.do (치과대학 외래"
+  "note": "전북대 교수초빙안내 + 교내채용 board https://www.jbnu.ac.kr/web/news/notice/sub03.do (치과대학 외래 | 2026-10 확인: 끔 — 교수초빙 공지사항이 2021년 글에서 멈춤 (하이브레인넷으로 모임)"
  },
  {
   "name": "부산대학교 치의학전문대학원",
@@ -559,10 +563,10 @@
    "서울특별시서부장애인치과병원"
   ],
   "homepage": "",
-  "recruit_url": "https://snudh.recruiter.co.kr/",
+  "recruit_url": "https://snudh.recruiter.co.kr/app/jobnotice/list",
   "watch": false,
   "operator": "서울대학교치과병원 (서울시 위탁)",
-  "note": "recruiter.co.kr (서울대치과병원 채용사이트)"
+  "note": "recruiter.co.kr (서울대치과병원 채용사이트) | 2026-10 확인: 서울특별시장애인치과병원 항목이 같은 사이트를 읽음"
  },
  {
   "name": "서울특별시장애인치과병원",
@@ -578,10 +582,11 @@
    "서울특별시장애인치과병원"
   ],
   "homepage": "",
-  "recruit_url": "https://snudh.recruiter.co.kr/",
-  "watch": false,
+  "recruit_url": "https://snudh.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "서울대학교치과병원 (서울시 위탁)",
-  "note": "recruiter.co.kr (서울대치과병원 채용사이트)"
+  "note": "recruiter.co.kr (서울대치과병원 채용사이트) | 2026-10 확인: snudh.recruiter.co.kr = 서울대치과병원·관악·장애인치과병원 공동 채용 사이트 (이 항목으로 읽음)",
+  "shared": true
  },
  {
   "name": "중앙장애인구강진료센터",
@@ -959,10 +964,10 @@
    "연세대 강남세브란스"
   ],
   "homepage": "https://gs.severance.healthcare",
-  "recruit_url": "https://yuhs.recruiter.co.kr",
+  "recruit_url": "https://yuhs.recruiter.co.kr/app/jobnotice/list",
   "watch": false,
   "operator": "",
-  "note": "recruiter.co.kr (yuhs)"
+  "note": "recruiter.co.kr (yuhs) | 2026-10 확인: 연세대학교 치과대학병원 항목이 yuhs 를 읽음"
  },
  {
   "name": "강남세브란스병원 치과병원",
@@ -978,7 +983,7 @@
   "recruit_url": "https://recruit.severance.healthcare/recruit/recruit.do",
   "watch": false,
   "operator": "연세대학교 의료원",
-  "note": "own (연세의료원 세브란스 채용 포털, filter 강남세브란스)"
+  "note": "own (연세의료원 세브란스 채용 포털, filter 강남세브란스) | 2026-10 확인: yuhs.recruiter.co.kr 은 연세대학교 치과대학병원 항목이 읽음"
  },
  {
   "name": "강동경희대학교병원",
@@ -991,10 +996,10 @@
    "강동경희대학교병원"
   ],
   "homepage": "https://www.khnmc.or.kr",
-  "recruit_url": "https://recruit.khnmc.or.kr/recruit/recruit01.do",
-  "watch": true,
+  "recruit_url": "https://recruit.incruit.com/khnmc/job/",
+  "watch": false,
   "operator": "",
-  "note": "own (recruit.khnmc.or.kr)"
+  "note": "own (recruit.khnmc.or.kr) | 2026-10 확인: recruit.khnmc.or.kr 은 DNS 에 없음. 강동경희대학교치과병원 항목이 incruit khnmc 를 읽음"
  },
  {
   "name": "강동성심병원",
@@ -1025,9 +1030,9 @@
   ],
   "homepage": "https://www.kbsmc.co.kr",
   "recruit_url": "https://recruit.kbsmc.co.kr/jsp/recruit/recruitList.jsp",
-  "watch": true,
+  "watch": false,
   "operator": "",
-  "note": "own (recruit.kbsmc.co.kr, 의사직 카테고리)"
+  "note": "own (recruit.kbsmc.co.kr, 의사직 카테고리) | 2026-10 확인: 끔 — recruit.kbsmc.co.kr 이 DNS 에 없음 — 새 채용 사이트 확인 필요"
  },
  {
   "name": "건국대학교병원",
@@ -1057,10 +1062,10 @@
    "경희의료원"
   ],
   "homepage": "https://www.khmc.or.kr",
-  "recruit_url": "https://khmc.recruiter.co.kr",
+  "recruit_url": "https://recruit.incruit.com/khmc/job/",
   "watch": false,
   "operator": "",
-  "note": "recruiter.co.kr (khmc)"
+  "note": "recruiter.co.kr (khmc) | 2026-10 확인: 경희대학교치과병원 항목이 incruit khmc 를 읽음"
  },
  {
   "name": "고려대학교 구로병원",
@@ -1074,10 +1079,10 @@
    "구로병원"
   ],
   "homepage": "https://guro.kumc.or.kr",
-  "recruit_url": "https://kumc.recruiter.co.kr/career/job",
+  "recruit_url": "https://kumc.recruiter.co.kr/app/jobnotice/list",
   "watch": false,
   "operator": "",
-  "note": "recruiter.co.kr (kumc)"
+  "note": "recruiter.co.kr (kumc) | 2026-10 확인: 고려대학교 안암병원 항목이 kumc 를 읽음"
  },
  {
   "name": "고려대학교 안암병원",
@@ -1093,10 +1098,11 @@
    "안암병원"
   ],
   "homepage": "https://anam.kumc.or.kr",
-  "recruit_url": "https://kumc.recruiter.co.kr/career/job",
-  "watch": false,
+  "recruit_url": "https://kumc.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "recruiter.co.kr (kumc); 구 시스템 recruit2.kumc.or.kr"
+  "note": "recruiter.co.kr (kumc); 구 시스템 recruit2.kumc.or.kr | 2026-10 확인: kumc.recruiter.co.kr (안암·구로·안산 공동, 제목에 [구로병원] 등)",
+  "shared": true
  },
  {
   "name": "노원을지대학교병원",
@@ -1177,10 +1183,10 @@
    "연세의료원"
   ],
   "homepage": "https://sev.severance.healthcare",
-  "recruit_url": "https://yuhs.recruiter.co.kr",
+  "recruit_url": "https://yuhs.recruiter.co.kr/app/jobnotice/list",
   "watch": false,
   "operator": "",
-  "note": "recruiter.co.kr (yuhs.recruiter.co.kr); 의대 임상강사는 medicine.yonsei.ac.kr/medicine/"
+  "note": "recruiter.co.kr (yuhs.recruiter.co.kr); 의대 임상강사는 medicine.yonsei.ac.kr/medicine/ | 2026-10 확인: 연세대학교 치과대학병원 항목이 yuhs 를 읽음"
  },
  {
   "name": "순천향대학교 부속 서울병원",
@@ -1247,10 +1253,11 @@
    "인제대학교상계백병원"
   ],
   "homepage": "https://www.paik.ac.kr/sanggye",
-  "recruit_url": "https://paik.recruiter.co.kr",
-  "watch": false,
+  "recruit_url": "https://paik.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "recruiter.co.kr (paik)"
+  "note": "recruiter.co.kr (paik) | 2026-10 확인: paik.recruiter.co.kr (백병원 4곳 공동, 제목에 [일산백병원] 등)",
+  "shared": true
  },
  {
   "name": "중앙대학교병원",
@@ -1265,10 +1272,11 @@
    "중앙대학교의료원"
   ],
   "homepage": "https://ch.cauhs.or.kr",
-  "recruit_url": "https://caumc.recruiter.co.kr/career/home",
-  "watch": false,
+  "recruit_url": "https://caumc.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "recruiter.co.kr (caumc); 구 사이트 recruit.caumc.or.kr"
+  "note": "recruiter.co.kr (caumc); 구 사이트 recruit.caumc.or.kr | 2026-10 확인: caumc.recruiter.co.kr (서울·광명 공동)",
+  "shared": true
  },
  {
   "name": "한림대학교강남성심병원",
@@ -1283,9 +1291,9 @@
   ],
   "homepage": "https://kangnam.hallym.or.kr",
   "recruit_url": "https://kangnam.hallym.or.kr/hallymuniv_sub.asp?left_menu=left_news&screen=ptm200",
-  "watch": true,
+  "watch": false,
   "operator": "",
-  "note": "own board"
+  "note": "own board | 2026-10 확인: 이 주소는 의료원 소식 게시판. 한림대학교성심병원 항목이 통합 채용 사이트를 읽음"
  },
  {
   "name": "한양대학교병원",
@@ -1299,10 +1307,10 @@
    "한양대학교의료원"
   ],
   "homepage": "https://seoul.hyumc.com",
-  "recruit_url": "https://hyumc.recruiter.co.kr/career/home",
-  "watch": false,
+  "recruit_url": "https://hyumc.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "recruiter.co.kr (hyumc), '교수직' 카테고리 있음"
+  "note": "recruiter.co.kr (hyumc), '교수직' 카테고리 있음 | 2026-10 확인: hyumc.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "고신대학교복음병원",
@@ -1333,10 +1341,10 @@
    "동아대학교의료원"
   ],
   "homepage": "https://www.damc.or.kr",
-  "recruit_url": "https://www.damc.or.kr/08/04.php",
+  "recruit_url": "https://www.damc.or.kr/05/03_2017.php",
   "watch": true,
   "operator": "",
-  "note": "own board"
+  "note": "own board | 2026-10 확인: 채용공고 목록 주소로 바꿈"
  },
  {
   "name": "부산대학교병원",
@@ -1350,9 +1358,9 @@
   ],
   "homepage": "https://www.pnuh.or.kr",
   "recruit_url": "https://pnuh.recruiter.co.kr/app/jobnotice/list",
-  "watch": false,
+  "watch": true,
   "operator": "",
-  "note": "recruiter.co.kr (pnuh) + 잡알리오"
+  "note": "recruiter.co.kr (pnuh) + 잡알리오 | 2026-10 확인: pnuh.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "인제대학교 부산백병원",
@@ -1366,10 +1374,10 @@
    "인제대학교부산백병원"
   ],
   "homepage": "https://www.paik.ac.kr/busan",
-  "recruit_url": "https://paik.recruiter.co.kr",
+  "recruit_url": "https://paik.recruiter.co.kr/app/jobnotice/list",
   "watch": false,
   "operator": "",
-  "note": "recruiter.co.kr (paik)"
+  "note": "recruiter.co.kr (paik) | 2026-10 확인: 인제대학교 상계백병원 항목이 paik 를 읽음"
  },
  {
   "name": "인제대학교 해운대백병원",
@@ -1382,10 +1390,10 @@
    "해운대백병원"
   ],
   "homepage": "https://www.paik.ac.kr/haeundae",
-  "recruit_url": "https://paik.recruiter.co.kr",
+  "recruit_url": "https://paik.recruiter.co.kr/app/jobnotice/list",
   "watch": false,
   "operator": "",
-  "note": "recruiter.co.kr (paik)"
+  "note": "recruiter.co.kr (paik) | 2026-10 확인: 인제대학교 상계백병원 항목이 paik 를 읽음"
  },
  {
   "name": "경북대학교병원",
@@ -1398,10 +1406,11 @@
    "경북대학교병원"
   ],
   "homepage": "https://www.knuh.kr",
-  "recruit_url": "https://knuh.kr/content/04information/02_01.asp",
+  "recruit_url": "https://knuh.recruiter.co.kr/app/jobnotice/list",
   "watch": true,
   "operator": "",
-  "note": "own board + recruiter.co.kr (knuh.recruiter.co.kr) + 잡알리오"
+  "note": "own board + recruiter.co.kr (knuh.recruiter.co.kr) + 잡알리오 | 2026-10 확인: knuh.kr 은 TLS 오류로 못 읽음 → knuh.recruiter.co.kr (경북대병원·칠곡 공동)",
+  "shared": true
  },
  {
   "name": "계명대학교 동산병원",
@@ -1467,7 +1476,7 @@
   "recruit_url": "https://knuh.kr/content/04information/02_01.asp",
   "watch": false,
   "operator": "",
-  "note": "경북대병원 채용(공동) / 게시판 공유: 경북대학교병원"
+  "note": "경북대병원 채용(공동) / 게시판 공유: 경북대학교병원 | 2026-10 확인: 경북대학교병원 항목이 knuh.recruiter.co.kr 을 읽음"
  },
  {
   "name": "가천대 길병원",
@@ -1479,10 +1488,10 @@
    "가천의대길병원"
   ],
   "homepage": "https://www.gilhospital.com",
-  "recruit_url": "https://gilhospital.recruiter.co.kr",
-  "watch": false,
+  "recruit_url": "https://gilhospital.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "recruiter.co.kr (gilhospital)"
+  "note": "recruiter.co.kr (gilhospital) | 2026-10 확인: gilhospital.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "가톨릭대학교 인천성모병원",
@@ -1496,10 +1505,10 @@
    "인천성모병원"
   ],
   "homepage": "https://www.cmcism.or.kr",
-  "recruit_url": "https://cmcism.recruiter.co.kr",
-  "watch": false,
+  "recruit_url": "https://cmcism.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "recruiter.co.kr"
+  "note": "recruiter.co.kr | 2026-10 확인: cmcism.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "인하대학교병원",
@@ -1512,10 +1521,10 @@
    "인하대학교의과대학부속병원"
   ],
   "homepage": "https://www.inha.com",
-  "recruit_url": "https://www.inha.com/page/about/recruit/list",
+  "recruit_url": "https://inhauh.recruiter.co.kr/app/jobnotice/list",
   "watch": true,
   "operator": "",
-  "note": "own board + recruiter.co.kr (inhauh.recruiter.co.kr)"
+  "note": "own board + recruiter.co.kr (inhauh.recruiter.co.kr) | 2026-10 확인: inhauh.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "전남대학교병원",
@@ -1528,10 +1537,11 @@
    "전남대학교병원"
   ],
   "homepage": "https://www.cnuh.com",
-  "recruit_url": "https://www.cnuh.com/board/B0148.cs",
+  "recruit_url": "https://cnuh.recruiter.co.kr/app/jobnotice/list",
   "watch": true,
   "operator": "",
-  "note": "own board + 온라인접수 /recruit/info.cs + recruiter.co.kr (cnuh.recruiter.co.kr) + 잡알"
+  "note": "own board + 온라인접수 /recruit/info.cs + recruiter.co.kr (cnuh.recruiter.co.kr) + 잡알 | 2026-10 확인: 옛 게시판 B0148 은 2020년에 멈춤. cnuh.recruiter.co.kr 에 전남대병원·전남대치과병원 공고가 함께 올라옴",
+  "shared": true
  },
  {
   "name": "조선대학교병원",
@@ -1544,10 +1554,10 @@
    "조선대학교병원"
   ],
   "homepage": "https://hosp.chosun.ac.kr",
-  "recruit_url": "https://csuh.recruiter.co.kr",
-  "watch": false,
+  "recruit_url": "https://csuh.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "recruiter.co.kr (csuh)"
+  "note": "recruiter.co.kr (csuh) | 2026-10 확인: csuh.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "가톨릭대학교 대전성모병원",
@@ -1562,9 +1572,9 @@
   ],
   "homepage": "https://www.cmcdj.or.kr",
   "recruit_url": "https://www.cmcdj.or.kr/m/bbs/bbs_list.jsp?bfid=RECRUIT_09",
-  "watch": true,
+  "watch": false,
   "operator": "",
-  "note": "own board (bfid=RECRUIT_09) + 병원 채용사이트"
+  "note": "own board (bfid=RECRUIT_09) + 병원 채용사이트 | 2026-10 확인: 끔 — 게시판 목록을 찾지 못함 (자바스크립트)"
  },
  {
   "name": "건양대학교병원",
@@ -1578,9 +1588,9 @@
   ],
   "homepage": "https://www.kyuh.ac.kr",
   "recruit_url": "https://www.kyuh.ac.kr/bbs/BBSMSTR_000000000167/list.do",
-  "watch": true,
+  "watch": false,
   "operator": "",
-  "note": "own board"
+  "note": "own board | 2026-10 확인: 끔 — 옛 게시판은 2022년에 멈춤. 새 채용 사이트(kyuh.ac.kr/prog/recruitNotice)는 버튼(자바스크립트) 목록"
  },
  {
   "name": "대전을지대학교병원",
@@ -1611,9 +1621,9 @@
   ],
   "homepage": "https://www.cnuh.co.kr",
   "recruit_url": "https://www.cnuh.co.kr/prog/recruitNotice/01/D/list.do",
-  "watch": true,
+  "watch": false,
   "operator": "",
-  "note": "own (prog/recruitNotice/{병원코드}/D=의사) + 잡알리오"
+  "note": "own (prog/recruitNotice/{병원코드}/D=의사) + 잡알리오 | 2026-10 확인: 끔 — 채용 목록이 자바스크립트로 그려짐 (잡알리오로 모임)"
  },
  {
   "name": "울산대학교병원",
@@ -1641,9 +1651,9 @@
   ],
   "homepage": "https://www.cnuh.co.kr",
   "recruit_url": "https://www.cnuh.co.kr/prog/recruitNotice/02/D/list.do",
-  "watch": true,
+  "watch": false,
   "operator": "",
-  "note": "own (충남대병원 채용 시스템)"
+  "note": "own (충남대병원 채용 시스템) | 2026-10 확인: 끔 — 채용 목록이 자바스크립트로 그려짐"
  },
  {
   "name": "가톨릭대학교 부천성모병원",
@@ -1708,10 +1718,10 @@
    "안산병원(고대)"
   ],
   "homepage": "https://ansan.kumc.or.kr",
-  "recruit_url": "https://kumc.recruiter.co.kr/career/job",
+  "recruit_url": "https://kumc.recruiter.co.kr/app/jobnotice/list",
   "watch": false,
   "operator": "",
-  "note": "recruiter.co.kr (kumc) + own board https://ansan.kumc.or.kr/kr/introduction/news"
+  "note": "recruiter.co.kr (kumc) + own board https://ansan.kumc.or.kr/kr/introduction/news | 2026-10 확인: 고려대학교 안암병원 항목이 kumc 를 읽음"
  },
  {
   "name": "동국대학교일산병원",
@@ -1742,10 +1752,10 @@
    "서울대학교병원 분당"
   ],
   "homepage": "https://www.snubh.org",
-  "recruit_url": "https://snubh.recruiter.co.kr",
-  "watch": false,
+  "recruit_url": "https://snubh.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "recruiter.co.kr (snubh) + own board (snubh.org/intro/news/recruitView.do)"
+  "note": "recruiter.co.kr (snubh) + own board (snubh.org/intro/news/recruitView.do) | 2026-10 확인: snubh.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "분당서울대학교병원 치과",
@@ -1825,10 +1835,10 @@
    "용인세브란스병원"
   ],
   "homepage": "https://yi.severance.healthcare",
-  "recruit_url": "https://yuhs.recruiter.co.kr",
+  "recruit_url": "https://yuhs.recruiter.co.kr/app/jobnotice/list",
   "watch": false,
   "operator": "",
-  "note": "recruiter.co.kr (yuhs); 임상강사는 의대 recruit 게시판"
+  "note": "recruiter.co.kr (yuhs); 임상강사는 의대 recruit 게시판 | 2026-10 확인: 연세대학교 치과대학병원 항목이 yuhs 를 읽음"
  },
  {
   "name": "의정부을지대학교병원",
@@ -1858,10 +1868,10 @@
    "일산백병원"
   ],
   "homepage": "https://www.paik.ac.kr/ilsan",
-  "recruit_url": "https://paik.recruiter.co.kr",
+  "recruit_url": "https://paik.recruiter.co.kr/app/jobnotice/list",
   "watch": false,
   "operator": "",
-  "note": "recruiter.co.kr (paik)"
+  "note": "recruiter.co.kr (paik) | 2026-10 확인: 인제대학교 상계백병원 항목이 paik 를 읽음"
  },
  {
   "name": "중앙대학교광명병원",
@@ -1874,10 +1884,10 @@
    "중앙대학교광명병원"
   ],
   "homepage": "https://gh.cauhs.or.kr",
-  "recruit_url": "https://caumc.recruiter.co.kr/career/home",
+  "recruit_url": "https://caumc.recruiter.co.kr/app/jobnotice/list",
   "watch": false,
   "operator": "",
-  "note": "recruiter.co.kr (caumc)"
+  "note": "recruiter.co.kr (caumc) | 2026-10 확인: 중앙대학교병원 항목이 caumc 를 읽음"
  },
  {
   "name": "한림대학교동탄성심병원",
@@ -1908,10 +1918,11 @@
    "한림대학교의료원"
   ],
   "homepage": "https://hallym.hallym.or.kr",
-  "recruit_url": "https://www.hallym.or.kr/hallymuniv_sub.asp?left_menu=left_pr&screen=ptp113",
+  "recruit_url": "https://recruit.hallym.or.kr/index.jsp?mgb=1",
   "watch": true,
   "operator": "",
-  "note": "own (의료원소식 게시판의 [채용] 글) + 의료원 채용사이트(과거 recruit.hallym.or.kr) + 교원채용 상시POOL"
+  "note": "own (의료원소식 게시판의 [채용] 글) + 의료원 채용사이트(과거 recruit.hallym.or.kr) + 교원채용 상시POOL | 2026-10 확인: 한림대의료원 통합 채용 사이트(성심·강남·한강·동탄·춘천 공동)",
+  "shared": true
  },
  {
   "name": "한양대학교구리병원",
@@ -1956,9 +1967,9 @@
   ],
   "homepage": "https://www.knuh.or.kr",
   "recruit_url": "https://www.knuh.or.kr/hospitalinfo/hospitalinfo_03_05.asp?bid=5",
-  "watch": true,
+  "watch": false,
   "operator": "",
-  "note": "own board + 잡알리오(공고에 알리오 게재 명시)"
+  "note": "own board + 잡알리오(공고에 알리오 게재 명시) | 2026-10 확인: 끔 — 게시판 주소 404 (잡알리오로 모임)"
  },
  {
   "name": "원주세브란스기독병원",
@@ -2005,10 +2016,10 @@
    "충북대학교병원"
   ],
   "homepage": "https://www.cbnuh.or.kr",
-  "recruit_url": "https://cbnuh.recruiter.co.kr",
-  "watch": false,
+  "recruit_url": "https://cbnuh.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "recruiter.co.kr (cbnuh) + own board(기타채용 BBSMSTR_000000000357) + 잡알리오"
+  "note": "recruiter.co.kr (cbnuh) + own board(기타채용 BBSMSTR_000000000357) + 잡알리오 | 2026-10 확인: cbnuh.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "단국대학교병원",
@@ -2070,10 +2081,11 @@
    "전북대학교병원"
   ],
   "homepage": "https://www.jbuh.co.kr",
-  "recruit_url": "https://jbuh.recruiter.co.kr",
-  "watch": false,
+  "recruit_url": "https://jbuh.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "recruiter.co.kr (jbuh) + own (www.jbuh.co.kr/cuh/employ/sub01/sub01.jsp) + 잡알리오"
+  "note": "recruiter.co.kr (jbuh) + own (www.jbuh.co.kr/cuh/employ/sub01/sub01.jsp) + 잡알리오 | 2026-10 확인: jbuh.recruiter.co.kr (전북대병원·치과병원 공동)",
+  "shared": true
  },
  {
   "name": "화순전남대학교병원",
@@ -2151,10 +2163,10 @@
    "양산부산대학교병원"
   ],
   "homepage": "https://www.pnuyh.or.kr",
-  "recruit_url": "https://pnuyh.recruiter.co.kr/career/home",
-  "watch": false,
+  "recruit_url": "https://pnuyh.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "recruiter.co.kr (pnuyh); 구 사이트 recruit.pnuyh.or.kr"
+  "note": "recruiter.co.kr (pnuyh); 구 사이트 recruit.pnuyh.or.kr | 2026-10 확인: pnuyh.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "창원경상국립대학교병원",
@@ -2183,9 +2195,9 @@
   ],
   "homepage": "https://www.jejunuh.co.kr",
   "recruit_url": "https://www.jejunuh.co.kr/news/recruit/_/list.do",
-  "watch": true,
+  "watch": false,
   "operator": "",
-  "note": "own board + 잡알리오"
+  "note": "own board + 잡알리오 | 2026-10 확인: 끔 — 게시판 주소 400 (잡알리오·하이브레인넷으로 모임)"
  },
  {
   "name": "국립경찰병원",
@@ -2212,10 +2224,10 @@
    "중앙의료원"
   ],
   "homepage": "https://www.nmc.or.kr",
-  "recruit_url": "https://nmc.recruiter.co.kr",
-  "watch": false,
+  "recruit_url": "https://nmc.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "recruiter.co.kr (nmc) + 홈페이지 게시판 www.nmc.or.kr/nmc/board/B0000007 + 잡알리오"
+  "note": "recruiter.co.kr (nmc) + 홈페이지 게시판 www.nmc.or.kr/nmc/board/B0000007 + 잡알리오 | 2026-10 확인: nmc.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "서울특별시 동부병원",
@@ -2227,10 +2239,10 @@
    "서울특별시동부병원"
   ],
   "homepage": "",
-  "recruit_url": "https://dbhosp.recruiter.co.kr",
-  "watch": false,
+  "recruit_url": "https://dbhosp.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "서울특별시",
-  "note": "recruiter.co.kr (dbhosp, 추정)"
+  "note": "recruiter.co.kr (dbhosp, 추정) | 2026-10 확인: dbhosp.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "서울특별시 북부병원",
@@ -2242,10 +2254,10 @@
    "서울특별시북부병원"
   ],
   "homepage": "",
-  "recruit_url": "https://seoulbbh.recruiter.co.kr",
-  "watch": false,
+  "recruit_url": "https://seoulbbh.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "서울특별시",
-  "note": "recruiter.co.kr (seoulbbh)"
+  "note": "recruiter.co.kr (seoulbbh) | 2026-10 확인: seoulbbh.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "서울특별시 서울의료원",
@@ -2259,10 +2271,10 @@
    "시립서울의료원"
   ],
   "homepage": "https://www.seoulmc.or.kr",
-  "recruit_url": "https://www.seoulmc.or.kr/site/recruit/list.do",
+  "recruit_url": "https://smc.recruiter.co.kr/app/jobnotice/list",
   "watch": true,
   "operator": "서울특별시",
-  "note": "own board + 채용사이트 recruitoffice.seoulmc.or.kr"
+  "note": "own board + 채용사이트 recruitoffice.seoulmc.or.kr | 2026-10 확인: smc.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "서울특별시보라매병원",
@@ -2293,9 +2305,9 @@
   ],
   "homepage": "https://www.bohun.or.kr/seoul/main.do",
   "recruit_url": "https://www.bohun.or.kr/seoul/na/ntt/selectNttList.do?mi=32253&bbsId=1158",
-  "watch": true,
+  "watch": false,
   "operator": "한국보훈복지의료공단",
-  "note": "own board + 지원은 bohun.fairyhr.com + 잡알리오"
+  "note": "own board + 지원은 bohun.fairyhr.com + 잡알리오 | 2026-10 확인: 끔 — 메뉴만 읽힘. 보훈병원 공고는 잡알리오(한국보훈복지의료공단)로 모임"
  },
  {
   "name": "중앙보훈병원 치과병원",
@@ -2326,10 +2338,10 @@
    "한국원자력의학원원자력병원"
   ],
   "homepage": "https://www.kirams.re.kr",
-  "recruit_url": "https://kirams.recruiter.co.kr",
-  "watch": false,
+  "recruit_url": "https://kirams.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "한국원자력의학원",
-  "note": "recruiter.co.kr (kirams) + 잡알리오"
+  "note": "recruiter.co.kr (kirams) + 잡알리오 | 2026-10 확인: kirams.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "부산보훈병원",
@@ -2342,9 +2354,9 @@
   ],
   "homepage": "https://www.bohun.or.kr/busan/main.do",
   "recruit_url": "https://www.bohun.or.kr/busan/na/ntt/selectNttList.do?mi=33215&bbsId=1158",
-  "watch": true,
+  "watch": false,
   "operator": "한국보훈복지의료공단",
-  "note": "own board + bohun.fairyhr.com"
+  "note": "own board + bohun.fairyhr.com | 2026-10 확인: 끔 — 메뉴만 읽힘. 보훈병원 공고는 잡알리오(한국보훈복지의료공단)로 모임"
  },
  {
   "name": "대구보훈병원",
@@ -2357,9 +2369,9 @@
   ],
   "homepage": "https://www.bohun.or.kr/daegu/main.do",
   "recruit_url": "https://www.bohun.or.kr/daegu/na/ntt/selectNttList.do?mi=33151&bbsId=1158",
-  "watch": true,
+  "watch": false,
   "operator": "한국보훈복지의료공단",
-  "note": "own board + bohun.fairyhr.com"
+  "note": "own board + bohun.fairyhr.com | 2026-10 확인: 끔 — 메뉴만 읽힘. 보훈병원 공고는 잡알리오(한국보훈복지의료공단)로 모임"
  },
  {
   "name": "근로복지공단 소속병원",
@@ -2384,10 +2396,10 @@
    "인천의료원"
   ],
   "homepage": "https://www.icmc.or.kr",
-  "recruit_url": "https://icmc.recruiter.co.kr",
-  "watch": false,
+  "recruit_url": "https://icmc.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "인천광역시",
-  "note": "recruiter.co.kr (icmc) + 인천시 일자리 게시판(incheon.go.kr/job) + 클린아이 잡플러스"
+  "note": "recruiter.co.kr (icmc) + 인천시 일자리 게시판(incheon.go.kr/job) + 클린아이 잡플러스 | 2026-10 확인: icmc.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "인천보훈병원",
@@ -2400,9 +2412,9 @@
   ],
   "homepage": "https://www.bohun.or.kr/incheon/main.do",
   "recruit_url": "https://www.bohun.or.kr/incheon/na/ntt/selectNttList.do?mi=33641&bbsId=1158",
-  "watch": true,
+  "watch": false,
   "operator": "한국보훈복지의료공단",
-  "note": "own board + bohun.fairyhr.com"
+  "note": "own board + bohun.fairyhr.com | 2026-10 확인: 끔 — 메뉴만 읽힘. 보훈병원 공고는 잡알리오(한국보훈복지의료공단)로 모임"
  },
  {
   "name": "광주보훈병원",
@@ -2415,9 +2427,9 @@
   ],
   "homepage": "https://www.bohun.or.kr/gwangju/main.do",
   "recruit_url": "https://www.bohun.or.kr/gwangju/na/ntt/selectNttList.do?mi=32890&bbsId=1158",
-  "watch": true,
+  "watch": false,
   "operator": "한국보훈복지의료공단",
-  "note": "own board + bohun.fairyhr.com"
+  "note": "own board + bohun.fairyhr.com | 2026-10 확인: 끔 — 메뉴만 읽힘. 보훈병원 공고는 잡알리오(한국보훈복지의료공단)로 모임"
  },
  {
   "name": "대전보훈병원",
@@ -2430,9 +2442,9 @@
   ],
   "homepage": "https://www.bohun.or.kr/daejeon/main.do",
   "recruit_url": "https://www.bohun.or.kr/daejeon/na/ntt/selectNttList.do?mi=33414&bbsId=1158",
-  "watch": true,
+  "watch": false,
   "operator": "한국보훈복지의료공단",
-  "note": "own board + bohun.fairyhr.com"
+  "note": "own board + bohun.fairyhr.com | 2026-10 확인: 끔 — 메뉴만 읽힘. 보훈병원 공고는 잡알리오(한국보훈복지의료공단)로 모임"
  },
  {
   "name": "경기도의료원",
@@ -2448,9 +2460,9 @@
   ],
   "homepage": "https://www.medical.or.kr",
   "recruit_url": "https://www.medical.or.kr/hire/index.do",
-  "watch": true,
+  "watch": false,
   "operator": "경기도",
-  "note": "own (경기도의료원 채용사이트) + 클린아이 잡플러스 + 경기도 통합채용(gg.saramin.co.kr)"
+  "note": "own (경기도의료원 채용사이트) + 클린아이 잡플러스 + 경기도 통합채용(gg.saramin.co.kr) | 2026-10 확인: 끔 — 채용 사이트 주소 404"
  },
  {
   "name": "국군수도병원",
@@ -2463,9 +2475,9 @@
   ],
   "homepage": "https://afmd.mnd.go.kr",
   "recruit_url": "https://afmd.mnd.go.kr/user/boardList.action?boardId=I_5108105&siteId=afmd&id=afmd_040500000000",
-  "watch": true,
+  "watch": false,
   "operator": "국군의무사령부",
-  "note": "own board + 국방부 채용게시판 + 국방통합모집포털(m-recruit.mnd.go.kr)"
+  "note": "own board + 국방부 채용게시판 + 국방통합모집포털(m-recruit.mnd.go.kr) | 2026-10 확인: 끔 — 게시판 주소 404 (나라일터로 모임)"
  },
  {
   "name": "국군수도치과병원",
@@ -2493,9 +2505,9 @@
   ],
   "homepage": "https://www.ncc.re.kr",
   "recruit_url": "https://www.ncc.re.kr/boardList.ncc?uri=notice06",
-  "watch": true,
+  "watch": false,
   "operator": "",
-  "note": "own board (uri=notice06) + 잡알리오"
+  "note": "own board (uri=notice06) + 잡알리오 | 2026-10 확인: 끔 — 게시판 목록이 자바스크립트로 그려짐 (잡알리오로 모임)"
  },
  {
   "name": "국민건강보험 일산병원",
@@ -2510,10 +2522,10 @@
    "일산병원"
   ],
   "homepage": "https://www.nhimc.or.kr",
-  "recruit_url": "https://nhimc.recruiter.co.kr",
-  "watch": false,
+  "recruit_url": "https://nhimc.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "국민건강보험공단",
-  "note": "recruiter.co.kr (nhimc)"
+  "note": "recruiter.co.kr (nhimc) | 2026-10 확인: nhimc.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "성남시의료원",
@@ -2525,10 +2537,10 @@
    "성남의료원"
   ],
   "homepage": "",
-  "recruit_url": "https://scmc.recruiter.co.kr/career/job",
-  "watch": false,
+  "recruit_url": "https://scmc.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "성남시",
-  "note": "recruiter.co.kr (scmc)"
+  "note": "recruiter.co.kr (scmc) | 2026-10 확인: scmc.recruiter.co.kr 목록 기능으로 읽음"
  },
  {
   "name": "명지병원",

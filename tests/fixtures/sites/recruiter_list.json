@@ -1,0 +1,128 @@
+{
+ "pageUtil": {
+  "blockSize": 10,
+  "currentPage": 1,
+  "lastPage": 22,
+  "maxRows": 10,
+  "pageSize": 10,
+  "recordCount": 216,
+  "rowBounds": {
+   "limit": 10,
+   "offset": 0
+  },
+  "skipRows": 0
+ },
+ "list": [
+  {
+   "applyEndDate": {
+    "date": 15,
+    "day": 4,
+    "hours": 17,
+    "minutes": 0,
+    "month": 9,
+    "seconds": 59,
+    "time": 1792051259000,
+    "timezoneOffset": -540,
+    "year": 126
+   },
+   "applyPermitCount": 1,
+   "applyStartDate": {
+    "date": 1,
+    "day": 4,
+    "hours": 9,
+    "minutes": 0,
+    "month": 9,
+    "seconds": 0,
+    "time": 1790812800000,
+    "timezoneOffset": -540,
+    "year": 126
+   },
+   "companySn": 230736,
+   "deadlineCount": 6,
+   "defaultImageUseYn": false,
+   "imageFilePath": "",
+   "jobnoticeName": "영상의학과 전문의 모집 공고",
+   "jobnoticeSn": 267982,
+   "receiptState": "접수중",
+   "recruitClassName": "전문의",
+   "recruitKindCode": "BASIC",
+   "recruitTypeCode": "GENERAL",
+   "recruitTypeName": "일반채용",
+   "systemKindCode": "MRS2"
+  },
+  {
+   "applyEndDate": {
+    "date": 31,
+    "day": 4,
+    "hours": 17,
+    "minutes": 0,
+    "month": 11,
+    "seconds": 59,
+    "time": 1798704059000,
+    "timezoneOffset": -540,
+    "year": 126
+   },
+   "applyPermitCount": 1,
+   "applyStartDate": {
+    "date": 30,
+    "day": 4,
+    "hours": 9,
+    "minutes": 0,
+    "month": 6,
+    "seconds": 0,
+    "time": 1785369600000,
+    "timezoneOffset": -540,
+    "year": 126
+   },
+   "companySn": 230736,
+   "deadlineCount": 83,
+   "defaultImageUseYn": false,
+   "imageFilePath": "",
+   "jobnoticeName": "권역호흡기전문질환센터 계약직의사 상시 모집",
+   "jobnoticeSn": 261672,
+   "receiptState": "접수중",
+   "recruitClassName": "전문의",
+   "recruitKindCode": "BASIC",
+   "recruitTypeCode": "GENERAL",
+   "recruitTypeName": "일반채용",
+   "systemKindCode": "MRS2"
+  },
+  {
+   "applyEndDate": {
+    "date": 31,
+    "day": 4,
+    "hours": 17,
+    "minutes": 0,
+    "month": 11,
+    "seconds": 59,
+    "time": 1798704059000,
+    "timezoneOffset": -540,
+    "year": 126
+   },
+   "applyPermitCount": 1,
+   "applyStartDate": {
+    "date": 1,
+    "day": 1,
+    "hours": 9,
+    "minutes": 0,
+    "month": 5,
+    "seconds": 0,
+    "time": 1780272000000,
+    "timezoneOffset": -540,
+    "year": 126
+   },
+   "companySn": 230736,
+   "deadlineCount": 83,
+   "defaultImageUseYn": false,
+   "imageFilePath": "",
+   "jobnoticeName": "외상외과(외과, 심장혈관흉부외과 전문의) 상시 모집",
+   "jobnoticeSn": 255385,
+   "receiptState": "접수중",
+   "recruitClassName": "전문의",
+   "recruitKindCode": "BASIC",
+   "recruitTypeCode": "GENERAL",
+   "recruitTypeName": "일반채용",
+   "systemKindCode": "MRS2"
+  }
+ ]
+}

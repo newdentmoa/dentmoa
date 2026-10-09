@@ -28,6 +28,10 @@ class Institution:
     recruit_url: str = ""
     operator: str = ""
     watch: bool = True  # 채용 게시판을 직접 확인할지
+    # 게시판 읽기 방법 (hospitals 수집기)
+    title_filter: str = ""  # "dental" = 제목에 치과·치의·구강이 있는 글만 (의료원 전체 채용 게시판 등)
+    shared: bool = False  # 여러 기관이 함께 쓰는 게시판 → 글마다 기관 이름·위치를 붙이지 않는다
+    fetch: str = ""  # "browser" = 자바스크립트 확인 화면이 있어 브라우저로 연다
 
     @property
     def inst_type(self) -> str:
@@ -53,6 +57,9 @@ def load() -> list[Institution]:
                 recruit_url=item.get("recruit_url", ""),
                 operator=item.get("operator", ""),
                 watch=bool(item.get("watch", True)),
+                title_filter=item.get("title_filter", ""),
+                shared=bool(item.get("shared", False)),
+                fetch=item.get("fetch", ""),
             )
         )
     return out
