@@ -392,6 +392,30 @@ def test_moreden_reads_posts_from_list_json(monkeypatch):
     assert page.visited == [moreden.LIST_URL]
 
 
+def test_moreden_tries_list_again_when_json_missing(monkeypatch):
+    """메모리가 모자라 첫 화면에서 목록 JSON 을 못 받아도 한 번 더 열어 읽는다."""
+    import contextlib
+
+    from dentmoa.sources import moreden
+    from dentmoa.sources.browser import BrowserSession
+
+    class FlakyPage(_FakeListPage):
+        def goto(self, url, **kw):
+            if not self.visited:  # 첫 번째로 열 때는 화면이 제대로 안 뜸
+                self.url = url
+                self.visited.append(url)
+                return
+            super().goto(url, **kw)
+
+    page = FlakyPage({1: json.loads(fx("moreden_list.json"))})
+    sess = BrowserSession(page=page, context=None)
+    page.sess = sess
+    monkeypatch.setattr(moreden, "open_browser", lambda *a, **kw: contextlib.nullcontext(sess))
+    got = list(moreden.MoredenSource().fetch(ctx(secrets={"moreden_id": "me", "moreden_pw": "pw"}, max_pages=1)))
+    assert [g.source_id for g in got] == ["73337", "73336", "73335"]
+    assert page.visited == [moreden.LIST_URL, moreden.LIST_URL]
+
+
 # ───────────── recruiter.co.kr · incruit (병원 채용 플랫폼) ─────────────
 
 
