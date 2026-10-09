@@ -15,7 +15,7 @@ import os
 import secrets
 from datetime import timedelta
 
-from flask import Flask, render_template
+from flask import Flask, jsonify, render_template
 
 from .. import db, settings_store
 from . import helpers, security
@@ -65,13 +65,15 @@ def create_app(testing: bool = False) -> Flask:
 
     def _error(code: int, title: str, message: str):
         def handler(_e):
+            if security.wants_json():  # 관심·숨기기 버튼(fetch)은 화면 대신 한글 메시지를 받는다
+                return jsonify(ok=False, error=f"{title}. {message}"), code
             return render_template("error.html", code=code, title=title, message=message), code
 
         app.register_error_handler(code, handler)
 
     _error(400, "요청을 처리하지 못했어요", "화면이 오래 열려 있었거나 로그인 정보가 바뀌었어요. 페이지를 새로고침한 뒤 다시 시도해 주세요.")
     _error(404, "찾을 수 없어요", "주소가 바뀌었거나 지워진 화면이에요.")
-    _error(405, "이렇게 열 수 없는 주소예요", "화면의 버튼을 눌러서 이용해 주세요.")
+    _error(405, "직접 열 수 없는 주소예요", "화면의 버튼을 눌러서 이용해 주세요.")
     _error(413, "보낸 내용이 너무 커요", "입력한 내용을 줄여서 다시 시도해 주세요.")
     _error(500, "문제가 생겼어요", "잠시 뒤 다시 시도해 주세요. 계속되면 '상태' 화면의 실행 기록을 확인해 주세요.")
     return app

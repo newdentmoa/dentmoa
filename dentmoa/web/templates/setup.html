@@ -8,8 +8,12 @@
   {% if error %}<div class="flash flash-error" role="alert">{{ error }}</div>{% endif %}
   <form method="post" action="{{ url_for('auth.setup') }}" class="narrow-form" data-busy="저장하는 중…">
     {{ csrf() }}
+    <label class="field"><span class="field-label">설치 코드 (6자리 숫자)</span>
+      <input type="text" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="12" required autofocus></label>
+    <p class="hint">설치(install.sh)가 끝날 때 화면에 나온 숫자예요. 잊었다면 서버에서
+      <code>sudo grep SETUP_CODE deploy/.env</code> 로 다시 볼 수 있어요.</p>
     <label class="field"><span class="field-label">비밀번호 (8자 이상)</span>
-      <input type="password" name="password" autocomplete="new-password" minlength="8" required autofocus></label>
+      <input type="password" name="password" autocomplete="new-password" minlength="8" required></label>
     <label class="field"><span class="field-label">비밀번호 한 번 더</span>
       <input type="password" name="password2" autocomplete="new-password" minlength="8" required></label>
     <button type="submit" class="btn btn-primary btn-block">비밀번호 정하기</button>

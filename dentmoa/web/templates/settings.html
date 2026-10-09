@@ -58,7 +58,8 @@
       {% set ns = namespace(n=0) %}
       {% for sg in opt.sigungu %}{% if (opt.sido ~ ' ' ~ sg) in selected_regions %}{% set ns.n = ns.n + 1 %}{% endif %}{% endfor %}
       <div class="sido" data-sido="{{ opt.sido }}">
-        <label class="check"><input type="checkbox" name="regions" value="{{ opt.sido }}" data-sido-all="{{ opt.sido }}"{% if opt.sido in selected_regions %} checked{% endif %}><span>{{ opt.sido }} 전체</span></label>
+        <label class="check"><input type="checkbox" name="regions" value="{{ opt.sido }}" data-sido-all="{{ opt.sido }}"{% if opt.sido in selected_regions %} checked{% endif %}><span>{{ opt.sido }}{{ ' 전체' if opt.sigungu }}</span></label>
+        {% if opt.sigungu %}
         <details{% if ns.n %} open{% endif %}>
           <summary>구·시·군 고르기 <span class="count" data-count>{% if ns.n %}{{ ns.n }}곳{% endif %}</span></summary>
           <div class="checks checks-compact">
@@ -68,6 +69,7 @@
             {% endfor %}
           </div>
         </details>
+        {% endif %}
       </div>
       {% endfor %}
     </div>

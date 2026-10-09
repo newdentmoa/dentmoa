@@ -177,3 +177,41 @@ def test_dedup_and_reminders(tmp_db):
     assert db.get_posting(b).dup_of == a
     assert db.get_posting(a).dup_of is None
     assert db.get_posting(a).deadline is not None
+
+
+def test_setup_code(tmp_db, monkeypatch):
+    monkeypatch.delenv("DENTMOA_SETUP_CODE", raising=False)
+    code = settings_store.setup_code()
+    assert len(code) == 6 and code.isdigit()
+    assert settings_store.setup_code() == code  # 한 번 만들면 그대로
+    assert settings_store.check_setup_code(f" {code} ")
+    assert not settings_store.check_setup_code("")
+    monkeypatch.setenv("DENTMOA_SETUP_CODE", "424242")
+    assert settings_store.check_setup_code("424242")
+
+
+def test_short_admin_password_env_does_not_crash(tmp_db, monkeypatch):
+    monkeypatch.setenv("ADMIN_PASSWORD", "short")
+    settings_store.init_password_from_env()
+    assert not settings_store.has_password()
+
+
+def test_uncertain_defaults_do_not_filter(tmp_db):
+    """직위 단어가 없는 병원 공고는 '봉직의' 기본값 때문에 교수직 조건에서 빠지면 안 된다."""
+    raw = RawPosting("alio", "a1", "https://x/a1", "소아치과 전문의 채용", "근무지: 서울", posted_at=config.now(),
+                     institution_hint="서울대학교치과병원")
+    pid, _ = db.save_raw(raw, source_kind="aggregator", dentist_only=False, default_inst_type=None)
+    p = db.get_posting(pid)
+    assert "positions" in p.uncertain
+    f = settings_store.load()["filters"]
+    f["positions"] = ["faculty", "clinical_professor", "fellow"]
+    f["specialties"] = ["pedo"]
+    assert match(p, f).ok
+
+    # 동네 게시판 글의 '치과의원' 은 확실한 값 → 치과의원을 끄면 걸러진다
+    pid2, _ = db.save_raw(_raw("2", "[서울] 원장님 모십니다"), source_kind="local_board", dentist_only=True, default_inst_type=None)
+    p2 = db.get_posting(pid2)
+    f["positions"] = list(settings_store.DEFAULT_SETTINGS["filters"]["positions"])
+    f["specialties"] = ["gp"]
+    f["inst_types"] = ["dental_univ_hospital"]
+    assert not match(p2, f).ok

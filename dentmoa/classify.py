@@ -597,7 +597,7 @@ def classify(
     c.inst_type, c.institution, why, inst = detect_inst(
         title, institution_hint, body, scope_body=source_kind != "local_board", default=default_inst
     )
-    if not why:
+    if not why and source_kind != "local_board":
         c.uncertain.append("inst_types")
     c.note("inst_types", why or "기본값")
     if institution_hint and not c.institution:

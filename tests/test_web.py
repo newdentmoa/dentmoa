@@ -109,13 +109,17 @@ def test_setup_flow(app):
         assert r.status_code == 302 and r.headers["Location"].endswith("/setup")
 
     t = token(c.get("/setup").get_data(as_text=True))
-    r = c.post("/setup", data={"_csrf": t, "password": "short", "password2": "short"})
+    code = settings_store.setup_code()
+    r = c.post("/setup", data={"_csrf": t, "code": "000000" if code != "000000" else "111111", "password": PASSWORD, "password2": PASSWORD})
+    assert r.status_code == 400 and "설치 코드" in r.get_data(as_text=True)
+    assert not settings_store.has_password()
+    r = c.post("/setup", data={"_csrf": t, "code": code, "password": "short", "password2": "short"})
     assert r.status_code == 400 and "8자 이상" in r.get_data(as_text=True)
-    r = c.post("/setup", data={"_csrf": t, "password": PASSWORD, "password2": PASSWORD + "x"})
+    r = c.post("/setup", data={"_csrf": t, "code": code, "password": PASSWORD, "password2": PASSWORD + "x"})
     assert r.status_code == 400 and "서로 달라요" in r.get_data(as_text=True)
     assert not settings_store.has_password()
 
-    r = c.post("/setup", data={"_csrf": t, "password": PASSWORD, "password2": PASSWORD})
+    r = c.post("/setup", data={"_csrf": t, "code": code, "password": PASSWORD, "password2": PASSWORD})
     assert r.status_code == 302 and r.headers["Location"].endswith("/accounts")
     assert settings_store.check_password(PASSWORD)
     assert c.get("/").status_code == 200  # 바로 로그인된 상태
@@ -307,6 +311,29 @@ def test_star_and_hide_toggle(client):
     assert r.headers["Location"].endswith(f"/posting/{pid}")
 
 
+def test_star_tab_shows_every_starred_post(client):
+    pid = add_posting("1", "구직합니다 봉직 자리 구해요", "부산에서 봉직 자리 구합니다")
+    assert db.get_posting(pid).post_kind == "seeking"
+    db.set_flag(pid, "starred", True)
+    assert "봉직 자리 구해요" not in client.get("/?view=all").get_data(as_text=True)
+    assert "봉직 자리 구해요" in client.get("/?view=star").get_data(as_text=True)
+
+
+def test_fetch_errors_are_korean_json(client):
+    pid = add_posting()
+    r = client.post(f"/posting/{pid}/star", data={"_csrf": "wrong"}, headers={"X-Requested-With": "fetch"})
+    assert r.status_code == 400 and r.get_json()["ok"] is False and "새로고침" in r.get_json()["error"]
+    t = csrf_of(client)
+    r = client.post("/posting/999/star", data={"_csrf": t}, headers={"X-Requested-With": "fetch"})
+    assert r.status_code == 404 and "찾을 수 없어요" in r.get_json()["error"]
+
+
+def test_huge_posting_id_is_404(client):
+    big = "9" * 25
+    assert client.get(f"/posting/{big}").status_code == 404
+    assert client.post(f"/posting/{big}/hide", data={"_csrf": csrf_of(client)}).status_code == 404
+
+
 def test_detail_shows_body_and_evidence(client):
     pid = add_posting(body="서울 강남구 치과의원\n소아치과 전문의 모십니다\n주 5일 <b>근무</b>")
     s = settings_store.load()
@@ -393,6 +420,7 @@ def test_settings_save_round_trip(client, monkeypatch):
     assert 'value="07:30"' in html and 'value="19:05"' in html
     assert "현재 조건으로 최근 30일 공고 중" in html
     assert "나라일터" in html and "치과의사 커뮤니티 구인 게시판" in html
+    assert 'value="세종" data-sido-all="세종"' in html and "세종 전체" not in html  # 구·시·군이 없는 곳
 
 
 def test_settings_region_normalization(client):
@@ -455,6 +483,13 @@ def test_accounts_never_echo_secrets(client, monkeypatch):
     monkeypatch.setenv("DENTPHOTO_PW", "from-env-pw")
     html = client.get("/accounts").get_data(as_text=True)
     assert "환경변수로 설정됨" in html and "from-env-pw" not in html
+
+
+def test_app_password_spaces_removed(client):
+    t = csrf_of(client, "/accounts")
+    # 휴대폰에서 복사하면 줄바꿈 없는 공백(U+00A0)이 섞여 온다
+    client.post("/accounts", data={"_csrf": t, "section": "email", "smtp_password": "abcd\u00a0efgh ijkl\u00a0mnop"})
+    assert settings_store.secrets()["smtp_password"] == "abcdefghijklmnop"
 
 
 def test_accounts_validation(client):

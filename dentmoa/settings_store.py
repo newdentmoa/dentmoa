@@ -202,4 +202,32 @@ def check_password(password: str) -> bool:
 def init_password_from_env() -> None:
     pw = os.environ.get("ADMIN_PASSWORD")
     if pw and not has_password():
-        set_password(pw)
+        try:
+            set_password(pw)
+        except ValueError as e:
+            print(f"경고: ADMIN_PASSWORD 를 쓰지 않았습니다 — {e} 처음 화면에서 비밀번호를 정해 주세요.")
+
+
+def setup_code() -> str:
+    """처음 비밀번호를 정할 때 필요한 설치 코드.
+
+    서버를 켠 직후 주소를 먼저 알아낸 다른 사람이 비밀번호를 정해 버리지 못하게 한다.
+    install.sh 가 deploy/.env 에 DENTMOA_SETUP_CODE 를 만들어 두고 화면에 보여준다.
+    없으면 여기서 만들어 서버 기록(로그)에 남긴다.
+    """
+    env = (os.environ.get("DENTMOA_SETUP_CODE") or "").strip()
+    if env:
+        return env
+    code = db.kv_get("setup_code")
+    if not code:
+        import secrets as _secrets
+
+        code = f"{_secrets.randbelow(10**6):06d}"
+        db.kv_set("setup_code", code)
+    return code
+
+
+def check_setup_code(value: str) -> bool:
+    import hmac
+
+    return hmac.compare_digest((value or "").strip().encode(), setup_code().encode())

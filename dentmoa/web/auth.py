@@ -27,8 +27,16 @@ def setup():
         return redirect(url_for("postings.index") if is_logged_in() else url_for("auth.login"))
     error = None
     if request.method == "POST":
+        ip = client_ip()
+        lim = limiter()
         pw = request.form.get("password", "")
-        error = _check_new_password(pw, request.form.get("password2", ""))
+        if lim.remaining(ip):
+            error = "설치 코드를 너무 많이 틀렸어요. 10분 뒤에 다시 시도해 주세요."
+        elif not settings_store.check_setup_code(request.form.get("code", "")):
+            lim.fail(ip)
+            error = "설치 코드가 맞지 않아요. 설치할 때 화면에 나온 6자리 숫자를 넣어 주세요."
+        else:
+            error = _check_new_password(pw, request.form.get("password2", ""))
         if not error:
             settings_store.set_password(pw)
             login_user()

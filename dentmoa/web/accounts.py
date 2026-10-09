@@ -58,7 +58,7 @@ SECTIONS: list[dict] = [
 SECTION_BY_KEY = {s["key"]: s for s in SECTIONS}
 CHECKABLE_SOURCES = list(SOURCE_KEYS)
 
-APP_PASSWORD_RE = re.compile(r"^[a-z]{4}( [a-z]{4}){3}$")
+APP_PASSWORD_RE = re.compile(r"[a-z]{16}")
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 
@@ -121,8 +121,8 @@ def save():
         val = (request.form.get(key) or "").strip()
         if not val:
             continue  # 빈칸 = 그대로 두기
-        if key == "smtp_password" and APP_PASSWORD_RE.match(val):
-            val = val.replace(" ", "")  # 'abcd efgh ijkl mnop' → 붙여서 저장
+        if key == "smtp_password" and APP_PASSWORD_RE.fullmatch(compact := re.sub(r"\s+", "", val)):
+            val = compact  # 'abcd efgh ijkl mnop' → 붙여서 저장 (휴대폰에서 복사한 특수 공백 포함)
         if error := _validate(key, val):
             flash(error, "error")
             return redirect(url_for("accounts.index") + f"#{sec['key']}")

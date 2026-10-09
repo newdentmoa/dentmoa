@@ -131,10 +131,10 @@ def build_cards(lq: ListQuery, settings: dict) -> list[Card]:
             continue
         if lq.view == "star":
             if not p.starred:
-                continue
+                continue  # 직접 관심 표시한 글은 글 종류와 상관없이 모두 보여 준다
         elif p.dup_of is not None:
             continue  # 같은 공고는 원본 카드에 '다른 출처에도 있음'으로 표시
-        if lq.view != "match" and not lq.include_other and (p.post_kind != "hiring" or not p.is_dentist):
+        elif lq.view == "all" and not lq.include_other and (p.post_kind != "hiring" or not p.is_dentist):
             continue
         if not lq.passes(p):
             continue
@@ -172,7 +172,7 @@ def index():
 
 EVIDENCE_ROWS = [
     ("post_kind", "글 종류"),
-    ("is_dentist", "치과의사 공고인가"),
+    ("is_dentist", "치과의사 공고 여부"),
     ("inst_types", "기관 종류"),
     ("positions", "직위"),
     ("specialties", "분과"),
@@ -231,11 +231,19 @@ def _related(p: Posting) -> tuple[Posting | None, list[Posting]]:
     return original, [Posting.from_row(r) for r in rows]
 
 
-@bp.get("/posting/<int:pid>")
-def detail(pid: int):
-    p = db.get_posting(pid)
+MAX_ID = 2**63 - 1  # SQLite 정수 범위
+
+
+def _posting_or_404(pid: int) -> Posting:
+    p = db.get_posting(pid) if pid <= MAX_ID else None
     if p is None:
         abort(404)
+    return p
+
+
+@bp.get("/posting/<int:pid>")
+def detail(pid: int):
+    p = _posting_or_404(pid)
     settings = settings_store.load()
     original, dups = _related(p)
     return render_template(
@@ -253,9 +261,7 @@ def detail(pid: int):
 
 
 def _toggle(pid: int, flag: str):
-    p = db.get_posting(pid)
-    if p is None:
-        abort(404)
+    p = _posting_or_404(pid)
     value = not getattr(p, flag)
     db.set_flag(pid, flag, value)
     if wants_json():

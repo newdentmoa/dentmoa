@@ -80,8 +80,9 @@
         credentials: "same-origin"
       })
         .then(function (r) {
-          return r.json().then(function (data) {
-            if (!r.ok || !data.ok) throw new Error(data.error || "처리하지 못했어요.");
+          // 로그인이 풀려 다른 화면(HTML)이 오면 JSON이 아니므로 빈 값으로 본다
+          return r.json().catch(function () { return {}; }).then(function (data) {
+            if (!r.ok || !data.ok) throw new Error(data.error || "처리하지 못했어요. 페이지를 새로고침해 주세요.");
             return data;
           });
         })
@@ -98,7 +99,9 @@
           }
         })
         .catch(function (err) {
-          window.alert(err.message || "처리하지 못했어요. 페이지를 새로고침해 주세요.");
+          // 네트워크 오류는 브라우저가 영어로 알려 주므로 한글 문구로 바꾼다
+          var msg = err instanceof TypeError ? "서버에 연결하지 못했어요. 인터넷 연결을 확인해 주세요." : err.message;
+          window.alert(msg || "처리하지 못했어요. 페이지를 새로고침해 주세요.");
         })
         .then(function () {
           if (btn) btn.disabled = false;

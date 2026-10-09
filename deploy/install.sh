@@ -6,8 +6,11 @@
 #   sudo bash deploy/install.sh 내도메인.com    내 도메인 사용 (도메인이 이 서버 IP를 가리켜야 함)
 #   sudo bash deploy/install.sh auto           서버 IP가 바뀌었을 때 주소를 다시 만들기
 #
-# 여러 번 실행해도 괜찮습니다. 이미 된 단계는 건너뛰고, 있는 deploy/.env 는 덮어쓰지 않습니다.
+# 여러 번 실행해도 괜찮습니다. 이미 끝난 단계는 건너뛰고, 있는 deploy/.env 는 덮어쓰지 않습니다.
 set -euo pipefail
+
+# 패키지 설치 중에 묻는 화면(서비스 재시작 확인 등)이 뜨지 않게
+export DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ENV_FILE="$REPO_DIR/deploy/.env"
@@ -21,6 +24,16 @@ fail() {
   exit 1
 }
 compose() { docker compose -f "$REPO_DIR/deploy/docker-compose.yml" "$@"; }
+
+# 새 서버는 켜진 뒤 몇 분 동안 자동 업데이트가 apt 를 붙잡고 있을 수 있다 → 끝날 때까지 기다린다
+wait_apt() {
+  local i
+  for i in $(seq 1 60); do
+    fuser /var/lib/dpkg/lock-frontend /var/lib/dpkg/lock /var/lib/apt/lists/lock >/dev/null 2>&1 || return 0
+    if [ "$i" -eq 1 ]; then info "서버가 자동 업데이트 중입니다. 끝날 때까지 기다립니다 (최대 5분)…"; fi
+    sleep 5
+  done
+}
 
 # deploy/.env 의 값 읽기
 env_get() {
@@ -55,17 +68,22 @@ fi
 # ──────────────────────────── 1. 도커 ────────────────────────────
 step 1 "도커(Docker) 설치 확인"
 if ! command -v curl >/dev/null 2>&1; then
-  apt-get update -qq && apt-get install -y -qq curl >/dev/null || fail "curl 을 설치하지 못했습니다."
+  wait_apt
+  { apt-get update -qq && apt-get install -y -qq curl >/dev/null; } || fail "curl 을 설치하지 못했습니다."
 fi
 if command -v docker >/dev/null 2>&1; then
   info "도커가 이미 설치되어 있습니다: $(docker --version)"
 else
   info "도커를 설치합니다. 몇 분 걸릴 수 있어요…"
-  curl -fsSL https://get.docker.com | sh || fail "도커를 설치하지 못했습니다. 인터넷 연결을 확인하고 다시 실행해 주세요."
+  wait_apt
+  curl -fsSL https://get.docker.com | sh ||
+    fail "도커를 설치하지 못했습니다. 5분쯤 뒤 같은 명령을 다시 실행해 주세요: cd ~/dentmoa && sudo bash deploy/install.sh"
 fi
 if ! docker compose version >/dev/null 2>&1; then
   info "docker compose 를 설치합니다…"
-  apt-get update -qq && apt-get install -y -qq docker-compose-plugin >/dev/null ||
+  wait_apt
+  # 도커 공식 저장소의 이름은 docker-compose-plugin, Ubuntu 저장소의 이름은 docker-compose-v2
+  { apt-get update -qq && { apt-get install -y -qq docker-compose-plugin || apt-get install -y -qq docker-compose-v2; } >/dev/null; } ||
     fail "docker compose 를 설치하지 못했습니다."
 fi
 systemctl enable --now docker >/dev/null 2>&1 || true
@@ -125,6 +143,11 @@ elif [ "$current" != "$DOMAIN" ]; then
 else
   info "이미 있습니다. 그대로 씁니다."
 fi
+if [ -z "$(env_get DENTMOA_SETUP_CODE)" ]; then
+  # 처음 비밀번호를 정할 때 필요한 6자리 코드 (주소를 먼저 알아낸 다른 사람이 가로채지 못하게)
+  env_set DENTMOA_SETUP_CODE "$(printf '%06d' $(( $(od -An -N4 -tu4 /dev/urandom) % 1000000 )))"
+fi
+SETUP_CODE="$(env_get DENTMOA_SETUP_CODE)"
 chmod 600 "$ENV_FILE"
 
 # ──────────────────────────── 5. 데이터 폴더 ────────────────────────────
@@ -170,12 +193,12 @@ info "프로그램이 켜졌습니다."
 
 info "https 인증서를 받고 있는지 확인합니다 (최대 2분)…"
 https_ok=""
-for _ in $(seq 1 12); do
-  if curl -fsS --max-time 10 "https://$DOMAIN/healthz" >/dev/null 2>&1; then
+for _ in $(seq 1 8); do # 한 번에 최대 15초 × 8번 = 2분
+  if curl -fsS --connect-timeout 5 --max-time 10 "https://$DOMAIN/healthz" >/dev/null 2>&1; then
     https_ok=1
     break
   fi
-  sleep 10
+  sleep 5
 done
 
 echo
@@ -187,16 +210,18 @@ echo " 휴대폰이나 컴퓨터 브라우저에서 아래 주소를 여세요:"
 echo
 echo "     https://$DOMAIN"
 echo
-echo " 1) 처음 화면에서 대시보드 비밀번호를 정합니다. (지금 바로 해 주세요)"
+echo " 1) 처음 화면에서 설치 코드 [ $SETUP_CODE ] 를 넣고 대시보드 비밀번호를 정합니다. (지금 바로 해 주세요)"
 echo " 2) '계정·연결' 화면에서 모어덴·덴트포토 아이디·비밀번호를 넣고,"
-echo "    텔레그램(docs/3-텔레그램-설정.md)과 메일(docs/4-메일-설정.md)을 설정합니다."
+echo "    텔레그램과 메일 알림을 설정합니다. (GitHub 의 docs/3-텔레그램-설정.md, docs/4-메일-설정.md)"
 echo " 3) '알림 조건' 화면에서 받고 싶은 공고 조건을 고릅니다. (docs/5-사용법.md)"
 echo
 if [ -z "$https_ok" ]; then
-  echo " ※ 아직 https 주소가 열리지 않습니다. 다음을 확인해 주세요:"
+  echo " ※ 서버 안에서 https 주소 확인이 아직 안 됩니다. 휴대폰에서 주소가 열리지 않으면:"
   echo "    - Lightsail 인스턴스의 '네트워킹' 탭 → IPv4 방화벽에"
-  echo "      HTTP(80)와 HTTPS(443) 규칙이 있어야 합니다. 없으면 '규칙 추가'로 넣어 주세요."
+  echo "      HTTP(80)와 HTTPS(443) 규칙이 있어야 합니다. 없으면 '규칙 추가'로 넣고, 아래 명령으로 웹 서버를 다시 시작하세요."
+  echo "        cd $REPO_DIR/deploy && sudo docker compose restart caddy"
   echo "    - 인증서를 받는 데 몇 분 걸릴 수 있습니다. 5분쯤 뒤 다시 열어 보세요."
+  echo "    - 웹 서버 기록 보기: cd $REPO_DIR/deploy && sudo docker compose logs --tail 50 caddy"
   echo
 else
   echo " ※ 주소가 열리지 않으면 Lightsail 인스턴스의 '네트워킹' 탭 → IPv4 방화벽에"

@@ -43,11 +43,15 @@ def match(p: Posting, filters: dict) -> MatchResult:
     if filters.get("dentist_only", True) and not p.is_dentist:
         reasons.append("치과의사 공고 아님")
 
-    if p.inst_type not in filters.get("inst_types", []):
+    # 분류기가 글에서 단서를 못 찾아 기본값을 넣은 항목(uncertain)은 걸러내지 않는다.
+    # 예: '소아치과 전문의 채용'(직위 단어 없음) 공고가 '봉직의' 기본값 때문에 교수직 조건에서 빠지지 않도록
+    unsure = set(p.uncertain)
+
+    if p.inst_type not in filters.get("inst_types", []) and "inst_types" not in unsure:
         reasons.append(f"기관: {INST_TYPES.get(p.inst_type, p.inst_type)}")
 
     pos = set(filters.get("positions", []))
-    if p.positions and not pos.intersection(p.positions):
+    if p.positions and not pos.intersection(p.positions) and "positions" not in unsure:
         reasons.append("직위: " + ", ".join(POSITIONS.get(k, k) for k in p.positions))
 
     spec = set(filters.get("specialties", []))
@@ -58,7 +62,7 @@ def match(p: Posting, filters: dict) -> MatchResult:
         reasons.append("분과: " + ", ".join(SPECIALTIES.get(k, k) for k in p.specialties))
 
     work = set(filters.get("work_types", []))
-    if p.work_types and not work.intersection(p.work_types):
+    if p.work_types and not work.intersection(p.work_types) and "work_types" not in unsure:
         reasons.append("근무형태: " + ", ".join(WORK_TYPES.get(k, k) for k in p.work_types))
 
     region = selection_matches(filters.get("regions", ["전국"]), p.regions)

@@ -142,8 +142,9 @@ def cmd_serve(args) -> int:
 
     app = web.create_app()
     if not settings_store.has_password():
-        print("안내: 대시보드 비밀번호가 아직 없습니다. 'python -m dentmoa set-password' 로 정하거나 "
-              "ADMIN_PASSWORD 환경변수를 넣어 주세요.")
+        print("안내: 대시보드 비밀번호가 아직 없습니다. 처음 화면에서 설치 코드 "
+              f"{settings_store.setup_code()} 를 넣고 비밀번호를 정해 주세요. "
+              "('python -m dentmoa set-password' 로 정해도 됩니다)")
     scheduler.start()
     print(f"덴트모아 대시보드: http://{args.host}:{args.port}" + (f"  ({config.BASE_URL})" if config.BASE_URL else ""))
     print("멈추려면 Ctrl+C")
