@@ -78,6 +78,14 @@ def _dates_in(line: str, ref: date) -> list[tuple[int, int, date]]:
     return out
 
 
+# 지원 마감이 아닌 날짜가 있는 줄 (근무 기간, 대진 일정, 면접, 합격자 서류 등)
+NOT_DEADLINE_LINE_RE = re.compile(
+    r"대진|근무\s*(?:기간|일정|일자|예정|시작|개시)|계약\s*(?:기간|일)|임용\s*(?:예정|기간|일)|휴가\s*기간|"
+    r"면접|합격자|합격\s*발표|개원\s*예정|부터\s*\d{1,2}\s*일\s*까지"
+)
+PERIOD_LABEL_RE = re.compile(r"(?:^|[\s\-•·])기간\s*[:：]")
+
+
 def find_deadline(text: str, posted: date) -> tuple[str, date | None]:
     """본문에서 마감일을 찾는다. posted = 게시일(연도 추정 기준)."""
     text = normalize(text)
@@ -85,14 +93,37 @@ def find_deadline(text: str, posted: date) -> tuple[str, date | None]:
 
     best: date | None = None
     best_score = 0
+    carry = False  # '접수기간' 다음 줄에 날짜가 오는 경우
     for ln in lines:
         dates = _dates_in(ln, posted)
+        strong = STRONG_KEYWORD_RE.search(ln)
         if not dates:
+            carry = bool(strong) and len(ln) <= 20
+            continue
+        prev_carry, carry = carry, False
+        if NOT_DEADLINE_LINE_RE.search(ln) and not (strong and strong.start() < NOT_DEADLINE_LINE_RE.search(ln).start()):
             continue
         score = 0
-        if STRONG_KEYWORD_RE.search(ln):
+        if strong or prev_carry:
             score = 3
+            if strong:
+                # 키워드 바로 뒤의 날짜 (기간이면 끝 날짜)
+                after = [d for d in dates if d[0] >= strong.start()]
+                if after:
+                    i = dates.index(after[0])
+                    nxt = dates[i + 1] if i + 1 < len(dates) else None
+                    if nxt and RANGE_SEP_RE.fullmatch(re.sub(r"\([^)]*\)|\d{1,2}:\d{2}|[.,]", "", ln[after[0][1]:nxt[0]]) or " "):
+                        dates = dates[: i + 2]
+                    else:
+                        dates = dates[: i + 1]
+        elif PERIOD_LABEL_RE.search(ln) and len(dates) >= 2:
+            score = 2
         elif re.search(r"까지", ln):
+            k = ln.index("까지")
+            near = [d for d in dates if 0 <= k - d[1] <= 6]  # '10/20(화)까지'
+            if not near:
+                continue
+            dates = [near[-1]]
             score = 2
         prev_end = dates[-2][1] if len(dates) >= 2 else 0
         gap = ln[prev_end:dates[-1][0]]
@@ -105,12 +136,7 @@ def find_deadline(text: str, posted: date) -> tuple[str, date | None]:
         cand = dates[-1][2]
         if len(dates) >= 2 and RANGE_SEP_RE.search(ln[dates[-2][1]:dates[-1][0]] or " "):
             cand = dates[-1][2]
-        elif re.search(r"까지", ln):
-            # '10월 20일까지' 처럼 '까지' 바로 앞 날짜
-            k = ln.index("까지")
-            before = [dt for s, e, dt in dates if e <= k + 1]
-            if before:
-                cand = before[-1]
+
         if cand < posted - timedelta(days=1):
             continue  # 게시일보다 이전 날짜는 마감일이 아님
         if score > best_score or (score == best_score and best and cand > best):

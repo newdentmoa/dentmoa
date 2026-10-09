@@ -84,6 +84,11 @@ def find(text: str) -> Institution | None:
     squeezed = _key(normalize(text))
     best = None
     for m in rx.finditer(squeezed):
+        # '보령아산병원' 속의 '아산병원' 처럼 다른 이름의 일부인 짧은 별칭은 무시
+        if len(m.group(0)) <= 5 and m.start() > 0 and re.match(r"[가-힣]", squeezed[m.start() - 1]):
+            prev = squeezed[max(0, m.start() - 3):m.start()]
+            if not re.search(r"(?:치과|병원|에서|에서는|의|은|는|이|가)$", prev):
+                continue
         if best is None or len(m.group(0)) > len(best):
             best = m.group(0)
     return lookup[best] if best else None

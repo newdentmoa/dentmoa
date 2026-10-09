@@ -1,0 +1,4043 @@
+[
+ {
+  "title": "[구인] 서울 강남구 역삼역 치과 페이닥터 구합니다",
+  "body": "역삼역 3번 출구 앞 치과입니다.\n주 5일 근무, 급여 세후 1,500 이상 협의.\n임플란트 가능하신 분 우대합니다.\n연락처 010-1234-5678",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "dental_clinic",
+   "positions": [
+    "staff_dentist"
+   ],
+   "specialties": [
+    "gp"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "서울 강남구"
+   ],
+   "deadline": "",
+   "is_dentist": true
+  }
+ },
+ {
+  "title": "분당 정자동 교정과 전문의 원장님 모십니다",
+  "body": "교정 위주 치과입니다. 주 2~3일 교정 진료해주실 교정과 전문의 원장님 모십니다. 페이 협의.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "ortho"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "경기 성남시"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "인천 연수구 송도 협진치과 GP 원장님 구합니다",
+  "body": "교정과 전문의, 소아치과 전문의 상주 중인 협진 치과입니다.\n일반진료 담당하실 원장님 모십니다.\n주 5일(토요일 격주), 세후 1,600~",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "인천 연수구"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "동탄 키즈치과 원장님 모십니다 (소아치과 전문의 아니어도 무방)",
+  "body": "경기 화성시 동탄2신도시 어린이 전문 치과입니다.\n소아치과 전문의가 아니어도 소아 진료에 관심 있으신 선생님이면 됩니다.\n진료시간 10시~19시, 점심 1~2시.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "dental_clinic",
+   "specialties": [
+    "gp",
+    "pedo"
+   ],
+   "regions": [
+    "경기 화성시"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "대구 수성구 소아치과 전문의 원장님 초빙합니다",
+  "body": "소아 전문 치과의원입니다. 소아치과 전문의 원장님 초빙합니다.\n수면진정 경험 있으시면 더욱 좋습니다.\n급여 세후 2,000 이상, 주 5일.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "dental_clinic",
+   "positions": [
+    "staff_dentist"
+   ],
+   "specialties": [
+    "pedo"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "대구 수성구"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "부산 해운대구 치과 원장님 구합니다 (교정 제외)",
+  "body": "교정은 외부 원장님이 월 2회 방문 진료하십니다.\n교정 제외 일반진료(보존, 보철, 임플란트) 가능하신 원장님 모십니다.\n주 5일, 4대보험.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "부산 해운대구"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "[구인] 대전 서구 둔산동 야간 파트 원장님 (교정X 소아X)",
+  "body": "화, 목 오후 2시~9시 야간진료 파트 원장님 구합니다.\n교정 X, 소아 X 일반진료 위주입니다. 시급 협의.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "대전 서구"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "대진 원장님 구합니다 (10/12~10/16, 5일간)",
+  "body": "서울 노원구 상계동 치과입니다. 원장님 학회 일정으로 10월 12일부터 16일까지 대진 원장님 구합니다.\n일급 70만원, 일반진료만 해주시면 됩니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp"
+   ],
+   "work_types": [
+    "locum"
+   ],
+   "regions": [
+    "서울 노원구"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "수원 영통 페이닥터 모십니다 세후 1.5~",
+  "body": "월 세후 1,500~1,800 (인센티브 별도)\n진료시간 9:30~18:30, 수요일 야간 21시까지\n주 5일 근무",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "경기 수원시"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "의정부 치과 원장님 구합니다",
+  "body": "근무시간 9.30~6.30 (점심 1시~2시)\n주 4.5일 근무, 연봉 2.4억~2.8억 네트\n경기 의정부시 민락동",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "경기 의정부시"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "[구직] 보존과 전문의 파트 자리 구합니다",
+  "body": "서울, 경기 남부 지역에서 주 2일 파트 근무 희망합니다. 경력 5년차입니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "seeking"
+  }
+ },
+ {
+  "title": "주 3일 페이 자리 알아보고 있습니다",
+  "body": "GP 7년차입니다. 임플란트 서저리 가능하고 강남, 서초 쪽 희망합니다. 쪽지 주세요.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "seeking"
+  }
+ },
+ {
+  "title": "구직 중이신 원장님들 연락주세요 - 일산 치과",
+  "body": "경기 고양시 일산동구 치과입니다. 함께 일하실 원장님 구합니다. 주 5일, 세후 1,500.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "경기 고양시"
+   ],
+   "specialties": [
+    "gp"
+   ]
+  }
+ },
+ {
+  "title": "구직하시는 선생님들 참고하세요 - 신규 개원 치과 원장님 모집",
+  "body": "서울 송파구 위례 신규 개원 치과에서 함께하실 원장님 모집합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "서울 송파구"
+   ]
+  }
+ },
+ {
+  "title": "경기 용인 수지 치과 양도합니다",
+  "body": "개원 8년차, 체어 5대, 월 매출 8천. 권리금 협의. 인수하실 원장님 연락주세요.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "other",
+   "regions": [
+    "경기 용인시"
+   ]
+  }
+ },
+ {
+  "title": "공동개원 하실 원장님 구합니다 (지분 50:50)",
+  "body": "서울 마포구 신규 개원 예정입니다. 동업하실 원장님 찾습니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "positions": [
+    "other"
+   ],
+   "regions": [
+    "서울 마포구"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "덴탈 유닛체어 중고 매매합니다",
+  "body": "사용 3년, 상태 좋습니다. 경기 안양시 직거래 원합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "네트워크 치과 부평점 원장님 모집",
+  "body": "전국 30개 지점을 운영하는 네트워크 치과입니다. 인천 부평구 지점에서 진료하실 원장님을 모집합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "인천 부평구"
+   ]
+  }
+ },
+ {
+  "title": "강남 OO치과병원 보철과 전문의 모집",
+  "body": "서울 강남구 소재 치과병원입니다. 보철과 전문의 선생님 모집합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "dental_hospital",
+   "specialties": [
+    "prostho"
+   ],
+   "regions": [
+    "서울 강남구"
+   ]
+  }
+ },
+ {
+  "title": "치주과, 보존과 전문의 원장님 각 1명 모십니다",
+  "body": "광주 광산구 수완지구 치과입니다. 치주과 전문의, 보존과 전문의 원장님 각 1분씩 모십니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "endo",
+    "perio"
+   ],
+   "regions": [
+    "광주 광산구"
+   ]
+  }
+ },
+ {
+  "title": "페이닥터 구합니다 (교정 가능하신 분 우대)",
+  "body": "경기 김포시 구래동 치과. 일반진료 원장님 구합니다. 교정 가능하신 분 우대합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp"
+   ],
+   "specialty_hints": [
+    "ortho"
+   ],
+   "regions": [
+    "경기 김포시"
+   ]
+  }
+ },
+ {
+  "title": "토요일 파트 원장님 구합니다",
+  "body": "서울 은평구 치과입니다. 매주 토요일 9시~14시 진료해주실 원장님 구합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "서울 은평구"
+   ]
+  }
+ },
+ {
+  "title": "야간진료 가능하신 풀타임 원장님 모십니다",
+  "body": "주 5일 근무, 화·목 야간 9시까지. 서울 관악구 신림역 치과.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "서울 관악구"
+   ]
+  }
+ },
+ {
+  "title": "주 3일 근무 원장님 모십니다",
+  "body": "월, 수, 금 근무. 경기 부천시 중동 치과입니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "경기 부천시"
+   ]
+  }
+ },
+ {
+  "title": "[구인] 부산대치과병원 출신 원장님 진료하시는 연제구 치과에서 GP 원장님 모십니다",
+  "body": "부산 연제구 연산동 치과입니다. 주 5일, 세후 1,400~",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "dental_clinic",
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "부산 연제구"
+   ]
+  }
+ },
+ {
+  "title": "인천 영종도 하늘도시 치과 원장님 구합니다",
+  "body": "영종도 신도시 치과입니다. 주 5일 근무 원장님 모십니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "인천 영종구"
+   ]
+  }
+ },
+ {
+  "title": "인천 서구 청라 치과 페이닥터 모집",
+  "body": "청라국제도시 치과입니다. 주 5일, 급여 협의.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "인천 서구"
+   ]
+  }
+ },
+ {
+  "title": "검단신도시 치과 봉직의 모십니다",
+  "body": "인천 검단신도시 신규 개원 치과입니다. 봉직의 원장님 모십니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "positions": [
+    "staff_dentist"
+   ],
+   "regions": [
+    "인천 검단구"
+   ]
+  }
+ },
+ {
+  "title": "세종시 나성동 치과 원장님 구합니다",
+  "body": "세종시 나성동 치과입니다. 주 5일 근무.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "세종"
+   ]
+  }
+ },
+ {
+  "title": "창원 성산구 상남동 치과 페이닥터 구함",
+  "body": "경남 창원시 성산구 치과입니다. 주 5일.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "경남 창원시"
+   ]
+  }
+ },
+ {
+  "title": "서울 성동구 성수동 치과 원장님 모십니다",
+  "body": "주 5일 근무 원장님 모십니다.\n10월 20일까지 이력서를 메일로 보내주세요.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "서울 성동구"
+   ],
+   "deadline": "2026-10-20"
+  }
+ },
+ {
+  "title": "양천구 목동 치과 원장님 모집",
+  "body": "근무 시작일: 11월 1일\n지원은 10/15까지 받습니다.\n서울 양천구 목동",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "서울 양천구"
+   ],
+   "deadline": "2026-10-15"
+  }
+ },
+ {
+  "title": "[공지] 페이닥터 채용 마감되었습니다",
+  "body": "많은 관심 감사드립니다. 금번 채용은 마감되었습니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "대진 가능합니다 (10월 중순~11월)",
+  "body": "GP 10년차입니다. 서울 전지역 대진 가능합니다. 쪽지 주세요.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "seeking"
+  }
+ },
+ {
+  "title": "페이닥터 자리 구합니다 (경기 남부)",
+  "body": "통합치의학과 전문의, 6년차입니다. 수원, 용인, 화성 쪽 희망합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "seeking"
+  }
+ },
+ {
+  "title": "어린이치과 성인진료 원장님 구합니다",
+  "body": "소아치과 전문의 원장님 두 분이 상주하고 계신 어린이치과입니다.\n보호자 성인 일반진료 담당하실 원장님 구합니다.\n서울 강동구 고덕동",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "서울 강동구"
+   ]
+  }
+ },
+ {
+  "title": "소아치과 전문의 또는 일반의 원장님 모십니다",
+  "body": "경기 남양주시 다산신도시 키즈치과입니다. 소아치과 전문의 또는 소아 진료 경험 많으신 일반의 선생님 모십니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp",
+    "pedo"
+   ],
+   "regions": [
+    "경기 남양주시"
+   ]
+  }
+ },
+ {
+  "title": "통합치의학과 전문의 원장님 모십니다",
+  "body": "충남 천안시 서북구 불당동 치과입니다. 통합치의학과 전문의 원장님 모십니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "integrated"
+   ],
+   "regions": [
+    "충남 천안시"
+   ]
+  }
+ },
+ {
+  "title": "강서구 마곡 치과 GP 원장님 모집",
+  "body": "대표원장님은 보철과 전문의이십니다. 일반진료 해주실 원장님 모집합니다.\n서울 강서구 마곡동",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "서울 강서구"
+   ]
+  }
+ },
+ {
+  "title": "월 2회 방문 진료해주실 교정과 원장님 구합니다",
+  "body": "전북 전주시 효자동 치과입니다. 교정 환자 진료를 위해 월 2회 방문해주실 교정과 전문의 원장님 구합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "ortho"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "전북 전주시"
+   ]
+  }
+ },
+ {
+  "title": "서초구 교대역 치과 (주 5일, 세후 1,600)",
+  "body": "일반진료 원장님 자리입니다. 이력서 보내주시면 검토 후 연락드리겠습니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "서울 서초구"
+   ],
+   "work_types": [
+    "fulltime"
+   ]
+  }
+ },
+ {
+  "title": "주 4일 근무지 찾습니다",
+  "body": "보철과 전문의 3년차입니다. 대구, 경북 지역 희망합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "seeking"
+  }
+ },
+ {
+  "title": "저희 치과에서 함께 일하실 원장님 찾습니다",
+  "body": "경북 포항시 남구 치과입니다. 주 5일, 급여 협의.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "경북 포항시"
+   ]
+  }
+ },
+ {
+  "title": "일반진료 원장님 구합니다 (교정, 소아 안 합니다)",
+  "body": "제주시 노형동 치과입니다. 저희 치과는 교정, 소아 진료는 안 합니다. 보철, 임플란트 위주.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "제주 제주시"
+   ],
+   "specialty_hints": [
+    "prostho"
+   ]
+  }
+ },
+ {
+  "title": "교정과 전문의 원장님 모십니다",
+  "body": "강원 원주시 혁신도시 치과입니다. 교정과 전문의 원장님 모십니다. 소아 진료 가능하시면 우대합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "ortho"
+   ],
+   "specialty_hints": [
+    "pedo"
+   ],
+   "regions": [
+    "강원 원주시"
+   ]
+  }
+ },
+ {
+  "title": "출산휴가 대체 원장님 구합니다 (12월~2월, 3개월)",
+  "body": "경기 평택시 고덕동 치과입니다. 원장님 출산휴가 기간 동안 진료해주실 분을 구합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "locum"
+   ],
+   "regions": [
+    "경기 평택시"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "대진 및 파트 원장님 구합니다",
+  "body": "서울 동작구 치과입니다. 수요일 파트, 그리고 11월 중 1주 대진 가능하신 원장님 구합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "locum",
+    "parttime"
+   ],
+   "regions": [
+    "서울 동작구"
+   ]
+  }
+ },
+ {
+  "title": "주 3일 또는 주 5일 원장님 모십니다",
+  "body": "경기 하남시 미사 치과. 주 3일 파트, 주 5일 풀타임 모두 가능합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "fulltime",
+    "parttime"
+   ],
+   "regions": [
+    "경기 하남시"
+   ]
+  }
+ },
+ {
+  "title": "페이닥터 혹은 동업 원장님 구합니다",
+  "body": "서울 광진구 건대입구역 치과입니다. 페이닥터로 시작해서 추후 동업도 가능합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "positions": [
+    "other",
+    "staff_dentist"
+   ],
+   "regions": [
+    "서울 광진구"
+   ]
+  }
+ },
+ {
+  "title": "안녕하세요 원장님들",
+  "body": "GP 4년차입니다. 대진이나 파트 근무 가능합니다. 경기 북부 쪽 연락 부탁드립니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "seeking"
+  }
+ },
+ {
+  "title": "개원 입지 추천 문의드립니다",
+  "body": "경기 남부 쪽 개원 준비 중입니다. 조언 부탁드립니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "소아 진정법 세미나 안내",
+  "body": "11월 8일 소아 진정법 핸즈온 세미나가 있습니다. 많은 참여 바랍니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "오전만 근무하실 원장님 구합니다",
+  "body": "전남 순천시 연향동 치과. 월~금 오전 9시~1시 근무.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "전남 순천시"
+   ]
+  }
+ },
+ {
+  "title": "주 6일 근무 원장님 모십니다 (일요일 휴무)",
+  "body": "경남 김해시 장유 치과. 주 6일, 세후 2,200.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "경남 김해시"
+   ]
+  }
+ },
+ {
+  "title": "[모집] 서울 종로구 치과 원장님 1분 모십니다",
+  "body": "주 5일 근무\n지원 마감: 10/10(토)\n이메일 접수",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "서울 종로구"
+   ],
+   "deadline": "2026-10-10"
+  }
+ },
+ {
+  "title": "광명역 치과 페이닥터 모집 (채용 시 마감)",
+  "body": "경기 광명시 일직동 치과. 주 5일, 세후 1,500. 채용 시 마감합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "경기 광명시"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "평촌 치과 원장님 구합니다",
+  "body": "경기 안양시 동안구 평촌 치과입니다. 치주 수술 가능하신 분 우대합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp"
+   ],
+   "specialty_hints": [
+    "perio"
+   ],
+   "regions": [
+    "경기 안양시"
+   ]
+  }
+ },
+ {
+  "title": "치과 자리 임대합니다 (구 치과 자리, 인테리어 그대로)",
+  "body": "서울 도봉구 창동역 앞, 기존 치과 자리 임대 놓습니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "other",
+   "regions": [
+    "서울 도봉구"
+   ]
+  }
+ },
+ {
+  "title": "치과 인수 원합니다",
+  "body": "서울 강북구, 성북구 쪽 체어 4~5대 규모 치과 인수 희망합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "목포 치과 GP 원장님 구합니다",
+  "body": "전남 목포시 하당 치과. 교정은 교정과 전문의 원장님이 주 1회 내원하십니다. 일반진료 원장님 구합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "전남 목포시"
+   ],
+   "work_types": [
+    "fulltime"
+   ]
+  }
+ },
+ {
+  "title": "보존 진료 원장님 모십니다 (전문의 아니어도 무방)",
+  "body": "충북 청주시 흥덕구 치과입니다. 보존과 전문의 아니어도 무방합니다. 근관치료 잘하시는 분이면 됩니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "endo",
+    "gp"
+   ],
+   "regions": [
+    "충북 청주시"
+   ]
+  }
+ },
+ {
+  "title": "키즈치과 진료 원장님 구합니다",
+  "body": "서울 마포구 상암동 어린이치과입니다. 소아 진료 가능하신 원장님 구합니다. 주 5일.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "서울 마포구"
+   ]
+  }
+ },
+ {
+  "title": "신촌 세브란스병원 앞 치과 페이닥터 구합니다",
+  "body": "서울 서대문구 신촌 치과입니다. 주 5일 근무.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "dental_clinic",
+   "regions": [
+    "서울 서대문구"
+   ]
+  }
+ },
+ {
+  "title": "페닥 구함 - 대구 달서구",
+  "body": "대구 달서구 상인동 치과. 주5일 세후 1500.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "positions": [
+    "staff_dentist"
+   ],
+   "regions": [
+    "대구 달서구"
+   ]
+  }
+ },
+ {
+  "title": "구강외과 전문의 원장님 모십니다 (임플란트·사랑니 전담)",
+  "body": "경기 시흥시 배곧 치과입니다. 임플란트 수술과 사랑니 발치 전담하실 구강외과 전문의 원장님 모십니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "oms"
+   ],
+   "regions": [
+    "경기 시흥시"
+   ]
+  }
+ },
+ {
+  "title": "근무 후 양도 조건으로 원장님 모십니다",
+  "body": "경기 이천시 치과입니다. 1년 정도 페이닥터로 근무 후 양도 예정입니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "경기 이천시"
+   ]
+  }
+ },
+ {
+  "title": "[마감] 강남 신사역 페이닥터 구합니다",
+  "body": "채용 완료되었습니다. 감사합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "구직 중인 5년차 GP입니다",
+  "body": "경기 남부 지역 페이 자리 희망합니다. 임플란트, 보철 가능합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "seeking"
+  }
+ },
+ {
+  "title": "인천 중구 영종도 운서동 치과 원장님 구합니다",
+  "body": "주 5일, 세후 1,500.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "인천 영종구"
+   ]
+  }
+ },
+ {
+  "title": "인천 동구 송림동 치과 페이닥터 모십니다",
+  "body": "주 5일 근무.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "인천 제물포구"
+   ]
+  }
+ },
+ {
+  "title": "야간 주 2회 진료 원장님 구합니다",
+  "body": "서울 영등포구 치과입니다. 화, 목 저녁 6시~10시 야간진료만 해주실 원장님 구합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "서울 영등포구"
+   ]
+  }
+ },
+ {
+  "title": "주 5일 원장님 모십니다 (격주 토요일)",
+  "body": "경기 군포시 산본 치과. 주 5일, 격주 토요일 근무, 토요일 근무 시 평일 하루 휴무.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "경기 군포시"
+   ]
+  }
+ },
+ {
+  "title": "일반진료 원장님 구합니다",
+  "body": "주택가에 있는 치과로 소아 환자가 많습니다. 일반진료 원장님 구합니다. 서울 중랑구 면목동.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp"
+   ],
+   "specialty_hints": [
+    "pedo"
+   ],
+   "regions": [
+    "서울 중랑구"
+   ]
+  }
+ },
+ {
+  "title": "소치 전문의 원장님 모십니다",
+  "body": "경기 고양시 덕양구 삼송 어린이치과입니다. 소치 전문의 원장님 모십니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "pedo"
+   ],
+   "regions": [
+    "경기 고양시"
+   ]
+  }
+ },
+ {
+  "title": "임플란트 원장님 구합니다",
+  "body": "치주과 전문의 원장님 계시고, 임플란트 및 일반진료 해주실 원장님 구합니다. 경기 안산시 고잔동.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "경기 안산시"
+   ]
+  }
+ },
+ {
+  "title": "소아치과 전문의 원장님과 협진하실 GP 원장님 구합니다",
+  "body": "부산 수영구 광안동 치과입니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "부산 수영구"
+   ]
+  }
+ },
+ {
+  "title": "페이닥터 구합니다",
+  "body": "경기 안산시 상록구 치과입니다. 주 5일, 급여 협의.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "positions": [
+    "staff_dentist"
+   ],
+   "specialties": [
+    "gp"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "경기 안산시"
+   ]
+  }
+ },
+ {
+  "title": "근무할 치과 찾습니다",
+  "body": "통합치의학과 전문의입니다. 대전, 세종 지역 희망합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "seeking"
+  }
+ },
+ {
+  "title": "치과 인수하실 원장님 구합니다",
+  "body": "경기 오산시 치과 양도합니다. 체어 6대, 권리금 협의.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "원장님 모십니다 - 수원 인계동",
+  "body": "저희 치과병원은 체어 25대 규모의 치과병원입니다. 일반진료 원장님 모십니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "dental_hospital",
+   "regions": [
+    "경기 수원시"
+   ]
+  }
+ },
+ {
+  "title": "GP 원장님 모십니다",
+  "body": "대표원장님은 서울대 치과병원 보철과 수련하셨습니다.\n경기 파주시 운정신도시 위치",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "dental_clinic",
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "경기 파주시"
+   ]
+  }
+ },
+ {
+  "title": "의왕 치과 원장님 모십니다",
+  "body": "지원 마감 10/12(월), 면접 10/15(목)\n경기 의왕시",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "경기 의왕시"
+   ],
+   "deadline": "2026-10-12"
+  }
+ },
+ {
+  "title": "부원장님 모십니다",
+  "body": "부산 중구 남포동 치과. 주 5일, 세후 1,700.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "positions": [
+    "staff_dentist"
+   ],
+   "regions": [
+    "부산 중구"
+   ]
+  }
+ },
+ {
+  "title": "교정 전담 원장님 주 1회 모십니다",
+  "body": "광주 서구 치평동 치과입니다. 교정 전담으로 주 1회 진료해주실 원장님 모십니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "ortho"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "광주 서구"
+   ]
+  }
+ },
+ {
+  "title": "보철과 또는 통합치의학과 전문의 원장님 모십니다",
+  "body": "경기 화성시 봉담 치과입니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "integrated",
+    "prostho"
+   ],
+   "regions": [
+    "경기 화성시"
+   ]
+  }
+ },
+ {
+  "title": "주말 대진 원장님 구합니다",
+  "body": "울산 중구 성남동 치과. 10월 셋째 주 토요일 하루 대진 부탁드립니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "locum"
+   ],
+   "regions": [
+    "울산 중구"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "[구인] 대표원장(교정과 전문의)과 함께 진료하실 GP 원장님",
+  "body": "서울 노원구 중계동 치과입니다. 주 5일.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "서울 노원구"
+   ]
+  }
+ },
+ {
+  "title": "11월 1일부터 근무 가능하신 원장님 모십니다",
+  "body": "경북 구미시 인동 치과. 주 5일.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "경북 구미시"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "구직 희망하시는 원장님 연락주세요",
+  "body": "경기 구리시 인창동 치과입니다. 일반진료 원장님 모십니다. 주 5일.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "경기 구리시"
+   ]
+  }
+ },
+ {
+  "title": "강서구 발산역 치과입니다",
+  "body": "구직 중이신 원장님들 많은 연락 부탁드립니다. 일반진료 원장님 모십니다. 서울 강서구.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "서울 강서구"
+   ]
+  }
+ },
+ {
+  "title": "강동구 고덕역 치과 (주 3~5일 협의)",
+  "body": "주 3일 파트 근무 가능합니다. 일반진료 원장님 모십니다. 서울 강동구 고덕동.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "서울 강동구"
+   ]
+  }
+ },
+ {
+  "title": "김해 내동 치과 원장님 구합니다",
+  "body": "조건: 세후 1,500 + 인센티브(매출 7/3), 화·목 9시까지 야간\n경남 김해시",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "경남 김해시"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "하남 미사 치과 원장님 모십니다",
+  "body": "11.15 개원 예정입니다. 채용 시까지 지원 받습니다.\n경기 하남시 망월동",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "경기 하남시"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "졸업 예정 GP입니다, 페이 자리 구해요",
+  "body": "내년 2월 졸업 예정입니다. 서울 동부 쪽 희망합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "seeking"
+  }
+ },
+ {
+  "title": "대진 가능하신 원장님 구합니다",
+  "body": "서울 서대문구 치과입니다. 10월 넷째 주 대진 원장님 구합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "locum"
+   ],
+   "regions": [
+    "서울 서대문구"
+   ]
+  }
+ },
+ {
+  "title": "소아 진료 위주 치과 원장님 모십니다",
+  "body": "경기 오산시 세교 치과. 소아 환자 비율이 높습니다. 소아치과 전문의가 아니셔도 됩니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "regions": [
+    "경기 오산시"
+   ]
+  }
+ },
+ {
+  "title": "2027년도 서울대학교치과병원 임상교수 초빙 공고",
+  "body": "1. 초빙분야 및 인원\n - 소아치과 1명\n - 치주과 1명\n2. 지원자격: 해당 분과 전문의 자격 소지자\n3. 접수기간: 2026. 10. 5.(월) ~ 2026. 10. 16.(금) 18:00까지\n4. 제출서류: 첨부파일 참조",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "pedo",
+    "perio"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "서울 종로구"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "경북대학교치과병원 전임의(Fellow) 추가 모집 공고",
+  "body": "모집과: 구강악안면외과, 치과보철과 각 1명\n원서접수: 10월 7일(수) ~ 10월 14일(수) 17:00\n임용기간: 2026.11.1. ~ 2027.2.28.\n문의: 교육연구실 053-600-0000",
+  "source_kind": "hospital_board",
+  "institution_hint": "경북대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "oms",
+    "prostho"
+   ],
+   "regions": [
+    "대구 중구"
+   ],
+   "deadline": "2026-10-14"
+  }
+ },
+ {
+  "title": "2026년 2학기 연세대학교 치과대학병원 진료교수(비전임) 채용",
+  "body": "채용분야: 통합치의학과 2명\n지원기간: 2026년 10월 2일 ~ 10월 12일\n※ 세부사항은 첨부파일을 참조하시기 바랍니다.",
+  "source_kind": "hospital_board",
+  "institution_hint": "연세대학교 치과대학병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "integrated"
+   ],
+   "regions": [
+    "서울 서대문구"
+   ],
+   "deadline": "2026-10-12"
+  }
+ },
+ {
+  "title": "[서울아산병원] 치과 임상강사 모집",
+  "body": "모집부서: 치과(구강악안면외과, 치과보철과, 치과교정과)\n자격: 해당 과 전문의\n접수기간: ~10/20(화)\n제출서류: 이력서, 자기소개서 (병원 양식)",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울아산병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "univ_hospital_dept",
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "oms",
+    "ortho",
+    "prostho"
+   ],
+   "regions": [
+    "서울 송파구"
+   ],
+   "deadline": "2026-10-20"
+  }
+ },
+ {
+  "title": "중앙보훈병원 치과 촉탁의(시간제) 채용 공고",
+  "body": "채용분야: 치과 촉탁의 1명\n근무형태: 주 2일(화, 목) 오전 진료\n접수기간: 2026.10.5.~2026.10.19.\n접수방법: 이메일 접수",
+  "source_kind": "hospital_board",
+  "institution_hint": "중앙보훈병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "specialties": [
+    "gp"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "서울 강동구"
+   ],
+   "deadline": "2026-10-19"
+  }
+ },
+ {
+  "title": "치과위생사(계약직) 채용 공고",
+  "body": "모집분야: 치과위생사 ○명\n담당업무: 치과의사 진료 보조, 환자 안내 및 예약 관리\n자격요건: 치과위생사 면허 소지자\n접수기간: 2026.10.05 ~ 2026.10.12",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": false
+  }
+ },
+ {
+  "title": "2027년도 임상강사(전임의) 모집 공고",
+  "body": "모집과: 내과, 외과, 소아청소년과, 산부인과, 정형외과, 영상의학과, 마취통증의학과\n접수기간: 2026.10.12 ~ 10.23\n제출서류: 첨부파일 참조",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울아산병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": false
+  }
+ },
+ {
+  "title": "2027년 진료교수(촉탁의) 채용 공고",
+  "body": "채용분야: 내과 2명, 소아청소년과 1명, 영상의학과 1명, 치과(소아치과) 1명, 재활의학과 1명\n접수기간: 2026년 10월 6일(화) ~ 10월 15일(목)\n임용예정일: 2027. 3. 1.",
+  "source_kind": "hospital_board",
+  "institution_hint": "분당서울대학교병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "univ_hospital_dept",
+   "positions": [
+    "clinical_professor",
+    "contract"
+   ],
+   "specialties": [
+    "pedo"
+   ],
+   "regions": [
+    "경기 성남시"
+   ],
+   "deadline": "2026-10-15"
+  }
+ },
+ {
+  "title": "2027년도 수련치과의사(인턴) 필기시험 합격자 발표",
+  "body": "첨부파일을 확인하시기 바랍니다.",
+  "source_kind": "hospital_board",
+  "institution_hint": "경북대학교치과병원",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "임상교수요원 채용 면접 안내",
+  "body": "서류전형 합격자에 한하여 아래와 같이 면접을 실시합니다.\n일시: 2026. 10. 21.(수) 14:00\n장소: 본관 4층 회의실",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울대학교치과병원",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "2027년도 치과 전공의(레지던트) 모집 공고",
+  "body": "모집과 및 인원: 구강악안면외과 2명, 치과보철과 1명, 치과교정과 1명, 소아치과 1명, 치주과 1명, 치과보존과 1명, 구강내과 1명, 영상치의학과 1명\n원서접수: 2026. 11. 16.(월) ~ 11. 18.(수) 17:00\n시험일: 2026. 11. 27.(금)",
+  "source_kind": "hospital_board",
+  "institution_hint": "원광대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "resident"
+   ],
+   "specialties": [
+    "endo",
+    "oms",
+    "oral_medicine",
+    "ortho",
+    "pedo",
+    "perio",
+    "prostho",
+    "radiology"
+   ],
+   "regions": [
+    "전북 익산시"
+   ],
+   "deadline": "2026-11-18"
+  }
+ },
+ {
+  "title": "2027년도 수련치과의사(인턴) 모집",
+  "body": "모집인원: 인턴 16명\n지원자격: 치과의사 면허 소지자 또는 2027년 치과의사 국가시험 응시 예정자\n원서접수: 2026. 11. 16.(월) ~ 11. 18.(수)\n자세한 사항은 첨부된 공고문 참조",
+  "source_kind": "hospital_board",
+  "institution_hint": "부산대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "resident"
+   ],
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "경남 양산시"
+   ],
+   "deadline": "2026-11-18"
+  }
+ },
+ {
+  "title": "2027학년도 1학기 경희대학교 치과대학 전임교원 초빙 공고",
+  "body": "1. 초빙분야: 구강병리학 1명, 치과교정학 1명\n2. 지원자격: 치의학 박사학위 소지자\n3. 지원서 접수: 2026. 10. 19.(월) 10:00 ~ 10. 30.(금) 17:00\n4. 임용예정일: 2027. 3. 1.",
+  "source_kind": "hospital_board",
+  "institution_hint": "경희대학교 치과대학",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "faculty"
+   ],
+   "specialties": [
+    "ortho",
+    "pathology"
+   ],
+   "regions": [
+    "서울 동대문구"
+   ],
+   "deadline": "2026-10-30"
+  }
+ },
+ {
+  "title": "치과 진료교수 채용 공고",
+  "body": "첨부파일 참조",
+  "source_kind": "hospital_board",
+  "institution_hint": "중앙보훈병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "public_hospital",
+   "positions": [
+    "clinical_professor"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "서울 강동구"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "[국립중앙의료원] 치과 전문의(구강악안면외과) 채용",
+  "body": "근무지: 서울특별시 중구 을지로 245\n채용형태: 계약직(2년)\n접수마감: 2026-10-22",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "specialties": [
+    "oms"
+   ],
+   "regions": [
+    "서울 중구"
+   ],
+   "deadline": "2026-10-22"
+  }
+ },
+ {
+  "title": "서울특별시 관악구보건소 임기제공무원(치과의사) 채용 공고",
+  "body": "채용분야: 일반임기제 6호 치과의사 1명\n담당업무: 구강보건실 진료 및 구강보건사업\n접수기간: 2026. 10. 13.(화) ~ 10. 15.(목) 18:00",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "서울 관악구"
+   ],
+   "deadline": "2026-10-15"
+  }
+ },
+ {
+  "title": "법무부 교정시설 의무사무관(치과) 채용 공고",
+  "body": "근무지: 청송교도소 (경북 청송군)\n채용직급: 일반임기제 5급 상당(의무사무관)\n자격: 치과의사 면허 소지자\n원서접수: 2026.10.8 ~ 10.14",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "경북 청송군"
+   ],
+   "deadline": "2026-10-14",
+   "specialty_hints": []
+  }
+ },
+ {
+  "title": "국군수도치과병원 계약직 치과의사(보철) 채용",
+  "body": "채용인원: 1명\n근무형태: 주 5일(월~금)\n접수기간: 10. 12.(월) ~ 10. 23.(금)",
+  "source_kind": "hospital_board",
+  "institution_hint": "국군수도치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "specialties": [
+    "prostho"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "경기 성남시"
+   ],
+   "deadline": "2026-10-23"
+  }
+ },
+ {
+  "title": "서울특별시장애인치과병원 치과의사(진료교수) 채용 공고",
+  "body": "채용분야: 진료교수 1명 (소아치과 또는 통합치의학과 전문의 우대)\n접수기간: 2026. 10. 7. ~ 10. 20.",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "disabled_dental",
+   "positions": [
+    "clinical_professor"
+   ],
+   "regions": [
+    "서울 성동구"
+   ],
+   "deadline": "2026-10-20"
+  }
+ },
+ {
+  "title": "경기권역장애인구강진료센터 치과의사(임상교수) 모집",
+  "body": "근무부서: 경기권역장애인구강진료센터\n자격: 치과의사 면허 소지자 (소아치과 전문의 우대)\n접수기간: 2026. 10. 5. ~ 10. 16.",
+  "source_kind": "hospital_board",
+  "institution_hint": "단국대학교 치과대학 죽전치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "disabled_dental",
+   "positions": [
+    "clinical_professor"
+   ],
+   "regions": [
+    "경기 용인시"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "간호직(정규직) 및 보건직 채용 공고",
+  "body": "모집분야: 간호사 3명, 치과위생사 2명, 원무행정 1명\n접수기간: 2026. 10. 5. ~ 10. 9.",
+  "source_kind": "hospital_board",
+  "institution_hint": "경북대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": false
+  }
+ },
+ {
+  "title": "연세대학교 치과대학 행정조교 채용 공고",
+  "body": "근무부서: 치과대학 학사지원팀\n자격: 학사 학위 소지자, 컴퓨터 활용 능숙자\n접수기간: 2026. 10. 5. ~ 10. 12.",
+  "source_kind": "hospital_board",
+  "institution_hint": "연세대학교 치과대학",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": false
+  }
+ },
+ {
+  "title": "[계약직] 소아치과 치과위생사 채용 공고",
+  "body": "근무부서: 소아치과 외래\n자격: 치과위생사 면허 소지자\n접수기간: 2026. 10. 6. ~ 10. 13.",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": false
+  }
+ },
+ {
+  "title": "구강악안면외과 병동 간호사 채용",
+  "body": "모집분야: 간호사(병동 3교대) 2명\n자격: 간호사 면허 소지자\n접수기간: 2026. 10. 5. ~ 10. 11.",
+  "source_kind": "hospital_board",
+  "institution_hint": "경희대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": false
+  }
+ },
+ {
+  "title": "치과보존과 진료교수 채용 공고",
+  "body": "1. 채용분야: 치과보존과 진료교수 1명\n2. 서류접수\n - 기간 : 2026.10.05(월) ~ 2026.10.14(수) 17:00\n - 방법 : 이메일 접수",
+  "source_kind": "hospital_board",
+  "institution_hint": "전남대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "endo"
+   ],
+   "regions": [
+    "광주 북구"
+   ],
+   "deadline": "2026-10-14"
+  }
+ },
+ {
+  "title": "치과교정과 임상강사 모집",
+  "body": "모집인원\n1명\n접수기간\n2026.10.05 ~ 2026.10.14\n제출서류\n이력서, 자기소개서",
+  "source_kind": "hospital_board",
+  "institution_hint": "강남세브란스병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "univ_hospital_dept",
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "ortho"
+   ],
+   "regions": [
+    "서울 강남구"
+   ],
+   "deadline": "2026-10-14"
+  }
+ },
+ {
+  "title": "[강남세브란스병원] 2027년도 치과 전공의(레지던트) 모집",
+  "body": "모집과목: 치주과 1명, 보존과 1명\n접수기간: 2026. 11. 16. ~ 11. 18.",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "univ_hospital_dept",
+   "positions": [
+    "resident"
+   ],
+   "specialties": [
+    "endo",
+    "perio"
+   ],
+   "regions": [
+    "서울 강남구"
+   ],
+   "deadline": "2026-11-18"
+  }
+ },
+ {
+  "title": "인하대학교병원 치과 임상강사 모집",
+  "body": "모집분야: 구강악안면외과 1명\n접수기간: 2026. 10. 5. ~ 10. 16.",
+  "source_kind": "hospital_board",
+  "institution_hint": "인하대학교병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "univ_hospital_dept",
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "oms"
+   ],
+   "regions": [
+    "인천 제물포구"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "인천광역시의료원 치과 전문의 채용 공고",
+  "body": "채용분야: 치과 전문의(계약직) 1명\n접수기간: 2026. 10. 7.(수) ~ 10. 21.(수)",
+  "source_kind": "hospital_board",
+  "institution_hint": "인천광역시의료원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "인천 제물포구"
+   ],
+   "deadline": "2026-10-21"
+  }
+ },
+ {
+  "title": "세종충남대학교병원 치과 임상강사 모집 공고",
+  "body": "모집분야: 치과(구강악안면외과) 1명\n접수기간: 2026. 10. 5.(월) ~ 10. 13.(화)",
+  "source_kind": "hospital_board",
+  "institution_hint": "세종충남대학교병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "univ_hospital_dept",
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "oms"
+   ],
+   "regions": [
+    "세종"
+   ],
+   "deadline": "2026-10-13"
+  }
+ },
+ {
+  "title": "가톨릭대학교 서울성모병원 치과 구강악안면외과 진료교수 모집",
+  "body": "접수기간: 2026년 10월 5일(월) ~ 2026년 10월 16일(금)\n제출서류: 첨부파일 참조",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "univ_hospital_dept",
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "oms"
+   ],
+   "regions": [
+    "서울 서초구"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "전남대학교 치의학전문대학원 기금교수 초빙 공고",
+  "body": "초빙분야: 소아치과학 1명\n임용기간: 2027. 3. 1. ~ 2029. 2. 28.\n접수기간: 2026. 10. 12. ~ 10. 23.",
+  "source_kind": "hospital_board",
+  "institution_hint": "전남대학교 치의학전문대학원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "pedo"
+   ],
+   "regions": [
+    "광주 북구"
+   ],
+   "deadline": "2026-10-23"
+  }
+ },
+ {
+  "title": "연구교수(구강생물학) 초빙 공고",
+  "body": "초빙분야: 구강생물학 1명\n접수기간: 2026. 10. 8. ~ 10. 22.",
+  "source_kind": "hospital_board",
+  "institution_hint": "경북대학교 치과대학",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "basic_science"
+   ],
+   "regions": [
+    "대구 중구"
+   ],
+   "deadline": "2026-10-22"
+  }
+ },
+ {
+  "title": "치과대학 치의학과 조교수(구강악안면외과학) 신규임용 공고",
+  "body": "초빙분야: 구강악안면외과학 1명\n접수기간: 2026. 10. 19. ~ 10. 28.",
+  "source_kind": "hospital_board",
+  "institution_hint": "조선대학교 치과대학",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "faculty"
+   ],
+   "specialties": [
+    "oms"
+   ],
+   "regions": [
+    "광주 동구"
+   ],
+   "deadline": "2026-10-28"
+  }
+ },
+ {
+  "title": "[대림성모병원] 치과 과장 채용",
+  "body": "근무지: 서울특별시 영등포구 대림동\n근무형태: 정규직, 주 5일\n접수: 채용 시 마감",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "general_hospital",
+   "regions": [
+    "서울 영등포구"
+   ],
+   "work_types": [
+    "fulltime"
+   ]
+  }
+ },
+ {
+  "title": "[보령아산병원] 치과 과장 모집",
+  "body": "근무지: 충청남도 보령시\n근무형태: 정규직\n자격: 치과의사 면허 소지자",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "general_hospital",
+   "regions": [
+    "충남 보령시"
+   ]
+  }
+ },
+ {
+  "title": "[현대병원] 치과 과장(봉직의) 채용",
+  "body": "근무지: 경기도 남양주시 진접읍\n근무시간: 월~금 09:00~18:00, 토 09:00~13:00",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "general_hospital",
+   "positions": [
+    "staff_dentist"
+   ],
+   "regions": [
+    "경기 남양주시"
+   ]
+  }
+ },
+ {
+  "title": "소아치과 비전임 진료교수 채용(시간제)",
+  "body": "근무형태: 주 2회(화·목 오전) 시간제 근무\n접수기간: 2026. 10. 5. ~ 10. 12.",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "pedo"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "deadline": "2026-10-12"
+  }
+ },
+ {
+  "title": "[조선대학교] 2027학년도 1학기 전임교원 초빙 공고",
+  "body": "초빙분야\n - 의과대학 의학과: 내과학 2명\n - 치과대학 치의학과: 치과교정학 1명, 소아치과학 1명\n - 간호대학 간호학과: 성인간호학 1명\n접수기간: 2026. 10. 12.(월) ~ 10. 21.(수)",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "positions": [
+    "faculty"
+   ],
+   "specialties": [
+    "ortho",
+    "pedo"
+   ],
+   "deadline": "2026-10-21"
+  }
+ },
+ {
+  "title": "치과 임상강사 채용 공고 취소 안내",
+  "body": "병원 사정으로 인하여 2026. 9. 25.자 치과 임상강사 채용 공고를 취소합니다.",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울아산병원",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "치과보존과 진료교수 채용 접수기간 연장 공고",
+  "body": "기존 접수기간: 2026. 10. 5.(월) ~ 10. 12.(월)\n변경 접수기간: 2026. 10. 5.(월) ~ 10. 23.(금)\n기타 사항은 기존 공고와 동일",
+  "source_kind": "hospital_board",
+  "institution_hint": "경북대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "endo"
+   ],
+   "deadline": "2026-10-23"
+  }
+ },
+ {
+  "title": "2027년도 치과 레지던트 추가모집",
+  "body": "모집과: 구강내과 1명\n원서접수: 2027. 1. 4. ~ 1. 6.",
+  "source_kind": "hospital_board",
+  "institution_hint": "조선대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "resident"
+   ],
+   "specialties": [
+    "oral_medicine"
+   ],
+   "regions": [
+    "광주 동구"
+   ],
+   "deadline": "2027-01-06"
+  }
+ },
+ {
+  "title": "치과 임상강사(구강내과) 채용 재공고",
+  "body": "접수기간: 2026. 10. 5. ~ 10. 19.\n제출서류는 첨부파일을 참조하시기 바랍니다.",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울아산병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "oral_medicine"
+   ],
+   "deadline": "2026-10-19"
+  }
+ },
+ {
+  "title": "2027년도 치과 전공의 면접시험 안내",
+  "body": "일시: 2026. 11. 27.(금) 09:00\n장소: 치과병원 4층 세미나실",
+  "source_kind": "hospital_board",
+  "institution_hint": "전남대학교치과병원",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "치과 진료교수 최종합격자 공고",
+  "body": "최종합격자: 홍○○\n합격자는 2026. 10. 16.까지 구비서류를 제출하시기 바랍니다.",
+  "source_kind": "hospital_board",
+  "institution_hint": "중앙보훈병원",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "치과보존과 임상강사 모집(10월 14일까지)",
+  "body": "첨부파일 참조",
+  "source_kind": "hospital_board",
+  "institution_hint": "전남대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "endo"
+   ],
+   "regions": [
+    "광주 북구"
+   ],
+   "deadline": "2026-10-14"
+  }
+ },
+ {
+  "title": "2027년도 치과보철과 전임의 모집 공고",
+  "body": "접수기간: 12. 28.(월) ~ 1. 8.(금)\n임용예정일: 2027. 3. 1.",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "prostho"
+   ],
+   "deadline": "2027-01-08"
+  }
+ },
+ {
+  "title": "치주과 진료교수 채용",
+  "body": "제출기한: 2026년 10월 16일 금요일 오후 6시까지 (우편 접수는 당일 도착분에 한함)",
+  "source_kind": "hospital_board",
+  "institution_hint": "부산대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "perio"
+   ],
+   "regions": [
+    "경남 양산시"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "[하이브레인] 치과 임상교수 채용 ('26.10.23 마감)",
+  "body": "채용분야: 구강악안면외과 임상교수 1명",
+  "source_kind": "aggregator",
+  "institution_hint": "강릉원주대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "oms"
+   ],
+   "regions": [
+    "강원 강릉시"
+   ],
+   "deadline": "2026-10-23"
+  }
+ },
+ {
+  "title": "치과 외래 간호사 채용",
+  "body": "근무부서: 치과 외래\n담당업무: 치과 진료 보조 및 외래 환자 관리\n접수기간: 2026. 10. 5. ~ 10. 9.",
+  "source_kind": "hospital_board",
+  "institution_hint": "세브란스병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": false
+  }
+ },
+ {
+  "title": "치과기공사(계약직) 채용 공고",
+  "body": "모집분야: 치과기공사 1명 (보철과 기공실)\n접수기간: 2026. 10. 5. ~ 10. 12.",
+  "source_kind": "hospital_board",
+  "institution_hint": "경희대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": false
+  }
+ },
+ {
+  "title": "[미소드림치과병원] 구강악안면외과 전문의 채용",
+  "body": "근무지: 경기도 수원시 영통구\n근무형태: 주 5일, 정규직\n급여: 면접 시 협의",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_hospital",
+   "positions": [
+    "staff_dentist"
+   ],
+   "specialties": [
+    "oms"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "경기 수원시"
+   ]
+  }
+ },
+ {
+  "title": "[온종합병원] 치과 과장(봉직의) 채용",
+  "body": "근무지: 부산광역시 부산진구\n근무형태: 전일제\n접수: 상시 채용",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "general_hospital",
+   "positions": [
+    "staff_dentist"
+   ],
+   "specialties": [
+    "gp"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "부산 부산진구"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "의생명연구원 연구원(계약직) 채용",
+  "body": "담당업무: 구강 미생물 연구 실험 보조\n자격: 생명과학 관련 학사 이상\n접수기간: 2026. 10. 5. ~ 10. 16.",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": false
+  }
+ },
+ {
+  "title": "강릉원주대학교치과병원 임상교수 채용 공고",
+  "body": "채용분야: 치과보철과 1명\n접수기간: 2026. 10. 12. ~ 10. 16.",
+  "source_kind": "hospital_board",
+  "institution_hint": "강원대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "prostho"
+   ],
+   "regions": [
+    "강원 강릉시"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "치과보철과 진료교수 채용 공고",
+  "body": "지원자격: 치과보철과 전문의로서 전임의 과정을 수료한 자\n접수기간: 2026. 10. 5. ~ 10. 16.",
+  "source_kind": "hospital_board",
+  "institution_hint": "경북대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "prostho"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "2027년도 치과 전임의 모집",
+  "body": "모집과: 구강악안면외과 2명, 치주과 1명\n지원자격: 해당 과 전공의 수련과정을 마친 자 또는 2027년 2월 수료 예정자\n접수기간: 2026. 12. 1. ~ 12. 11.",
+  "source_kind": "hospital_board",
+  "institution_hint": "전남대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "oms",
+    "perio"
+   ],
+   "deadline": "2026-12-11"
+  }
+ },
+ {
+  "title": "치과 임상강사 모집 공고",
+  "body": "모집분야: 보철과, 보존과, 치주과 각 1명 (※ 교정과·소아치과는 금번 모집에서 제외)\n접수기간: 2026. 10. 5. ~ 10. 16.",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울아산병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "endo",
+    "perio",
+    "prostho"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "치과 외래교수 모집 공고",
+  "body": "모집분야: 치과 외래교수(무급, 위촉직)\n자격: 해당 분야 전문의로서 개원의\n접수기간: 2026. 10. 5. ~ 10. 30.",
+  "source_kind": "hospital_board",
+  "institution_hint": "분당서울대학교병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "positions": [
+    "other"
+   ],
+   "deadline": "2026-10-30"
+  }
+ },
+ {
+  "title": "[공지] 2027년도 레지던트 모집 공고",
+  "body": "공고문 및 지원서 양식은 첨부파일을 참조하십시오.",
+  "source_kind": "hospital_board",
+  "institution_hint": "단국대학교치과대학병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "resident"
+   ],
+   "regions": [
+    "충남 천안시"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "의사직(전문의) 채용 공고",
+  "body": "모집분야: 내과 2명, 정형외과 1명, 치과(보철) 1명\n접수기간: 2026. 10. 5. ~ 10. 16.",
+  "source_kind": "hospital_board",
+  "institution_hint": "중앙보훈병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "public_hospital",
+   "specialties": [
+    "prostho"
+   ],
+   "regions": [
+    "서울 강동구"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "2027년도 인턴 모집 공고",
+  "body": "모집인원: 의과 인턴 45명\n원서접수: 2027. 1. 4. ~ 1. 6.",
+  "source_kind": "hospital_board",
+  "institution_hint": "경희대학교병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": false
+  }
+ },
+ {
+  "title": "치과 전문의 채용 결과 안내",
+  "body": "채용 결과를 아래와 같이 안내합니다.",
+  "source_kind": "hospital_board",
+  "institution_hint": "국립중앙의료원",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "[근로복지공단 인천병원] 치과 전문의(계약직) 채용",
+  "body": "근무지: 인천광역시 부평구 무네미로 446\n접수기간: 2026. 10. 5. ~ 10. 19.",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "인천 부평구"
+   ],
+   "deadline": "2026-10-19"
+  }
+ },
+ {
+  "title": "치과 진료교수(소아치과) 채용 공고",
+  "body": "6. 전형일정\n - 서류접수: 2026. 10. 5.(월) ~ 10. 14.(수)\n - 서류전형 합격자 발표: 2026. 10. 19.(월)\n - 면접: 2026. 10. 22.(목)\n - 최종합격자 발표: 2026. 10. 27.(화)",
+  "source_kind": "hospital_board",
+  "institution_hint": "경북대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "pedo"
+   ],
+   "regions": [
+    "대구 중구"
+   ],
+   "deadline": "2026-10-14"
+  }
+ },
+ {
+  "title": "치과 임상강사(치주과) 채용 공고",
+  "body": "1. 서류접수: 2026. 10. 5.(월) ~ 10. 14.(수)\n2. 면접: 2026. 10. 21.(수) 예정\n3. 최종합격자 서류 제출기한: 2026. 11. 6.(금)",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울아산병원",
+  "expected": {
+   "post_kind": "hiring",
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "perio"
+   ],
+   "deadline": "2026-10-14"
+  }
+ },
+ {
+  "title": "의정부시보건소 시간선택제임기제공무원(치과의사) 채용 공고",
+  "body": "근무시간: 주 20시간 (월·수·금 오전)\n담당업무: 구강보건실 진료\n접수기간: 2026. 10. 12.(월) ~ 10. 16.(금)",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "specialties": [
+    "gp"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "경기 의정부시"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "[경북대학교] 2027년도 상반기 기금교수(치과대학) 초빙",
+  "body": "초빙분야: 치과보존학 1명\n접수기간: 2026. 10. 12. ~ 10. 23.",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "endo"
+   ],
+   "deadline": "2026-10-23"
+  }
+ },
+ {
+  "title": "[한림대학교] 의과대학 치과학교실 전임교원 초빙",
+  "body": "초빙분야: 구강악안면외과 1명\n지원자격: 구강악안면외과 전문의, 박사학위 소지자\n접수기간: 2026. 10. 5. ~ 10. 20.",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "univ_hospital_dept",
+   "positions": [
+    "faculty"
+   ],
+   "specialties": [
+    "oms"
+   ],
+   "deadline": "2026-10-20"
+  }
+ },
+ {
+  "title": "관악서울대학교치과병원 치과의사(진료교수) 채용",
+  "body": "채용분야: 통합치의학과 1명\n접수기간: 2026. 10. 7. ~ 10. 16.",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "dental_univ_hospital",
+   "positions": [
+    "clinical_professor"
+   ],
+   "specialties": [
+    "integrated"
+   ],
+   "regions": [
+    "서울 관악구"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "2027년도 레지던트 최종 합격자 명단",
+  "body": "첨부파일 참조",
+  "source_kind": "hospital_board",
+  "institution_hint": "연세대학교 치과대학병원",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "2027년도 전공의 면접 대상자 공고",
+  "body": "면접 대상자는 첨부파일을 확인하시기 바랍니다.",
+  "source_kind": "hospital_board",
+  "institution_hint": "부산대학교치과병원",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "치과 촉탁의 채용 공고",
+  "body": "접수: 10.13(화)~10.16(금) 18:00\n근무: 주 3일 오전",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울특별시 서울의료원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "서울 중랑구"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "중앙장애인구강진료센터 진료교수 채용",
+  "body": "채용분야: 소아치과 또는 장애인치과 진료 1명\n접수기간: 2026. 10. 5. ~ 10. 16.",
+  "source_kind": "hospital_board",
+  "institution_hint": "서울대학교치과병원",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "disabled_dental",
+   "positions": [
+    "clinical_professor"
+   ],
+   "regions": [
+    "서울 종로구"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "[강원 인제군] 보건소 임기제공무원(치과의사) 채용 공고",
+  "body": "인제군 공고 제2026-812호\n1. 채용분야: 일반임기제공무원 6호(치과의사) 1명\n2. 근무부서: 인제군보건소 구강보건실\n3. 응시자격: 치과의사 면허 소지자\n4. 접수기간: 2026. 10. 12.(월) ~ 10. 16.(금) 18:00\n5. 근무기간: 임용일로부터 2년(근무실적에 따라 5년 범위 내 연장 가능)",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "specialties": [
+    "gp"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "강원 인제군"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "송파구보건소 시간선택제임기제공무원(치과의사) 채용 공고",
+  "body": "서울특별시 송파구 공고 제2026-1530호\n○ 채용직급: 시간선택제임기제 '라'급(치과의사) 1명\n○ 근무시간: 주 20시간(월~금 09:00~13:00)\n○ 업무내용: 구강검진, 불소도포, 구강보건교육\n○ 원서접수: 2026.10.13.(화) ~ 2026.10.15.(목)\n○ 접수방법: 방문 또는 등기우편",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "specialties": [
+    "gp"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "서울 송파구"
+   ],
+   "deadline": "2026-10-15"
+  }
+ },
+ {
+  "title": "광주시보건소 시간선택제임기제(치과의사) 채용 공고",
+  "body": "광주시 공고 제2026-1421호\n1. 채용인원: 시간선택제임기제 '나'급 치과의사 1명\n2. 근무장소: 광주시보건소 구강보건센터(경기도 광주시 파발로 155)\n3. 근무시간: 주 35시간\n4. 접수기간: 2026. 10. 14.(수) ~ 10. 20.(화)",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "경기 광주시"
+   ],
+   "deadline": "2026-10-20"
+  }
+ },
+ {
+  "title": "광주광역시 북구보건소 일반임기제(치과의사) 채용",
+  "body": "북구 공고 제2026-998호\n근무지: 북구보건소 구강보건실(광주광역시 북구 우치로 120)\n접수기간: 10.19.(월)~10.21.(수)",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "광주 북구"
+   ],
+   "deadline": "2026-10-21"
+  }
+ },
+ {
+  "title": "울산 동구보건소 일반임기제(치과의사) 채용",
+  "body": "근무시간: 주 5일 09:00~18:00\n접수: 10.13~10.16",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "울산 동구"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "고성군보건소 임기제공무원(치과의사) 채용 재공고",
+  "body": "고성군 공고 제2026-2001호\n경상남도 고성군 보건소 치과의사를 다음과 같이 재공고합니다.\n접수기간: 2026. 10. 13.~10. 19.",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "경남 고성군"
+   ],
+   "deadline": "2026-10-19"
+  }
+ },
+ {
+  "title": "세종특별자치시 보건소 임기제공무원(치과의사) 및 기간제(치과위생사) 채용",
+  "body": "1. 치과의사: 일반임기제 7호 1명\n2. 치과위생사: 기간제 2명\n근무지: 세종시보건소(세종시 보람동)\n접수기간: 2026.10.13~2026.10.16",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "is_dentist": true,
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "세종"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "영광군보건소 기간제근로자(치과위생사) 채용 공고",
+  "body": "근무지: 영광군보건소 구강보건실\n자격: 치과위생사 면허 소지자\n접수기간: 2026.10.12.~10.14.",
+  "source_kind": "aggregator",
+  "expected": {
+   "is_dentist": false,
+   "inst_type": "public_hospital",
+   "regions": [
+    "전남 영광군"
+   ]
+  }
+ },
+ {
+  "title": "인천광역시 제물포구보건소 임기제(치과의사) 채용",
+  "body": "접수기간: 2026.10.14~10.20",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "인천 제물포구"
+   ],
+   "deadline": "2026-10-20"
+  }
+ },
+ {
+  "title": "단양군보건의료원 치과의사(일반임기제) 채용 공고",
+  "body": "원서접수 2026.10.12.(월)~10.23.(금)",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "충북 단양군"
+   ],
+   "deadline": "2026-10-23"
+  }
+ },
+ {
+  "title": "울릉군보건의료원 치과 전문임기제 채용(관사 제공)",
+  "body": "근무지: 경북 울릉군 울릉읍\n응시원서 접수: 2026. 10. 19.(월) ~ 10. 21.(수)",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "경북 울릉군"
+   ],
+   "deadline": "2026-10-21"
+  }
+ },
+ {
+  "title": "포항시 남구보건소 시간선택제임기제공무원(치과의사) 채용 공고",
+  "body": "공고기간: 2026. 10. 2.(금) ~ 2026. 10. 16.(금)\n접수기간: 2026. 10. 14.(수) ~ 2026. 10. 16.(금) 18:00\n근무시간: 주 20시간\n임용예정일: 2026. 11. 2.\n근무기간: 임용일 ~ 2028. 11. 1.",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "경북 포항시"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "보건지소 대체 치과의사(기간제) 구합니다",
+  "body": "근무기간: 계약일 ~ 2026. 12. 31.\n근무지: 강원 평창군 대화보건지소\n채용 시 마감",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "regions": [
+    "강원 평창군"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "구강보건 전담 치과의사(기간제) 채용",
+  "body": "근무지역 : 전남 > 화순군\n고용형태 : 기간제(1년)\n접수마감 : 2026-10-15",
+  "source_kind": "aggregator",
+  "institution_hint": "화순군보건소",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "전남 화순군"
+   ],
+   "deadline": "2026-10-15"
+  }
+ },
+ {
+  "title": "2026년 제3회 임기제공무원(치과의사) 최종합격자 공고",
+  "body": "울산광역시 동구 공고 제2026-555호\n최종합격자: 김OO\n임용예정일: 2026.11.2.",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "other"
+  }
+ },
+ {
+  "title": "평택시 송탄보건소 시간선택제임기제(치과의사) 서류전형 합격자 및 면접시험 안내",
+  "body": "",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "other",
+   "regions": [
+    "경기 평택시"
+   ]
+  }
+ },
+ {
+  "title": "[구직] 공보의 소집해제 예정, 경기 남부 보건소·공공기관 시간제 자리 찾습니다",
+  "body": "2027년 4월 소집해제 예정입니다. 수원·화성·오산 쪽이면 좋겠습니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "seeking",
+   "regions": [
+    "경기 수원시",
+    "경기 화성시",
+    "경기 오산시"
+   ]
+  }
+ },
+ {
+  "title": "보건소 임기제나 공공병원 자리 구합니다 (대전/세종)",
+  "body": "공보의 3년 마치고 내년 봄부터 근무 가능합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "seeking",
+   "regions": [
+    "대전",
+    "세종"
+   ]
+  }
+ },
+ {
+  "title": "국립공주병원 치과 의무직 공무원(일반임기제) 채용 공고",
+  "body": "보건복지부 국립공주병원에서 치과의사를 채용합니다.\n채용분야: 의무사무관(치과) 1명\n응시자격: 치과의사 면허 소지자\n접수기간: 2026. 10. 8. ~ 10. 22.\n문의: 041-850-0000",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "충남 공주시"
+   ],
+   "deadline": "2026-10-22"
+  }
+ },
+ {
+  "title": "상주적십자병원 치과 과장(계약직) 채용",
+  "body": "대한적십자사 상주적십자병원 치과 전문의 또는 일반의 채용\n근무형태: 계약직(1년, 연장 가능), 주 5일\n접수마감: 2026. 10. 23.(금)",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "경북 상주시"
+   ],
+   "deadline": "2026-10-23"
+  }
+ },
+ {
+  "title": "강진의료원 치과의사(계약직) 채용 공고",
+  "body": "근무조건: 주 5일(월~금), 당직 없음\n자격: 치과의사 면허 소지자\n서류접수: 2026.10.5 ~ 2026.10.16",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "전남 강진군"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "근로복지공단 동해병원 치과 전문의(계약직) 채용",
+  "body": "근무지: 동해병원 치과\n채용인원: 1명\n접수기간: 2026.10.06 ~ 2026.10.19",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "강원 동해시"
+   ],
+   "deadline": "2026-10-19"
+  }
+ },
+ {
+  "title": "인천광역시의료원 치과 촉탁의 채용 공고",
+  "body": "근무형태: 주 3일 (화·목·토)\n자격: 치과의사 면허 소지자\n접수: 2026.10.12 ~ 10.23",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "인천 제물포구"
+   ],
+   "deadline": "2026-10-23"
+  }
+ },
+ {
+  "title": "서울특별시어린이병원 치과(소아치과) 전문의 채용 공고",
+  "body": "서울특별시 공고\n채용분야: 소아치과 전문의(전문임기제 나급) 1명\n주요업무: 장애아동 및 소아 치과진료, 전신마취 하 치과치료\n근무지: 서울특별시어린이병원(서초구 헌릉로 260)\n원서접수: 2026. 10. 15.(목) ~ 10. 21.(수)",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "specialties": [
+    "pedo"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "서울 서초구"
+   ],
+   "deadline": "2026-10-21"
+  }
+ },
+ {
+  "title": "중앙보훈병원 치과병원 치과보철과 계약직 의사 채용",
+  "body": "채용분야: 치과보철과 전문의 1명(계약직, 2년)\n원서접수: 2026.10.05(월) ~ 2026.10.16(금) 17:00",
+  "source_kind": "hospital_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "specialties": [
+    "prostho"
+   ],
+   "regions": [
+    "서울 강동구"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "국립중앙의료원 치과 전임의 모집",
+  "body": "모집분야: 구강악안면외과 전임의 1명\n원서접수: 2026.10.12 ~ 10.19",
+  "source_kind": "hospital_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "oms"
+   ],
+   "regions": [
+    "서울 중구"
+   ],
+   "deadline": "2026-10-19"
+  }
+ },
+ {
+  "title": "국민건강보험 일산병원 치과 촉탁의 채용",
+  "body": "근무: 주 2일(화, 금)\n접수마감: 10월 16일(금)",
+  "source_kind": "hospital_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "경기 고양시"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "국립경찰병원 치과 계약직 의사(치주과) 채용 공고",
+  "body": "접수기간 2026.10.08~2026.10.21",
+  "source_kind": "hospital_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "specialties": [
+    "perio"
+   ],
+   "regions": [
+    "서울 송파구"
+   ],
+   "deadline": "2026-10-21"
+  }
+ },
+ {
+  "title": "국립나주병원 치과 촉탁의 모집",
+  "body": "근무: 주 2회(화, 목 오후)\n자격: 치과의사\n마감: 2026. 10. 16.",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "전남 나주시"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "국립소록도병원 의무직 공무원(치과) 채용 공고",
+  "body": "주소: 전라남도 고흥군 도양읍 소록선창길 65\n채용인원: 일반임기제 치과의사 1명\n관사 제공\n원서접수: 2026.10.19.~10.23.",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "전남 고흥군"
+   ],
+   "deadline": "2026-10-23"
+  }
+ },
+ {
+  "title": "서울특별시 서부장애인치과병원 치과의사(소아치과) 채용",
+  "body": "근무형태: 정규직(주 5일)\n자격: 소아치과 전문의\n원서접수: 2026.10.13~10.22",
+  "source_kind": "hospital_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "disabled_dental",
+   "specialties": [
+    "pedo"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "서울 강서구"
+   ],
+   "deadline": "2026-10-22"
+  }
+ },
+ {
+  "title": "경기권역장애인구강진료센터 진료 촉탁의 모집 (월 2회 토요일)",
+  "body": "근무: 월 2회 토요일 오전 9시~13시\n자격: 치과의사 면허 소지자\n마감: 10월 20일",
+  "source_kind": "hospital_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "disabled_dental",
+   "positions": [
+    "contract"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "경기 용인시"
+   ],
+   "deadline": "2026-10-20"
+  }
+ },
+ {
+  "title": "국군의무사령부 국군양주병원 민간의사(치과) 채용 공고",
+  "body": "채용분야: 치과 민간의사(계약직) 1명\n근무지: 국군양주병원(경기도 양주시 남면)\n계약기간: 2027.1.1. ~ 2027.12.31.\n접수기간: 2026.10.12.~2026.10.23.",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "specialties": [
+    "gp"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "경기 양주시"
+   ],
+   "deadline": "2026-10-23"
+  }
+ },
+ {
+  "title": "육군 제7보병사단 의무대 민간 치과의사(계약직) 모집",
+  "body": "근무지: 강원특별자치도 화천군 사내면\n근무형태: 주 5일 (09:00~18:00), 관사 제공\n지원서 접수: 10월 20일(화)까지 이메일 접수",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "강원 화천군"
+   ],
+   "deadline": "2026-10-20"
+  }
+ },
+ {
+  "title": "공군 제8전투비행단 치과 민간의사 채용 (원주)",
+  "body": "계약직, 주 5일\n접수기간: 2026.10.13 ~ 10.22",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "강원 원주시"
+   ],
+   "deadline": "2026-10-22"
+  }
+ },
+ {
+  "title": "법무부 광주교도소 의료과 의무관(치과) 일반임기제 채용",
+  "body": "1. 채용분야: 일반임기제공무원(6호) 치과의사 1명\n2. 근무지: 광주교도소(광주광역시 북구 삼각동)\n3. 담당업무: 수용자 치과 진료\n4. 원서접수 기간: 2026. 10. 7. ~ 10. 19. 18:00까지",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "specialties": [
+    "gp"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "광주 북구"
+   ],
+   "deadline": "2026-10-19"
+  }
+ },
+ {
+  "title": "경북북부제1교도소 의무관(치과의사) 채용 공고",
+  "body": "근무지: 경상북도 청송군 진보면\n접수: 10.12.~10.16.",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "경북 청송군"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "여주교도소 치과 의무관(임기제) 채용",
+  "body": "근무지: 법무부 소속 교정시설(여주교도소)\n응시자격: 치과의사 면허 소지자\n접수기간: 2026.10.12.~10.16.",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "specialties": [
+    "gp"
+   ],
+   "specialty_hints": [],
+   "regions": [
+    "경기 여주시"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "광주 상무지구 치과 페이닥터 모십니다",
+  "body": "주 5일, 세후 1200 보장\n교정 제외 일반진료\n연락: 010-0000-0000",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "dental_clinic",
+   "positions": [
+    "staff_dentist"
+   ],
+   "specialties": [
+    "gp"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "광주 서구"
+   ]
+  }
+ },
+ {
+  "title": "경기 광주 오포 치과에서 봉직의 구합니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "positions": [
+    "staff_dentist"
+   ],
+   "regions": [
+    "경기 광주시"
+   ]
+  }
+ },
+ {
+  "title": "광주시 태전동 신규개원 치과 원장님 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "경기 광주시"
+   ]
+  }
+ },
+ {
+  "title": "광주광역시 광산구 수완지구 치과 파트 원장님 구합니다(주 2일)",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "광주 광산구"
+   ]
+  }
+ },
+ {
+  "title": "광주 첨단 치과 대진 구합니다 (11/2~11/7)",
+  "body": "원장님 학회 일정으로 1주일 대진 구합니다. 일 60만원.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "locum"
+   ],
+   "deadline": ""
+  }
+ },
+ {
+  "title": "광주(경기도) 신현리 치과 페이닥터 모십니다",
+  "body": "주 5일, 숙소 지원",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "경기 광주시"
+   ]
+  }
+ },
+ {
+  "title": "광주 오포읍 치과 봉직의 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "경기 광주시"
+   ]
+  }
+ },
+ {
+  "title": "대구 동성로 치과 페이닥터 모집 (주 4.5일)",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "대구 중구"
+   ]
+  }
+ },
+ {
+  "title": "부산 중구 남포동 치과 봉직의 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "부산 중구"
+   ]
+  }
+ },
+ {
+  "title": "강서구 화곡역 도보 2분 치과 페이닥터 구합니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "서울 강서구"
+   ]
+  }
+ },
+ {
+  "title": "강서구 명지국제신도시 치과 봉직의 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "부산 강서구"
+   ]
+  }
+ },
+ {
+  "title": "강원 고성(간성) 치과 원장님 구합니다, 숙소 제공",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "강원 고성군"
+   ]
+  }
+ },
+ {
+  "title": "대전 둔산동 치과 페이닥터 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "대전 서구"
+   ]
+  }
+ },
+ {
+  "title": "판교역 도보 3분, 소아치과 전문의 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "specialties": [
+    "pedo"
+   ],
+   "regions": [
+    "경기 성남시"
+   ]
+  }
+ },
+ {
+  "title": "일산 라페스타 인근 치과 페이 구함 (주 5일)",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "hiring",
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "경기 고양시"
+   ]
+  }
+ },
+ {
+  "title": "송도 센트럴파크역 치과 교정과 전문의 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "specialties": [
+    "ortho"
+   ],
+   "regions": [
+    "인천 연수구"
+   ]
+  }
+ },
+ {
+  "title": "부산 송도해수욕장 근처 치과 페이닥터 구합니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "부산 서구"
+   ]
+  }
+ },
+ {
+  "title": "서면역 2번 출구 치과 봉직의 모집",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "부산 부산진구"
+   ]
+  }
+ },
+ {
+  "title": "센텀시티 치과 GP 원장님 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "부산 해운대구"
+   ]
+  }
+ },
+ {
+  "title": "부산 범어사역 인근 치과 봉직의 구합니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "부산 금정구"
+   ]
+  }
+ },
+ {
+  "title": "광화문 세종대로 치과 페이닥터 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "서울 종로구"
+   ]
+  }
+ },
+ {
+  "title": "분당서울대병원 맞은편 치과에서 페이닥터 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "inst_type": "dental_clinic",
+   "positions": [
+    "staff_dentist"
+   ],
+   "regions": [
+    "경기 성남시"
+   ]
+  }
+ },
+ {
+  "title": "강북삼성병원 근처 치과 페이닥터 모십니다",
+  "body": "주 5일, 세후 1200",
+  "source_kind": "local_board",
+  "expected": {
+   "inst_type": "dental_clinic",
+   "positions": [
+    "staff_dentist"
+   ]
+  }
+ },
+ {
+  "title": "순천향대 서울병원 근처 치과 페이닥터",
+  "body": "서울 용산구 한남동, 주 5일",
+  "source_kind": "local_board",
+  "expected": {
+   "inst_type": "dental_clinic",
+   "regions": [
+    "서울 용산구"
+   ]
+  }
+ },
+ {
+  "title": "아주대병원 정문 앞 치과 봉직의 구합니다",
+  "body": "주 5일 근무",
+  "source_kind": "local_board",
+  "expected": {
+   "inst_type": "dental_clinic"
+  }
+ },
+ {
+  "title": "순천 연향동 치과 페이닥터 구합니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "전남 순천시"
+   ]
+  }
+ },
+ {
+  "title": "순천향대학교 부천병원 치과 임상강사 모집",
+  "body": "모집분야: 구강악안면외과 1명\n접수마감: 2026.10.20",
+  "source_kind": "hospital_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "univ_hospital_dept",
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "oms"
+   ],
+   "regions": [
+    "경기 부천시"
+   ],
+   "deadline": "2026-10-20"
+  }
+ },
+ {
+  "title": "칠곡경북대학교병원 치과 임상강사(전임의) 모집",
+  "body": "모집분야: 소아치과 1명\n원서접수: 2026.10.12.~10.16.",
+  "source_kind": "hospital_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "univ_hospital_dept",
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "pedo"
+   ],
+   "regions": [
+    "대구 북구"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "한림대학교 강남성심병원 치과 임상강사 모집 공고",
+  "body": "모집과: 치과보철과 1명\n접수기간: 2026. 10. 7. ~ 10. 14.",
+  "source_kind": "hospital_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "univ_hospital_dept",
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "prostho"
+   ],
+   "regions": [
+    "서울 영등포구"
+   ],
+   "deadline": "2026-10-14"
+  }
+ },
+ {
+  "title": "보존과 전문의 모십니다 (주 4일)",
+  "body": "서울 송파구 잠실새내역 앞 치과입니다.\n근무: 주 4일, 세후 1500 + 인센티브\n복지: 하계휴가 5일, 학회비 지원\n자세한 내용은 하단 연락처로 문의주세요.",
+  "source_kind": "local_board",
+  "expected": {
+   "specialties": [
+    "endo"
+   ],
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "서울 송파구"
+   ]
+  }
+ },
+ {
+  "title": "소아치과 페이닥터 모십니다",
+  "body": "부산 해운대구 좌동 어린이치과입니다.\n방학 성수기에는 토요일 근무 있습니다.\n주 5일, 소아치과 전문의 우대",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "부산 해운대구"
+   ]
+  }
+ },
+ {
+  "title": "치과 페이닥터 모십니다 (주 5일)",
+  "body": "인천 남동구 구월동 치과입니다. 과잉진료 없이 환자 중심 진료에 주안점을 두고 있습니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "work_types": [
+    "fulltime"
+   ],
+   "regions": [
+    "인천 남동구"
+   ]
+  }
+ },
+ {
+  "title": "[인천] 치과 봉직의 모십니다",
+  "body": "구월동 로데오거리 위치\n주 5일, 세후 1300\n해외 연수 및 세미나 비용 지원",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "인천 남동구"
+   ]
+  }
+ },
+ {
+  "title": "[경북 구미] 페이닥터 모십니다, 교정과 전문의 상주",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "경북 구미시"
+   ]
+  }
+ },
+ {
+  "title": "임플란트 가능하신 원장님 모십니다",
+  "body": "대구 수성구 범어동 위치\n매출 목표 달성 시 인센티브 별도",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "대구 수성구"
+   ]
+  }
+ },
+ {
+  "title": "페이닥터 모십니다(주 4.5일)",
+  "body": "경남 김해시 장유 치과입니다. 거창한 복지는 없지만 칼퇴 보장합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "경남 김해시"
+   ]
+  }
+ },
+ {
+  "title": "[경기] 임플란트 잘 하시는 원장님 모십니다",
+  "body": "용인 수지구 치과\n급여: 기본 + 인센티브, 월 이천만원 이상 가져가시는 분도 계십니다",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "경기 용인시"
+   ]
+  }
+ },
+ {
+  "title": "치과 원장님 모십니다 (관사 제공)",
+  "body": "강원 강릉시 교동 치과입니다. 진료실에서 동해 바다가 보입니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "강원 강릉시"
+   ]
+  }
+ },
+ {
+  "title": "임플란트·틀니 가능하신 원장님 모십니다",
+  "body": "경북 포항시 북구 치과입니다. 고령 환자가 많아 보철 위주 진료입니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "경북 포항시"
+   ]
+  }
+ },
+ {
+  "title": "봉직의 모십니다",
+  "body": "경남 김해 외동 치과, 남해고속도로 서김해IC 5분 거리",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "경남 김해시"
+   ]
+  }
+ },
+ {
+  "title": "보철과 전문의 모십니다",
+  "body": "충남 아산시 배방읍 치과입니다. 매출 기준 인센티브 부여, 4대보험 가입.",
+  "source_kind": "local_board",
+  "expected": {
+   "specialties": [
+    "prostho"
+   ],
+   "regions": [
+    "충남 아산시"
+   ]
+  }
+ },
+ {
+  "title": "페이닥터 구합니다",
+  "body": "인천 부평구 부평역 인근, 감염관리 강화된 치과입니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "인천 부평구"
+   ]
+  }
+ },
+ {
+  "title": "치과 페이닥터 모십니다",
+  "body": "전남 목포시 하당 치과입니다. 좋은 원장님과 함께하게 된다면 영광이겠습니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "전남 목포시"
+   ]
+  }
+ },
+ {
+  "title": "봉직의 구합니다",
+  "body": "부산 강서구 명지동 치과, 김해공항 10분",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "부산 강서구"
+   ]
+  }
+ },
+ {
+  "title": "[충남 천안] 교정과 전문의 상주, GP 원장님 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "specialties": [
+    "gp"
+   ],
+   "regions": [
+    "충남 천안시"
+   ]
+  }
+ },
+ {
+  "title": "신규 개원 치과 대표원장님과 함께할 페이닥터 모십니다",
+  "body": "경기 화성시 동탄2신도시 신규 개원. 장비 예산 충분하며 음성 차트 시스템 사용합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "경기 화성시"
+   ]
+  }
+ },
+ {
+  "title": "충북 음성군 금왕읍 치과 원장님 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "충북 음성군"
+   ]
+  }
+ },
+ {
+  "title": "치과 원장님 모십니다",
+  "body": "서울 은평구 연신내역 치과입니다. 고양이 키우는 직원이 많아요.",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "서울 은평구"
+   ]
+  }
+ },
+ {
+  "title": "인천 서구 청라 치과 봉직의 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "인천 서구"
+   ]
+  }
+ },
+ {
+  "title": "검단신도시 치과 페이닥터 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "인천 검단구"
+   ]
+  }
+ },
+ {
+  "title": "인천 서구 검단 치과 원장님 구합니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "인천 검단구"
+   ]
+  }
+ },
+ {
+  "title": "인천 동구 송림동 치과 페이닥터 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "인천 제물포구"
+   ]
+  }
+ },
+ {
+  "title": "인천 중구 영종하늘도시 치과 봉직의 구합니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "인천 영종구"
+   ]
+  }
+ },
+ {
+  "title": "영종구 운서동 치과 페이닥터 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "인천 영종구"
+   ]
+  }
+ },
+ {
+  "title": "치과의사(페이닥터) 채용",
+  "body": "근무지역: 경기 남부 (자세한 위치는 면접 시 안내)\n주 5일, 세후 1400",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "경기"
+   ]
+  }
+ },
+ {
+  "title": "[경남] 교정과 전문의 모십니다",
+  "body": "지역 : 경상남도 > 창원시 > 성산구\n근무 : 주 4일",
+  "source_kind": "local_board",
+  "expected": {
+   "specialties": [
+    "ortho"
+   ],
+   "regions": [
+    "경남 창원시"
+   ]
+  }
+ },
+ {
+  "title": "인하대학교병원 치과 임상강사 모집",
+  "body": "모집분야: 구강악안면외과 1명\n접수기간: 2026.10.12 ~ 10.16",
+  "source_kind": "hospital_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "univ_hospital_dept",
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "oms"
+   ],
+   "regions": [
+    "인천 제물포구"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "국군대전병원 민간의사(치과) 채용 공고",
+  "body": "계약기간: 2027.1.1.~2027.12.31.\n접수기간: 2026.10.12.~10.21.",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "regions": [
+    "대전"
+   ],
+   "deadline": "2026-10-21"
+  }
+ },
+ {
+  "title": "국립춘천병원 치과 촉탁의 채용",
+  "body": "근무: 주 1회(수 오후)\n접수: 2026.10.12~10.16",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "강원 춘천시"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "국군수도병원 치과 전임의 모집",
+  "body": "모집분야: 치주과 1명\n원서접수: 2026.10.13~10.20",
+  "source_kind": "hospital_board",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "fellow"
+   ],
+   "specialties": [
+    "perio"
+   ],
+   "regions": [
+    "경기 성남시"
+   ],
+   "deadline": "2026-10-20"
+  }
+ },
+ {
+  "title": "성남시 수정구보건소 시간선택제임기제(치과의사) 채용",
+  "body": "근무: 주 20시간\n원서접수: 10.14~10.16",
+  "source_kind": "aggregator",
+  "expected": {
+   "post_kind": "hiring",
+   "inst_type": "public_hospital",
+   "positions": [
+    "contract"
+   ],
+   "work_types": [
+    "parttime"
+   ],
+   "regions": [
+    "경기 성남시"
+   ],
+   "deadline": "2026-10-16"
+  }
+ },
+ {
+  "title": "[인천] 치과 봉직의 구합니다 (주 5일)",
+  "body": "인천 남동구 구월동 로데오거리 위치\n주 5일, 세후 1300\n해외 연수 및 세미나 비용 지원",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "인천 남동구"
+   ]
+  }
+ },
+ {
+  "title": "[경기] 임플란트 가능하신 원장님 구합니다",
+  "body": "경기 용인시 수지구 치과\n급여: 기본 + 인센티브, 월 이천만원 이상 가져가시는 분도 계십니다",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "경기 용인시"
+   ]
+  }
+ },
+ {
+  "title": "경기도 광주시 경안동 치과 페이닥터 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "경기 광주시"
+   ]
+  }
+ },
+ {
+  "title": "광주 남구 봉선동 치과 봉직의 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "광주 남구"
+   ]
+  }
+ },
+ {
+  "title": "포항 남구 해도동 치과 원장님 구합니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "경북 포항시"
+   ]
+  }
+ },
+ {
+  "title": "울산 남구 삼산동 치과 페이닥터 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "울산 남구"
+   ]
+  }
+ },
+ {
+  "title": "[구직] 인천 송도/청라 쪽 페이 자리 찾습니다",
+  "body": "경력 5년차, 내년 1월부터 가능합니다.",
+  "source_kind": "local_board",
+  "expected": {
+   "post_kind": "seeking",
+   "regions": [
+    "인천 연수구",
+    "인천 서구"
+   ]
+  }
+ },
+ {
+  "title": "서울연세치과(부산 서면) 페이닥터 모십니다",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "부산 부산진구"
+   ]
+  }
+ },
+ {
+  "title": "서울삼성치과 페이닥터 모십니다",
+  "body": "대구 수성구 범어동 위치, 주 5일",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "대구 수성구"
+   ]
+  }
+ },
+ {
+  "title": "대전 둔산동 서울플란트치과 페이닥터 모집",
+  "body": "",
+  "source_kind": "local_board",
+  "expected": {
+   "regions": [
+    "대전 서구"
+   ]
+  }
+ }
+]

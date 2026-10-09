@@ -52,8 +52,9 @@ def normalize(text: str) -> str:
 @dataclass(frozen=True)
 class _Entry:
     targets: tuple[tuple[str, str | None], ...]
-    risky: bool = False  # 시·도 이름이 같은 글에 있어야 인정
+    risky: bool = False  # 바로 앞에 그 시·도 이름이 있어야 인정
     ctx: str | None = None  # 이 시·도 이름이 같은 글에 있어야 인정
+    not_ctx: str | None = None  # 이 시·도만 언급된 글에서는 인정하지 않음
     block: tuple[str, ...] = ()
 
 
@@ -83,7 +84,12 @@ def _index() -> tuple[dict[str, list[_Entry]], re.Pattern, re.Pattern, re.Patter
     for alias in ALIASES:
         add(
             alias["name"],
-            _Entry(tuple(alias["to"]), ctx=alias.get("ctx"), block=tuple(SHORT_BLOCK_SUFFIX.get(alias["name"], ()))),
+            _Entry(
+                tuple(alias["to"]),
+                ctx=alias.get("ctx"),
+                not_ctx=alias.get("not_ctx"),
+                block=tuple(SHORT_BLOCK_SUFFIX.get(alias["name"], ())),
+            ),
         )
     # 공항 등 다른 지역 이름이 들어간 고유명사
     add("김포공항", _Entry((("서울", "강서구"),)))
@@ -108,6 +114,16 @@ def _index() -> tuple[dict[str, list[_Entry]], re.Pattern, re.Pattern, re.Patter
 
 
 @lru_cache(maxsize=1)
+def _short_names() -> frozenset[str]:
+    out = set()
+    for sggs in SIGUNGU.values():
+        for sgg in sggs:
+            if len(sgg[:-1]) >= 2:
+                out.add(sgg[:-1])
+    return frozenset(out)
+
+
+@lru_cache(maxsize=1)
 def _sido_lookup() -> dict[str, str]:
     out = {}
     for sido, ns in SIDO_NAMES.items():
@@ -127,7 +143,9 @@ def _find_sidos(text: str) -> list[tuple[int, int, str]]:
         name = m.group(1)
         sido = lookup[name]
         end = m.end()
-        if name == "세종" and re.match(r"(대왕|문화|로|대\s*학|대학교|병원)", text[end:]):
+        if name == "세종" and re.match(r"(대왕|문화|로|대로|대\s*학|대학교|병원)", text[end:]):
+            continue
+        if re.match(r"[가-힣]{0,8}?(?:치과|의원|구치소|교도소|어린이병원)", text[end:]) and not re.match(r"(?:시|도|특별|광역)", text[end:]):
             continue
         if name == "경기" and re.match(r"\s*(가|는|를|의\s*(?:흐름|침체|불황)|침체|불황|회복|악화|둔화)", text[end:]):
             continue
@@ -136,9 +154,10 @@ def _find_sidos(text: str) -> list[tuple[int, int, str]]:
 
 
 def _gyeonggi_gwangju(text: str, start: int) -> bool:
-    """'광주'가 경기 광주시를 뜻하는지 (바로 앞에 '경기'가 있는지)."""
+    """'광주'가 경기 광주시를 뜻하는지 (앞에 '경기'가 있거나 '광주(경기도)')."""
     before = text[max(0, start - 8):start]
-    return bool(re.search(r"경기(도)?\s*[/·,]?\s*$", before))
+    after = text[start:start + 12]
+    return bool(re.search(r"경기(도)?\s*[/·,]?\s*$", before) or re.match(r"광주(?:시)?\s*[(\[]\s*경기", after))
 
 
 def parse_regions(text: str, max_results: int = 6) -> list[Region]:
@@ -151,6 +170,7 @@ def parse_regions(text: str, max_results: int = 6) -> list[Region]:
 
     sidos = _find_sidos(text)
     mentioned = {s for _, _, s in sidos}
+    SHORT_NAMES = _short_names()  # noqa: N806
 
     hits: list[tuple[int, Region]] = []
     covered: list[tuple[int, int]] = []
@@ -158,13 +178,18 @@ def parse_regions(text: str, max_results: int = 6) -> list[Region]:
     for m in name_re.finditer(text):
         name = m.group(1)
         after = text[m.end():m.end() + 6]
+        near = _nearest_sido(sidos, m.start(), window=12)
+        is_short = name in SHORT_NAMES
         chosen: list[tuple[str, str | None]] = []
         for entry in names[name]:
             if any(after.startswith(b) for b in entry.block):
                 continue
             if entry.ctx and entry.ctx not in mentioned:
                 continue
-            if entry.risky and not any(t[0] in mentioned for t in entry.targets):
+            if entry.not_ctx and entry.not_ctx in mentioned and not any(t[0] in mentioned for t in entry.targets):
+                continue
+            needs_near = entry.risky or (is_short and re.match(r"[동로길]", after or " "))
+            if needs_near and not any(t[0] == near for t in entry.targets):
                 continue
             chosen.extend(entry.targets)
         if not chosen:
@@ -185,6 +210,26 @@ def parse_regions(text: str, max_results: int = 6) -> list[Region]:
         for sido, sgg in chosen:
             hits.append((m.start(), Region(sido, sgg)))
         covered.append((m.start(), m.end()))
+
+    # 기관 이름 속 도시 이름
+    for m in re.finditer(
+        r"(?:국립|시립|도립|군립|근로복지공단\s*|국군)?([가-힣]{2,3})(?=(?:적십자|보훈|산재|아산|기독|성모)?(?:병원|의료원|보건소|보건의료원))",
+        text,
+    ):
+        city = m.group(1)
+        if any(s <= m.start(1) < e for s, e in covered):
+            continue
+        if city in _sido_lookup() and len(city) == 2 and city not in ("광주",):  # '국군대전병원'
+            hits.append((m.start(1), Region(_sido_lookup()[city])))
+            covered.append((m.start(1), m.end(1)))
+            continue
+        for entry in names.get(city, []):
+            if any(text[m.end(1):].startswith(b) for b in entry.block):
+                continue  # '아산병원'(서울아산병원) 같은 고유 이름
+            if city in SHORT_NAMES and len(entry.targets) == 1 and entry.targets[0][1]:
+                hits.append((m.start(1), Region(*entry.targets[0])))
+                covered.append((m.start(1), m.end(1)))
+                break
 
     # 광주 처리
     for m in re.finditer(r"(?<![" + HANGUL + r"])광주(광역시|시)?(?!대(?:학|\s*병원))", text):
@@ -212,6 +257,20 @@ def parse_regions(text: str, max_results: int = 6) -> list[Region]:
 
     if any(r == Region("경기", "광주시") for _, r in hits):
         hits = [(pos, r) for pos, r in hits if r != Region("광주")]
+    # 2026년 분구: '인천 서구 검단' → 검단구, '인천 중구 영종도' → 영종구
+    found = {r for _, r in hits}
+    if Region("인천", "검단구") in found:
+        hits = [(pos, r) for pos, r in hits if r != Region("인천", "서구")]
+    multi = {}
+    for alias in ALIASES:
+        if len(alias["to"]) > 1:
+            multi[frozenset(Region(*t) for t in alias["to"])] = True
+    for group in multi:
+        inside = group & found
+        if len(inside) > 1:
+            singles = [r for pos, r in hits if r in group and sum(1 for _, x in hits if x == r) > 1]
+            if singles:
+                hits = [(pos, r) for pos, r in hits if r not in group or r in singles]
 
     hits.sort(key=lambda h: h[0])
     ordered = list(dict.fromkeys(r for _, r in hits))

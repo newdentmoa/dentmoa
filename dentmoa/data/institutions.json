@@ -575,8 +575,7 @@
    "서울시장애인치과병원",
    "서울장애인치과병원",
    "서울특별시 장애인치과병원",
-   "서울특별시장애인치과병원",
-   "시립장애인치과병원"
+   "서울특별시장애인치과병원"
   ],
   "homepage": "",
   "recruit_url": "https://snudh.recruiter.co.kr/",
@@ -592,7 +591,6 @@
   "aliases": [
    "SNUDH 장애인치과",
    "서울대치과병원 장애인구강진료센터",
-   "중앙센터",
    "중앙장애인구강진료센터"
   ],
   "homepage": "https://sndcc.org",
@@ -1109,8 +1107,7 @@
    "노원을지",
    "노원을지대병원",
    "노원을지대학교병원",
-   "을지대학교의료원",
-   "을지병원"
+   "을지대학교의료원"
   ],
   "homepage": "https://www.eulji.or.kr",
   "recruit_url": "https://www.eulji.or.kr/info/info_pg06_04.jsp",
@@ -1508,7 +1505,7 @@
   "name": "인하대학교병원",
   "kind": "univ_hospital_dept",
   "sido": "인천",
-  "sigungu": "중구",
+  "sigungu": "제물포구",
   "aliases": [
    "인하대병원",
    "인하대학교병원",
@@ -2211,7 +2208,6 @@
   "sido": "서울",
   "sigungu": "중구",
   "aliases": [
-   "국립의료원",
    "국립중앙의료원",
    "중앙의료원"
   ],
@@ -2227,7 +2223,6 @@
   "sido": "서울",
   "sigungu": "동대문구",
   "aliases": [
-   "동부병원",
    "서울시동부병원",
    "서울특별시동부병원"
   ],
@@ -2243,7 +2238,6 @@
   "sido": "서울",
   "sigungu": "중랑구",
   "aliases": [
-   "북부병원",
    "서울시북부병원",
    "서울특별시북부병원"
   ],
@@ -2293,7 +2287,6 @@
   "sido": "서울",
   "sigungu": "강동구",
   "aliases": [
-   "보훈병원",
    "서울보훈병원",
    "중앙보훈병원",
    "한국보훈복지의료공단"
@@ -2373,20 +2366,7 @@
   "kind": "public_hospital",
   "sido": "인천",
   "sigungu": "부평구",
-  "aliases": [
-   "근로복지공단 대구병원",
-   "근로복지공단 대전병원",
-   "근로복지공단 동해병원",
-   "근로복지공단 순천병원",
-   "근로복지공단 안산병원",
-   "근로복지공단 울산병원",
-   "근로복지공단 인천병원",
-   "근로복지공단 정선병원",
-   "근로복지공단 창원병원",
-   "근로복지공단 태백병원",
-   "근로복지공단소속병원",
-   "산재병원"
-  ],
+  "aliases": [],
   "homepage": "https://www.kcomwel.or.kr",
   "recruit_url": "https://www.kcomwel.or.kr/hrm_recruit/RLIST.kws",
   "watch": false,
@@ -2397,7 +2377,7 @@
   "name": "인천광역시의료원",
   "kind": "public_hospital",
   "sido": "인천",
-  "sigungu": "동구",
+  "sigungu": "제물포구",
   "aliases": [
    "인천광역시의료원",
    "인천시의료원",
@@ -2479,8 +2459,7 @@
   "sigungu": "성남시",
   "aliases": [
    "국군수도병원",
-   "국군의무사령부",
-   "수도병원"
+   "국군의무사령부"
   ],
   "homepage": "https://afmd.mnd.go.kr",
   "recruit_url": "https://afmd.mnd.go.kr/user/boardList.action?boardId=I_5108105&siteId=afmd&id=afmd_040500000000",
