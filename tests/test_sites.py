@@ -4,6 +4,7 @@
 """
 
 import json
+import re
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -139,19 +140,49 @@ def test_gojobs_keyword_search_and_hidden_textarea_body(fakeweb):
 
 # ───────────── 덴트포토 ─────────────
 
-DP_LIST = """<table><tr><th>번호</th><th>지역</th><th>제목</th><th>글쓴이</th><th>날짜</th></tr>
-<tr><td>9012</td><td>서울</td><td><a href="content.php?no=9012&page=1">[송파] 소아치과 원장님 모십니다</a></td><td>김원장</td><td>2026-10-08</td></tr>
-<tr><td>9011</td><td>경기</td><td><a href="content.php?no=9011&page=1">수원 페이닥터 구인</a></td><td>이원장</td><td>2026-10-07</td></tr>
-</table>"""
+DP = "https://board.dentphoto.com/recruit_dental"
 
 
-def test_dentphoto_follows_script_redirect_to_member_login(fakeweb):
+def test_dentphoto_parse_real_list():
     from dentmoa.sources import dentphoto
 
-    state = {}
+    items = dentphoto.parse_list(fx("dentphoto_list.html"))
+    by = {i.source_id: i for i in items}
+    assert list(by) == ["1", "239213", "239212", "239211", "239185", "239161"]
+    assert by["1"].is_notice and not by["239213"].is_notice
+    assert dentphoto._kind(by["239213"]) == "구인" and dentphoto._kind(by["239185"]) == "양도"
+    it = by["239213"]
+    # 목록 제목 앞의 '지역 | ' 은 따로 떼어 낸다
+    assert it.title == "가나치과에서 임플란트 경험 많으신 부원장님을 모십니다" and it.region == "경기도 여주시"
+    assert it.posted_at == datetime(2026, 10, 9, tzinfo=config.TZ)
+    assert it.url == f"{DP}/list2content.php?num=239213&gotopage=1&bnum=238964&code="
+    assert by["239161"].title == "단독진료 가능한 풀타임 원장님 모십니다 주 5일 야간 주 1회"
+    # 2쪽에서 읽어도 주소는 같다
+    assert dentphoto._detail_url(f"{DP}/list2content.php?num=5&gotopage=2&bnum=4&code=") == f"{DP}/list2content.php?num=5&gotopage=1&bnum=4&code="
 
+
+def test_dentphoto_parse_real_view():
+    from dentmoa.sources import dentphoto
+
+    d = dentphoto.parse_detail(fx("dentphoto_view.html"))
+    assert d["title"] == "가나치과에서 임플란트 경험 많으신 부원장님을 모십니다" and d["kind"] == "구인"
+    assert d["region"] == "경기도 여주시" and d["author"] == "가나치과" and d["institution"] == "가나치과"
+    assert d["posted_at"] == datetime(2026, 10, 9, 22, 22, tzinfo=config.TZ)
+    lines = d["body"].splitlines()
+    # <br> 만 줄바꿈, '1 만원'은 비워 둘 수 없어 적은 값 → 협의
+    assert lines[:6] == ["주소 : (12618) 경기 여주시 예시로 33 (하동)", "직장명 : 가나치과 전화번호 : 031-000-0000", "",
+                         "급여 : 협의", "", "안녕하세요~ 가나치과 대표원장입니다."]
+    assert "주 3~5일 (근무요일 협의 가능)" in lines
+    # 댓글 칸의 로그인한 사람 이름, 눈에 안 보이는 글자는 본문에 넣지 않는다
+    assert "로그인한사람" not in d["body"] and "\u200b" not in d["body"]
+
+
+def _dp_routes(state):
     def list_page(session, method, url, kw):
-        return (200, DP_LIST) if state.get("ok") else (200, fx("dentphoto_list_logged_out.html"))
+        if not state.get("ok"):
+            return 200, fx("dentphoto_list_logged_out.html")
+        state.setdefault("lists", []).append(url)
+        return 200, fx("dentphoto_list.html")
 
     def check(session, method, url, kw):
         assert method.upper() == "POST"
@@ -160,16 +191,59 @@ def test_dentphoto_follows_script_redirect_to_member_login(fakeweb):
         state["ok"] = True
         return 200, "<script>location.replace('https://board.dentphoto.com/recruit_dental/list.php');</script>"
 
-    fakeweb([
-        ("https://board.dentphoto.com/recruit_dental/list.php", list_page),
+    def list2content(session, method, url, kw):
+        query = url.split("?", 1)[1]
+        return 200, f"<script language=Javascript>document.location.href='content.php?{query}'</script>"
+
+    def content(session, method, url, kw):
+        num = re.search(r"num=(\d+)", url).group(1)
+        if num == "239211":
+            return 200, "<script>alert('삭제된 게시물입니다.');history.back();</script>"
+        if "bnum=" not in url:
+            return 200, "<script language=Javascript>var msg = '올바른 접근이 아닙니다.(1)';alert(msg);history.back();</script>"
+        html = fx("dentphoto_view.html")
+        return 200, html if num == "239213" else html.replace("가나치과에서 임플란트 경험 많으신 부원장님을 모십니다", f"원장님 모십니다 {num}")
+
+    return [
+        (f"{DP}/list.php", list_page),
+        (f"{DP}/list2content.php", list2content),
+        (f"{DP}/content.php", content),
         ("https://member.dentphoto.com/login/login.php", (200, fx("dentphoto_login.html"))),
         ("https://member.dentphoto.com/login/login_check.php", check),
-        ("https://board.dentphoto.com/recruit_dental/content.php?no=", (200, "<div class='content'>소아치과 전문의, 주 4일</div>")),
-    ])
-    got = list(dentphoto.DentphotoSource().fetch(ctx(secrets={"dentphoto_id": "me", "dentphoto_pw": "pa#ss$word"}, max_pages=1)))
+    ]
+
+
+def test_dentphoto_real_flow(fakeweb):
+    """로그인 → 목록 → list2content.php → content.php (2026-10 실제 화면 순서)"""
+    from dentmoa.sources import dentphoto
+
+    assert fx("dentphoto_list2content.html").startswith("<script")
+    state = {}
+    web = fakeweb(_dp_routes(state))
+    secrets = {"dentphoto_id": "me", "dentphoto_pw": "pa#ss$word"}
+    got = list(dentphoto.DentphotoSource().fetch(ctx(secrets=secrets, max_pages=2)))
     assert state["ok"]
-    assert [g.source_id for g in got] == ["9012", "9011"]
-    assert got[0].url == "https://board.dentphoto.com/recruit_dental/content.php?no=9012&page=1"
+    # 공지·양도 글은 빼고, 그 사이 지워진 글(239211)은 저장하지 않는다
+    assert [g.source_id for g in got] == ["239213", "239212", "239161"]
+    g = got[0]
+    assert g.title == "가나치과에서 임플란트 경험 많으신 부원장님을 모십니다"
+    assert g.url == f"{DP}/list2content.php?num=239213&gotopage=1&bnum=238964&code="
+    assert g.region_hint == "경기도 여주시" and g.institution_hint == "가나치과" and g.author == "가나치과"
+    assert g.posted_at == datetime(2026, 10, 9, 22, 22, tzinfo=config.TZ)
+    assert g.body.startswith("주소 : (12618) 경기 여주시") and "급여 : 협의" in g.body
+    assert got[1].title == "원장님 모십니다 239212" and got[1].region_hint == "경기도 여주시"  # 글 화면의 지역 칸
+    urls = [u for _, u, _ in web.calls]
+    # 로그인 성공 후 목록은 한 번만 다시 열고, 2쪽은 사이트의 쪽 번호 링크 모양으로 연다
+    assert state["lists"] == [f"{DP}/list.php", f"{DP}/list.php?gotopage=2&key=&code=&keyword=&keyfield="]
+    i = urls.index(f"{DP}/list2content.php?num=239213&gotopage=1&bnum=238964&code=")
+    assert urls[i + 1] == f"{DP}/content.php?num=239213&gotopage=1&bnum=238964&code="
+    assert not any("239185" in u for u in urls)  # 양도 글은 열지 않는다
+
+    # 이미 본 글은 다시 열지 않는다 (목록의 제목·지역만)
+    web.calls.clear()
+    got2 = list(dentphoto.DentphotoSource().fetch(ctx(secrets=secrets, max_pages=1, known_ids={"239213", "239212", "239211", "239161"})))
+    assert [(g.source_id, g.region_hint) for g in got2][:1] == [("239213", "경기도 여주시")] and len(got2) == 4
+    assert not any("content.php" in u for _, u, _ in web.calls)
 
 
 def test_dentphoto_real_failure_message(fakeweb):
@@ -231,6 +305,91 @@ def test_moreden_merge_uses_list_json_not_hot_items():
     assert set(items) == {"73304", "73305"}
     assert items["73305"]["closed"] is True
     assert not moreden.MoredenSource()._last_page(sess, 1) and moreden.MoredenSource()._last_page(sess, 3)
+
+
+class _FakeListPage(_Page):
+    """모어덴 구인 게시판 화면: 열면 그 쪽의 목록 JSON 을 (실제처럼 두 번) 받는다."""
+
+    API = "https://public-api.moreden.co.kr/community/management/recruit/list"
+
+    def __init__(self, payloads):
+        super().__init__("<html><body><div id='root'></div></body></html>")
+        self.payloads, self.url, self.visited, self.sess = payloads, "", [], None
+
+    def goto(self, url, **kw):
+        from dentmoa.sources.browser import CapturedJSON
+
+        self.url = url
+        self.visited.append(url)
+        m = re.fullmatch(r"https://moreden\.co\.kr/recruit/doctor(?:\?page=(\d+))?", url)
+        if m and int(m.group(1) or 1) in self.payloads:
+            n = int(m.group(1) or 1)
+            api = self.API + (f"?page={n}" if n > 1 else "")
+            self.sess.captured += [CapturedJSON(api, self.payloads[n]), CapturedJSON(api, self.payloads[n])]
+
+    def wait_for_load_state(self, *a, **kw):
+        pass
+
+    def wait_for_timeout(self, ms):
+        pass
+
+    def locator(self, sel):
+        class _L:
+            first = property(lambda self: self)
+
+            def is_visible(self, **kw):
+                return False
+
+        return _L()
+
+
+def test_moreden_reads_posts_from_list_json(monkeypatch):
+    """목록 JSON 에 본문까지 있다 → 글을 하나씩 열지 않는다 (2026-10 로그인 후 실제 응답)."""
+    import contextlib
+    import copy
+
+    from dentmoa.sources import moreden
+    from dentmoa.sources.browser import BrowserSession
+
+    listing = json.loads(fx("moreden_list.json"))
+    closed = dict(copy.deepcopy(listing["board"][0]), bid=73338, title="마감된 글", terminated_at="2026-10-09T08:00:00.000Z")
+    listing["board"].append(closed)
+    old = dict(copy.deepcopy(listing["board"][1]), bid=70001, reg_dttm="20260701090000")
+    page2 = {"board": [old], "hot_items": [], "query": None, "page": 2, "pages": 444}
+    page = _FakeListPage({1: listing, 2: page2})
+    sess = BrowserSession(page=page, context=None)
+    page.sess = sess
+    monkeypatch.setattr(moreden, "open_browser", lambda *a, **kw: contextlib.nullcontext(sess))
+
+    secrets = {"moreden_id": "me", "moreden_pw": "pw"}
+    got = list(moreden.MoredenSource().fetch(ctx(secrets=secrets, max_pages=5)))
+    # 마감된 글·기준일보다 오래된 글·인기 글(hot_items)은 뺀다
+    assert [g.source_id for g in got] == ["73337", "73336", "73335"]
+    # 2쪽에서 기준일보다 오래된 글이 나오면 더 넘기지 않고, 글 화면은 열지 않는다
+    assert page.visited == [moreden.LIST_URL, f"{moreden.LIST_URL}?page=2"]
+    a = got[0]
+    assert a.url == "https://moreden.co.kr/recruit/doctor/73337"
+    assert a.posted_at == datetime(2026, 10, 9, 15, 0, 8, tzinfo=config.TZ)
+    assert a.region_hint == "경기도 안양시 동안구 예시대로 1 (비산동)" and a.institution_hint == "안양 예시치과의원"
+    assert a.body.splitlines()[:5] == [
+        "위치: 경기도 안양시 동안구 예시대로 1 (비산동) 5층 치과",
+        "병원: 안양 예시치과의원",
+        "전공: 치과교정과",
+        "근무형태: 파트타임 근무",
+        "급여: 일급 세후 10만원",
+    ]
+    assert a.extra == {"major": "치과교정과", "working_time": "파트타임 근무"}
+    c = got[2]
+    # 연봉 1만원(10000)은 '협의'라는 뜻, 붙여 넣은 글의 폭 없는 공백은 지운다
+    assert "급여: 협의" in c.body and "\u200b" not in c.body
+    assert c.extra["major"].startswith("전공무관 / 구강악안면외과")
+    assert "소아진료도 거의 없는 수준." in c.body
+
+    # 이미 저장된 글도 목록 JSON 으로 갱신만 한다 (글 화면을 열지 않음)
+    page.visited.clear()
+    got2 = list(moreden.MoredenSource().fetch(ctx(secrets=secrets, max_pages=1, known_ids={"73337", "73336", "73335"})))
+    assert len(got2) == 3 and got2[0].body == a.body
+    assert page.visited == [moreden.LIST_URL]
 
 
 # ───────────── recruiter.co.kr · incruit (병원 채용 플랫폼) ─────────────

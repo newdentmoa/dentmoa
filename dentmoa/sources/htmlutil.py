@@ -23,6 +23,11 @@ def soup(html: str) -> BeautifulSoup:
     return BeautifulSoup(html, "lxml")
 
 
+def strip_invisible(s: str) -> str:
+    """눈에 안 보이는 글자(폭 없는 공백 등) 지우기 — 편집기에서 붙여 넣은 글에 많다."""
+    return re.sub(r"[\u200b-\u200d\u2060\ufeff]", "", s or "")
+
+
 def text_of(node: Tag | None) -> str:
     """줄바꿈을 살린 텍스트."""
     if node is None:
@@ -31,7 +36,7 @@ def text_of(node: Tag | None) -> str:
         br.replace_with("\n")
     for blk in node.find_all(["p", "div", "li", "tr", "h1", "h2", "h3", "h4", "h5", "h6"]):
         blk.insert_after("\n")
-    text = node.get_text("")
+    text = strip_invisible(node.get_text(""))
     lines = [re.sub(r"[ \t ]+", " ", ln).strip() for ln in text.splitlines()]
     out: list[str] = []
     for ln in lines:

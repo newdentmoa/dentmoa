@@ -23,7 +23,7 @@ from .deadline import find_deadline
 from .regions import Region, normalize, parse_regions
 from .summarize import summarize
 
-CLASSIFIER_VERSION = 2
+CLASSIFIER_VERSION = 3
 
 
 @dataclass
@@ -183,7 +183,7 @@ INST_RULES: list[tuple[str, re.Pattern]] = [
     (
         "univ_hospital_dept",
         re.compile(
-            r"(?:대학교|대학)\s*(?:부속\s*)?(?:병원|의료원)|대학\s*병원|의과\s*대학|의대\s*부속|세브란스|서울\s*아산\s*병원|"
+            r"(?:대학교|대학)\s*(?:부속\s*)?(?:병원|의료원)|대학\s*병원|의과\s*대학|의대\s*부속|세브란스(?!치과(?!대학|병원))|서울\s*아산\s*병원|"
             r"삼성\s*서울\s*병원|강북\s*삼성|가톨릭\S*\s*성모\s*병원|길\s*병원|백\s*병원|순천향|분당\s*서울대"
         ),
     ),

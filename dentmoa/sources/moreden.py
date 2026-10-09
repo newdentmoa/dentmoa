@@ -2,21 +2,25 @@
 
 자바스크립트로 화면을 그리는 사이트라 브라우저(Chromium)로 읽는다.
 
-2026-10 실제 사이트 확인:
-- 구인 게시판: moreden.co.kr/recruit/doctor (?page=N), 글: /recruit/doctor/<bid>
-- 로그인 안 된 상태로 열면 통합 로그인 화면 auth.deneer.co.kr/login 으로 넘어간다.
+2026-10 실제 사이트 확인 (로그인 후 화면까지):
+- 구인 게시판: moreden.co.kr/recruit/doctor (2쪽부터 ?page=N — 주소로 바로 열어도 그 쪽 JSON 을 받는다), 글: /recruit/doctor/<bid>
+- 로그인 안 된 상태로 열면 moreden.co.kr/login?auth_check=true… → 통합 로그인 화면 auth.deneer.co.kr/login 으로 넘어간다.
   화면에 로그인 칸이 두 벌 있다: 치과의사용(#communityIdInput·#communityPwInput·#communityLoginButton,
   '기존 아이디로 로그인' 을 눌러야 보임)과 직원용 마켓(#marketIdInput…, 처음부터 보임). 치과의사용을 써야 한다.
   틀리면 경고창(alert)에 '아이디가 존재하지 않습니다.' 같은 말이 뜬다.
-- 화면이 받아오는 JSON (public-api.moreden.co.kr/community):
-  목록 /management/recruit/list?page=N → {"board": [...], "page", "pages", "hot_items"}  (로그인 필요)
-    글 하나: bid, title, location1, location2, hospital_name, reg_dttm(20261007102130), major, working_time, view, like
-  글 /management/recruit/article/<bid> → {"article": {..., "content", "address", "wage_type", "net_wage", ...}}
+  맞으면 moreden.co.kr/auth?code=… → 원래 화면. 로그인 표(token)는 브라우저 저장소(localStorage)에 남아 다음 실행에도 쓰인다.
+- 화면이 받아오는 JSON (public-api.moreden.co.kr/community, 'authorization' 머리글 필요):
+  목록 /management/recruit/list(?page=N) → {"board": [20건], "hot_items": [인기 글], "query", "page", "pages"}
+    글 하나에 본문까지 다 있다: bid, title, content(일반 글자), location1, location2, address, detail_address, hospital_name,
+    reg_dttm(20261009150008, 한국 시각), major, working_time, wage_type, gross_wage, net_wage, terminated_at, deleted, status
+  글 /management/recruit/article/<bid> → {"article": {목록과 같은 칸 + unick(글쓴이 별명)}}
 - major 는 전공 글자 코드를 이어 붙인 문자열(예: "AE"), working_time 은 full_time/part_time/whatever.
+- 급여 칸은 비워 둘 수 없어서 '협의'인 글은 0 이나 10000(1만원)을 적는다.
+- 같은 화면에서 목록 JSON 을 두 번 받는다(같은 내용).
 
 1) 구인 게시판을 연다 → 로그인 화면이 나오면 치과의사 아이디·비밀번호로 로그인
-2) 목록 JSON 에서 글 목록을 읽는다 (못 읽으면 화면의 링크로)
-3) 처음 보는 글만 열어서 본문 JSON 을 읽는다
+2) 목록 JSON 에서 글을 읽는다 — 본문까지 들어 있어서 글을 하나씩 열지 않는다
+3) 목록 JSON 을 못 받았거나 본문이 비어 있으면: 화면의 링크로 글을 찾고, 처음 보는 글만 열어서 읽는다
 """
 
 from __future__ import annotations
@@ -28,7 +32,7 @@ from urllib.parse import urljoin
 from ..models import RawPosting
 from .base import FetchContext, LoginError, MissingCredentials, Source, StructureError
 from .browser import BrowserSession, dump_captured, find_record, generic_login, open_browser, records_from_json
-from .htmlutil import extract_main_text, find_label_value, parse_board_date, soup
+from .htmlutil import extract_main_text, find_label_value, parse_board_date, soup, strip_invisible
 
 BASE = "https://moreden.co.kr"
 LIST_URL = f"{BASE}/recruit/doctor"
@@ -63,15 +67,17 @@ def _won(v) -> str:
         n = int(float(v))
     except (TypeError, ValueError):
         return ""
-    return f"{n / 10000:g}만원" if n >= 10000 else f"{n}원"
+    if n <= 10000:
+        return ""  # 0·1만원은 '협의'라는 뜻으로 적은 값
+    return f"{n / 10000:g}만원"
 
 
 def wage_text(a: dict) -> str:
     kind = WAGE_TYPE.get(a.get("wage_type") or "", "")
     parts = []
-    if a.get("gross_wage"):
+    if _won(a.get("gross_wage")):
         parts.append(f"세전 {_won(a['gross_wage'])}")
-    if a.get("net_wage"):
+    if _won(a.get("net_wage")):
         parts.append(f"세후 {_won(a['net_wage'])}")
     if not parts:
         return "협의"
@@ -83,7 +89,7 @@ def majors_text(code: str | None) -> str:
 
 
 def item_from_api(rec: dict) -> dict | None:
-    """목록 JSON 의 글 하나 → 내부 형식."""
+    """목록 JSON 의 글 하나 → 내부 형식 (본문이 있으면 본문까지)."""
     bid = rec.get("bid")
     title = (rec.get("title") or "").strip()
     if bid is None or not title:
@@ -93,7 +99,7 @@ def item_from_api(rec: dict) -> dict | None:
         "id": str(bid),
         "url": f"{LIST_URL}/{bid}",
         "title": title,
-        "body": "",
+        "body": body_from_article(rec) if (rec.get("content") or "").strip() else "",
         "region": rec.get("address") or region,
         "institution": (rec.get("hospital_name") or "").strip(),
         "posted_at": parse_board_date(str(rec.get("reg_dttm") or "")),
@@ -117,8 +123,9 @@ def body_from_article(a: dict) -> str:
     if WORKING_TIME.get(a.get("working_time") or ""):
         lines.append(f"근무형태: {WORKING_TIME[a['working_time']]}")
     lines.append(f"급여: {wage_text(a)}")
-    content = _strip_html(a.get("content") or "")
-    return "\n".join(lines) + ("\n\n" + content.strip() if content.strip() else "")
+    content = strip_invisible(_strip_html(a.get("content") or ""))
+    content = re.sub(r"\n[ \t]*(?:\n[ \t]*){2,}", "\n\n", content).strip()  # 빈 줄 여러 개 → 하나
+    return "\n".join(lines) + ("\n\n" + content if content else "")
 
 
 class MoredenSource(Source):
@@ -146,14 +153,31 @@ class MoredenSource(Source):
             for it in items:
                 if it["posted_at"] and it["posted_at"] < ctx.since:
                     continue
+                if it.get("closed"):
+                    continue
+                if it["body"]:
+                    # 목록 JSON 에 본문까지 있다 → 글을 따로 열지 않는다 (이미 저장된 글은 고친 내용이 반영된다)
+                    yield self._raw(it)
+                    continue
                 if it["id"] in ctx.known_ids:
                     # 이미 저장된 글은 본문을 다시 열지 않는다(제목만 갱신)
                     yield RawPosting(self.key, it["id"], it["url"], it["title"], posted_at=it["posted_at"],
                                      region_hint=it["region"], institution_hint=it["institution"])
                     continue
-                if it.get("closed"):
-                    continue
                 yield self._detail(sess, ctx, it)
+
+    def _raw(self, it: dict) -> RawPosting:
+        return RawPosting(
+            source=self.key,
+            source_id=it["id"],
+            url=it["url"],
+            title=it["title"],
+            body=it["body"],
+            posted_at=it["posted_at"],
+            region_hint=it["region"],
+            institution_hint=it["institution"],
+            extra=_extra(it),
+        )
 
     # ─────────────── 로그인 ───────────────
 
@@ -332,7 +356,6 @@ class MoredenSource(Source):
             if m and m.group(1) == it["id"] and isinstance(cap.data, dict) and isinstance(cap.data.get("article"), dict):
                 article = cap.data["article"]
                 break
-        extra = {"major": majors_text(it.get("major")), "working_time": WORKING_TIME.get(it.get("working_time") or "", "")}
         if article:
             title = (article.get("title") or it["title"]).strip()
             region = article.get("address") or it["region"]
@@ -346,7 +369,7 @@ class MoredenSource(Source):
                 author=(article.get("unick") or "")[:40],
                 region_hint=region,
                 institution_hint=(article.get("hospital_name") or it["institution"]).strip(),
-                extra={k: v for k, v in extra.items() if v},
+                extra=_extra(it),
             )
         # JSON 을 못 받았으면 화면 글자로
         body = extract_main_text(html)
@@ -371,8 +394,13 @@ class MoredenSource(Source):
             posted_at=posted,
             region_hint=region,
             institution_hint=inst,
-            extra={k: v for k, v in extra.items() if v},
+            extra=_extra(it),
         )
+
+
+def _extra(it: dict) -> dict:
+    extra = {"major": majors_text(it.get("major")), "working_time": WORKING_TIME.get(it.get("working_time") or "", "")}
+    return {k: v for k, v in extra.items() if v}
 
 
 def _typing_delay() -> int:
