@@ -19,7 +19,7 @@
 - 같은 화면에서 목록 JSON 을 두 번 받는다(같은 내용).
 
 1) 구인 게시판을 연다 → 로그인 화면이 나오면 치과의사 아이디·비밀번호로 로그인
-2) 목록 JSON 에서 글을 읽는다 — 본문까지 들어 있어서 글을 하나씩 열지 않는다
+2) 목록 JSON 에서 글을 읽는다 — 본문까지 들어 있어서 글을 하나씩 열지 않는다 (못 받으면 한 번 더 연다)
 3) 목록 JSON 을 못 받았거나 본문이 비어 있으면: 화면의 링크로 글을 찾고, 처음 보는 글만 열어서 읽는다
 """
 
@@ -145,6 +145,12 @@ class MoredenSource(Source):
         with open_browser(self.key, capture_json=API_RE) as sess:
             self._open_list(sess, ctx, user, pw)
             items = self._collect_list(sess, ctx)
+            if not items:
+                # 서버 메모리가 모자라거나 화면이 늦게 떠서 목록 JSON 을 못 받는 일이 있다 → 한 번 더 열어 본다
+                ctx.log("목록을 받지 못함 — 잠시 뒤 한 번 더 시도")
+                ctx.sleep()
+                self._open_list(sess, ctx, user, pw)
+                items = self._collect_list(sess, ctx)
             if not items:
                 ctx.dump("moreden-list.html", sess.page.content())
                 dump_captured(sess, ctx, "moreden-list")

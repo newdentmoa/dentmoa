@@ -55,6 +55,11 @@ def _log(msg: str) -> None:
 # ──────────────────────────── 수집 ────────────────────────────
 
 
+# 마지막 성공 수집 뒤로 이보다 오래 지났으면 '따라잡기' — 평소 최대 쪽 수(max_pages) 대신 backfill_max_pages 까지 읽는다.
+# (하루 3번이면 실행 사이가 길어야 14시간, 하루 1번이면 24시간 남짓이라 평소에는 해당하지 않는다)
+CATCH_UP_AFTER = timedelta(hours=36)
+
+
 def make_context(source: Source, settings: dict, *, save_debug: bool = False, force_backfill: bool = False) -> FetchContext:
     col = settings["collect"]
     last_ok = db.last_run("collect", source.key, status="ok")
@@ -64,8 +69,13 @@ def make_context(source: Source, settings: dict, *, save_debug: bool = False, fo
         since = now - timedelta(days=col["backfill_days"])
         pages = col["backfill_max_pages"]
     else:
-        since = datetime.fromisoformat(last_ok["started_at"]) - timedelta(days=2)
+        last = datetime.fromisoformat(last_ok["started_at"])
+        since = last - timedelta(days=2)
         pages = col["max_pages"]
+        if now - last > CATCH_UP_AFTER:
+            # 며칠 동안 이 사이트 수집이 실패했다(서버 메모리 부족·사이트 장애 등) → 그동안 올라온 글을 놓치지 않게 더 많이 읽는다.
+            # 사이트별 수집기는 since 보다 오래된 글이 나오면 쪽 넘기기를 멈추므로, 필요한 만큼만 더 읽는다.
+            pages = max(pages, col["backfill_max_pages"])
     return FetchContext(
         since=since,
         known_ids=db.known_source_ids(source.key),

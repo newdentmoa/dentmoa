@@ -54,6 +54,31 @@ def use_sources(monkeypatch, *sources):
     monkeypatch.setattr(pipeline, "all_sources", lambda: list(sources))
 
 
+def test_catch_up_after_failed_days(monkeypatch, tmp_db):
+    """며칠 동안 수집이 실패했으면 다음 성공 때 평소보다 많은 쪽을 읽어 따라잡는다."""
+    s = settings_store.load()
+    src = FakeSource()
+    real_now = config.now()
+
+    def ok_run_at(hours_ago):
+        monkeypatch.setattr(config, "now", lambda: real_now - timedelta(hours=hours_ago))
+        db.run_finish(db.run_start("collect", src.key), "ok")
+        monkeypatch.setattr(config, "now", lambda: real_now)
+
+    ok_run_at(14)  # 하루 3번: 전날 저녁 → 오늘 아침
+    ctx = pipeline.make_context(src, s)
+    assert ctx.max_pages == s["collect"]["max_pages"] == 2 and not ctx.backfill
+    assert ctx.since == real_now - timedelta(hours=14) - timedelta(days=2)
+
+    ok_run_at(25)  # 하루 1번으로 정해 둔 경우도 평소대로
+    assert pipeline.make_context(src, s).max_pages == 2
+
+    ok_run_at(24 * 4)  # 4일 동안 실패(마지막 성공이 4일 전) → 따라잡기
+    ctx = pipeline.make_context(src, s)
+    assert ctx.max_pages == s["collect"]["backfill_max_pages"] == 10 and not ctx.backfill
+    assert ctx.since == real_now - timedelta(days=4) - timedelta(days=2)
+
+
 def test_first_run_backfill_then_incremental(monkeypatch, sent):
     src = FakeSource([
         raw("1", "[서울 강남] 소아치과 전문의 모십니다", "주 5일", days_ago=1),
