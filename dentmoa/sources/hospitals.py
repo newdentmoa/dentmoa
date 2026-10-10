@@ -4,6 +4,7 @@ data/institutions.json 에서 recruit_url 이 있고 watch 가 true 인 기관�
 치과의사와 관련 있어 보이는 글만 본문까지 읽는다.
 - 일반 게시판: htmlutil.find_list_items (날짜가 있는 줄을 글 목록으로 본다)
 - recruiter.co.kr 채용 사이트: platforms.recruiter_items (공고명 검색 '치과', '구강')
+- 가톨릭중앙의료원 채용 사이트(recruit.cmcnu.or.kr): platforms.cmc_items — 전체 기관 검색 한 번으로 7개 병원을 함께 읽는다
 - fetch="browser" 인 곳: 자바스크립트 확인 화면이 있어 브라우저(Chromium)로 연다
 한 곳이 실패해도 나머지는 계속 읽는다.
 """
@@ -20,7 +21,17 @@ from ..institutions import Institution
 from ..models import RawPosting
 from .base import FetchContext, PoliteSession, Source, SourceError, StructureError, decode
 from .htmlutil import extract_main_text, find_list_items, looks_empty_board, parse_board_date
-from .platforms import RECRUITER_KEYWORDS, recruiter_body, recruiter_host, recruiter_items
+from .platforms import (
+    CMC_KEYWORDS,
+    RECRUITER_KEYWORDS,
+    cmc_body,
+    cmc_hospital,
+    cmc_items,
+    cmc_site,
+    recruiter_body,
+    recruiter_host,
+    recruiter_items,
+)
 
 DENTIST_TITLE_RE = re.compile(
     r"치과\s*의사|치의|치과|구강|교수|교원|전임의|임상\s*강사|펠로우|촉탁|전문의|진료의|의사|레지던트|전공의|인턴|초빙"
@@ -28,7 +39,8 @@ DENTIST_TITLE_RE = re.compile(
 DENTAL_WORD_RE = re.compile(r"치과|치의|구강")
 GENERIC_RECRUIT_RE = re.compile(r"채용|모집|초빙|공고|선발|충원")
 NON_DENTIST_TITLE_RE = re.compile(
-    r"위생사|간호|기공사|조무|행정|사무|원무|시설|미화|보안|운전|약사|영양|방사선사|임상병리|물리치료|전산|청원경찰|"
+    r"위생사|치위생|간호|기공사|치기공|조무|행정|사무|원무|시설|미화|보안|운전|약사|영양|방사선사|방사선직|임상병리|물리치료|전산|청원경찰|"
+    r"지원직|코디네이터|"
     r"주차|조리|사회복지|연구원|연구보조|보조원|합격자|결과\s*발표|면접\s*(?:안내|일정)"
 )
 DENTAL_KINDS = {"dental_univ_hospital", "disabled_dental", "dental_school"}
@@ -119,6 +131,9 @@ class HospitalBoardsSource(Source):
         host = recruiter_host(inst.recruit_url)
         if host:
             yield from self._recruiter(inst, host, ctx)
+            return
+        if cmc_site(inst.recruit_url):
+            yield from self._cmc(ctx)
             return
         http = PoliteSession(f"board-{_slug(inst)}", ctx, persist_cookies=False)
         html, url = self._get_list(inst, http)
@@ -224,6 +239,46 @@ class HospitalBoardsSource(Source):
                     url=it.url,
                     title=it.title,
                     body=recruiter_body(html, it),
+                    posted_at=it.posted_at,
+                    institution_hint=inst_hint,
+                    region_hint=region_hint,
+                )
+
+
+    # ─────────────── 가톨릭중앙의료원 (recruit.cmcnu.or.kr) ───────────────
+
+    def _cmc(self, ctx: FetchContext) -> Iterable[RawPosting]:
+        """전체 기관 검색('치과', '구강')으로 서울성모·여의도·의정부·부천·은평·성빈센트·대전성모를 한 번에 읽는다.
+
+        검색이 본문까지 보므로 제목에 치과가 없어도(예: '임상강사 모집' 에 치과 포함) 가져온다.
+        직원(치위생직·간호직 등) 공고는 제목으로 걸러서 열지 않는다.
+        """
+        http = PoliteSession("cmc", ctx, persist_cookies=False)
+        by_name = {i.name: i for i in institutions.load()}
+        seen: set[str] = set()
+        details = 0
+        for kw in CMC_KEYWORDS:
+            for it in cmc_items(http, kw):
+                if it.sid in seen:
+                    continue
+                seen.add(it.sid)
+                if it.posted_at and it.posted_at < ctx.since:
+                    continue
+                if NON_DENTIST_TITLE_RE.search(it.title) and not re.search(r"치과\s*의사|교수|전임의|임상\s*강사|촉탁의", it.title):
+                    continue
+                inst = by_name.get(cmc_hospital(it.title))
+                inst_hint, region_hint = (inst.name, _region(inst)) if inst else ("", "")
+                if it.sid in ctx.known_ids or details >= MAX_DETAILS_PER_BOARD:
+                    yield RawPosting(self.key, it.sid, it.url, it.title, posted_at=it.posted_at,
+                                     institution_hint=inst_hint, region_hint=region_hint)
+                    continue
+                details += 1
+                yield RawPosting(
+                    source=self.key,
+                    source_id=it.sid,
+                    url=it.url,
+                    title=it.title,
+                    body=cmc_body(http, it.url),
                     posted_at=it.posted_at,
                     institution_hint=inst_hint,
                     region_hint=region_hint,

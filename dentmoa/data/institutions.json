@@ -241,9 +241,9 @@
   ],
   "homepage": "https://www.gwnudh.or.kr/default.asp",
   "recruit_url": "https://www.gwnudh.or.kr/default.asp",
-  "watch": true,
+  "watch": false,
   "operator": "",
-  "note": "own homepage 공지사항 (직원 모집 posts) + 잡알리오"
+  "note": "own homepage 공지사항 (직원 모집 posts) + 잡알리오 | 2026-10-10 사용자 요청으로 끔 (강원 이직 계획 없음)"
  },
  {
   "name": "단국대학교치과대학병원",
@@ -914,10 +914,10 @@
    "서울성모병원"
   ],
   "homepage": "https://www.cmcseoul.or.kr",
-  "recruit_url": "https://recruit.cmcnu.or.kr/cmcseoul/application/appList.do",
+  "recruit_url": "https://recruit.cmcnu.or.kr/cmc/index.do",
   "watch": true,
   "operator": "",
-  "note": "own (recruit.cmcnu.or.kr, 병원별 하위경로)"
+  "note": "2026-10 확인: 가톨릭중앙의료원 통합 채용 사이트 — 전체 기관 검색('치과','구강') 한 번으로 서울성모·여의도·의정부·부천·은평·성빈센트·대전성모를 함께 읽음(hospitals._cmc). 옛 주소 /cmcseoul/application/appList.do 는 404. 6곳 모두 치과 있음, 소아치과 전문의는 없음"
  },
  {
   "name": "가톨릭대학교 여의도성모병원",
@@ -931,10 +931,10 @@
    "여의도성모병원"
   ],
   "homepage": "https://www.cmcsungmo.or.kr",
-  "recruit_url": "https://recruit.cmcnu.or.kr/cmcsungmo/application/appList.do",
-  "watch": true,
+  "recruit_url": "https://recruit.cmcnu.or.kr/cmcsungmo/index.do",
+  "watch": false,
   "operator": "",
-  "note": "own (recruit.cmcnu.or.kr)"
+  "note": "2026-10 확인: 가톨릭중앙의료원 통합 채용 사이트(주소가 /cmcsungmo/index.do 로 바뀜) — '가톨릭대학교 서울성모병원' 항목에서 전체 기관 검색으로 함께 읽음"
  },
  {
   "name": "가톨릭대학교 은평성모병원",
@@ -948,10 +948,10 @@
    "은평성모병원"
   ],
   "homepage": "https://www.cmcep.or.kr",
-  "recruit_url": "https://recruit.cmcnu.or.kr/cmcep/application/appList.do",
-  "watch": true,
+  "recruit_url": "https://recruit.cmcnu.or.kr/cmcep/index.do",
+  "watch": false,
   "operator": "",
-  "note": "own (recruit.cmcnu.or.kr)"
+  "note": "2026-10 확인: 가톨릭중앙의료원 통합 채용 사이트(주소가 /cmcep/index.do 로 바뀜) — '가톨릭대학교 서울성모병원' 항목에서 전체 기관 검색으로 함께 읽음"
  },
  {
   "name": "강남세브란스병원",
@@ -1574,7 +1574,7 @@
   "recruit_url": "https://www.cmcdj.or.kr/m/bbs/bbs_list.jsp?bfid=RECRUIT_09",
   "watch": false,
   "operator": "",
-  "note": "own board (bfid=RECRUIT_09) + 병원 채용사이트 | 2026-10 확인: 끔 — 게시판 목록을 찾지 못함 (자바스크립트)"
+  "note": "own board (bfid=RECRUIT_09) + 병원 채용사이트 | 2026-10 확인: 끔 — 게시판 목록을 찾지 못함 (자바스크립트) | 2026-10 확인: 가톨릭중앙의료원 통합 채용 사이트(/cmcdj/index.do)에도 공고가 올라와 서울성모 항목의 전체 기관 검색으로 함께 읽음"
  },
  {
   "name": "건양대학교병원",
@@ -1667,10 +1667,10 @@
    "부천성모병원"
   ],
   "homepage": "https://www.cmcbucheon.or.kr",
-  "recruit_url": "https://recruit.cmcnu.or.kr/cmcbucheon/application/appList.do",
-  "watch": true,
+  "recruit_url": "https://recruit.cmcnu.or.kr/cmcbucheon/index.do",
+  "watch": false,
   "operator": "",
-  "note": "own (recruit.cmcnu.or.kr)"
+  "note": "2026-10 확인: 가톨릭중앙의료원 통합 채용 사이트(주소가 /cmcbucheon/index.do 로 바뀜) — '가톨릭대학교 서울성모병원' 항목에서 전체 기관 검색으로 함께 읽음"
  },
  {
   "name": "가톨릭대학교 성빈센트병원",
@@ -1684,10 +1684,10 @@
    "성빈센트병원"
   ],
   "homepage": "https://www.cmcvincent.or.kr",
-  "recruit_url": "https://recruit.cmcnu.or.kr/cmcvincent/application/appList.do",
-  "watch": true,
+  "recruit_url": "https://recruit.cmcnu.or.kr/cmcvincent/index.do",
+  "watch": false,
   "operator": "",
-  "note": "own (recruit.cmcnu.or.kr)"
+  "note": "2026-10 확인: 가톨릭중앙의료원 통합 채용 사이트(주소가 /cmcvincent/index.do 로 바뀜) — '가톨릭대학교 서울성모병원' 항목에서 전체 기관 검색으로 함께 읽음"
  },
  {
   "name": "가톨릭대학교 의정부성모병원",
@@ -1701,10 +1701,10 @@
    "의정부성모병원"
   ],
   "homepage": "https://www.cmcujb.or.kr",
-  "recruit_url": "https://recruit.cmcnu.or.kr/cmcujb/application/appList.do",
-  "watch": true,
+  "recruit_url": "https://recruit.cmcnu.or.kr/cmcujb/index.do",
+  "watch": false,
   "operator": "",
-  "note": "own (recruit.cmcnu.or.kr)"
+  "note": "2026-10 확인: 가톨릭중앙의료원 통합 채용 사이트(주소가 /cmcujb/index.do 로 바뀜) — '가톨릭대학교 서울성모병원' 항목에서 전체 기관 검색으로 함께 읽음"
  },
  {
   "name": "고려대학교 안산병원",
@@ -2148,9 +2148,9 @@
   ],
   "homepage": "https://smc.skku.edu",
   "recruit_url": "https://smc.skku.edu/smc/board/list.do?mId=58",
-  "watch": true,
+  "watch": false,
   "operator": "",
-  "note": "own board"
+  "note": "own board | 2026-10-10 사용자 요청으로 끔 (창원 이직 계획 없음)"
  },
  {
   "name": "양산부산대학교병원",

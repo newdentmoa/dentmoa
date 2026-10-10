@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import random
+import ssl
 import time
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -16,6 +17,7 @@ from pathlib import Path
 from typing import Callable, Iterable
 
 import requests
+from requests.adapters import HTTPAdapter
 
 from .. import config
 from ..models import RawPosting
@@ -102,6 +104,27 @@ class Source:
         return f"연결 성공 — 최근 글 예시: {items[0].title[:40]}"
 
 
+# 오래된 암호화 설정(SHA-1 서명 등)을 써서 기본 설정으로는 접속이 거부되는 사이트.
+# 인증서 확인은 그대로 하고, 허용하는 암호화 수준만 낮춘다. (2026-10: 가톨릭중앙의료원 채용 사이트 — WRONG_SIGNATURE_TYPE)
+LEGACY_TLS_HOSTS = ("recruit.cmcnu.or.kr",)
+
+
+class LegacyTLSAdapter(HTTPAdapter):
+    @staticmethod
+    def _context() -> ssl.SSLContext:
+        ctx = ssl.create_default_context()
+        ctx.set_ciphers("DEFAULT:@SECLEVEL=0")
+        return ctx
+
+    def init_poolmanager(self, *args, **kwargs):
+        kwargs["ssl_context"] = self._context()
+        return super().init_poolmanager(*args, **kwargs)
+
+    def proxy_manager_for(self, proxy, **kwargs):
+        kwargs["ssl_context"] = self._context()
+        return super().proxy_manager_for(proxy, **kwargs)
+
+
 class PoliteSession(requests.Session):
     """요청 사이에 쉬고, 실패하면 몇 번 다시 시도하고, 쿠키를 파일에 보관하는 세션."""
 
@@ -110,6 +133,8 @@ class PoliteSession(requests.Session):
         self.key = key
         self.ctx = ctx
         self.headers.update(DEFAULT_HEADERS)
+        for host in LEGACY_TLS_HOSTS:
+            self.mount(f"https://{host}", LegacyTLSAdapter())
         self._first = True
         self._cookie_file = config.COOKIE_DIR / f"{key}.json" if persist_cookies else None
         self._load_cookies()

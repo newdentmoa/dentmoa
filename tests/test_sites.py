@@ -439,6 +439,59 @@ def test_recruiter_items_and_body(fakeweb):
     assert platforms.recruiter_host("https://www.snudh.org/") == ""
 
 
+def test_cmc_one_search_for_all_catholic_hospitals(fakeweb, monkeypatch):
+    """가톨릭중앙의료원 채용 사이트: 전체 기관 검색(CP949 로 인코딩한 '치과'·'구강') → 직원 공고는 열지 않고 치과의사 공고만 읽는다."""
+    from dentmoa import institutions
+    from dentmoa.institutions import Institution
+    from dentmoa.sources import hospitals
+
+    boards = [
+        Institution("가톨릭대학교 서울성모병원", "univ_hospital_dept", "서울", "서초구", recruit_url="https://recruit.cmcnu.or.kr/cmc/index.do"),
+        Institution("가톨릭대학교 의정부성모병원", "univ_hospital_dept", "경기", "의정부시",
+                    recruit_url="https://recruit.cmcnu.or.kr/cmcujb/index.do", watch=False),
+    ]
+    monkeypatch.setattr(institutions, "load", lambda: boards)
+    search = fx("cmc_search.html").encode("cp949", "xmlcharrefreplace")
+    view = fx("cmc_view.html").replace("간호직(치과팀/휴직대체)", "치과의사(임의수련의 AGD과정 포함)").encode("cp949", "xmlcharrefreplace")
+    web = fakeweb([
+        ("https://recruit.cmcnu.or.kr/cmc/index.do", (200, search)),
+        ("https://recruit.cmcnu.or.kr/cmc/application/appView.do?seq_no=16999", (200, view)),
+    ])
+    got = list(hospitals.HospitalBoardsSource().fetch(ctx(max_pages=1)))
+    urls = [u for _, u, _ in web.calls]
+    # 한 번에 전체 기관을 검색한다 — 검색어는 사이트처럼 CP949 ('치과' = %C4%A1%B0%FA, '구강' = %B1%B8%B0%AD)
+    searches = [u for u in urls if "index.do" in u]
+    assert searches == ["https://recruit.cmcnu.or.kr/cmc/index.do?INST_CD_FILTER=ALL&ALL_ST=ALL&ALL_SV=%C4%A1%B0%FA",
+                        "https://recruit.cmcnu.or.kr/cmc/index.do?INST_CD_FILTER=ALL&ALL_ST=ALL&ALL_SV=%B1%B8%B0%AD"]
+    # 간호직·치위생직 공고는 열지도 않는다
+    assert [g.source_id for g in got] == ["cmc:16999"]
+    assert not any("seq_no=16466" in u or "seq_no=16420" in u for u in urls)
+    g = got[0]
+    assert g.title == "[의정부성모] 2027년도 치과의사(임의수련의 AGD과정 포함) 모집"
+    assert g.url == "https://recruit.cmcnu.or.kr/cmc/application/appView.do?seq_no=16999"
+    assert g.institution_hint == "가톨릭대학교 의정부성모병원" and g.region_hint == "경기 의정부시"
+    assert g.posted_at == datetime(2026, 9, 30, tzinfo=config.TZ)
+    assert g.body.startswith("기관: 서울성모병원\n교직구분: 비정규직\n부서: 치과팀\n직종: 간호직\n접수기간: 2026-10-01 ~ 2026-10-15")
+    assert "4. 모집인원 : O명" in g.body and "수정/조회" not in g.body  # 화면의 단추 글자는 뺀다
+
+    # 이미 본 글은 다시 열지 않는다
+    web.calls.clear()
+    got2 = list(hospitals.HospitalBoardsSource().fetch(ctx(max_pages=1, known_ids={"cmc:16999"})))
+    assert [g.source_id for g in got2] == ["cmc:16999"] and not any("appView" in u for _, u, _ in web.calls)
+
+
+def test_legacy_tls_only_for_listed_sites_and_still_verifies():
+    import ssl
+
+    from dentmoa.sources.base import LegacyTLSAdapter, PoliteSession
+
+    http = PoliteSession("t", ctx(), persist_cookies=False)
+    assert isinstance(http.get_adapter("https://recruit.cmcnu.or.kr/cmc/index.do"), LegacyTLSAdapter)
+    assert not isinstance(http.get_adapter("https://www.hibrain.net/"), LegacyTLSAdapter)
+    c = LegacyTLSAdapter._context()
+    assert c.verify_mode == ssl.CERT_REQUIRED and c.check_hostname  # 인증서 확인은 그대로
+
+
 def test_hospitals_recruiter_board_shared_hints(fakeweb, monkeypatch):
     from dentmoa import institutions
     from dentmoa.institutions import Institution
