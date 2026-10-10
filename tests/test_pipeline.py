@@ -6,7 +6,7 @@ import pytest
 
 from dentmoa import config, db, notify, pipeline, settings_store
 from dentmoa.models import RawPosting
-from dentmoa.sources.base import LoginError, Source
+from dentmoa.sources.base import LoginError, Source, SourceError
 
 
 class FakeSource(Source):
@@ -159,3 +159,60 @@ def test_disabled_source_skipped(monkeypatch, sent):
     settings_store.save(s)
     pipeline.run_cycle()
     assert src.contexts == []
+
+
+class LoginSource(FakeSource):
+    requires_login = True
+
+
+def test_network_failure_warns_only_after_failures_in_a_row(monkeypatch, sent):
+    """접속 실패는 한 번으로는 알리지 않는다 — 놓친 글은 다음 성공 때 따라잡는다. 연속 3번이면 알린다."""
+    src = FakeSource(error=SourceError("접속 실패: https://x (Read timed out)"))
+    use_sources(monkeypatch, src)
+    pipeline.run_cycle()
+    pipeline.run_cycle()
+    assert sent["digest"] == []  # 두 번 실패: 아직 조용히
+    src.error = None
+    pipeline.run_cycle()  # 성공하면 횟수는 처음부터
+    src.error = SourceError("접속 실패: https://x (Read timed out)")
+    pipeline.run_cycle()
+    pipeline.run_cycle()
+    assert sent["digest"] == []
+    pipeline.run_cycle()  # 연속 세 번째
+    _, warnings = sent["digest"][0]
+    assert [w.kind for w in warnings] == ["network"]
+
+
+def test_login_failure_waits_a_day_unless_password_changes(monkeypatch, sent):
+    """틀린 비밀번호로 하루 3번씩 시도하면 계정이 잠길 수 있다 → 하루 한 번만, 비밀번호를 바꾸면 바로."""
+    settings_store.update_secrets({"moreden_id": "dr", "moreden_pw": "old"})
+    src = LoginSource(error=LoginError("모어덴 로그인에 실패했습니다."))
+    use_sources(monkeypatch, src)
+    pipeline.run_cycle()
+    assert len(src.contexts) == 1
+    _, warnings = sent["digest"][0]
+    assert warnings[0].kind == "login"  # 계정 문제는 바로 알린다
+
+    pipeline.run_cycle()  # 같은 날 다음 실행: 로그인하지 않고 건너뛴다
+    assert len(src.contexts) == 1
+    assert "하루 한 번만" in db.last_run("collect", "moreden")["message"]
+
+    settings_store.update_secrets({"moreden_pw": "new"})  # 비밀번호를 고치면 바로 다시 시도
+    src.error = None
+    pipeline.run_cycle()
+    assert len(src.contexts) == 2
+    assert db.last_run("collect", "moreden")["status"] == "ok"
+    assert "moreden" not in db.kv_get("login_failed", {})  # 성공하면 기록을 지운다
+
+
+def test_login_retried_after_a_day(monkeypatch, sent):
+    src = LoginSource(error=LoginError("모어덴 로그인에 실패했습니다."))
+    use_sources(monkeypatch, src)
+    pipeline.run_cycle()
+    real_now = config.now()
+    monkeypatch.setattr(config, "now", lambda: real_now + pipeline.LOGIN_RETRY_AFTER - timedelta(minutes=1))
+    pipeline.run_cycle()
+    assert len(src.contexts) == 1
+    monkeypatch.setattr(config, "now", lambda: real_now + pipeline.LOGIN_RETRY_AFTER)
+    pipeline.run_cycle()
+    assert len(src.contexts) == 2

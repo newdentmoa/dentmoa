@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import threading
 import traceback
 from dataclasses import dataclass, field
@@ -89,9 +90,52 @@ def make_context(source: Source, settings: dict, *, save_debug: bool = False, fo
     )
 
 
+# 로그인 실패 뒤에는 같은 아이디·비밀번호로 이 시간 안에 다시 시도하지 않는다 — 틀린 비밀번호로 여러 번 시도하면
+# 계정이 잠길 수 있다. 계정 화면에서 아이디·비밀번호를 바꾸면 바로 다시 시도한다.
+LOGIN_RETRY_AFTER = timedelta(hours=23)
+# 접속 실패·화면 구조 문제는 이만큼 연속으로 실패했을 때만 알린다 (하루 3번 수집이면 약 하루).
+# 그사이 놓친 글은 다음에 성공할 때 따라잡는다 (make_context). 계정 문제(로그인·계정 정보 없음)는 바로 알린다.
+WARN_AFTER_FAILURES = 3
+
+
+def _credential_print(source: Source) -> str:
+    """아이디·비밀번호가 바뀌었는지 알아보기 위한 지문 (비밀번호 자체는 저장하지 않는다)."""
+    sec = settings_store.secrets()
+    raw = f"{sec.get(source.key + '_id', '')}\n{sec.get(source.key + '_pw', '')}"
+    return hashlib.sha256(raw.encode()).hexdigest()[:16]
+
+
+def _login_paused(source: Source) -> str:
+    entry = db.kv_get("login_failed", {}).get(source.key)
+    if not entry or entry.get("creds") != _credential_print(source):
+        return ""
+    if config.now() - datetime.fromisoformat(entry["at"]) >= LOGIN_RETRY_AFTER:
+        return ""
+    return (f"로그인에 실패해서 계정 잠김을 막으려고 하루 한 번만 다시 시도합니다 (마지막 실패: {entry['at'][:16].replace('T', ' ')}). "
+            f"대시보드의 '계정·연결'에서 아이디·비밀번호를 고치면 바로 다시 시도합니다. 처음 실패 내용: {entry.get('message', '')}")
+
+
+def _remember_login(source: Source, failed_message: str | None) -> None:
+    failed = db.kv_get("login_failed", {})
+    if failed_message is None:
+        if source.key in failed:
+            failed.pop(source.key)
+            db.kv_set("login_failed", failed)
+        return
+    failed[source.key] = {"at": config.now().isoformat(), "creds": _credential_print(source), "message": failed_message[:200]}
+    db.kv_set("login_failed", failed)
+
+
 def collect_source(source: Source, settings: dict, *, save_debug: bool = False) -> SourceReport:
     run_id = db.run_start("collect", source.key)
     rep = SourceReport(source.key, source.label, ok=True)
+    if getattr(source, "requires_login", False):
+        paused = _login_paused(source)
+        if paused:
+            rep.ok, rep.kind, rep.message = False, "login", paused
+            db.run_finish(run_id, "error", message=paused)
+            _log(f"[{source.key}] 건너뜀: {paused}")
+            return rep
     try:
         ctx = make_context(source, settings, save_debug=save_debug)
         new_ids: list[int] = []
@@ -111,12 +155,15 @@ def collect_source(source: Source, settings: dict, *, save_debug: bool = False) 
         _dedup(new_ids)
         rep.message = f"{rep.found}건 확인, 새 글 {rep.new}건"
         db.run_finish(run_id, "ok", found=rep.found, new=rep.new, message=rep.message)
+        if getattr(source, "requires_login", False):
+            _remember_login(source, None)
     except MissingCredentials as e:
         rep.ok, rep.kind, rep.message = False, "credentials", str(e)
         db.run_finish(run_id, "error", found=rep.found, new=rep.new, message=rep.message)
     except LoginError as e:
         rep.ok, rep.kind, rep.message = False, "login", str(e)
         db.run_finish(run_id, "error", found=rep.found, new=rep.new, message=rep.message)
+        _remember_login(source, str(e))
     except StructureError as e:
         rep.ok, rep.kind, rep.message = False, "structure", str(e)
         db.run_finish(run_id, "error", found=rep.found, new=rep.new, message=rep.message)
@@ -209,12 +256,29 @@ def digest(collect_report: CollectReport | None = None, *, dry_run: bool = False
 
 
 def _fresh_warnings(report: CollectReport | None) -> list[SourceReport]:
-    """같은 출처의 같은 문제는 하루 한 번만 알린다."""
+    """알릴 만한 실패만: 계정 문제는 바로, 접속 실패·화면 구조 문제는 연속 WARN_AFTER_FAILURES 번 실패했을 때.
+    같은 출처는 하루 한 번만 알린다."""
     if not report:
         return []
     warned = db.kv_get("warned", {})
     today = config.now().date().isoformat()
-    return [w for w in report.warnings if warned.get(w.key) != today]
+    out = []
+    for w in report.warnings:
+        if warned.get(w.key) == today:
+            continue
+        if w.kind not in ("login", "credentials") and _failures_in_a_row(w.key) < WARN_AFTER_FAILURES:
+            continue
+        out.append(w)
+    return out
+
+
+def _failures_in_a_row(source_key: str) -> int:
+    n = 0
+    for run in db.recent_collect_runs(source_key, WARN_AFTER_FAILURES + 1):
+        if run["status"] != "error":
+            break
+        n += 1
+    return n
 
 
 def reminders() -> int:
