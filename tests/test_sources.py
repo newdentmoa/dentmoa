@@ -39,8 +39,9 @@ class FakeWeb:
                 status, html = handler(session, method, url, kwargs) if callable(handler) else handler
                 r = requests.Response()
                 r.status_code = status
-                r._content = html.encode("utf-8")
-                r.encoding = "utf-8"
+                # bytes 면 그대로 (EUC-KR·CP949 사이트 흉내), 글자면 UTF-8
+                r._content = html if isinstance(html, bytes) else html.encode("utf-8")
+                r.encoding = None if isinstance(html, bytes) else "utf-8"
                 r.url = url
                 r.headers["Content-Type"] = "text/html; charset=utf-8"
                 return r

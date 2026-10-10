@@ -23,7 +23,7 @@ from .deadline import find_deadline
 from .regions import Region, normalize, parse_regions
 from .summarize import summarize
 
-CLASSIFIER_VERSION = 3
+CLASSIFIER_VERSION = 6
 
 
 @dataclass
@@ -87,6 +87,14 @@ OTHER_KIND_RE = re.compile(
     r"양도|양수|매매|매각|임대|분양|인수(?!\s*인계)|장비\s*(?:판매|처분)|중고|세미나|강의|강좌|연수회|학술|학회|"
     r"설문|공지|이벤트|광고|홍보|개원\s*(?:자리|입지)\s*(?:추천|문의)"
 )
+# 구직자에게 주는 조언·정보 글 ('페이닥터 구직하시는 분들께 조언 드립니다', '봉직의 계약서 체크리스트')
+ADVICE_RE = re.compile(
+    r"조언|꿀\s*팁|(?<![가-힣])팁(?![가-힣])|노하우|체크\s*리스트|주의\s*(?:할|하실|해야\s*할)\s*(?:점|것)|주의\s*사항|"
+    r"확인\s*(?:할|하실|해야\s*할)\s*(?:점|것)|피하세요|피해야\s*할|알아야\s*할|후기|질문\s*(?:리스트|목록)|"
+    r"[\[(【<]\s*(?:정보|팁|질문|후기|잡담|자유)\s*[\])】>]"
+)
+# 구인 낱말이 없을 때만 조언·질문 글로 보는 말 ('[필독] 치과 구인' 은 구인)
+ADVICE_WEAK_RE = re.compile(r"필독|참고\s*하세요|정리\s*(?:해\s*봤|했|합니다)|공유\s*(?:합니다|드립니다|해요)|궁금(?:합니다|해요|한데)|어떤가요|어떨까요")
 
 
 def detect_post_kind(title: str, body: str, *, default: str) -> tuple[str, str]:
@@ -104,6 +112,10 @@ def detect_post_kind(title: str, body: str, *, default: str) -> tuple[str, str]:
     )
     if m:  # 병원을 사고파는 글 ('근무 후 양도 조건으로 원장님 모십니다'는 구인)
         return "other", m.group(0)
+    if not HIRING_STRONG_RE.search(t):
+        m = ADVICE_RE.search(t) or (ADVICE_WEAK_RE.search(t) if not HIRING_RE.search(t) else None)
+        if m:  # 구직자에게 주는 조언·정보 글
+            return "other", f"조언·정보 글: {m.group(0)}"
     m = SEEKING_RE.search(t)
     if m and not HIRING_STRONG_RE.search(t):
         return "seeking", m.group(0)
@@ -130,35 +142,90 @@ NON_DENTIST_RE = re.compile(
     r"의료기사|방사선사|임상병리사|물리치료사|작업치료사|시설(?:직)?|미화|보안|운전|전산|코디네이터|코디|상담\s*실장|데스크|"
     r"실장님?|연구원|연구직|보조원|사회복지사"
 )
+# 치과의사를 직접 가리키는 말 — 있으면 치과의사 공고
 DENTIST_STRONG_RE = re.compile(
-    r"치과\s*의사|치의학|치과\s*대학|치과대학|치의학\s*(?:전문)?대학원|치전원|"
-    r"구강악안면외과|치과\s*보철과|치과\s*교정과|소아\s*치과|치주과|치과\s*보존과|구강\s*내과|영상\s*치의학|구강\s*병리|예방\s*치과|통합\s*치의학|"
+    r"치과\s*의사|"
     r"치과\s*(?:전문의|교수|전임의|임상\s*강사|진료\s*교수|임상\s*교수|촉탁의|과장|의|진료의|레지던트|전공의|원장|봉직의)|"
     r"봉직의|페이\s*닥터|페닥"
 )
-POSITION_ANY_RE = re.compile(
-    r"교수|교원|전임의|임상\s*강사|펠로우|촉탁|전문의|의사|진료의|원장|레지던트|전공의|인턴|수련의|임기제|봉직"
+# 치과 진료과·교육기관 이름 — 치과의사 공고의 단서지만, 직원 공고에도 '근무 부서'로 나온다 (예: '소아치과 외래 간호사')
+DENTAL_DEPT_RE = re.compile(
+    r"치의학|치과\s*대학|치과대학|치의학\s*(?:전문)?대학원|치전원|"
+    r"구강악안면외과|치과\s*보철과|치과\s*교정과|소아\s*치과|치주과|치과\s*보존과|구강\s*내과|영상\s*치의학|구강\s*병리|예방\s*치과|통합\s*치의학"
 )
+# '의과대학, 치과대학 지원자는 경력증명서 …', '의학 및 치의학계열의 경우 전문의 …' — 대학 전체 교원 공고에 늘 붙는
+# 안내 문구의 대학 나열. 치과 자리가 있다는 뜻이 아니다 (2026-10 연세대 법학전문대학원 교원 공고). 본문에서만 뺀다.
+COLLEGES_NOTE_RE = re.compile(r"(?:의과\s*대학|의학)\s*(?:,|및|·|ㆍ|/)\s*치(?:과\s*대학|의학)")
+# 직원 직종 — 연락처('행정지원팀', '시설과')에도 흔히 나오는 행정·사무·시설 같은 말은 넣지 않는다
+STAFF_JOB_RE = re.compile(
+    r"치과\s*위생사|위생사|치위생|간호\s*(?:사|조무사|직)|조무사|기공사|치기공|의료\s*기사|방사선사|임상\s*병리사|물리\s*치료사|"
+    r"작업\s*치료사|영양사|약사|사회\s*복지사|단시간\s*근무자|공무직|사무\s*보조|진료\s*지원직|환경\s*미화|미화원|코디네이터|상담\s*실장"
+)
+# 치과의사가 맡는 자리 (직원 직종이 함께 적힌 글에서는 이런 말이 있어야 치과의사 공고로 본다)
+DENTIST_ROLE_RE = re.compile(
+    r"치과\s*의사|전문의|전임의|임상\s*강사|펠로우|교수(?!\s*(?:님과|들과))|교원|촉탁의|진료의|레지던트|전공의|수련의|(?<!청년)(?<!청년 )(?<!체험형)(?<!체험형 )(?<!채용형)(?<!채용형 )(?<!행정)(?<!행정 )인턴(?!십)|"
+    r"봉직의?|페이\s*닥터|의사직|의무직"
+)
+# '의사소통'·'병원장' 처럼 자리 이름이 아닌 것은 뺀다
+POSITION_ANY_RE = re.compile(
+    r"교수|교원|전임의|임상\s*강사|펠로우|촉탁|전문의|의사(?!\s*(?:소통|결정|표시|전달|표현))|진료의|(?<!병)원장|레지던트|전공의|(?<!청년)(?<!청년 )(?<!체험형)(?<!체험형 )(?<!채용형)(?<!채용형 )(?<!행정)(?<!행정 )인턴|"
+    r"수련의|임기제|봉직"
+)
+# 공고의 '모집 분야' 칸 (예: '모집분야: 사무보조(단시간근무자)', '채용직종 : 치과위생사(교정과)')
+RECRUIT_FIELD_RE = re.compile(r"(?:모집|채용|선발)\s*(?:분야|직종|부문|직렬|직위|대상)|(?<![가-힣])직\s*종(?![가-힣])")
 DENTAL_INST_TYPES = {"dental_univ_hospital", "dental_hospital", "disabled_dental", "dental_clinic"}
 
 
 NON_DENTIST_TITLE_RE = re.compile(
     r"위생사|치위생|간호|조무사|기공사|조교|행정|사무원|사무직|원무|약사|영양사|방사선사|임상병리|물리치료|시설|미화|보안|운전|전산|"
-    r"연구원|코디|상담실장|사회복지"
+    r"연구원|코디|상담실장|사회복지|단시간\s*근무자|공무직|사무\s*보조|일반직"
 )
+# 연구직 — 치과대학 연구실의 박사후연구원 등 (제목에 '교수연구팀' 처럼 교수가 들어 있어도 연구직)
+RESEARCH_TITLE_RE = re.compile(r"post\s*-?\s*doc|포닥|박사\s*후\s*(?:연구원|과정|연구)", re.I)
 DENTIST_TITLE_RE = re.compile(
-    r"치과\s*의사|교수|교원|전임의|임상\s*강사|펠로우|전문의|촉탁의|진료의|레지던트|전공의|인턴|원장|봉직|페이\s*닥터|의사직|의무|과장"
+    r"치과\s*의사|교수|교원|전임의|임상\s*강사|펠로우|전문의|촉탁의|진료의|레지던트|전공의|(?<!청년)(?<!청년 )(?<!체험형)(?<!체험형 )(?<!채용형)(?<!채용형 )(?<!행정)(?<!행정 )인턴|원장|봉직|페이\s*닥터|의사직|의무|과장"
 )
+
+
+# 보건소장: 의사 면허가 있는 사람 중에서 임용하고, 어려우면 치과의사·한의사 등도 임용할 수 있다(지역보건법 시행령 제13조).
+# 공고에 치과의사가 적혀 있지 않아도 치과의사 공고로 보고 분과는 '일반의 혹은 분과무관'으로 둔다 (사용자 결정, 2026-10-10).
+HEALTH_CENTER_HEAD_RE = re.compile(r"보건소장|보건의료원장|보건소\s+소장")
 
 
 def detect_dentist(text: str, title: str, inst_type: str, dentist_only: bool) -> tuple[bool, str]:
     if dentist_only:
         return True, "치과의사 전용 게시판"
+    rs = RESEARCH_TITLE_RE.search(title)
+    if rs and not re.search(r"치과\s*의사|임상|진료", title):
+        return False, f"연구직: {rs.group(0)}"
     nd = NON_DENTIST_TITLE_RE.search(title)
     if nd and not DENTIST_TITLE_RE.search(title):
         return False, f"제목이 다른 직종: {nd.group(0)}"
-    t_wo = NON_DENTIST_RE.sub(" ", text)
+    hc = HEALTH_CENTER_HEAD_RE.search(title)
+    if hc:
+        return True, f"{hc.group(0)} (의사 우선, 임용이 어려우면 치과의사도 가능)"
+    # 1) 공고의 '모집 분야' 칸이 있으면 그것으로 판단
+    fields = _recruit_fields(text)
+    if fields:
+        fv = " / ".join(fields)
+        if DENTIST_ROLE_RE.search(fv):
+            return True, f"모집 분야: {fv[:40]}"
+        staff = STAFF_JOB_RE.search(fv) or NON_DENTIST_RE.search(fv)
+        if staff:
+            return False, f"모집 분야가 다른 직종: {staff.group(0)}"
+    body = text[len(title):] if text.startswith(title) else text
+    t_wo = NON_DENTIST_RE.sub(" ", title + COLLEGES_NOTE_RE.sub(" ", body))
     m = DENTIST_STRONG_RE.search(t_wo)
+    if m:
+        return True, m.group(0)
+    # 2) 직원 직종이 적혀 있으면 치과의사 자리 이름이 따로 있어야 한다 (치과 기관의 직원 공고 걸러내기)
+    staff = STAFF_JOB_RE.search(text)
+    if staff:
+        role = DENTIST_ROLE_RE.search(t_wo)
+        if role and ("치과" in t_wo or DENTAL_DEPT_RE.search(t_wo) or inst_type in DENTAL_INST_TYPES):
+            return True, f"치과 + {role.group(0)}"
+        return False, f"다른 직종: {staff.group(0)}"
+    m = DENTAL_DEPT_RE.search(t_wo)
     if m:
         return True, m.group(0)
     has_pos = POSITION_ANY_RE.search(t_wo)
@@ -167,6 +234,19 @@ def detect_dentist(text: str, title: str, inst_type: str, dentist_only: bool) ->
     if inst_type in DENTAL_INST_TYPES and has_pos and not NON_DENTIST_RE.search(title):
         return True, f"치과 기관 + {has_pos.group(0)}"
     return False, ""
+
+
+def _recruit_fields(text: str) -> list[str]:
+    """'모집분야: 사무보조', '채용직종 : 치과위생사(교정과)' 같은 칸의 값들."""
+    out = []
+    for m in RECRUIT_FIELD_RE.finditer(text):
+        rest = text[m.end():m.end() + 80]
+        if not re.match(r"\s*[:：\-]|\s*\n|\s+\S", rest):
+            continue
+        val = re.sub(r"^\s*[:：\-]?\s*", "", rest).split("\n")[0].strip()
+        if val:
+            out.append(val)
+    return out
 
 
 # ════════════════════════════ 기관 종류 ════════════════════════════
@@ -248,6 +328,11 @@ def detect_inst(title: str, hint: str, body: str, *, scope_body: bool, default: 
     head = f"{hint}\n{title}"
     probe = head + ("\n" + body[:600] if scope_body else "")
     inst = institutions.find(probe)
+    in_title = institutions.find(title)
+    if in_title is not None and in_title is not inst and _inst_in_text(in_title, title):
+        # 제목에 기관 이름이 따로 있으면 그쪽이 맞다 — 잡알리오는 운영 법인 이름을 함께 주는데
+        # ('한국보훈복지의료공단' + 제목 '[광주보훈병원] …') 법인 이름이 더 길어서 중앙보훈병원으로 잡히던 문제
+        inst = in_title
     if inst and not ((hint and institutions.find(hint) is inst) or _inst_in_text(inst, probe)):
         inst = None
     m = re.search(r"장애인\s*(?:치과|구강)", title)
@@ -263,7 +348,7 @@ def detect_inst(title: str, hint: str, body: str, *, scope_body: bool, default: 
             if not _is_context_mention(head, m.end()):
                 return kind, _guess_name(head), m.group(0), None
     if scope_body:
-        part = body[:600]
+        part = COLLEGES_NOTE_RE.sub(" ", body[:600])
         for kind, rx in INST_RULES[:5]:  # 본문에서는 확실한 것만
             for m in rx.finditer(part):
                 if not _is_context_mention(part, m.end()):
@@ -312,7 +397,7 @@ STAFF_RE = re.compile(
     r"치과\s*의사\s*(?:구인|모집|채용|구함|구합니다)|GP\s*(?:원장|선생|구인|모집|구함)|일반의\s*(?:구인|모집|채용)",
     re.I,
 )
-RESIDENT_RE = re.compile(r"전공의|레지던트|인턴(?!십)|수련의|수련\s*치과\s*의사|수련\s*과정")
+RESIDENT_RE = re.compile(r"전공의|레지던트|(?<!청년)(?<!청년 )(?<!체험형)(?<!체험형 )(?<!채용형)(?<!채용형 )(?<!행정)(?<!행정 )인턴(?!십)|수련의|수련\s*치과\s*의사|수련\s*과정")
 OTHER_POS_RE = re.compile(r"동업|공동\s*개원|파트너\s*원장|지분\s*(?:참여|투자)|투자\s*원장|양도|양수|인수")
 
 
@@ -547,7 +632,8 @@ def _record(key, role, snippet, targets, hints, negated, c):
 # ════════════════════════════ 근무 형태 ════════════════════════════
 
 LOCUM_RE = re.compile(r"대진(?!대)|(?:휴가|출산|육아|병가|연수)\s*(?:휴가|휴직)?\s*(?:기간\s*)?(?:대체|공백)|대체\s*(?:원장|의사|진료|근무)")
-PART_MONTHLY_RE = re.compile(r"월\s*[1-4]\s*(?:회|번|일)|(?:야간|저녁|토요일?|일요일?)\s*(?:진료)?\s*(?:만|주\s*[1-3]\s*(?:회|일|번))")
+# '월 2회' — '11월 3일'(날짜), '6개월 1회' 는 아니다
+PART_MONTHLY_RE = re.compile(r"(?<![\d.개])(?<![\d.]\s)월\s*[1-4]\s*(?:회|번|일)|(?:야간|저녁|토요일?|일요일?)\s*(?:진료)?\s*(?:만|주\s*[1-3]\s*(?:회|일|번))")
 EXISTING_SENT_RE = re.compile(r"내원\s*하(?:십|시)|오십니다|하십니다|상주|근무\s*중|진료\s*중|계십니다")
 PART_RE = re.compile(
     r"파트\s*타임|(?<![가-힣])파트(?!너|장)|비상근|주\s*(?:[1-2]\d|30)\s*시간|\bpart\s*-?\s*time\b|\bpart\b|"
@@ -561,6 +647,8 @@ FULL_RE = re.compile(
     re.I,
 )
 FULL_WEAK_RE = re.compile(r"(?<!비)상근|월\s*~\s*금")
+# '4주 대진', '출산 대진 3개월' — 정해진 기간 동안 매일 나오는 대진 ('월 2회 토요일 포함' 도 그 기간의 근무 조건)
+LOCUM_PERIOD_RE = re.compile(r"\d+\s*(?:주|개월|달)\s*(?:간|동안)?\s*대진|대진\s*[(\[]?\s*\d+\s*(?:주|개월|달)")
 PART_STRONG_RE = re.compile(r"비상근|시간\s*선택제|시간제|주\s*(?:[1-2]\d|30)\s*시간|반일|오전만|오후만|파트\s*타임")
 
 
@@ -590,7 +678,7 @@ def detect_work_types(text: str, c: Classification) -> list[str]:
             continue
         part = pm
         break
-    if part is None and not out and not FULL_WEAK_RE.search(text):
+    if part is None and not out and not FULL_WEAK_RE.search(text) and not LOCUM_PERIOD_RE.search(text):
         part = PART_MONTHLY_RE.search(text)
     if part:
         out.append("parttime")
@@ -704,6 +792,9 @@ def classify(
 
     # 분과
     c.specialties, c.specialty_hints = detect_specialties(title, body, c.institution, c)
+    if HEALTH_CENTER_HEAD_RE.search(title):
+        c.specialties, c.specialty_hints = ["gp"], []
+        c.note("specialties", "보건소장 → 일반의 혹은 분과무관")
 
     # 근무 형태
     c.work_types = detect_work_types(text, c)

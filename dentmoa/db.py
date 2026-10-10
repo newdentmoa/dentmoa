@@ -347,6 +347,16 @@ def recent_runs(limit: int = 50) -> list[dict]:
         return [dict(r) for r in conn.execute("SELECT * FROM runs ORDER BY id DESC LIMIT ?", (limit,)).fetchall()]
 
 
+def recent_collect_runs(source: str, limit: int) -> list[dict]:
+    """이 출처의 최근 수집 기록 (최근 것부터, 아직 진행 중인 것은 빼고)."""
+    with connect() as conn:
+        rows = conn.execute(
+            "SELECT * FROM runs WHERE kind='collect' AND source=? AND status<>'running' ORDER BY id DESC LIMIT ?",
+            (source, limit),
+        ).fetchall()
+    return [dict(r) for r in rows]
+
+
 def last_run(kind: str, source: str = "", status: str | None = None) -> dict | None:
     q = "SELECT * FROM runs WHERE kind=? AND source=?"
     args: list = [kind, source]
