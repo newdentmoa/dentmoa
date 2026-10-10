@@ -17,7 +17,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 DEPLOY = ROOT / "deploy"
-SCRIPTS = ["install.sh", "update.sh", "backup.sh"]
+SCRIPTS = ["install.sh", "update.sh", "backup.sh", "netwatch.sh"]
 
 
 @pytest.mark.parametrize("name", SCRIPTS)
@@ -127,3 +127,132 @@ def test_doc_links(doc):
         assert dest.exists(), f"{doc.name}: 없는 파일 링크 {target}"
         if anchor and dest.suffix == ".md":
             assert anchor in _anchors(dest), f"{doc.name}: 없는 제목 링크 {target}"
+
+
+# ──────────────────────────── 서버 연결 지킴이 (deploy/netwatch.sh) ────────────────────────────
+# ip·curl·systemctl 같은 서버 명령은 가짜로 바꿔 끼우고, 2분마다 실행되는 것을 여러 번 불러서 흉내 낸다.
+
+FAKE_COMMANDS = {
+    # FAKE_ROUTE=1 이면 기본 경로가 있다
+    "ip": 'if [ "$*" = "-4 route show default" ]; then [ "${FAKE_ROUTE:-1}" = 1 ] && echo "default via 172.26.0.1 dev ens5"; exit 0; fi\necho "ip $*"\n',
+    # FAKE_META=1 이면 클라우드 안쪽 정보 주소가 대답한다
+    "curl": '[ "${FAKE_META:-1}" = 1 ] && exit 0 || exit 7\n',
+    "systemctl": 'echo "$*" >>"$FAKE_CALLS"\n',
+    "logger": "exit 0\n",
+    "networkctl": 'echo "networkctl $*"\n',
+    "journalctl": 'echo "journalctl $*"\n',
+}
+
+
+@pytest.fixture
+def netwatch(tmp_path):
+    if not shutil.which("bash"):
+        pytest.skip("bash 없음")
+    bin_dir = tmp_path / "bin"
+    bin_dir.mkdir()
+    for name, body in FAKE_COMMANDS.items():
+        f = bin_dir / name
+        f.write_text("#!/bin/sh\n" + body)
+        f.chmod(0o755)
+    uptime = tmp_path / "uptime"
+    uptime.write_text("5000.00 100.00\n")
+    env = {
+        **os.environ,
+        "PATH": f"{bin_dir}:{os.environ.get('PATH', '/usr/bin:/bin')}",
+        "NETWATCH_STATE": str(tmp_path / "state"),
+        "NETWATCH_LOG": str(tmp_path / "netwatch.log"),
+        "NETWATCH_LAST_REBOOT": str(tmp_path / "last-reboot"),
+        "NETWATCH_UPTIME_FILE": str(uptime),
+        "NETWATCH_CRON_FILE": str(tmp_path / "cron"),
+        "FAKE_CALLS": str(tmp_path / "calls"),
+    }
+
+    class Runner:
+        path = tmp_path
+
+        def run(self, *args, **fake):
+            e = {**env, **{k: str(v) for k, v in fake.items()}}
+            subprocess.run(["bash", str(DEPLOY / "netwatch.sh"), *args], env=e, check=True)
+
+        def calls(self):
+            f = tmp_path / "calls"
+            return f.read_text().splitlines() if f.exists() else []
+
+        def log(self):
+            f = tmp_path / "netwatch.log"
+            return f.read_text() if f.exists() else ""
+
+        def fails(self):
+            f = tmp_path / "state" / "fails"
+            return int(f.read_text()) if f.exists() else 0
+
+    return Runner()
+
+
+def test_netwatch_does_nothing_while_connected(netwatch):
+    for _ in range(3):
+        netwatch.run()
+    assert netwatch.calls() == [] and netwatch.log() == "" and netwatch.fails() == 0
+
+
+def test_netwatch_restarts_network_then_reboots(netwatch):
+    # 2026-10-10 처럼 기본 경로가 사라졌다
+    netwatch.run(FAKE_ROUTE=0)
+    assert netwatch.fails() == 1 and netwatch.calls() == []
+    assert "network DOWN (check 1)" in netwatch.log() and "network state" in netwatch.log()  # 원인 찾기용 기록
+    netwatch.run(FAKE_ROUTE=0)
+    assert netwatch.calls() == ["restart systemd-networkd"]
+    netwatch.run(FAKE_ROUTE=0)
+    netwatch.run(FAKE_ROUTE=0)
+    assert netwatch.calls() == ["restart systemd-networkd"]
+    netwatch.run(FAKE_ROUTE=0)  # 5번째(약 10분) → 재부팅
+    assert netwatch.calls() == ["restart systemd-networkd", "reboot"]
+    assert (netwatch.path / "last-reboot").read_text().strip().isdigit()
+
+
+def test_netwatch_recovers_and_resets_count(netwatch):
+    netwatch.run(FAKE_ROUTE=0)
+    netwatch.run(FAKE_ROUTE=0)
+    netwatch.run()
+    assert netwatch.fails() == 0
+    assert "network OK again (after 2 failed checks)" in netwatch.log()
+    netwatch.run(FAKE_ROUTE=0)  # 다시 1번부터 센다
+    assert netwatch.fails() == 1
+
+
+def test_netwatch_does_not_reboot_soon_after_boot_or_reboot(netwatch):
+    (netwatch.path / "uptime").write_text("600.00 10.00\n")  # 켜진 지 10분
+    for _ in range(6):
+        netwatch.run(FAKE_ROUTE=0)
+    assert "reboot" not in netwatch.calls()
+    # 오래 켜져 있었어도 이 장치가 1시간 안에 재부팅했다면 기다린다
+    (netwatch.path / "uptime").write_text("5000.00 10.00\n")
+    import time
+
+    (netwatch.path / "last-reboot").write_text(f"{int(time.time()) - 600}\n")
+    for _ in range(5):
+        netwatch.run(FAKE_ROUTE=0)
+    assert "reboot" not in netwatch.calls()
+    assert "not rebooting yet" in netwatch.log()
+
+
+def test_netwatch_metadata_check_only_after_it_answered_once(netwatch):
+    # AWS 가 아닌 서버: 정보 주소가 처음부터 대답하지 않으면 경로만 본다
+    netwatch.run(FAKE_META=0)
+    assert netwatch.fails() == 0
+    # 한 번 대답한 뒤 대답이 없으면 끊긴 것으로 본다(경로는 남아 있어도)
+    netwatch.run(FAKE_META=1)
+    netwatch.run(FAKE_META=0)
+    assert netwatch.fails() == 1
+
+
+@pytest.mark.skipif(not hasattr(os, "geteuid") or os.geteuid() != 0, reason="관리자 권한이 필요한 등록 시험")
+def test_netwatch_install_writes_cron(netwatch):
+    netwatch.run("install")
+    cron = (netwatch.path / "cron").read_text()
+    assert re.search(r'^\*/2 \* \* \* \* root /bin/bash ".*/deploy/netwatch\.sh"', cron, re.M)
+
+
+def test_install_and_update_register_netwatch():
+    for name in ("install.sh", "update.sh"):
+        assert 'deploy/netwatch.sh" install' in (DEPLOY / name).read_text(encoding="utf-8"), name

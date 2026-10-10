@@ -129,6 +129,12 @@ dentmoa/
   못 쓰고 6개월 뒤 닫히므로 유료 플랜으로 업그레이드해야 함(크레딧은 이어짐). 사용자는 2026-10-10 dentmoa 용 계정을 무료 플랜으로 만들었음
   → docs/1 '1-1. 유료 플랜으로 바꾸기'. 그 뒤 '계정이 꼬인 것 같다'며 같은 메일로 다시 가입(유료 플랜) → 계정 dentmoa,
   크레딧 화면이 0달러(가입 당일). 하루 뒤 다시 보고, 그래도 0이면 결제 지원 문의(약관상 크레딧은 한 사람 한 계정만).
+  2026-10-10 23:10 쯤 서버 IPv4 연결이 끊김(대시보드·SSH 모두 안 열림). 서버는 정상(cron·sysstat 계속 돎, 메모리 경고 없음, CPU 0%),
+  amazon-ssm-agent 가 14:19 UTC 에 'network is unreachable'·DNS 실패를 남김, systemd-networkd 는 13:17(도커 설치) 뒤로 아무 기록 없음
+  (DHCP lease lost 기록도 없음), apt 자동 업데이트도 없음 → 원인 미확정, 재부팅으로 복구. 대책: deploy/netwatch.sh(cron 2분 —
+  기본 경로·169.254.169.254 확인, 2번 끊기면 networkd 재시작, 5번이면 재부팅(켜진 지 20분·1시간에 한 번), 끊긴 순간의 상태를
+  /var/log/dentmoa-netwatch.log 에 영어로 기록). install.sh 7단계·update.sh 가 등록. 다시 생기면 그 기록부터 본다.
+  메모리: 서버가 쓸 수 있는 것은 412MB, 재부팅 직후 available 160MB·스왑 111MB(multipathd·snapd·udisksd 등 기본 프로그램이 큼).
   GitHub Actions 예약 실행도 검토해 사용자에게 설명함 —
   대시보드 없음, 상태(DB) 저장을 따로 만들어야 함, 무료 2,000분/월이 빠듯(한 번에 15~20분), 약관상 애매.
 
