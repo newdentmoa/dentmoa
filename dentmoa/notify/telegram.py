@@ -174,18 +174,26 @@ def send_message(token: str, chat_id: str, html: str, *, disable_preview: bool =
     return send_chunks(token, chat_id, [html], disable_preview=disable_preview)
 
 
-def find_chat_id(token: str) -> str | None:
-    """봇에게 온 최근 메시지에서 개인 대화(채팅) ID를 찾는다. 없으면 None.
+def find_chat(token: str, exclude: Iterable[str] = ()) -> tuple[str, str] | None:
+    """봇에게 온 최근 메시지에서 개인 대화(채팅) ID와 텔레그램 이름을 찾는다. 없으면 None.
 
     사용자가 텔레그램에서 봇에게 /start 를 보낸 뒤 부르면 된다.
+    exclude: 이미 다른 사람 것으로 저장한 채팅 ID — 건너뛴다 (아내 휴대폰에서 /start 를 누른 뒤 찾을 때).
     """
+    skip = {str(x).strip() for x in exclude if x}
     data = _call(token, "getUpdates", {"timeout": 0})
     for upd in reversed(data.get("result") or []):
         for key in ("message", "edited_message", "my_chat_member"):
             chat = (upd.get(key) or {}).get("chat") or {}
-            if chat.get("type") == "private" and chat.get("id") is not None:
-                return str(chat["id"])
+            if chat.get("type") == "private" and chat.get("id") is not None and str(chat["id"]) not in skip:
+                name = " ".join(x for x in (chat.get("first_name"), chat.get("last_name")) if x)
+                return str(chat["id"]), name or chat.get("username") or ""
     return None
+
+
+def find_chat_id(token: str, exclude: Iterable[str] = ()) -> str | None:
+    found = find_chat(token, exclude)
+    return found[0] if found else None
 
 
 def send_test(secrets: dict) -> None:

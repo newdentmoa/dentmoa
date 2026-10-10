@@ -83,7 +83,21 @@ CREATE TABLE IF NOT EXISTS kv (
     value TEXT NOT NULL,
     updated_at TEXT NOT NULL
 );
+
+-- 사람별 기록 (settings 'people' 의 키 p1, p2 …): 알림 판단·알림·마감 알림·관심(★).
+-- postings 의 processed_at·notified_at·reminded_at·starred 는 사람별 기록이 생기기 전의 것이다 (첫 사람 p1 로 옮김).
+CREATE TABLE IF NOT EXISTS person_postings (
+    person TEXT NOT NULL,
+    posting_id INTEGER NOT NULL REFERENCES postings(id) ON DELETE CASCADE,
+    processed_at TEXT,
+    notified_at TEXT,
+    reminded_at TEXT,
+    starred INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (person, posting_id)
+);
+CREATE INDEX IF NOT EXISTS idx_person_postings_posting ON person_postings(posting_id);
 """
+LEGACY_PERSON = "p1"  # 사람별 기록이 생기기 전의 알림·관심 기록의 주인 (settings_store.DEFAULT_PEOPLE 의 첫 사람)
 
 
 def configure(path: Path | str) -> None:
@@ -106,6 +120,7 @@ def connect() -> Iterator[sqlite3.Connection]:
                 conn = sqlite3.connect(p)
                 conn.execute("PRAGMA journal_mode=WAL")
                 conn.executescript(SCHEMA)
+                _migrate(conn)
                 conn.commit()
                 conn.close()
                 _initialized.add(p)
@@ -254,6 +269,22 @@ def get_posting(pid: int) -> Posting | None:
     return Posting.from_row(row) if row else None
 
 
+def _migrate(conn: sqlite3.Connection) -> None:
+    """예전(한 사람용) 알림·관심 기록을 첫 사람의 기록으로 한 번 옮긴다."""
+    if conn.execute("SELECT 1 FROM kv WHERE key='migrated_person_postings'").fetchone():
+        return
+    conn.execute(
+        "INSERT OR IGNORE INTO person_postings(person, posting_id, processed_at, notified_at, reminded_at, starred) "
+        "SELECT ?, id, processed_at, notified_at, reminded_at, starred FROM postings "
+        "WHERE processed_at IS NOT NULL OR notified_at IS NOT NULL OR reminded_at IS NOT NULL OR starred=1",
+        (LEGACY_PERSON,),
+    )
+    conn.execute(
+        "INSERT OR REPLACE INTO kv(key, value, updated_at) VALUES('migrated_person_postings', 'true', ?)",
+        (_iso(config.now()),),
+    )
+
+
 def all_postings(*, since: datetime | None = None, include_hidden: bool = True) -> list[Posting]:
     q = "SELECT * FROM postings WHERE 1=1"
     args: list = []
@@ -268,7 +299,8 @@ def all_postings(*, since: datetime | None = None, include_hidden: bool = True) 
 
 
 def set_flag(pid: int, flag: str, value: bool) -> None:
-    if flag not in ("starred", "hidden"):
+    """숨기기는 모두에게 적용된다 (관심(★)은 사람마다 — set_star)."""
+    if flag != "hidden":
         raise ValueError(flag)
     with connect() as conn:
         conn.execute(f"UPDATE postings SET {flag}=? WHERE id=?", (int(value), pid))
@@ -279,43 +311,115 @@ def set_dup_of(pid: int, dup_of: int | None) -> None:
         conn.execute("UPDATE postings SET dup_of=? WHERE id=?", (dup_of, pid))
 
 
-def unprocessed() -> list[Posting]:
+# ──────────────────────────── 사람별 기록 ────────────────────────────
+
+_PERSON_JOIN = (
+    "SELECT p.*, COALESCE(s.starred, 0) AS person_starred, s.notified_at AS person_notified_at, "
+    "s.reminded_at AS person_reminded_at FROM postings p "
+    "LEFT JOIN person_postings s ON s.posting_id = p.id AND s.person = ?"
+)
+
+
+def _with_person(rows) -> list[Posting]:
+    """사람별 기록(관심·알림·마감 알림)을 공고에 얹는다."""
+    out = []
+    for r in rows:
+        p = Posting.from_row(r)
+        p.starred = bool(r["person_starred"])
+        p.notified_at = _dt(r["person_notified_at"])
+        p.reminded_at = _dt(r["person_reminded_at"])
+        out.append(p)
+    return out
+
+
+def _dt(v: str | None) -> datetime | None:
+    return datetime.fromisoformat(v) if v else None
+
+
+def unprocessed(person: str, since: datetime | None = None) -> list[Posting]:
+    """이 사람에게 아직 알림 판단을 하지 않은 공고 (since 가 있으면 그 뒤에 올라온 것만)."""
+    q = _PERSON_JOIN + " WHERE s.processed_at IS NULL"
+    args: list = [person]
+    if since:
+        q += " AND COALESCE(p.posted_at, p.first_seen_at) >= ?"
+        args.append(_iso(since))
     with connect() as conn:
-        rows = conn.execute("SELECT * FROM postings WHERE processed_at IS NULL ORDER BY id").fetchall()
-    return [Posting.from_row(r) for r in rows]
+        rows = conn.execute(q + " ORDER BY p.id", args).fetchall()
+    return _with_person(rows)
 
 
-def mark_processed(ids: list[int], notified_ids: list[int]) -> None:
+def _upsert(conn: sqlite3.Connection, person: str, pid: int, **cols) -> None:
+    names = ", ".join(cols)
+    marks = ", ".join("?" for _ in cols)
+    updates = ", ".join(f"{k}=excluded.{k}" for k in cols)
+    conn.execute(
+        f"INSERT INTO person_postings(person, posting_id, {names}) VALUES(?, ?, {marks}) "
+        f"ON CONFLICT(person, posting_id) DO UPDATE SET {updates}",
+        (person, pid, *cols.values()),
+    )
+
+
+def mark_processed(person: str, ids: list[int], notified_ids: list[int]) -> None:
     now = _iso(config.now())
     notified = set(notified_ids)
     with connect() as conn:
         for pid in ids:
-            conn.execute(
-                "UPDATE postings SET processed_at=?, notified_at=CASE WHEN ? THEN ? ELSE notified_at END WHERE id=?",
-                (now, int(pid in notified), now, pid),
-            )
+            if pid in notified:
+                _upsert(conn, person, pid, processed_at=now, notified_at=now)
+            else:
+                _upsert(conn, person, pid, processed_at=now)
 
 
-def due_reminders(today: date, days: int, starred_only: bool) -> list[Posting]:
-    """마감이 오늘~days일 뒤이고, 알림을 보냈던 공고 중 아직 마감 알림을 안 보낸 것."""
-    q = (
-        "SELECT * FROM postings WHERE deadline IS NOT NULL AND deadline >= ? AND deadline <= ? "
-        "AND reminded_at IS NULL AND hidden=0 AND dup_of IS NULL"
+def due_reminders(person: str, today: date, days: int, starred_only: bool) -> list[Posting]:
+    """마감이 오늘~days일 뒤이고, 이 사람에게 알림을 보냈거나 관심(★) 표시한 공고 중 아직 마감 알림을 안 보낸 것."""
+    q = _PERSON_JOIN + (
+        " WHERE p.deadline IS NOT NULL AND p.deadline >= ? AND p.deadline <= ? "
+        "AND s.reminded_at IS NULL AND p.hidden=0 AND p.dup_of IS NULL"
     )
-    args: list = [today.isoformat(), (today + timedelta(days=days)).isoformat()]
+    args: list = [person, today.isoformat(), (today + timedelta(days=days)).isoformat()]
     if starred_only:
-        q += " AND starred=1"
+        q += " AND s.starred=1"
     else:
-        q += " AND (notified_at IS NOT NULL OR starred=1)"
-    q += " ORDER BY deadline"
+        q += " AND (s.notified_at IS NOT NULL OR s.starred=1)"
+    q += " ORDER BY p.deadline"
     with connect() as conn:
-        return [Posting.from_row(r) for r in conn.execute(q, args).fetchall()]
+        return _with_person(conn.execute(q, args).fetchall())
 
 
-def mark_reminded(ids: list[int]) -> None:
+def mark_reminded(person: str, ids: list[int]) -> None:
     now = _iso(config.now())
     with connect() as conn:
-        conn.executemany("UPDATE postings SET reminded_at=? WHERE id=?", [(now, i) for i in ids])
+        for pid in ids:
+            _upsert(conn, person, pid, reminded_at=now)
+
+
+def set_star(person: str, pid: int, value: bool) -> None:
+    with connect() as conn:
+        _upsert(conn, person, pid, starred=int(value))
+
+
+def starred_ids(person: str) -> set[int]:
+    with connect() as conn:
+        rows = conn.execute("SELECT posting_id FROM person_postings WHERE person=? AND starred=1", (person,)).fetchall()
+    return {r[0] for r in rows}
+
+
+def person_records(pid: int) -> dict[str, dict]:
+    """공고 하나의 사람별 기록: 사람 키 → {'notified_at', 'reminded_at', 'starred'}"""
+    with connect() as conn:
+        rows = conn.execute(
+            "SELECT person, notified_at, reminded_at, starred FROM person_postings WHERE posting_id=?", (pid,)
+        ).fetchall()
+    return {
+        r["person"]: {"notified_at": _dt(r["notified_at"]), "reminded_at": _dt(r["reminded_at"]), "starred": bool(r["starred"])}
+        for r in rows
+    }
+
+
+def forget_person(person: str) -> None:
+    """사람을 지울 때 그 사람의 기록도 지운다."""
+    with connect() as conn:
+        conn.execute("DELETE FROM person_postings WHERE person=?", (person,))
 
 
 def count_postings() -> int:

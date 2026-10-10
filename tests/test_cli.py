@@ -82,7 +82,7 @@ def test_collect_notify_reclassify(tmp_db, fake_source, capsys):
     assert main(["notify", "--dry-run"]) == 0
     out = capsys.readouterr().out
     assert "미리보기" in out and "소아치과 전문의 원장님 모십니다" in out
-    assert db.unprocessed()  # 미리보기는 처리 완료로 표시하지 않음
+    assert db.unprocessed("p1")  # 미리보기는 처리 완료로 표시하지 않음
 
     assert main(["reclassify", "--all"]) == 0
     assert "1건" in capsys.readouterr().out

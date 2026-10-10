@@ -120,6 +120,17 @@ def _failed(sent: dict[str, str]) -> bool:
     return bool(sent) and not any(v == "ok" for v in sent.values())
 
 
+def _print_digest(rep, *, dry_run: bool = False) -> None:
+    """사람마다: 판단한 새 공고 수, 조건에 맞는 공고, 보낸 결과."""
+    for d in rep.people:
+        head = f"[{d.name}] " if len(rep.people) > 1 else ""
+        print(f"{head}알림을 판단할 새 공고 {d.considered}건 중 조건에 맞는 공고 {len(d.matched)}건"
+              + (" (미리보기 — 보내지 않음)" if dry_run else ""))
+        _print_titles(d.matched)
+        if not dry_run:
+            _print_sent(d.sent, d.skipped_reason)
+
+
 # ──────────────────────────── 명령 ────────────────────────────
 
 
@@ -168,12 +179,11 @@ def cmd_run_once(args) -> int:
     col, dig = result["collect"], result["digest"]
     print("[수집]")
     _print_collect(col)
-    print(f"\n[알림] 조건에 맞는 새 공고 {len(dig.matched)}건")
-    _print_titles(dig.matched)
-    _print_sent(dig.sent, dig.skipped_reason)
+    print("\n[알림]")
+    _print_digest(dig)
     print(f"\n[마감 알림] {result['reminders']}건")
     print(f"\n요약: {result['message']}")
-    return 1 if col.warnings or _failed(dig.sent) else 0
+    return 1 if col.warnings or dig.failed else 0
 
 
 def cmd_collect(args) -> int:
@@ -197,12 +207,8 @@ def cmd_notify(args) -> int:
 
     config.ensure_dirs()
     rep = pipeline.digest(dry_run=args.dry_run)
-    print(f"알림을 판단할 새 공고 {rep.considered}건 중 조건에 맞는 공고 {len(rep.matched)}건"
-          + (" (미리보기 — 보내지 않음)" if args.dry_run else ""))
-    _print_titles(rep.matched)
-    if not args.dry_run:
-        _print_sent(rep.sent, rep.skipped_reason)
-    return 1 if _failed(rep.sent) else 0
+    _print_digest(rep, dry_run=args.dry_run)
+    return 1 if rep.failed else 0
 
 
 def cmd_remind(args) -> int:

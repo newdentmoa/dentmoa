@@ -37,7 +37,9 @@ def _posting(pid=1, **kw) -> Posting:
 
 
 def _settings(**notify):
+    """한 사람 몫의 설정 (settings_store.person_settings 와 같은 모양)."""
     s = copy.deepcopy(settings_store.DEFAULT_SETTINGS)
+    s["notify"].update(settings_store.DEFAULT_ALERTS)
     s["notify"].update(notify)
     return s
 

@@ -1,6 +1,8 @@
 """알림 보내기 (텔레그램·메일).
 
 채널은 설정에서 켜져 있고(settings['notify']['telegram'/'email']) 계정 정보가 입력되어 있을 때만 쓴다.
+받는 사람이 여럿이면 pipeline 이 사람마다 그 사람 몫의 설정(settings_store.person_settings)과
+계정 정보(settings_store.person_secrets — 그 사람의 채팅 ID·받는 주소)를 넘기고, who(이름)를 제목에 붙인다.
 돌려주는 값: {'텔레그램': 'ok' 또는 한글 오류 메시지, '메일': …}. 시도한 채널이 없으면 {}.
 """
 
@@ -41,8 +43,9 @@ def _attempt(fn: Callable[[], None]) -> str:
         return f"예상하지 못한 오류: {e.__class__.__name__}: {e}"
 
 
-def _deliver(settings: dict, tg_chunks: Callable[[], list[str]], mail: Callable[[], tuple[str, str, str]]) -> dict[str, str]:
-    sec = settings_store.secrets()
+def _deliver(settings: dict, sec: dict | None, tg_chunks: Callable[[], list[str]],
+             mail: Callable[[], tuple[str, str, str]]) -> dict[str, str]:
+    sec = settings_store.secrets() if sec is None else sec
     result: dict[str, str] = {}
     for ch in channels(settings, sec):
         if ch == TELEGRAM:
@@ -54,21 +57,23 @@ def _deliver(settings: dict, tg_chunks: Callable[[], list[str]], mail: Callable[
     return result
 
 
-def send_digest(postings, warnings, settings: dict) -> dict[str, str]:
+def send_digest(postings, warnings, settings: dict, *, secrets: dict | None = None, who: str = "") -> dict[str, str]:
     """새 공고 모음 알림."""
     return _deliver(
         settings,
-        lambda: fmt.telegram_digest(postings, warnings, settings),
-        lambda: fmt.email_digest(postings, warnings, settings),
+        secrets,
+        lambda: fmt.telegram_digest(postings, warnings, settings, who=who),
+        lambda: fmt.email_digest(postings, warnings, settings, who=who),
     )
 
 
-def send_reminders(postings, settings: dict) -> dict[str, str]:
+def send_reminders(postings, settings: dict, *, secrets: dict | None = None, who: str = "") -> dict[str, str]:
     """마감 임박 알림."""
     return _deliver(
         settings,
-        lambda: fmt.telegram_reminders(postings, settings),
-        lambda: fmt.email_reminders(postings, settings),
+        secrets,
+        lambda: fmt.telegram_reminders(postings, settings, who=who),
+        lambda: fmt.email_reminders(postings, settings, who=who),
     )
 
 
