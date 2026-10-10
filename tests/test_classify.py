@@ -30,6 +30,17 @@ def C(title, body="", kind="local_board", **kw):
         ("교정 세미나 안내", "", "other"),
         ("부산 해운대 봉직의 구합니다", "", "hiring"),
         ("함께하실 원장님을 찾습니다", "", "hiring"),
+        # 구직자에게 주는 조언·정보 글은 공고가 아니다 (사용자 결정 2026-10-10)
+        ("페이닥터 구직하시는 분들께 조언 드립니다", "면접 볼 때 세후 금액을 꼭 확인하세요", "other"),
+        ("신규 졸업생 구직 팁 공유합니다", "", "other"),
+        ("봉직의 자리 구할 때 꼭 확인할 것", "근로계약서, 퇴직금", "other"),
+        ("구인 공고 볼 때 주의할 점", "세전 세후 구분", "other"),
+        ("이런 치과는 피하세요 (구직 원장님 필독)", "", "other"),
+        ("[정보] 봉직의 계약서 체크리스트", "", "other"),
+        ("구직 중인 원장님들 참고하세요", "요즘 페이 시세 정리", "other"),
+        ("[필독] 치과 구인", "주 5일", "hiring"),  # '필독' 은 구인 낱말이 없을 때만 조언 글
+        ("소아치과 원장님 모십니다 (필독)", "", "hiring"),
+        ("노하우 전수해 드립니다, 페이닥터 구합니다", "", "hiring"),
     ],
 )
 def test_post_kind_local(title, body, expected):
@@ -155,6 +166,12 @@ def test_specialties_board(title, body, targets):
         ("풀타임/파트 모두 가능", "", ["fulltime", "parttime"]),
         ("원장님 모십니다", "", ["fulltime"]),
         ("대진대학교 출신 원장님 모십니다", "", ["fulltime"]),
+        # 본문의 날짜('11월 3일')는 '한 달에 3일'(파트)이 아니다 — 기간이 제목에만 있는 '4주 대진'
+        ("[구인] 4주 대진 원장님", "11월 3일 ~ 11월 28일 근무", ["locum"]),
+        ("[부산] 대진 4주 (1월)", "1월 2일 ~ 1월 30일\n평일 9:30~18:30", ["locum"]),
+        ("4주 대진 원장님 모셔요", "월 2회 토요일 근무 포함", ["locum"]),  # 그 기간의 근무 조건
+        ("소아치과 원장님 월 2회 모십니다", "토요일 진료", ["parttime"]),
+        ("토요일 대진 원장님", "월 2회 토요일만", ["parttime", "locum"]),
     ],
 )
 def test_work_types(title, body, expected):
@@ -277,3 +294,23 @@ def test_college_list_boilerplate_is_not_a_dental_post():
     c = C("2027학년도 연세대학교 전임교원 초빙 공고", note + "\n치과대학 / 통합치의학 / 1 / 통합치의학과 전문의 자격 취득자", kind="hospital_board")
     assert c.is_dentist and "integrated" in c.specialties
     assert C("의과대학, 치과대학 교원 초빙", note, kind="hospital_board").is_dentist  # 제목은 그대로 본다
+
+
+def test_locum_is_a_staff_dentist_post():
+    """'4주 대진' 은 직위 봉직의, 근무형태 대진 (파트타임 아님)."""
+    c = C("[구인] 4주 대진 원장님", "11월 3일 ~ 11월 28일 근무")
+    assert c.positions == ["staff_dentist"] and c.work_types == ["locum"]
+
+
+@pytest.mark.parametrize(
+    "title, body, regions",
+    [
+        # 이름은 서울이지만 경기 의왕시에 있다 (기관 목록)
+        ("서울구치소 의료과 치과의사(임기제) 채용 공고", "담당업무: 수용자 치과 진료", ["경기 의왕시"]),
+        ("[법무부] 서울구치소 계약직 의사(치과) 채용", "근무지: 경기도 의왕시 안양판교로 143", ["경기 의왕시"]),
+        ("서울남부교도소 치과 촉탁의 모집", "", ["서울 구로구"]),
+    ],
+)
+def test_correctional_facility_location(title, body, regions):
+    c = C(title, body, kind="aggregator")
+    assert [r.label for r in c.regions] == regions and c.inst_type == "public_hospital"

@@ -2614,5 +2614,61 @@
   "watch": true,
   "operator": "",
   "note": "own board (의사직 필터)"
+ },
+ {
+  "name": "서울구치소",
+  "kind": "public_hospital",
+  "sido": "경기",
+  "sigungu": "의왕시",
+  "aliases": [
+   "서울 구치소"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "법무부",
+  "note": "2026-10-10 추가: 교정시설 위치 — 이름은 서울이지만 경기 의왕시(안양판교로)에 있음. 치과의사(의무관·촉탁의) 공고는 나라일터로 모임"
+ },
+ {
+  "name": "서울동부구치소",
+  "kind": "public_hospital",
+  "sido": "서울",
+  "sigungu": "송파구",
+  "aliases": [
+   "서울 동부구치소"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "법무부",
+  "note": "2026-10-10 추가: 교정시설 위치 — 서울 송파구(문정동). 치과의사(의무관·촉탁의) 공고는 나라일터로 모임"
+ },
+ {
+  "name": "서울남부구치소",
+  "kind": "public_hospital",
+  "sido": "서울",
+  "sigungu": "구로구",
+  "aliases": [
+   "서울 남부구치소"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "법무부",
+  "note": "2026-10-10 추가: 교정시설 위치 — 서울 구로구(천왕동). 치과의사(의무관·촉탁의) 공고는 나라일터로 모임"
+ },
+ {
+  "name": "서울남부교도소",
+  "kind": "public_hospital",
+  "sido": "서울",
+  "sigungu": "구로구",
+  "aliases": [
+   "서울 남부교도소"
+  ],
+  "homepage": "",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "법무부",
+  "note": "2026-10-10 추가: 교정시설 위치 — 서울 구로구(천왕동). 치과의사(의무관·촉탁의) 공고는 나라일터로 모임"
  }
 ]

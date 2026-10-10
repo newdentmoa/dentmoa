@@ -23,7 +23,7 @@ from .deadline import find_deadline
 from .regions import Region, normalize, parse_regions
 from .summarize import summarize
 
-CLASSIFIER_VERSION = 5
+CLASSIFIER_VERSION = 6
 
 
 @dataclass
@@ -87,6 +87,14 @@ OTHER_KIND_RE = re.compile(
     r"양도|양수|매매|매각|임대|분양|인수(?!\s*인계)|장비\s*(?:판매|처분)|중고|세미나|강의|강좌|연수회|학술|학회|"
     r"설문|공지|이벤트|광고|홍보|개원\s*(?:자리|입지)\s*(?:추천|문의)"
 )
+# 구직자에게 주는 조언·정보 글 ('페이닥터 구직하시는 분들께 조언 드립니다', '봉직의 계약서 체크리스트')
+ADVICE_RE = re.compile(
+    r"조언|꿀\s*팁|(?<![가-힣])팁(?![가-힣])|노하우|체크\s*리스트|주의\s*(?:할|하실|해야\s*할)\s*(?:점|것)|주의\s*사항|"
+    r"확인\s*(?:할|하실|해야\s*할)\s*(?:점|것)|피하세요|피해야\s*할|알아야\s*할|후기|질문\s*(?:리스트|목록)|"
+    r"[\[(【<]\s*(?:정보|팁|질문|후기|잡담|자유)\s*[\])】>]"
+)
+# 구인 낱말이 없을 때만 조언·질문 글로 보는 말 ('[필독] 치과 구인' 은 구인)
+ADVICE_WEAK_RE = re.compile(r"필독|참고\s*하세요|정리\s*(?:해\s*봤|했|합니다)|공유\s*(?:합니다|드립니다|해요)|궁금(?:합니다|해요|한데)|어떤가요|어떨까요")
 
 
 def detect_post_kind(title: str, body: str, *, default: str) -> tuple[str, str]:
@@ -104,6 +112,10 @@ def detect_post_kind(title: str, body: str, *, default: str) -> tuple[str, str]:
     )
     if m:  # 병원을 사고파는 글 ('근무 후 양도 조건으로 원장님 모십니다'는 구인)
         return "other", m.group(0)
+    if not HIRING_STRONG_RE.search(t):
+        m = ADVICE_RE.search(t) or (ADVICE_WEAK_RE.search(t) if not HIRING_RE.search(t) else None)
+        if m:  # 구직자에게 주는 조언·정보 글
+            return "other", f"조언·정보 글: {m.group(0)}"
     m = SEEKING_RE.search(t)
     if m and not HIRING_STRONG_RE.search(t):
         return "seeking", m.group(0)
@@ -620,7 +632,8 @@ def _record(key, role, snippet, targets, hints, negated, c):
 # ════════════════════════════ 근무 형태 ════════════════════════════
 
 LOCUM_RE = re.compile(r"대진(?!대)|(?:휴가|출산|육아|병가|연수)\s*(?:휴가|휴직)?\s*(?:기간\s*)?(?:대체|공백)|대체\s*(?:원장|의사|진료|근무)")
-PART_MONTHLY_RE = re.compile(r"월\s*[1-4]\s*(?:회|번|일)|(?:야간|저녁|토요일?|일요일?)\s*(?:진료)?\s*(?:만|주\s*[1-3]\s*(?:회|일|번))")
+# '월 2회' — '11월 3일'(날짜), '6개월 1회' 는 아니다
+PART_MONTHLY_RE = re.compile(r"(?<![\d.개])(?<![\d.]\s)월\s*[1-4]\s*(?:회|번|일)|(?:야간|저녁|토요일?|일요일?)\s*(?:진료)?\s*(?:만|주\s*[1-3]\s*(?:회|일|번))")
 EXISTING_SENT_RE = re.compile(r"내원\s*하(?:십|시)|오십니다|하십니다|상주|근무\s*중|진료\s*중|계십니다")
 PART_RE = re.compile(
     r"파트\s*타임|(?<![가-힣])파트(?!너|장)|비상근|주\s*(?:[1-2]\d|30)\s*시간|\bpart\s*-?\s*time\b|\bpart\b|"
@@ -634,6 +647,8 @@ FULL_RE = re.compile(
     re.I,
 )
 FULL_WEAK_RE = re.compile(r"(?<!비)상근|월\s*~\s*금")
+# '4주 대진', '출산 대진 3개월' — 정해진 기간 동안 매일 나오는 대진 ('월 2회 토요일 포함' 도 그 기간의 근무 조건)
+LOCUM_PERIOD_RE = re.compile(r"\d+\s*(?:주|개월|달)\s*(?:간|동안)?\s*대진|대진\s*[(\[]?\s*\d+\s*(?:주|개월|달)")
 PART_STRONG_RE = re.compile(r"비상근|시간\s*선택제|시간제|주\s*(?:[1-2]\d|30)\s*시간|반일|오전만|오후만|파트\s*타임")
 
 
@@ -663,7 +678,7 @@ def detect_work_types(text: str, c: Classification) -> list[str]:
             continue
         part = pm
         break
-    if part is None and not out and not FULL_WEAK_RE.search(text):
+    if part is None and not out and not FULL_WEAK_RE.search(text) and not LOCUM_PERIOD_RE.search(text):
         part = PART_MONTHLY_RE.search(text)
     if part:
         out.append("parttime")

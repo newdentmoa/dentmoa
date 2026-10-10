@@ -160,6 +160,10 @@ def _gyeonggi_gwangju(text: str, start: int) -> bool:
     return bool(re.search(r"경기(도)?\s*[/·,]?\s*$", before) or re.match(r"광주(?:시)?\s*[(\[]\s*경기", after))
 
 
+# 짧은 이름 바로 뒤에 붙은 도로 이름의 나머지 ('안양' + '판교로 143'). '으로'(조사)와 '대로'(위에서 따로 봄)는 빼고
+ROAD_AFTER_RE = re.compile(r"(?!으로|대로)[가-힣]{1,3}(?:대로|로|길)(?=\s*\d|번길|[\s,.)]|$)")
+
+
 def parse_regions(text: str, max_results: int = 6) -> list[Region]:
     """글에서 지역 목록을 위치 순서대로 찾는다. 확실하지 않은 이름은 버린다."""
     if not text:
@@ -192,6 +196,9 @@ def parse_regions(text: str, max_results: int = 6) -> list[Region]:
             # (안양시의 '관악대로' 가 서울 관악구로, 서울 금천구의 '시흥대로' 가 경기 시흥시로 잡히던 문제)
             needs_near = entry.risky or (is_short and re.match(r"대로|[동로길]", after or " "))
             if needs_near and not any(t[0] == near for t in entry.targets):
+                continue
+            # '의왕시 안양판교로 143', '양천구 안양천로' — 도로 이름의 앞부분일 뿐 그 시·군·구가 아니다
+            if is_short and ROAD_AFTER_RE.match(after):
                 continue
             chosen.extend(entry.targets)
         if not chosen:
