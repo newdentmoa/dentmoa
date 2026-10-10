@@ -2,10 +2,31 @@
 {% from "_macros.html" import csrf, check_group %}
 {% block title %}알림 조건{% endblock %}
 {% block content %}
-{% set f = s.filters %}
+{% set f = me.filters %}
+{% set a = me.alerts %}
 {% set n = s.notify %}
 {% set c = s.collect %}
-<h1 class="page-title">알림 조건</h1>
+{% set many = people|length > 1 %}
+<h1 class="page-title">{{ me.name ~ '의 ' if many }}알림 조건</h1>
+
+<div class="person-tabs" aria-label="받는 사람">
+  {% if many %}
+  {% for p in people %}
+  <form method="post" action="{{ url_for('people.switch', key=p.key) }}">
+    {{ csrf() }}<input type="hidden" name="next" value="{{ url_for('settings.index') }}">
+    <button type="submit" class="btn btn-small{{ ' btn-primary' if p.key == me.key }}" aria-pressed="{{ 'true' if p.key == me.key else 'false' }}">{{ p.name }}</button>
+  </form>
+  {% endfor %}
+  {% endif %}
+  {% if can_add %}
+  <form method="post" action="{{ url_for('settings.add_person') }}">
+    {{ csrf() }}<button type="submit" class="btn btn-small">+ 받는 사람 추가</button>
+  </form>
+  {% endif %}
+</div>
+{% if many %}
+<p class="hint">받는 사람마다 조건과 알림 방법을 따로 정해요. 위의 이름을 누르면 그 사람의 조건으로 바뀌어요. 알림 시각과 수집 설정(맨 아래)은 모두 함께 써요.</p>
+{% endif %}
 
 {% if errors %}
 <div class="flash flash-error" role="alert">
@@ -18,6 +39,16 @@
 
 <form method="post" action="{{ url_for('settings.index') }}" class="settings-form" data-busy="저장하는 중…">
   {{ csrf() }}
+  <input type="hidden" name="person" value="{{ me.key }}">
+
+  <section class="card">
+    <h2>이름</h2>
+    <label class="field">
+      <span class="field-label">받는 사람 이름 (별명)</span>
+      <input type="text" name="name" value="{{ me.name }}" maxlength="12" required autocapitalize="off" spellcheck="false">
+    </label>
+    <p class="hint">{{ '알림 제목과 공고 카드에 이 이름이 붙어요. (예: SH, JY)' if many else '받는 사람을 추가하면 알림 제목과 공고 카드에 이 이름이 붙어요.' }}</p>
+  </section>
 
   <section class="card">
     <h2>받을 글 종류</h2>
@@ -92,29 +123,36 @@
   </section>
 
   <section class="card">
-    <h2>알림</h2>
+    <h2>{{ me.name ~ '의 ' if many }}알림</h2>
+    <div class="checks">
+      <label class="check"><input type="checkbox" name="telegram" value="1"{% if a.telegram %} checked{% endif %}><span>텔레그램으로 받기</span></label>
+      <label class="check"><input type="checkbox" name="email" value="1"{% if a.email %} checked{% endif %}><span>메일로 받기</span></label>
+    </div>
+    <p class="hint">{{ me.name ~ '의 ' if many }}텔레그램 채팅 ID와 받는 메일 주소는 <a href="{{ url_for('accounts.index') }}">계정·연결</a>에서 넣어요.</p>
+    <label class="check check-wide"><input type="checkbox" name="send_empty" value="1"{% if a.send_empty %} checked{% endif %}><span>새 공고가 없어도 '새 공고 없음' 알림 받기</span></label>
+    <label class="check check-wide"><input type="checkbox" name="warnings" value="1"{% if a.warnings %} checked{% endif %}><span>사이트 문제 경고도 받기 <small class="muted">(로그인 실패, 사이트 접속 실패 등)</small></span></label>
+    <h3>마감 임박 알림</h3>
+    <label class="check check-wide"><input type="checkbox" name="reminder_enabled" value="1"{% if a.reminder_enabled %} checked{% endif %}><span>마감이 다가오면 한 번 더 알려 주기</span></label>
+    <div class="filter-row">
+      <label class="field field-inline">
+        <span class="field-label">마감</span>
+        <input type="number" name="reminder_days" value="{{ a.reminder_days }}" min="1" max="30" inputmode="numeric" class="input-short">
+        <span>일 전부터</span>
+      </label>
+      <label class="check"><input type="checkbox" name="reminder_starred_only" value="1"{% if a.reminder_starred_only %} checked{% endif %}><span>관심(★) 공고만</span></label>
+    </div>
+  </section>
+
+  {% if many %}<h2 class="group-title">모두 함께 쓰는 설정</h2>{% endif %}
+  <section class="card">
+    <h2>알림 시각</h2>
     <div class="field">
       <span class="field-label">알림 시각 (1~4개)</span>
       <div class="times">
         {% for t in times %}<input type="time" name="times" value="{{ t }}" aria-label="알림 시각 {{ loop.index }}">{% endfor %}
       </div>
     </div>
-    <p class="hint">정한 시각마다 사이트를 확인하고 새 공고를 모아서 보내요. 사이트를 조용히 읽도록 하루 2~3번을 권해요. 실제 시각은 몇 분 정도 달라질 수 있어요. 안 쓰는 칸은 비워 두세요.</p>
-    <div class="checks">
-      <label class="check"><input type="checkbox" name="telegram" value="1"{% if n.telegram %} checked{% endif %}><span>텔레그램으로 받기</span></label>
-      <label class="check"><input type="checkbox" name="email" value="1"{% if n.email %} checked{% endif %}><span>메일로 받기</span></label>
-    </div>
-    <label class="check check-wide"><input type="checkbox" name="send_empty" value="1"{% if n.send_empty %} checked{% endif %}><span>새 공고가 없어도 '새 공고 없음' 알림 받기</span></label>
-    <h3>마감 임박 알림</h3>
-    <label class="check check-wide"><input type="checkbox" name="reminder_enabled" value="1"{% if n.reminder_enabled %} checked{% endif %}><span>마감이 다가오면 한 번 더 알려 주기</span></label>
-    <div class="filter-row">
-      <label class="field field-inline">
-        <span class="field-label">마감</span>
-        <input type="number" name="reminder_days" value="{{ n.reminder_days }}" min="1" max="30" inputmode="numeric" class="input-short">
-        <span>일 전부터</span>
-      </label>
-      <label class="check"><input type="checkbox" name="reminder_starred_only" value="1"{% if n.reminder_starred_only %} checked{% endif %}><span>관심(★) 공고만</span></label>
-    </div>
+    <p class="hint">정한 시각마다 사이트를 확인하고 새 공고를 모아서 보내요{{ ' (받는 사람 모두 같은 시각)' if many }}. 사이트를 조용히 읽도록 하루 2~3번을 권해요. 실제 시각은 몇 분 정도 달라질 수 있어요. 안 쓰는 칸은 비워 두세요.</p>
   </section>
 
   <section class="card">
@@ -141,7 +179,17 @@
   </section>
 
   <div class="save-bar">
-    <button type="submit" class="btn btn-primary btn-block">저장</button>
+    <button type="submit" class="btn btn-primary btn-block">{{ me.name ~ '의 조건 ' if many }}저장</button>
   </div>
 </form>
+
+{% if many %}
+<section class="card danger-zone">
+  <h2>받는 사람 지우기</h2>
+  <p class="hint">'{{ me.name }}'을(를) 지우면 이 사람의 조건, 관심(★) 표시, 알림 기록이 모두 지워지고 더 이상 알림이 가지 않아요.</p>
+  <form method="post" action="{{ url_for('settings.delete_person', key=me.key) }}" data-confirm="'{{ me.name }}'을(를) 지울까요? 되돌릴 수 없어요.">
+    {{ csrf() }}<button type="submit" class="btn btn-small">{{ me.name }} 지우기</button>
+  </form>
+</section>
+{% endif %}
 {% endblock %}

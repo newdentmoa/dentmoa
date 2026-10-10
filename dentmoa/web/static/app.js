@@ -134,7 +134,17 @@
     });
   }
 
+  // 되돌릴 수 없는 버튼(사람 지우기): 한 번 더 묻는다
+  function confirmForms() {
+    document.addEventListener("submit", function (e) {
+      var form = e.target;
+      if (!form.hasAttribute || !form.hasAttribute("data-confirm")) return;
+      if (!window.confirm(form.getAttribute("data-confirm"))) e.preventDefault();
+    }, true);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
+    confirmForms();
     autoOpen();
     checkAllButtons();
     regionPicker();

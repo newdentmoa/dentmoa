@@ -18,6 +18,18 @@
         <img class="brand-mark" src="{{ static_url('icon.svg') }}" alt="" width="26" height="26">덴트모아
       </a>
       {% if g.get('logged_in') %}
+      {% set switch_people = people_nav() %}
+      {% if switch_people %}
+      <div class="person-switch" role="group" aria-label="보는 사람 (조건·관심 표시가 이 사람 기준으로 바뀌어요)">
+        {% for p in switch_people %}
+        <form method="post" action="{{ url_for('people.switch', key=p.key) }}">
+          <input type="hidden" name="{{ CSRF_FIELD }}" value="{{ csrf_token() }}">
+          <input type="hidden" name="next" value="{{ request.full_path.rstrip('?') }}">
+          <button type="submit"{% if p.active %} class="on" aria-pressed="true"{% else %} aria-pressed="false"{% endif %}>{{ p.name }}</button>
+        </form>
+        {% endfor %}
+      </div>
+      {% endif %}
       <form class="logout" method="post" action="{{ url_for('auth.logout') }}">
         <input type="hidden" name="{{ CSRF_FIELD }}" value="{{ csrf_token() }}">
         <button type="submit" class="link-button">로그아웃</button>

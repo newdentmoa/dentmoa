@@ -54,9 +54,9 @@ def create_app(testing: bool = False) -> Flask:
     security.init_app(app)
     helpers.init_app(app)
 
-    from . import accounts, alert_settings, auth, postings, status
+    from . import accounts, alert_settings, auth, people, postings, status
 
-    for mod in (auth, postings, alert_settings, accounts, status):
+    for mod in (auth, postings, alert_settings, accounts, status, people):
         app.register_blueprint(mod.bp)
 
     @app.get("/healthz")

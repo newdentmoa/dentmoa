@@ -1,5 +1,6 @@
 """웹 대시보드: 로그인, CSRF, 화면, 설정 저장, 계정 정보, 관심·숨기기."""
 
+from html import unescape
 import re
 import threading
 from datetime import timedelta
@@ -255,7 +256,7 @@ def test_default_view_follows_alert_filters(client):
     add_posting("1", "[부산 해운대구] 교정과 전문의 모십니다", "부산 해운대구 치과 교정과 전문의 주5일")
     add_posting("2", "[서울 강남구] 소아치과 전문의 모십니다", "서울 강남구 소아치과 전문의 주5일")
     s = settings_store.load()
-    s["filters"]["regions"] = ["서울"]
+    s["people"][0]["filters"]["regions"] = ["서울"]
     settings_store.save(s)
     html = client.get("/").get_data(as_text=True)
     assert "소아치과 전문의" in html and "교정과 전문의" not in html
@@ -294,10 +295,10 @@ def test_star_and_hide_toggle(client):
     t = csrf_of(client)
     r = client.post(f"/posting/{pid}/star", data={"_csrf": t, "next": "/?view=all"})
     assert r.status_code == 302 and r.headers["Location"] == "/?view=all"
-    assert db.get_posting(pid).starred
+    assert db.starred_ids("p1") == {pid} and db.starred_ids("p2") == set()  # 관심(★)은 보는 사람(SH)에게만
     assert "소아치과 전문의" in client.get("/?view=star").get_data(as_text=True)
     r = client.post(f"/posting/{pid}/star", data={"_csrf": t}, headers={"X-Requested-With": "fetch"})
-    assert r.get_json() == {"ok": True, "value": False} and not db.get_posting(pid).starred
+    assert r.get_json() == {"ok": True, "value": False} and db.starred_ids("p1") == set()
 
     client.post(f"/posting/{pid}/hide", data={"_csrf": t})
     assert db.get_posting(pid).hidden
@@ -314,7 +315,7 @@ def test_star_and_hide_toggle(client):
 def test_star_tab_shows_every_starred_post(client):
     pid = add_posting("1", "구직합니다 봉직 자리 구해요", "부산에서 봉직 자리 구합니다")
     assert db.get_posting(pid).post_kind == "seeking"
-    db.set_flag(pid, "starred", True)
+    db.set_star("p1", pid, True)
     assert "봉직 자리 구해요" not in client.get("/?view=all").get_data(as_text=True)
     assert "봉직 자리 구해요" in client.get("/?view=star").get_data(as_text=True)
 
@@ -337,8 +338,8 @@ def test_huge_posting_id_is_404(client):
 def test_detail_shows_body_and_evidence(client):
     pid = add_posting(body="서울 강남구 치과의원\n소아치과 전문의 모십니다\n주 5일 <b>근무</b>")
     s = settings_store.load()
-    s["filters"]["regions"] = ["부산"]
-    s["filters"]["include_uncertain_region"] = False
+    s["people"][0]["filters"]["regions"] = ["부산"]
+    s["people"][0]["filters"]["include_uncertain_region"] = False
     settings_store.save(s)
 
     html = client.get(f"/posting/{pid}").get_data(as_text=True)
@@ -356,7 +357,7 @@ def test_detail_shows_body_and_evidence(client):
 def test_region_uncertain_marker(client):
     add_posting("1", "소아치과 전문의 모십니다", "소아치과 전문의 선생님 모십니다. 주5일")
     s = settings_store.load()
-    s["filters"]["regions"] = ["서울 강남구"]
+    s["people"][0]["filters"]["regions"] = ["서울 강남구"]
     settings_store.save(s)
     html = client.get("/").get_data(as_text=True)
     assert "지역 확인 필요" in html
@@ -402,17 +403,18 @@ def test_settings_save_round_trip(client, monkeypatch):
     assert r.status_code == 302 and calls == [1]
 
     s = settings_store.load()
-    f, n, c = s["filters"], s["notify"], s["collect"]
+    f, a, n, c = s["people"][0]["filters"], s["people"][0]["alerts"], s["notify"], s["collect"]
     assert f["regions"] == ["서울 강남구", "부산"]
     assert f["include_keywords"] == ["서울대학교치과병원", "소아", "어린이"]
     assert f["exclude_keywords"] == ["양도", "동업"]
     assert f["specialties"] == ["pedo", "gp"] and f["include_hints"] and not f["include_uncertain_region"]
-    assert n["times"] == ["07:30", "19:05"] and n["telegram"] and not n["email"] and n["reminder_days"] == 5
+    assert n["times"] == ["07:30", "19:05"] and a["telegram"] and not a["email"] and a["reminder_days"] == 5
+    assert s["people"][1]["filters"]["regions"] == ["전국"]  # JY 의 조건은 그대로
     assert c["sources"]["moreden"] and c["sources"]["hospitals"] and not c["sources"]["dentphoto"]
     assert c["backfill_days"] == 14 and c["min_delay_sec"] == 4.0 and c["max_delay_sec"] == 9.0
 
     html = client.get("/settings").get_data(as_text=True)
-    assert "저장했습니다" in html
+    assert "SH의 조건을 저장했습니다" in html
     assert 'value="서울 강남구" data-sigungu-of="서울" checked' in html
     assert 'value="부산" data-sido-all="부산" checked' in html
     assert 'value="전국" data-region-all checked' not in html
@@ -426,9 +428,9 @@ def test_settings_save_round_trip(client, monkeypatch):
 def test_settings_region_normalization(client):
     t = csrf_of(client, "/settings")
     client.post("/settings", data=settings_form(t, regions=["부산", "부산 해운대구", "서울 강남구", "없는 곳"]))
-    assert settings_store.load()["filters"]["regions"] == ["부산", "서울 강남구"]
+    assert settings_store.load()["people"][0]["filters"]["regions"] == ["부산", "서울 강남구"]
     client.post("/settings", data=settings_form(t, regions=["전국", "서울"]))
-    assert settings_store.load()["filters"]["regions"] == ["전국"]
+    assert settings_store.load()["people"][0]["filters"]["regions"] == ["전국"]
 
 
 def test_settings_validation_errors(client):
@@ -447,7 +449,7 @@ def test_settings_preview_count(client):
     add_posting("1")
     add_posting("2", "[부산 해운대구] 교정과 전문의 모십니다", "부산 해운대구 교정과 주5일")
     t = csrf_of(client, "/settings")
-    client.post("/settings", data=settings_form(t, regions=["서울"], include_keywords="", specialties=list(settings_store.DEFAULT_SETTINGS["filters"]["specialties"]), inst_types=list(settings_store.DEFAULT_SETTINGS["filters"]["inst_types"])))
+    client.post("/settings", data=settings_form(t, regions=["서울"], include_keywords="", specialties=list(settings_store.DEFAULT_FILTERS["specialties"]), inst_types=list(settings_store.DEFAULT_FILTERS["inst_types"])))
     html = client.get("/settings").get_data(as_text=True)
     assert "최근 30일 공고 중 <strong>1건</strong>" in html
 
@@ -458,16 +460,16 @@ def test_settings_preview_count(client):
 def test_accounts_never_echo_secrets(client, monkeypatch):
     t = csrf_of(client, "/accounts")
     client.post("/accounts", data={"_csrf": t, "section": "moreden", "moreden_id": "kimdds77", "moreden_pw": "SuperSecret!9"})
-    client.post("/accounts", data={
-        "_csrf": t, "section": "telegram", "telegram_token": "123456:ABCDEF_secret_token", "telegram_chat_id": "987654",
-    })
+    client.post("/accounts", data={"_csrf": t, "section": "telegram", "telegram_token": "123456:ABCDEF_secret_token"})
+    client.post("/accounts/person/p1", data={"_csrf": t, "section": "telegram", "telegram_chat_id": "987654"})
     client.post("/accounts", data={
         "_csrf": t, "section": "email", "smtp_user": "me@gmail.com", "smtp_password": "abcd efgh ijkl mnop",
-        "email_to": "me@gmail.com",
     })
+    client.post("/accounts/person/p1", data={"_csrf": t, "section": "email", "email_to": "me@gmail.com"})
     sec = settings_store.secrets()
     assert sec["moreden_id"] == "kimdds77" and sec["moreden_pw"] == "SuperSecret!9"
-    assert sec["smtp_password"] == "abcdefghijklmnop" and sec["telegram_chat_id"] == "987654"
+    sh = settings_store.load()["people"][0]
+    assert sec["smtp_password"] == "abcdefghijklmnop" and sh["telegram_chat_id"] == "987654" and sh["email_to"] == "me@gmail.com"
 
     html = client.get("/accounts").get_data(as_text=True)
     for value in ("kimdds77", "SuperSecret!9", "123456:ABCDEF_secret_token", "987654", "abcdefghijklmnop", "me@gmail.com"):
@@ -509,22 +511,39 @@ def test_account_test_buttons(client, monkeypatch):
     settings_store.update_secrets({"telegram_token": "123:abc"})
     t = csrf_of(client, "/accounts")
 
-    monkeypatch.setattr(telegram, "find_chat_id", lambda token: "55555" if token == "123:abc" else None)
-    r = client.post("/accounts/telegram/find-chat", data={"_csrf": t}, follow_redirects=True)
-    assert "채팅 ID를 찾아서 저장했어요" in r.get_data(as_text=True)
-    assert settings_store.secrets()["telegram_chat_id"] == "55555"
+    chats = [("55555", "김선생"), ("66666", "지영")]  # 가장 최근에 봇에게 말을 건 순서 (최근 것부터)
+
+    def fake_find(token, exclude=()):
+        assert token == "123:abc"
+        return next((c for c in chats if c[0] not in exclude), None)
+
+    monkeypatch.setattr(telegram, "find_chat", fake_find)
+    r = client.post("/accounts/telegram/find-chat", data={"_csrf": t, "person": "p1"}, follow_redirects=True)
+    assert "'김선생'의 채팅 ID를 찾아서 SH에게 저장했어요" in unescape(r.get_data(as_text=True))
+    # JY 가 아이폰에서 '시작'을 누른 뒤: SH 의 채팅은 건너뛰고 JY 의 채팅을 찾는다
+    r = client.post("/accounts/telegram/find-chat", data={"_csrf": t, "person": "p2"}, follow_redirects=True)
+    assert "'지영'의 채팅 ID를 찾아서 JY에게 저장했어요" in unescape(r.get_data(as_text=True))
+    assert [p["telegram_chat_id"] for p in settings_store.load()["people"]] == ["55555", "66666"]
 
     def fail(_secrets):
         raise NotifyError("텔레그램 봇 토큰이 올바르지 않습니다")
 
     monkeypatch.setattr(telegram, "send_test", fail)
-    r = client.post("/accounts/telegram/test", data={"_csrf": t}, follow_redirects=True)
-    assert "텔레그램 테스트 실패: 텔레그램 봇 토큰이 올바르지 않습니다" in r.get_data(as_text=True)
+    r = client.post("/accounts/telegram/test", data={"_csrf": t, "person": "p1"}, follow_redirects=True)
+    assert "SH 텔레그램 테스트 실패: 텔레그램 봇 토큰이 올바르지 않습니다" in r.get_data(as_text=True)
 
     sent = []
-    monkeypatch.setattr(mailer, "send_test", lambda s: sent.append(s))
-    r = client.post("/accounts/email/test", data={"_csrf": t}, follow_redirects=True)
-    assert sent and "테스트 메일을 보냈어요" in r.get_data(as_text=True)
+    monkeypatch.setattr(telegram, "send_test", lambda sec: sent.append(sec["telegram_chat_id"]))
+    client.post("/accounts/telegram/test", data={"_csrf": t, "person": "p2"})
+    assert sent == ["66666"]  # JY 의 채팅으로
+
+    mails = []
+    s = settings_store.load()
+    s["people"][1]["email_to"] = "jy@icloud.com"
+    settings_store.save(s)
+    monkeypatch.setattr(mailer, "send_test", lambda sec: mails.append(sec["email_to"]))
+    r = client.post("/accounts/email/test", data={"_csrf": t, "person": "p2"}, follow_redirects=True)
+    assert mails == ["jy@icloud.com"] and "JY에게 테스트 메일을 보냈어요" in r.get_data(as_text=True)
 
     checked = []
 
@@ -604,3 +623,113 @@ def test_security_headers(client):
     r = client.get("/")
     assert "default-src 'self'" in r.headers["Content-Security-Policy"]
     assert r.headers["X-Frame-Options"] == "DENY" and r.headers["Cache-Control"] == "no-store"
+
+
+# ──────────────────────────── 받는 사람 둘 (SH·JY) ────────────────────────────
+
+
+def set_regions(sh, jy):
+    s = settings_store.load()
+    s["people"][0]["filters"]["regions"] = sh
+    s["people"][1]["filters"]["regions"] = jy
+    settings_store.save(s)
+
+
+def switch(client, key, next_url="/"):
+    t = csrf_of(client)
+    return client.post(f"/person/{key}", data={"_csrf": t, "next": next_url})
+
+
+def test_person_switch_changes_list_tags_and_stars(client):
+    seoul = add_posting("1")
+    busan = add_posting("2", "[부산 해운대구] 소아치과 봉직의 모십니다", "부산 해운대구 소아치과 주5일")
+    set_regions(["서울"], ["부산"])
+
+    html = client.get("/").get_data(as_text=True)
+    assert "SH 조건에 맞는 공고" in html and 'class="on" aria-pressed="true">SH<' in html
+    assert "[서울 강남구]" in html and "[부산 해운대구]" not in html
+
+    r = switch(client, "p2", "/?view=all")
+    assert r.status_code == 302 and r.headers["Location"] == "/?view=all"
+    html = client.get("/").get_data(as_text=True)
+    assert "JY 조건에 맞는 공고" in html and "[부산 해운대구]" in html and "[서울 강남구]" not in html
+
+    # 전체 공고: 카드마다 조건에 맞는 사람 이름
+    html = client.get("/?view=all").get_data(as_text=True)
+    assert 'class="tag tag-person" title="SH의 알림 조건에 맞아요">SH<' in html
+    assert 'class="tag tag-person" title="JY의 알림 조건에 맞아요">JY<' in html
+
+    t = csrf_of(client)
+    client.post(f"/posting/{busan}/star", data={"_csrf": t})
+    assert db.starred_ids("p2") == {busan} and db.starred_ids("p1") == set()
+    switch(client, "p1")
+    assert "[부산 해운대구]" not in client.get("/?view=star").get_data(as_text=True)  # SH 의 관심 목록은 비어 있음
+
+    detail = client.get(f"/posting/{seoul}").get_data(as_text=True)
+    assert "SH 조건에 맞음" in detail and "JY 조건 밖" in detail
+    assert switch(client, "nobody").status_code == 302  # 없는 사람은 무시
+    assert "SH 조건에 맞는 공고" in client.get("/").get_data(as_text=True)
+
+
+def test_person_choice_survives_login(app, client):
+    switch(client, "p2")
+    t = csrf_of(client)
+    client.post("/logout", data={"_csrf": t})
+    login(client)
+    assert "JY 조건에 맞는 공고" in client.get("/").get_data(as_text=True)
+
+
+def test_settings_edit_one_person_only(client):
+    switch(client, "p2")
+    t = csrf_of(client, "/settings")
+    html = client.get("/settings").get_data(as_text=True)
+    assert "JY의 알림 조건" in html and 'name="person" value="p2"' in html and "모두 함께 쓰는 설정" in html
+    r = client.post("/settings", data=settings_form(t, person="p2", name="지영", regions=["경기"], telegram="", email="1"))
+    assert r.status_code == 302
+    s = settings_store.load()
+    sh, jy = s["people"]
+    assert jy["name"] == "지영" and jy["filters"]["regions"] == ["경기"] and jy["alerts"]["email"] and not jy["alerts"]["telegram"]
+    assert sh["name"] == "SH" and sh["filters"]["regions"] == ["전국"] and sh["alerts"]["telegram"]
+    assert s["notify"]["times"] == ["07:30", "19:05"]  # 알림 시각은 함께 쓴다
+
+    r = client.post("/settings", data=settings_form(t, person="p2", name="SH"))
+    assert r.status_code == 400 and "이미 다른 사람의 이름" in unescape(r.get_data(as_text=True))
+    r = client.post("/settings", data=settings_form(t, person="p2", name="  "))
+    assert r.status_code == 400 and "이름을 적어 주세요" in r.get_data(as_text=True)
+
+
+def test_add_and_delete_person(client):
+    pid = add_posting()
+    t = csrf_of(client, "/settings")
+    client.post("/settings/people/add", data={"_csrf": t})
+    s = settings_store.load()
+    assert [(p["key"], p["name"]) for p in s["people"]] == [("p1", "SH"), ("p2", "JY"), ("p3", "사람3")]
+    assert not s["people"][2]["alerts"]["warnings"]
+    assert "사람3의 알림 조건" in client.get("/settings").get_data(as_text=True)  # 새 사람으로 바뀜
+
+    db.set_star("p3", pid, True)
+    client.post("/settings/people/p3/delete", data={"_csrf": t})
+    assert [p["key"] for p in settings_store.load()["people"]] == ["p1", "p2"]
+    assert db.starred_ids("p3") == set()
+
+    client.post("/settings/people/p2/delete", data={"_csrf": t})
+    r = client.post("/settings/people/p1/delete", data={"_csrf": t}, follow_redirects=True)
+    assert "한 명뿐이라 지울 수 없어요" in r.get_data(as_text=True)
+    html = client.get("/").get_data(as_text=True)
+    assert "내 조건에 맞는 공고" in html and "person-switch" not in html  # 한 사람이면 예전 화면 그대로
+
+
+def test_accounts_per_person_targets(client):
+    t = csrf_of(client, "/accounts")
+    html = client.get("/accounts").get_data(as_text=True)
+    assert "SH 채팅 ID" in html and "JY 채팅 ID" in html and "JY 받는 주소" in html
+    r = client.post("/accounts/person/p2", data={"_csrf": t, "section": "email", "email_to": "jy@icloud.com, sh@gmail.com"})
+    assert r.status_code == 302 and r.headers["Location"].endswith("#email")
+    r = client.post("/accounts/person/p2", data={"_csrf": t, "section": "telegram", "telegram_chat_id": "abc"}, follow_redirects=True)
+    assert "채팅 ID는 숫자" in r.get_data(as_text=True)
+    jy = settings_store.load()["people"][1]
+    assert jy["email_to"] == "jy@icloud.com, sh@gmail.com" and jy["telegram_chat_id"] == ""
+    html = client.get("/accounts").get_data(as_text=True)
+    assert "jy@icloud.com" not in html
+    client.post("/accounts/person/p2", data={"_csrf": t, "section": "email", "clear": ["email_to"]})
+    assert settings_store.load()["people"][1]["email_to"] == ""

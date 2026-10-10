@@ -9,8 +9,9 @@
   1) 남은 단계 목록 (끝난 것은 ✅)
   2) 다음에 사용자가 보낼 명령 (그대로 복사해 보낼 수 있는 한 줄)
   3) '나중에 해도 되는 개선 작업' 목록 (아래 '다음 세션에서 할 일'과 같은 내용) — 잊지 않도록 매번
-- 남은 단계 (2026-10-10 기준): 개선 작업 PR(newdentmoa/dentmoa#3) 합치기 → 서버 만들기(docs/1, Lightsail 서울 월 5달러) → 설치(docs/2) → 텔레그램(docs/3) → 메일(docs/4)
-  → 사이트 계정·알림 조건(docs/5) → (권장) AWS 요금 알림(docs/1 끝) → (선택) Claude 작업 환경의 환경 변수 비밀번호 지우기.
+- 남은 단계 (2026-10-10 기준): 서버 만들기(docs/1, Lightsail 서울 월 5달러) → 설치(docs/2) → 텔레그램(docs/3, 7단계에 아내 JY 연결)
+  → 메일(docs/4) → 사이트 계정·알림 조건(docs/5, SH·JY 각자) → (권장) AWS 요금 알림(docs/1 끝) → (선택) Claude 작업 환경의 환경 변수 비밀번호 지우기.
+  (개선 작업 PR newdentmoa/dentmoa#3 과 두 사람 기능 PR 은 합쳤다.)
   저장소 기본 브랜치는 `claude/dentist-job-alert-app-xmcl6s` 이다(main 없음). 설치 명령은 기본 브랜치를 받는다.
 
 ## 구조
@@ -25,8 +26,9 @@ dentmoa/
   deadline.py        마감일 찾기
   summarize.py       본문 3줄 요약(규칙)
   models.py          RawPosting(사이트에서 가져온 글), Posting(DB 행)
-  db.py              SQLite (postings / runs / kv). save_raw() 가 저장과 분류를 함께 한다
-  settings_store.py  설정(kv 'settings'), 계정정보(kv 'secrets', 환경변수 우선), 대시보드 비밀번호
+  db.py              SQLite (postings / runs / kv / person_postings). save_raw() 가 저장과 분류를 함께 한다
+  settings_store.py  설정(kv 'settings': people(사람별 조건·알림·받는 곳) + 함께 쓰는 notify·collect),
+                     계정정보(kv 'secrets', 환경변수 우선), 대시보드 비밀번호
   matching.py        match(posting, filters) -> MatchResult(ok, reasons)
   dedup.py           같은 공고 판별
   pipeline.py        collect() → digest() → reminders(), run_cycle()
@@ -34,7 +36,7 @@ dentmoa/
     htmlutil.py      게시판 일반 읽기: find_list_items(날짜가 있는 줄 = 글 목록), extract_main_text, 날짜 읽기
     platforms.py     병원 공동 채용 사이트 (recruiter.co.kr 목록 JSON, 가톨릭중앙의료원, 건양대 채용 프로그램) — hospitals 가 주소를 보고 고른다
   notify/            텔레그램·메일 (send_digest, send_reminders)
-  web/               Flask 대시보드
+  web/               Flask 대시보드 (people.py: 위쪽 SH|JY 단추 — 고른 사람은 세션에 기억)
   scheduler.py       APScheduler — 설정의 알림 시각마다 run_cycle()
   __main__.py        CLI: python -m dentmoa serve | run-once | collect | notify | probe | reclassify | set-password
 ```
@@ -54,6 +56,14 @@ dentmoa/
   (hospitals._board_ctx, 처음 읽는 게시판은 FIRST_READ_DAYS=30일).
 - 로그인 실패 뒤에는 같은 아이디·비밀번호로 23시간(LOGIN_RETRY_AFTER) 안에 다시 시도하지 않는다(계정 잠김 방지, kv 'login_failed' 에
   비밀번호가 아닌 지문만 저장). 계정 화면에서 아이디·비밀번호를 바꾸면 바로 다시 시도, 성공하면 기록을 지운다.
+- 받는 사람 여럿 (사용자 요청 2026-10-10: 나=SH, 아내=JY). settings['people'] = [{key p1·p2…(DB 기록 키, 바뀌지 않음), name(별명,
+  화면에서 바꿈), filters, alerts(telegram·email·send_empty·reminder_*·warnings), telegram_chat_id, email_to}], 최대 5명.
+  처음부터 SH(p1)·JY(p2). 예전 한 사람용 설정·계정 화면의 채팅 ID·받는 주소·postings 의 processed/notified/reminded/starred 는
+  p1 로 옮긴다(settings_store._from_legacy, db._migrate). 환경변수 TELEGRAM_CHAT_ID·EMAIL_TO 는 첫 사람 칸이 비었을 때만.
+  사람별: 조건, 알림 방법, 받는 곳, 알림 판단·알림·마감 알림 기록과 관심(★)(person_postings). 함께: 알림 시각, 수집, 숨기기, 봇 토큰·보내는 메일.
+  pipeline.digest/reminders 는 사람마다(settings_store.person_settings·person_secrets), 받는 사람이 둘 이상이면 제목에 이름
+  (pipeline.who). 사이트 경고는 alerts.warnings 켠 사람만(기본 첫 사람만). 받는 곳이 없는 사람은 공고를 남겨 두었다가 연결하면 받는다.
+  대시보드: 위쪽 SH|JY 로 보는 사람을 고르면 '○○ 조건에 맞는 공고'·관심(★)·알림 조건·미리보기가 그 사람 기준, 카드에 맞는 사람 이름 표시.
 - 첫 비밀번호 설정은 6자리 설치 코드가 필요하다(DENTMOA_SETUP_CODE, install.sh 가 deploy/.env 에 만든다).
 - 치과의사 공고 판단(classify.detect_dentist): ⓪ 제목이 연구직(Post-Doc·박사후연구원)이면 아님 ① 제목이 직원 직종(일반직·단시간근무자 포함)이면 아님 ② 보건소장은 치과의사 공고(분과 gp)
   ③ '모집분야·채용직종' 칸이 있으면 그 값으로 ④ 치과의사·치과 전문의 같은 말이 있으면 맞음 ⑤ 직원 직종(위생사·간호사·
@@ -117,15 +127,9 @@ dentmoa/
 ## 다음 세션에서 할 일 (= 사용자에게 매번 보여 주는 '나중에 해도 되는 개선 작업')
 1. (선택) 서버를 만든 뒤 서울 서버에서 꺼 둔 게시판 다시 접속해 보기: 국군수도병원(이 작업 환경에서는 접속 불가), 계명대동산(500),
    강북삼성 새 채용 사이트(ninehire). 열리면 watch 를 켠다.
-2. (사용자 검토 중, 2026-10-10) 아내와 함께 쓰기. 분석해서 설명함:
-   - 지금도 되는 것: 메일 받는 주소 여러 개(쉼표). 텔레그램은 채팅 ID 하나뿐이다(여러 개로 바꾸는 것은 작은 수정).
-   - 권장안: 대시보드 하나 + '받는 사람(프로필)'마다 조건 묶음. 사람마다 텔레그램 채팅 ID·메일, 공고 목록에 사람 표시(태그),
-     알림·마감 알림·별표는 사람별. 수집은 한 번만 하므로 메모리는 그대로라 5달러로 충분.
-   - 바꿀 곳: settings 'filters' → 프로필 목록(기존 설정은 '나'로 옮김), postings 의 notified/reminded/starred → 사람별 표,
-     digest·reminders 를 사람마다, 설정·계정 화면에 사람 탭.
-   - 덴트모아를 두 벌 설치하는 방법은 비추천: 수집이 두 번(사이트 방문 2배, 같은 모어덴 계정으로 두 곳에서 로그인), 메모리 2배.
 - 끝난 것(2026-10-10): 분류 오류 고치기(CLASSIFIER_VERSION 4·5·6, 예전 미해결 사례 포함), 꺼 둔 게시판 새 주소 찾기(9곳 되살림),
-  실패 경고는 연속 3번 실패할 때만 + 로그인 실패는 하루 한 번만 다시 시도 + 병원 게시판별 따라잡기.
+  실패 경고는 연속 3번 실패할 때만 + 로그인 실패는 하루 한 번만 다시 시도 + 병원 게시판별 따라잡기,
+  아내와 함께 쓰기(받는 사람 SH·JY — 위 '원칙'. 두 벌 설치는 수집 2배·메모리 2배라 하지 않음).
 - 하지 않기로 한 것: 브라우저(모어덴) 메모리 줄이기 — 512MB 서버 시험에서 이미 성공했고, 따라잡기가 있어 이득이 거의 없다.
   모어덴 실패 경고가 며칠씩 계속될 때만 다시 검토(먼저 7달러 플랜 올리기가 더 쉽다).
 - 강원 게시판(강원대 치과대학, 강릉아산, 원주세브란스)은 끄지 않고, 사용자가 알림 조건의 지역으로 거른다(docs/5 단계에서 안내).

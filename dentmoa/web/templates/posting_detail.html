@@ -10,7 +10,9 @@
   <h1 class="detail-title">{{ p.title }}</h1>
   <div class="badges">
     {% if badge %}<span class="badge {{ badge.cls }}" title="{{ badge.title }}">{{ badge.text }}</span>{% endif %}
-    {% if m.ok %}<a class="badge badge-ok" href="#match">내 알림 조건에 맞음</a>{% else %}<a class="badge badge-passed" href="#match">알림 조건 밖</a>{% endif %}
+    {% if people %}
+    {% for r in people %}<a class="badge {{ 'badge-ok' if r.ok else 'badge-passed' }}" href="#match">{{ r.name }} {{ '조건에 맞음' if r.ok else '조건 밖' }}</a>{% endfor %}
+    {% elif m.ok %}<a class="badge badge-ok" href="#match">내 알림 조건에 맞음</a>{% else %}<a class="badge badge-passed" href="#match">알림 조건 밖</a>{% endif %}
     {% if p.starred %}<span class="badge badge-star">★ 관심</span>{% endif %}
     {% if p.hidden %}<span class="badge badge-passed">숨김</span>{% endif %}
   </div>
@@ -32,7 +34,9 @@
     <dt>올린 날</dt><dd>{{ p.posted_at|fmt_dt if p.posted_at else '알 수 없음' }}</dd>
     <dt>처음 본 시각</dt><dd>{{ p.first_seen_at|fmt_dt }}</dd>
     <dt>출처</dt><dd>{{ p.source|source_label }}{% if p.author %} · {{ p.author }}{% endif %}</dd>
-    {% if p.notified_at %}<dt>알림</dt><dd>{{ p.notified_at|fmt_dt }}에 보냄</dd>{% endif %}
+    {% if people %}
+    {% for r in people if r.notified_at %}<dt>{{ r.name }} 알림</dt><dd>{{ r.notified_at|fmt_dt }}에 보냄</dd>{% endfor %}
+    {% elif p.notified_at %}<dt>알림</dt><dd>{{ p.notified_at|fmt_dt }}에 보냄</dd>{% endif %}
   </dl>
   <div class="actions">
     {{ toggle_buttons(p, here) }}
@@ -80,11 +84,11 @@
 </section>
 
 <section class="card" id="match">
-  <h2>알림 조건과 비교</h2>
+  <h2>{{ mine('내 알림 조건') if people else '알림 조건' }}과 비교</h2>
   {% if m.ok %}
-  <p class="result-ok">✓ 지금 알림 조건에 맞는 공고예요.</p>
+  <p class="result-ok">✓ 지금 {{ mine('내 알림 조건') if people else '알림 조건' }}에 맞는 공고예요.</p>
   {% else %}
-  <p class="result-no">알림 조건에 맞지 않아요. 맞지 않는 항목:</p>
+  <p class="result-no">{{ mine('내 알림 조건') if people else '알림 조건' }}에 맞지 않아요. 맞지 않는 항목:</p>
   {% endif %}
   {% if m.reasons %}
   <ul class="reasons">{% for r in m.reasons %}<li>{{ r }}</li>{% endfor %}</ul>

@@ -20,9 +20,12 @@
       <li>BotFather가 보내 준 메시지에서 <b>토큰</b>(123456789:AAH… 처럼 긴 글자)을 길게 눌러 복사합니다.</li>
       <li>아래 '봇 토큰' 칸에 붙여넣고 <b>저장</b>을 누릅니다.</li>
       <li>BotFather 메시지의 t.me/… 링크를 눌러 내 봇을 열고 <b>시작</b>(/start)을 누릅니다.</li>
-      <li>이 화면에서 <b>채팅 ID 자동 찾기</b>를 누릅니다.</li>
-      <li><b>테스트 메시지 보내기</b>를 눌러 텔레그램에 메시지가 오는지 확인합니다.</li>
+      <li>이 화면 아래 받는 사람 칸에서 <b>채팅 ID 자동 찾기</b>를 누릅니다.</li>
+      <li><b>테스트 메시지</b>를 눌러 텔레그램에 메시지가 오는지 확인합니다.</li>
     </ol>
+    {% if many %}
+    <p class="hint"><b>다른 사람(예: JY)도 받으려면:</b> 봇은 하나로 함께 씁니다. 같은 t.me/… 링크를 그 사람에게 보내서 그 사람 휴대폰(아이폰도 됨) 텔레그램에서 봇을 열고 <b>시작</b>을 누르게 한 뒤, 아래에서 그 사람의 <b>채팅 ID 자동 찾기</b>를 누르세요. 이미 다른 사람에게 저장한 채팅은 건너뛰고 찾아요.</p>
+    {% endif %}
     <p class="hint">토큰은 내 봇을 조종하는 열쇠예요. 다른 사람에게 보여주지 마세요.</p>
   </details>
   {% elif sec.key == 'email' %}
@@ -35,7 +38,7 @@
       <li>위쪽 검색창에 <b>앱 비밀번호</b>를 검색해 들어갑니다. (2단계 인증이 켜져 있어야 보여요)</li>
       <li>앱 이름에 '덴트모아'라고 적고 <b>만들기</b>를 누릅니다.</li>
       <li>화면에 나온 <b>16자리</b> 비밀번호를 복사해 아래 '앱 비밀번호' 칸에 붙여넣습니다. 띄어쓰기는 있어도 괜찮아요.</li>
-      <li>'보내는 Gmail 주소'에 그 Gmail 주소를, '받는 주소'에 알림을 받을 주소(같은 주소여도 돼요)를 적고 저장합니다.</li>
+      <li>'보내는 Gmail 주소'에 그 Gmail 주소를 적고 저장합니다. 알림을 받을 주소(같은 주소여도 돼요)는 아래 받는 사람 칸에 적습니다.</li>
       <li><b>메일 테스트</b>를 눌러 메일이 오는지 확인합니다. 안 보이면 스팸함도 확인해 주세요.</li>
     </ol>
   </details>
@@ -62,21 +65,44 @@
     <button type="submit" class="btn btn-primary">{{ sec.title }} 저장</button>
   </form>
 
-  {% if sec.key == 'telegram' %}
-  <div class="button-row tests">
-    <form method="post" action="{{ url_for('accounts.telegram_find_chat') }}" data-busy="찾는 중…">
-      {{ csrf() }}<button type="submit" class="btn">채팅 ID 자동 찾기</button>
+  {% if sec.key in ('telegram', 'email') %}
+  <h3>받는 사람{{ '마다' if many }}</h3>
+  {% for p in people %}
+  {% set r = p[sec.key] %}
+  <div class="person-target">
+    <form method="post" action="{{ url_for('accounts.save_person', key=p.key) }}" autocomplete="off" class="account-form">
+      {{ csrf() }}
+      <input type="hidden" name="section" value="{{ sec.key }}">
+      <div class="field">
+        <div class="field-top">
+          <label class="field-label" for="f-{{ p.key }}-{{ r.key }}">{{ p.name ~ ' ' if many }}{{ r.label }}</label>
+          <span class="status {{ r.status.cls }}">{{ r.status.text }}</span>
+        </div>
+        <input id="f-{{ p.key }}-{{ r.key }}" type="text" name="{{ r.key }}" value="" autocomplete="off" autocapitalize="off" spellcheck="false"
+               {% if r.status.cls == 'st-ok' %}placeholder="바꾸려면 새로 입력"{% elif r.env %}placeholder="환경변수 값을 쓰는 중 — 입력하면 이 값을 써요"{% endif %}>
+        <small class="hint">{{ r.help }}</small>
+        {% if r.status.cls == 'st-ok' %}
+        <label class="clear-check"><input type="checkbox" name="clear" value="{{ r.key }}"> 지우기</label>
+        {% endif %}
+      </div>
+      <button type="submit" class="btn btn-primary">{{ p.name ~ ' ' if many }}{{ r.label }} 저장</button>
     </form>
-    <form method="post" action="{{ url_for('accounts.telegram_test') }}" data-busy="보내는 중…">
-      {{ csrf() }}<button type="submit" class="btn">테스트 메시지 보내기</button>
-    </form>
+    <div class="button-row tests">
+      {% if sec.key == 'telegram' %}
+      <form method="post" action="{{ url_for('accounts.telegram_find_chat') }}" data-busy="찾는 중…">
+        {{ csrf() }}<input type="hidden" name="person" value="{{ p.key }}"><button type="submit" class="btn">{{ p.name ~ ' ' if many }}채팅 ID 자동 찾기</button>
+      </form>
+      <form method="post" action="{{ url_for('accounts.telegram_test') }}" data-busy="보내는 중…">
+        {{ csrf() }}<input type="hidden" name="person" value="{{ p.key }}"><button type="submit" class="btn">{{ p.name ~ ' ' if many }}테스트 메시지</button>
+      </form>
+      {% else %}
+      <form method="post" action="{{ url_for('accounts.email_test') }}" data-busy="보내는 중…">
+        {{ csrf() }}<input type="hidden" name="person" value="{{ p.key }}"><button type="submit" class="btn">{{ p.name ~ ' ' if many }}메일 테스트</button>
+      </form>
+      {% endif %}
+    </div>
   </div>
-  {% elif sec.key == 'email' %}
-  <div class="button-row tests">
-    <form method="post" action="{{ url_for('accounts.email_test') }}" data-busy="보내는 중…">
-      {{ csrf() }}<button type="submit" class="btn">메일 테스트</button>
-    </form>
-  </div>
+  {% endfor %}
   {% endif %}
 </section>
 {% endfor %}
