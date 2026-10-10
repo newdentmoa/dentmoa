@@ -265,3 +265,15 @@ def test_specific_hospital_in_title_beats_operator_hint():
     assert c.institution == "광주보훈병원" and [r.label for r in c.regions] == ["광주 광산구"]
     c = C("[중앙보훈병원] 전문의(서울요양병원, 치과병원 치주과) 채용 공고", kind="aggregator", institution_hint="한국보훈복지의료공단")
     assert c.institution == "중앙보훈병원" and [r.label for r in c.regions] == ["서울 강동구"]
+
+
+def test_college_list_boilerplate_is_not_a_dental_post():
+    """대학 전체 교원 공고의 '의과대학, 치과대학 지원자는 …' 안내 문구만으로는 치과의사 공고가 아니다 (2026-10 연세대)."""
+    note = ("1. 초빙분야\n법학전문대학원 / 민법 / 1\n"
+            "의과대학, 치과대학 및 원주의과대학 임상학분야 지원자의 경우 추천서 내용에 임상적 측면에 대한 의견을 포함할 것\n"
+            "가. 의학 및 치의학계열의 경우 전문의 자격을 인정받은 자.")
+    title = "2027학년도 연세대학교 전임교원 초빙 공고 (법학전문대학원, 교목실)"
+    assert not C(title, note, kind="hospital_board").is_dentist
+    c = C("2027학년도 연세대학교 전임교원 초빙 공고", note + "\n치과대학 / 통합치의학 / 1 / 통합치의학과 전문의 자격 취득자", kind="hospital_board")
+    assert c.is_dentist and "integrated" in c.specialties
+    assert C("의과대학, 치과대학 교원 초빙", note, kind="hospital_board").is_dentist  # 제목은 그대로 본다

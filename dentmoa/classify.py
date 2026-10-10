@@ -23,7 +23,7 @@ from .deadline import find_deadline
 from .regions import Region, normalize, parse_regions
 from .summarize import summarize
 
-CLASSIFIER_VERSION = 4
+CLASSIFIER_VERSION = 5
 
 
 @dataclass
@@ -141,6 +141,9 @@ DENTAL_DEPT_RE = re.compile(
     r"치의학|치과\s*대학|치과대학|치의학\s*(?:전문)?대학원|치전원|"
     r"구강악안면외과|치과\s*보철과|치과\s*교정과|소아\s*치과|치주과|치과\s*보존과|구강\s*내과|영상\s*치의학|구강\s*병리|예방\s*치과|통합\s*치의학"
 )
+# '의과대학, 치과대학 지원자는 경력증명서 …', '의학 및 치의학계열의 경우 전문의 …' — 대학 전체 교원 공고에 늘 붙는
+# 안내 문구의 대학 나열. 치과 자리가 있다는 뜻이 아니다 (2026-10 연세대 법학전문대학원 교원 공고). 본문에서만 뺀다.
+COLLEGES_NOTE_RE = re.compile(r"(?:의과\s*대학|의학)\s*(?:,|및|·|ㆍ|/)\s*치(?:과\s*대학|의학)")
 # 직원 직종 — 연락처('행정지원팀', '시설과')에도 흔히 나오는 행정·사무·시설 같은 말은 넣지 않는다
 STAFF_JOB_RE = re.compile(
     r"치과\s*위생사|위생사|치위생|간호\s*(?:사|조무사|직)|조무사|기공사|치기공|의료\s*기사|방사선사|임상\s*병리사|물리\s*치료사|"
@@ -198,7 +201,8 @@ def detect_dentist(text: str, title: str, inst_type: str, dentist_only: bool) ->
         staff = STAFF_JOB_RE.search(fv) or NON_DENTIST_RE.search(fv)
         if staff:
             return False, f"모집 분야가 다른 직종: {staff.group(0)}"
-    t_wo = NON_DENTIST_RE.sub(" ", text)
+    body = text[len(title):] if text.startswith(title) else text
+    t_wo = NON_DENTIST_RE.sub(" ", title + COLLEGES_NOTE_RE.sub(" ", body))
     m = DENTIST_STRONG_RE.search(t_wo)
     if m:
         return True, m.group(0)
@@ -332,7 +336,7 @@ def detect_inst(title: str, hint: str, body: str, *, scope_body: bool, default: 
             if not _is_context_mention(head, m.end()):
                 return kind, _guess_name(head), m.group(0), None
     if scope_body:
-        part = body[:600]
+        part = COLLEGES_NOTE_RE.sub(" ", body[:600])
         for kind, rx in INST_RULES[:5]:  # 본문에서는 확실한 것만
             for m in rx.finditer(part):
                 if not _is_context_mention(part, m.end()):

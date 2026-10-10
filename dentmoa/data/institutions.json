@@ -371,10 +371,10 @@
    "연세치대"
   ],
   "homepage": "https://dentistry.yonsei.ac.kr/dentistry/index.do",
-  "recruit_url": "https://dentistry.yonsei.ac.kr/dentistry/news/recruit.do",
-  "watch": false,
+  "recruit_url": "https://faculty.yonsei.ac.kr/opening.php?mid=m02&lang=ko",
+  "watch": true,
   "operator": "",
-  "note": "own 채용공고 board (연구교수, 강사, 임상교수, 임상지도교원) + 연세대 교원채용 https://faculty.yonsei.ac.kr | 2026-10 확인: 끔 — 게시판이 2020년 글에서 멈춤 (교원 채용은 faculty.yonsei.ac.kr·하이브레인넷)"
+  "note": "own 채용공고 board (연구교수, 강사, 임상교수, 임상지도교원) + 연세대 교원채용 https://faculty.yonsei.ac.kr | 2026-10 확인: 연세대 교원 초빙 게시판(faculty.yonsei.ac.kr). 대학 전체 공고 본문 표에 치과대학 자리가 섞여 나온다 (2027학년도 공고: 치과생체재료공학·통합치의학). 치과대학 자체 게시판은 2020년에 멈춤"
  },
  {
   "name": "경북대학교 치과대학",
@@ -428,7 +428,7 @@
   "recruit_url": "https://www3.chosun.ac.kr/chosun/633/subview.do",
   "watch": false,
   "operator": "",
-  "note": "조선대 전임교원채용 board + 교원임용 site https://pr.chosun.ac.kr/ ; 비전임 https://www3.chosun. | 2026-10 확인: 끔 — 전임교원채용 목록에 글 링크가 없음 (하이브레인넷으로 모임)"
+  "note": "조선대 전임교원채용 board + 교원임용 site https://pr.chosun.ac.kr/ ; 비전임 https://www3.chosun. | 2026-10 확인: 끔 — 전임교원채용 목록에 글 링크가 없음 (하이브레인넷으로 모임) — 2026-10-10 다시 찾아봄: 새 주소 없음"
  },
  {
   "name": "강원대학교 치과대학",
@@ -498,7 +498,7 @@
   "recruit_url": "https://professor.jbnu.ac.kr/professor/2321/subview.do",
   "watch": false,
   "operator": "",
-  "note": "전북대 교수초빙안내 + 교내채용 board https://www.jbnu.ac.kr/web/news/notice/sub03.do (치과대학 외래 | 2026-10 확인: 끔 — 교수초빙 공지사항이 2021년 글에서 멈춤 (하이브레인넷으로 모임)"
+  "note": "전북대 교수초빙안내 + 교내채용 board https://www.jbnu.ac.kr/web/news/notice/sub03.do (치과대학 외래 | 2026-10 확인: 끔 — 교수초빙 공지사항이 2021년 글에서 멈춤 (하이브레인넷으로 모임) — 2026-10-10 다시 찾아봄: 새 주소 없음"
  },
  {
   "name": "부산대학교 치의학전문대학원",
@@ -751,7 +751,7 @@
   "recruit_url": "",
   "watch": false,
   "operator": "경기도의료원",
-  "note": "경기도의료원 own board + 클린아이 잡플러스 (unverified)"
+  "note": "경기도의료원 own board + 클린아이 잡플러스 (unverified) | 2026-10 확인: 채용은 경기도의료원 항목(medical.recruiter.co.kr)으로 함께 읽음"
  },
  {
   "name": "경기도의료원 의정부병원",
@@ -767,7 +767,7 @@
   "recruit_url": "",
   "watch": false,
   "operator": "경기도의료원",
-  "note": "경기도의료원 own board + 클린아이 잡플러스 (unverified)"
+  "note": "경기도의료원 own board + 클린아이 잡플러스 (unverified) | 2026-10 확인: 채용은 경기도의료원 항목(medical.recruiter.co.kr)으로 함께 읽음"
  },
  {
   "name": "강원권역장애인구강진료센터",
@@ -1033,7 +1033,7 @@
   "recruit_url": "https://recruit.kbsmc.co.kr/jsp/recruit/recruitList.jsp",
   "watch": false,
   "operator": "",
-  "note": "own (recruit.kbsmc.co.kr, 의사직 카테고리) | 2026-10 확인: 끔 — recruit.kbsmc.co.kr 이 DNS 에 없음 — 새 채용 사이트 확인 필요"
+  "note": "own (recruit.kbsmc.co.kr, 의사직 카테고리) | 2026-10 확인: 끔 — recruit.kbsmc.co.kr 없어짐. 새 채용 사이트 kbsmcrecruit.ninehire.site 는 자동 접속 확인 화면(Vercel)이 있고 공고가 보이지 않음 (하이브레인넷·잡알리오로 모임)"
  },
  {
   "name": "건국대학교병원",
@@ -1325,10 +1325,10 @@
    "복음병원"
   ],
   "homepage": "https://www.kosinmed.or.kr",
-  "recruit_url": "",
-  "watch": false,
+  "recruit_url": "https://kosinmed.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "own (홈페이지 공지)"
+  "note": "own (홈페이지 공지) | 2026-10 확인: 채용 사이트 kosinmed.recruiter.co.kr"
  },
  {
   "name": "동아대학교병원",
@@ -1429,7 +1429,7 @@
   "recruit_url": "",
   "watch": false,
   "operator": "",
-  "note": "own (dsmc.or.kr 채용)"
+  "note": "own (dsmc.or.kr 채용) | 2026-10 확인: 끔 — dsmc.or.kr 채용 화면이 서버 오류(500). 하이브레인넷으로 모임"
  },
  {
   "name": "대구가톨릭대학교병원",
@@ -1442,10 +1442,10 @@
    "대구가톨릭대학교병원"
   ],
   "homepage": "https://www.dcmc.co.kr",
-  "recruit_url": "",
-  "watch": false,
+  "recruit_url": "https://dcmc.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "own (소식 > 채용, 합격확인 /content/07community/01_06.asp)"
+  "note": "own (소식 > 채용, 합격확인 /content/07community/01_06.asp) | 2026-10 확인: 채용 사이트 dcmc.recruiter.co.kr"
  },
  {
   "name": "영남대학교병원",
@@ -1588,10 +1588,10 @@
    "건양대학교병원"
   ],
   "homepage": "https://www.kyuh.ac.kr",
-  "recruit_url": "https://www.kyuh.ac.kr/bbs/BBSMSTR_000000000167/list.do",
-  "watch": false,
+  "recruit_url": "https://www.kyuh.ac.kr/prog/recruitNotice/list.do?pageUnit=50",
+  "watch": true,
   "operator": "",
-  "note": "own board | 2026-10 확인: 끔 — 옛 게시판은 2022년에 멈춤. 새 채용 사이트(kyuh.ac.kr/prog/recruitNotice)는 버튼(자바스크립트) 목록"
+  "note": "own board | 2026-10 확인: 새 채용 화면(prog/recruitNotice) — 글 링크가 단추라 platforms.recruit_notice_items 로 읽음. kyuh.recruiter.co.kr 는 2022년에 멈춤"
  },
  {
   "name": "대전을지대학교병원",
@@ -1624,7 +1624,7 @@
   "recruit_url": "https://www.cnuh.co.kr/prog/recruitNotice/01/D/list.do",
   "watch": false,
   "operator": "",
-  "note": "own (prog/recruitNotice/{병원코드}/D=의사) + 잡알리오 | 2026-10 확인: 끔 — 채용 목록이 자바스크립트로 그려짐 (잡알리오로 모임)"
+  "note": "own (prog/recruitNotice/{병원코드}/D=의사) + 잡알리오 | 2026-10 확인: 끔 — 새 채용 화면(prog/recruitNotice/01/ALL/list.do)은 글이 2020년 1건뿐 (실제 공고는 잡알리오로 모임)"
  },
  {
   "name": "울산대학교병원",
@@ -1654,7 +1654,7 @@
   "recruit_url": "https://www.cnuh.co.kr/prog/recruitNotice/02/D/list.do",
   "watch": false,
   "operator": "",
-  "note": "own (충남대병원 채용 시스템) | 2026-10 확인: 끔 — 채용 목록이 자바스크립트로 그려짐"
+  "note": "own (충남대병원 채용 시스템) | 2026-10 확인: 끔 — 새 채용 화면(prog/recruitNotice/02/ALL/list.do)에 글이 없음 (실제 공고는 잡알리오로 모임)"
  },
  {
   "name": "가톨릭대학교 부천성모병원",
@@ -2066,10 +2066,10 @@
    "원광대학교병원"
   ],
   "homepage": "https://www.wkuh.org",
-  "recruit_url": "",
-  "watch": false,
+  "recruit_url": "https://wkuh.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "own (wkuh.org 채용 메뉴; 전공의 /edu/contents.do)"
+  "note": "own (wkuh.org 채용 메뉴; 전공의 /edu/contents.do) | 2026-10 확인: 채용 사이트 wkuh.recruiter.co.kr"
  },
  {
   "name": "전북대학교병원",
@@ -2132,10 +2132,10 @@
    "경상대병원"
   ],
   "homepage": "https://www.gnuh.co.kr",
-  "recruit_url": "",
-  "watch": false,
+  "recruit_url": "https://gnuh.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "own (홈페이지 채용공고) + 잡알리오; 임상교수는 방문/우편 접수"
+  "note": "own (홈페이지 채용공고) + 잡알리오; 임상교수는 방문/우편 접수 | 2026-10 확인: 채용 사이트 gnuh.recruiter.co.kr (2026년에 새로 열어 글이 적음)"
  },
  {
   "name": "삼성창원병원",
@@ -2195,10 +2195,10 @@
    "제주대학교병원"
   ],
   "homepage": "https://www.jejunuh.co.kr",
-  "recruit_url": "https://www.jejunuh.co.kr/news/recruit/_/list.do",
-  "watch": false,
+  "recruit_url": "https://jejunuh.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "own board + 잡알리오 | 2026-10 확인: 끔 — 게시판 주소 400 (잡알리오·하이브레인넷으로 모임)"
+  "note": "own board + 잡알리오 | 2026-10 확인: 채용 사이트 jejunuh.recruiter.co.kr"
  },
  {
   "name": "국립경찰병원",
@@ -2453,17 +2453,74 @@
   "sido": "경기",
   "sigungu": "수원시",
   "aliases": [
-   "경기도의료원",
-   "경기도의료원 안성병원",
-   "경기도의료원 이천병원",
-   "경기도의료원 파주병원",
-   "경기도의료원 포천병원"
+   "경기도의료원"
   ],
   "homepage": "https://www.medical.or.kr",
-  "recruit_url": "https://www.medical.or.kr/hire/index.do",
-  "watch": false,
+  "recruit_url": "https://medical.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "경기도",
-  "note": "own (경기도의료원 채용사이트) + 클린아이 잡플러스 + 경기도 통합채용(gg.saramin.co.kr) | 2026-10 확인: 끔 — 채용 사이트 주소 404"
+  "note": "own (경기도의료원 채용사이트) + 클린아이 잡플러스 + 경기도 통합채용(gg.saramin.co.kr) | 2026-10 확인: 채용 사이트가 medical.recruiter.co.kr 로 옮김 (수원·의정부·파주·이천·안성·포천병원 공동). 제목 앞 '[파주병원]' 으로 병원 항목을 찾는다",
+  "shared": true
+ },
+ {
+  "name": "경기도의료원 파주병원",
+  "kind": "public_hospital",
+  "sido": "경기",
+  "sigungu": "파주시",
+  "aliases": [
+   "경기도의료원파주병원",
+   "파주의료원"
+  ],
+  "homepage": "https://www.medical.or.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "경기도의료원",
+  "note": "2026-10 확인: 채용은 경기도의료원 항목(medical.recruiter.co.kr)으로 함께 읽음"
+ },
+ {
+  "name": "경기도의료원 이천병원",
+  "kind": "public_hospital",
+  "sido": "경기",
+  "sigungu": "이천시",
+  "aliases": [
+   "경기도의료원이천병원",
+   "이천의료원"
+  ],
+  "homepage": "https://www.medical.or.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "경기도의료원",
+  "note": "2026-10 확인: 채용은 경기도의료원 항목(medical.recruiter.co.kr)으로 함께 읽음"
+ },
+ {
+  "name": "경기도의료원 안성병원",
+  "kind": "public_hospital",
+  "sido": "경기",
+  "sigungu": "안성시",
+  "aliases": [
+   "경기도의료원안성병원",
+   "안성의료원"
+  ],
+  "homepage": "https://www.medical.or.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "경기도의료원",
+  "note": "2026-10 확인: 채용은 경기도의료원 항목(medical.recruiter.co.kr)으로 함께 읽음"
+ },
+ {
+  "name": "경기도의료원 포천병원",
+  "kind": "public_hospital",
+  "sido": "경기",
+  "sigungu": "포천시",
+  "aliases": [
+   "경기도의료원포천병원",
+   "포천의료원"
+  ],
+  "homepage": "https://www.medical.or.kr",
+  "recruit_url": "",
+  "watch": false,
+  "operator": "경기도의료원",
+  "note": "2026-10 확인: 채용은 경기도의료원 항목(medical.recruiter.co.kr)으로 함께 읽음"
  },
  {
   "name": "국군수도병원",
@@ -2478,7 +2535,7 @@
   "recruit_url": "https://afmd.mnd.go.kr/user/boardList.action?boardId=I_5108105&siteId=afmd&id=afmd_040500000000",
   "watch": false,
   "operator": "국군의무사령부",
-  "note": "own board + 국방부 채용게시판 + 국방통합모집포털(m-recruit.mnd.go.kr) | 2026-10 확인: 끔 — 게시판 주소 404 (나라일터로 모임)"
+  "note": "own board + 국방부 채용게시판 + 국방통합모집포털(m-recruit.mnd.go.kr) | 2026-10 확인: 끔 — 게시판 주소 404, 이 작업 환경에서는 사이트 접속도 안 됨 (나라일터로 모임)"
  },
  {
   "name": "국군수도치과병원",
@@ -2505,10 +2562,10 @@
    "국립암센터병원"
   ],
   "homepage": "https://www.ncc.re.kr",
-  "recruit_url": "https://www.ncc.re.kr/boardList.ncc?uri=notice06",
-  "watch": false,
+  "recruit_url": "https://ncc.recruiter.co.kr/app/jobnotice/list",
+  "watch": true,
   "operator": "",
-  "note": "own board (uri=notice06) + 잡알리오 | 2026-10 확인: 끔 — 게시판 목록이 자바스크립트로 그려짐 (잡알리오로 모임)"
+  "note": "own board (uri=notice06) + 잡알리오 | 2026-10 확인: 채용 사이트 ncc.recruiter.co.kr (치과의사 전공의 공고가 여기 올라옴)"
  },
  {
   "name": "국민건강보험 일산병원",
