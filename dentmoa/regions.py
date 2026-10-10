@@ -188,7 +188,9 @@ def parse_regions(text: str, max_results: int = 6) -> list[Region]:
                 continue
             if entry.not_ctx and entry.not_ctx in mentioned and not any(t[0] in mentioned for t in entry.targets):
                 continue
-            needs_near = entry.risky or (is_short and re.match(r"[동로길]", after or " "))
+            # '관악로', '관악대로 236', '시흥대로' 처럼 도로 이름 속의 짧은 이름은 바로 앞에 같은 시·도가 있을 때만 인정
+            # (안양시의 '관악대로' 가 서울 관악구로, 서울 금천구의 '시흥대로' 가 경기 시흥시로 잡히던 문제)
+            needs_near = entry.risky or (is_short and re.match(r"대로|[동로길]", after or " "))
             if needs_near and not any(t[0] == near for t in entry.targets):
                 continue
             chosen.extend(entry.targets)

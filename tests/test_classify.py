@@ -208,6 +208,20 @@ def test_region_hint_and_body():
         ("내과 전문의 채용", "", "서울아산병원", False),
         ("임상강사(전임의) 채용", "모집과: 내과, 외과, 치과(구강악안면외과)", "서울아산병원", True),
         ("간호사 채용", "", "다라병원", False),
+        # 치과 기관의 직원 공고 — 근무 부서가 진료과(소아치과 등)여도 치과의사 공고가 아니다
+        ("[서울대학교치과병원] 2026년 장애인 제한경쟁 단시간근무자 채용",
+         "모집분야: 사무보조(단시간근무자)\n근무부서: 소아치과\n원활한 의사소통 가능자", "서울대학교치과병원", False),
+        ("2026년 제5차 직원 채용 공고", "채용분야: 진료지원직(치과위생사) 2명, 행정직 1명", "서울대학교치과병원", False),
+        ("소아치과 외래 계약직 채용", "모집직종: 간호사\n근무부서: 소아치과 외래", "부산대학교치과병원", False),
+        ("[경북대학교치과병원] 기간제 근로자 채용 공고", "채용직종: 치과위생사(교정과)\n임기제", "경북대학교치과병원", False),
+        ("2026년 하반기 계약직(육아휴직 대체) 채용", "직종: 의료기사(치과기공사)\n부서: 치과보철과 기공실", "전남대학교치과병원", False),
+        ("[강릉원주대학교치과병원] 공무직 채용", "모집분야: 환경미화\n원활한 의사소통", "강릉원주대학교치과병원", False),
+        ("2026년 제5차 직원 채용 공고", "채용분야: 진료교수(소아치과) 1명, 치과위생사 2명", "서울대학교치과병원", True),
+        ("치과 진료의(계약직) 채용", "치과위생사와 함께 근무, 치과의사 면허", "OO의료원", True),
+        ("구강악안면외과 채용 공고", "문의: 행정지원팀", "OO대학교병원", True),
+        # 보건소장: 의사 우선이지만 임용이 어려우면 치과의사도 가능 → 치과의사 공고(분과무관)
+        ("OO군 보건소장(개방형직위) 임용 공고", "", "", True),
+        ("OO군 보건소장 채용", "응시자격: 의사 면허 소지자", "", True),
     ],
 )
 def test_is_dentist(title, body, hint, expected):
@@ -229,3 +243,16 @@ def test_deadline_and_summary():
     assert len(c.summary) == 3
     assert any("세후 1,500" in s for s in c.summary)
     assert not any("010-1234" in s for s in c.summary)
+
+
+def test_health_center_head_is_gp():
+    c = C("OO시 보건소장(지방보건서기관, 임기제) 채용 공고", "자격요건: 의사·치과의사·한의사 면허", kind="aggregator")
+    assert c.is_dentist and c.specialties == ["gp"] and c.post_kind == "hiring"
+
+
+def test_specific_hospital_in_title_beats_operator_hint():
+    """잡알리오는 운영 법인('한국보훈복지의료공단')을 함께 준다 → 제목의 병원 이름이 우선 (2026-10 실제 사례)."""
+    c = C("[광주보훈병원] 치과 전문의 채용 공고", kind="aggregator", institution_hint="한국보훈복지의료공단")
+    assert c.institution == "광주보훈병원" and [r.label for r in c.regions] == ["광주 광산구"]
+    c = C("[중앙보훈병원] 전문의(서울요양병원, 치과병원 치주과) 채용 공고", kind="aggregator", institution_hint="한국보훈복지의료공단")
+    assert c.institution == "중앙보훈병원" and [r.label for r in c.regions] == ["서울 강동구"]
