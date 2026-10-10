@@ -1,5 +1,6 @@
 """계정·연결 화면: 사이트 계정, 텔레그램, 메일, 연결 테스트.
 
+텔레그램 봇 토큰과 보내는 메일 계정은 함께 쓰고, 받는 쪽(텔레그램 채팅 ID·받는 메일 주소)은 사람(SH·JY)마다 따로다.
 저장된 비밀번호·토큰은 화면에 절대 다시 보여주지 않는다 (저장됨 여부만 표시).
 """
 
@@ -40,7 +41,6 @@ SECTIONS: list[dict] = [
         "title": "텔레그램",
         "fields": [
             ("telegram_token", "봇 토큰", "password", "BotFather가 알려준 '123456789:ABC…' 모양의 긴 글자"),
-            ("telegram_chat_id", "채팅 ID", "text", "모르면 비워 두고 아래 '채팅 ID 자동 찾기'를 누르세요."),
         ],
     },
     {
@@ -51,11 +51,15 @@ SECTIONS: list[dict] = [
             ("smtp_port", "포트", "text", "Gmail이면 그대로 두세요 (587)."),
             ("smtp_user", "보내는 Gmail 주소", "email", ""),
             ("smtp_password", "앱 비밀번호", "password", "Gmail 로그인 비밀번호가 아니라 16자리 '앱 비밀번호'예요."),
-            ("email_to", "받는 주소", "text", "여러 곳으로 받으려면 쉼표(,)로 구분하세요."),
         ],
     },
 ]
 SECTION_BY_KEY = {s["key"]: s for s in SECTIONS}
+# 사람마다 따로인 칸: (키, 화면 묶음, 이름, 도움말)
+PERSON_FIELDS = [
+    ("telegram_chat_id", "telegram", "채팅 ID", "모르면 비워 두고 '채팅 ID 자동 찾기'를 누르세요."),
+    ("email_to", "email", "받는 주소", "여러 곳으로 받으려면 쉼표(,)로 구분하세요."),
+]
 CHECKABLE_SOURCES = list(SOURCE_KEYS)
 
 APP_PASSWORD_RE = re.compile(r"[a-z]{16}")
@@ -85,8 +89,21 @@ def _validate(key: str, value: str) -> str | None:
     return None
 
 
+def _person_rows(settings: dict) -> list[dict]:
+    """사람마다 채팅 ID·받는 주소의 상태 (값은 보여 주지 않는다)."""
+    rows = []
+    for p in settings["people"]:
+        fields = {}
+        for key, group, label, help_ in PERSON_FIELDS:
+            src = settings_store.target_source(settings, p, key)
+            fields[group] = {"key": key, "label": label, "help": help_, "status": _status(key, {key: src}), "env": src == "env"}
+        rows.append({"key": p["key"], "name": p["name"], **fields})
+    return rows
+
+
 @bp.get("/accounts")
 def index():
+    settings = settings_store.load()
     sources = settings_store.secret_sources()
     sections = [
         {
@@ -102,6 +119,8 @@ def index():
     return render_template(
         "accounts.html",
         sections=sections,
+        people=_person_rows(settings),
+        many=len(settings["people"]) > 1,
         check_sources=[(k, source_label(k)) for k in CHECKABLE_SOURCES],
     )
 
@@ -136,6 +155,38 @@ def save():
     return redirect(url_for("accounts.index") + f"#{sec['key']}")
 
 
+@bp.post("/accounts/person/<key>")
+def save_person(key: str):
+    """한 사람의 채팅 ID 또는 받는 주소 저장 (빈칸이면 그대로, '지우기'면 지움)."""
+    settings = settings_store.load()
+    group = request.form.get("section", "telegram")
+    p = next((x for x in settings["people"] if x["key"] == key), None)
+    field = next((f for f in PERSON_FIELDS if f[1] == group), None)
+    if p is None or field is None:
+        flash("알 수 없는 항목이에요.", "error")
+        return redirect(url_for("accounts.index"))
+    name = field[0]
+    if name in request.form.getlist("clear"):
+        p[name] = ""
+    else:
+        val = (request.form.get(name) or "").strip()
+        if not val:
+            flash("바뀐 내용이 없어요. 새로 입력한 칸만 저장돼요.", "info")
+            return redirect(url_for("accounts.index") + f"#{group}")
+        if error := _validate(name, val):
+            flash(error, "error")
+            return redirect(url_for("accounts.index") + f"#{group}")
+        p[name] = val
+    settings_store.save(settings)
+    flash(f"{p['name']}의 {field[2]}를 저장했습니다.", "ok")
+    return redirect(url_for("accounts.index") + f"#{group}")
+
+
+def _person_from_form(settings: dict) -> dict | None:
+    key = request.form.get("person")
+    return next((x for x in settings["people"] if x["key"] == key), None) if key else settings["people"][0]
+
+
 # ──────────────────────────── 테스트 버튼 ────────────────────────────
 
 
@@ -149,36 +200,49 @@ def _error_text(e: Exception) -> str:
 
 @bp.post("/accounts/telegram/test")
 def telegram_test():
+    settings = settings_store.load()
+    p = _person_from_form(settings)
+    if p is None:
+        return redirect(url_for("accounts.index") + "#telegram")
     try:
         from dentmoa.notify import telegram
 
-        telegram.send_test(settings_store.secrets())
+        telegram.send_test(settings_store.person_secrets(settings, p))
     except Exception as e:
-        flash(f"텔레그램 테스트 실패: {_error_text(e)}", "error")
+        flash(f"{p['name']} 텔레그램 테스트 실패: {_error_text(e)}", "error")
     else:
-        flash("테스트 메시지를 보냈어요. 텔레그램을 확인해 보세요.", "ok")
+        flash(f"{p['name']}에게 테스트 메시지를 보냈어요. {p['name']}의 텔레그램을 확인해 보세요.", "ok")
     return redirect(url_for("accounts.index") + "#telegram")
 
 
 @bp.post("/accounts/telegram/find-chat")
 def telegram_find_chat():
+    settings = settings_store.load()
+    p = _person_from_form(settings)
     token = settings_store.secrets().get("telegram_token", "")
+    if p is None:
+        return redirect(url_for("accounts.index") + "#telegram")
     if not token:
         flash("먼저 봇 토큰을 저장해 주세요.", "error")
         return redirect(url_for("accounts.index") + "#telegram")
+    # 다른 사람 것으로 이미 저장한 채팅은 건너뛴다 (아내 휴대폰에서 '시작'을 누른 뒤 찾을 때)
+    others = [settings_store.person_secrets(settings, x)["telegram_chat_id"] for x in settings["people"] if x["key"] != p["key"]]
     try:
         from dentmoa.notify import telegram
 
-        chat_id = telegram.find_chat_id(token)
+        found = telegram.find_chat(token, exclude=others)
     except Exception as e:
         flash(f"채팅 ID 찾기 실패: {_error_text(e)}", "error")
     else:
-        if chat_id:
-            settings_store.update_secrets({"telegram_chat_id": str(chat_id)})
-            flash("채팅 ID를 찾아서 저장했어요. 이제 '테스트 메시지 보내기'를 눌러 보세요.", "ok")
+        if found:
+            chat_id, tg_name = found
+            p["telegram_chat_id"] = chat_id
+            settings_store.save(settings)
+            who = f"텔레그램 이름 '{tg_name}'" if tg_name else "채팅"
+            flash(f"{who}의 채팅 ID를 찾아서 {p['name']}에게 저장했어요. 이제 '{p['name']} 테스트 메시지'를 눌러 보세요.", "ok")
         else:
             flash(
-                "채팅 ID를 찾지 못했어요. 텔레그램에서 내 봇을 열어 '시작'(/start)을 누르거나 "
+                f"채팅 ID를 찾지 못했어요. {p['name']}의 휴대폰 텔레그램에서 봇을 열어 '시작'(/start)을 누르거나 "
                 "아무 메시지나 보낸 뒤 다시 눌러 주세요.",
                 "error",
             )
@@ -187,14 +251,18 @@ def telegram_find_chat():
 
 @bp.post("/accounts/email/test")
 def email_test():
+    settings = settings_store.load()
+    p = _person_from_form(settings)
+    if p is None:
+        return redirect(url_for("accounts.index") + "#email")
     try:
         from dentmoa.notify import mailer
 
-        mailer.send_test(settings_store.secrets())
+        mailer.send_test(settings_store.person_secrets(settings, p))
     except Exception as e:
-        flash(f"메일 테스트 실패: {_error_text(e)}", "error")
+        flash(f"{p['name']} 메일 테스트 실패: {_error_text(e)}", "error")
     else:
-        flash("테스트 메일을 보냈어요. 받은편지함(안 보이면 스팸함)을 확인해 보세요.", "ok")
+        flash(f"{p['name']}에게 테스트 메일을 보냈어요. 받은편지함(안 보이면 스팸함)을 확인해 보세요.", "ok")
     return redirect(url_for("accounts.index") + "#email")
 
 

@@ -47,6 +47,7 @@
     <span class="region">{{ p.region_labels|join(', ') if p.region_labels else '지역 미상' }}</span>
   </div>
   <ul class="tags">
+    {% for name in c.people %}<li class="tag tag-person" title="{{ name }}의 알림 조건에 맞아요">{{ name }}</li>{% endfor %}
     {% for t in posting_tags(p) %}<li class="tag {{ t.cls }}">{{ t.text }}</li>{% endfor %}
     {% if p.post_kind != 'hiring' %}<li class="tag tag-warn">{{ tx.SHORT_LABELS.get(p.post_kind, p.post_kind) }} 글</li>{% endif %}
     {% if not p.is_dentist %}<li class="tag tag-warn">치과의사 외 직종</li>{% endif %}

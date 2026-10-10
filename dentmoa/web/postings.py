@@ -9,12 +9,12 @@ from datetime import timedelta
 
 from flask import Blueprint, abort, jsonify, redirect, render_template, request, url_for
 
-from .. import config, db, settings_store
+from .. import config, db
 from ..matching import match
 from ..models import Posting
 from ..regions_data import SIDO_ORDER
 from ..taxonomy import INST_TYPES, POSITIONS, POST_KINDS, SPECIALTIES, WORK_TYPES
-from .helpers import Card, labels, source_keys, source_labels
+from .helpers import Card, current_person, current_settings, labels, mine, source_keys, source_labels
 from .security import safe_next, wants_json
 
 bp = Blueprint("postings", __name__)
@@ -118,15 +118,24 @@ def matching_count(filters: dict, days: int = 30) -> int:
     )
 
 
-def build_cards(lq: ListQuery, settings: dict) -> list[Card]:
+def view_labels() -> dict[str, str]:
+    """탭 이름. 받는 사람이 둘 이상이면 '내 조건' 대신 고른 사람 이름."""
+    return {k: mine(v) for k, v in VIEWS.items()}
+
+
+def build_cards(lq: ListQuery, settings: dict, me: dict) -> list[Card]:
+    """me: 보는 사람 — 그 사람의 조건과 관심(★)으로 고른다."""
     since = None if lq.view == "star" else config.now() - timedelta(days=lq.days)
     posts = db.all_postings(since=since)
     dups = dup_map(posts)
-    filters = settings["filters"]
+    stars = db.starred_ids(me["key"])
+    filters = me["filters"]
     loose = {**filters, "post_kinds": list(POST_KINDS), "dentist_only": False} if lq.include_other else filters
+    everyone = settings["people"] if len(settings["people"]) > 1 else []
 
     cards = []
     for p in posts:
+        p.starred = p.id in stars
         if p.hidden and not lq.show_hidden:
             continue
         if lq.view == "star":
@@ -141,22 +150,23 @@ def build_cards(lq: ListQuery, settings: dict) -> list[Card]:
         m = match(p, filters)
         if lq.view == "match" and not (m.ok or (loose is not filters and match(p, loose).ok)):
             continue
-        cards.append(Card(p, m, dups.get(p.id, [])))
+        people = [x["name"] for x in everyone if (m.ok if x["key"] == me["key"] else match(p, x["filters"]).ok)]
+        cards.append(Card(p, m, dups.get(p.id, []), people))
     return cards
 
 
 @bp.get("/")
 def index():
-    settings = settings_store.load()
+    settings = current_settings()
     lq = ListQuery.from_args(request.args)
-    cards = build_cards(lq, settings)
+    cards = build_cards(lq, settings, current_person(settings))
     pages = max(1, math.ceil(len(cards) / PAGE_SIZE))
     page = min(lq.page, pages)
     shown = cards[(page - 1) * PAGE_SIZE: page * PAGE_SIZE]
     return render_template(
         "postings.html",
         lq=lq,
-        views=VIEWS,
+        views=view_labels(),
         periods=PERIODS,
         cards=shown,
         total=len(cards),
@@ -241,15 +251,32 @@ def _posting_or_404(pid: int) -> Posting:
     return p
 
 
+def person_rows(p: Posting, settings: dict) -> list[dict]:
+    """사람마다: 조건에 맞는지, 언제 알림을 보냈는지 (받는 사람이 둘 이상일 때만)."""
+    if len(settings["people"]) < 2:
+        return []
+    records = db.person_records(p.id)
+    rows = []
+    for x in settings["people"]:
+        rec = records.get(x["key"], {})
+        rows.append({"name": x["name"], "ok": match(p, x["filters"]).ok, "notified_at": rec.get("notified_at")})
+    return rows
+
+
 @bp.get("/posting/<int:pid>")
 def detail(pid: int):
     p = _posting_or_404(pid)
-    settings = settings_store.load()
+    settings = current_settings()
+    me = current_person(settings)
+    rec = db.person_records(p.id).get(me["key"], {})
+    p.starred = bool(rec.get("starred"))
+    p.notified_at = rec.get("notified_at")
     original, dups = _related(p)
     return render_template(
         "posting_detail.html",
         p=p,
-        m=match(p, settings["filters"]),
+        m=match(p, me["filters"]),
+        people=person_rows(p, settings),
         rows=evidence_rows(p),
         original=original,
         dups=dups,
@@ -260,10 +287,7 @@ def detail(pid: int):
 # ──────────────────────────── 관심·숨기기 ────────────────────────────
 
 
-def _toggle(pid: int, flag: str):
-    p = _posting_or_404(pid)
-    value = not getattr(p, flag)
-    db.set_flag(pid, flag, value)
+def _done(pid: int, value: bool):
     if wants_json():
         return jsonify(ok=True, value=value)
     return redirect(safe_next(request.form.get("next"), url_for("postings.detail", pid=pid)))
@@ -271,9 +295,17 @@ def _toggle(pid: int, flag: str):
 
 @bp.post("/posting/<int:pid>/star")
 def star(pid: int):
-    return _toggle(pid, "starred")
+    """관심(★)은 보는 사람마다 따로."""
+    _posting_or_404(pid)
+    me = current_person()
+    value = pid not in db.starred_ids(me["key"])
+    db.set_star(me["key"], pid, value)
+    return _done(pid, value)
 
 
 @bp.post("/posting/<int:pid>/hide")
 def hide(pid: int):
-    return _toggle(pid, "hidden")
+    """숨기기는 모두에게 (목록과 알림에서 빠진다)."""
+    p = _posting_or_404(pid)
+    db.set_flag(pid, "hidden", not p.hidden)
+    return _done(pid, not p.hidden)

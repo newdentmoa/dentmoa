@@ -10,7 +10,7 @@ from flask import Blueprint, flash, redirect, render_template, url_for
 from .. import db, settings_store
 from ..matching import match
 from ..settings_store import SOURCE_KEYS
-from .helpers import Card, fmt_dt, source_label
+from .helpers import Card, current_person, fmt_dt, source_label
 
 bp = Blueprint("status", __name__)
 
@@ -132,19 +132,22 @@ def run_now():
 
 @bp.get("/status/preview")
 def preview():
+    """보는 사람(SH·JY)에게 지금 알림을 보낸다면 들어갈 공고."""
     settings = settings_store.load()
+    me = current_person(settings)
     error = None
     pending: list = []
     matched: list = []
     try:
         from dentmoa import pipeline
 
-        pending, matched = pipeline.matched_pending(settings)
+        pending, matched = pipeline.matched_pending(settings, me)
     except Exception as e:
         error = str(e) or e.__class__.__name__
     return render_template(
         "preview.html",
-        cards=[Card(p, match(p, settings["filters"])) for p in matched],
+        who=me["name"] if len(settings["people"]) > 1 else "",
+        cards=[Card(p, match(p, me["filters"])) for p in matched],
         considered=len(pending),
         max_items=settings["notify"]["max_items"],
         error=error,

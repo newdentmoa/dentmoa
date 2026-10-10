@@ -7,9 +7,9 @@ from datetime import date, datetime
 from pathlib import Path
 from urllib.parse import urlencode, urlsplit
 
-from flask import Flask, current_app, g, request, url_for
+from flask import Flask, current_app, g, request, session, url_for
 
-from .. import config, taxonomy
+from .. import config, settings_store, taxonomy
 from ..matching import MatchResult
 from ..models import Posting
 from ..settings_store import SOURCE_KEYS
@@ -51,6 +51,40 @@ class Card:
     p: Posting
     m: MatchResult | None = None
     dups: list[Posting] = field(default_factory=list)
+    people: list[str] = field(default_factory=list)  # 조건에 맞는 사람 이름 (받는 사람이 둘 이상일 때만)
+
+
+# ──────────────────────────── 보는 사람 (SH·JY) ────────────────────────────
+
+
+def current_settings() -> dict:
+    """이번 요청의 설정 (한 번만 읽는다)."""
+    if "settings" not in g:
+        g.settings = settings_store.load()
+    return g.settings
+
+
+def current_person(settings: dict | None = None) -> dict:
+    """이 기기에서 고른 사람. 고른 적이 없거나 지워진 사람이면 첫 사람."""
+    s = settings or current_settings()
+    return settings_store.person(s, session.get("person"))
+
+
+def people_nav() -> list[dict]:
+    """위쪽 '보는 사람' 단추. 받는 사람이 한 명이면 비어 있다."""
+    s = current_settings()
+    if len(s["people"]) < 2:
+        return []
+    me = current_person(s)
+    return [{"key": p["key"], "name": p["name"], "active": p["key"] == me["key"]} for p in s["people"]]
+
+
+def mine(label: str) -> str:
+    """'내 조건' → 'SH 조건' (받는 사람이 둘 이상일 때)."""
+    s = current_settings()
+    if len(s["people"]) < 2:
+        return label
+    return label.replace("내 ", f"{current_person(s)['name']} ", 1)
 
 
 def source_labels() -> dict[str, str]:
@@ -219,6 +253,9 @@ def init_app(app: Flask) -> None:
         labels=labels,
         url_with=url_with,
         nav_items=nav_items,
+        people_nav=people_nav,
+        current_person=current_person,
+        mine=mine,
         source_label=source_label,
         static_url=static_url,
         tx=taxonomy,

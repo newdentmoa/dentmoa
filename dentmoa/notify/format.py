@@ -227,11 +227,17 @@ def _number(chunks: list[str]) -> list[str]:
     return [c if i == 0 else f"<i>({i + 1}/{n})</i>\n{c}" for i, c in enumerate(chunks)]
 
 
-def telegram_digest(postings: list[Posting], warnings, settings: dict, *, now: datetime | None = None) -> list[str]:
+def _who(who: str) -> str:
+    """제목에 넣을 받는 사람 이름 ('SH · ') — 받는 사람이 한 명이면 비어 있다."""
+    return f"{who} · " if who else ""
+
+
+def telegram_digest(postings: list[Posting], warnings, settings: dict, *, now: datetime | None = None,
+                    who: str = "") -> list[str]:
     now = _now(now)
     labels = source_labels()
     shown, more = _limit(postings, settings)
-    blocks = [f"🦷 <b>덴트모아</b> · {when_text(now)} · 새 공고 {len(postings)}건"]
+    blocks = [f"🦷 <b>덴트모아</b> · {_e(_who(who))}{when_text(now)} · 새 공고 {len(postings)}건"]
     if not postings:
         blocks.append(EMPTY_TEXT)
     blocks += [_tg_item(_item(p, now.date(), labels)) for p in shown]
@@ -242,11 +248,12 @@ def telegram_digest(postings: list[Posting], warnings, settings: dict, *, now: d
     return _number(pack(blocks, LIMIT - 20))
 
 
-def telegram_reminders(postings: list[Posting], settings: dict, *, now: datetime | None = None) -> list[str]:
+def telegram_reminders(postings: list[Posting], settings: dict, *, now: datetime | None = None,
+                       who: str = "") -> list[str]:
     now = _now(now)
     labels = source_labels()
     shown, more = _limit(postings, settings)
-    blocks = [f"⏰ <b>마감 임박 공고</b> · {when_text(now)} · {len(postings)}건"]
+    blocks = [f"⏰ <b>마감 임박 공고</b> · {_e(_who(who))}{when_text(now)} · {len(postings)}건"]
     blocks += [_tg_item(_item(p, now.date(), labels), compact=True) for p in shown]
     if more:
         blocks.append(_tg_more(more))
@@ -351,20 +358,26 @@ def _text_warnings(warnings) -> str:
     return "\n".join(lines)
 
 
-def email_digest(postings: list[Posting], warnings, settings: dict, *, now: datetime | None = None) -> tuple[str, str, str]:
+def _tag(who: str) -> str:
+    """메일 제목 머리: '[덴트모아]' 또는 '[덴트모아·SH]'"""
+    return f"[덴트모아·{who}]" if who else "[덴트모아]"
+
+
+def email_digest(postings: list[Posting], warnings, settings: dict, *, now: datetime | None = None,
+                 who: str = "") -> tuple[str, str, str]:
     """(제목, HTML, 글)"""
     now = _now(now)
     labels = source_labels()
     shown, more = _limit(postings, settings)
     items = [_item(p, now.date(), labels) for p in shown]
     when = when_text(now)
-    heading = f"🦷 덴트모아 · {when} · 새 공고 {len(postings)}건"
+    heading = f"🦷 덴트모아 · {_who(who)}{when} · 새 공고 {len(postings)}건"
     if postings:
-        subject = f"[덴트모아] 새 공고 {len(postings)}건 · {when}"
+        subject = f"{_tag(who)} 새 공고 {len(postings)}건 · {when}"
     elif warnings:
-        subject = f"[덴트모아] 확인이 필요해요 · {when}"
+        subject = f"{_tag(who)} 확인이 필요해요 · {when}"
     else:
-        subject = f"[덴트모아] 새 공고 없음 · {when}"
+        subject = f"{_tag(who)} 새 공고 없음 · {when}"
 
     html_parts, text_parts = [], [heading]
     if not postings:
@@ -383,14 +396,15 @@ def email_digest(postings: list[Posting], warnings, settings: dict, *, now: date
     return subject, _mail_page(heading, "".join(html_parts)), "\n\n".join(text_parts) + "\n"
 
 
-def email_reminders(postings: list[Posting], settings: dict, *, now: datetime | None = None) -> tuple[str, str, str]:
+def email_reminders(postings: list[Posting], settings: dict, *, now: datetime | None = None,
+                    who: str = "") -> tuple[str, str, str]:
     now = _now(now)
     labels = source_labels()
     shown, more = _limit(postings, settings)
     items = [_item(p, now.date(), labels) for p in shown]
     when = when_text(now)
-    heading = f"⏰ 마감 임박 공고 · {when} · {len(postings)}건"
-    subject = f"[덴트모아] 마감 임박 공고 {len(postings)}건 · {when}"
+    heading = f"⏰ 마감 임박 공고 · {_who(who)}{when} · {len(postings)}건"
+    subject = f"{_tag(who)} 마감 임박 공고 {len(postings)}건 · {when}"
     html_parts = [_mail_item(it, compact=True) for it in items]
     text_parts = [heading] + [_text_item(it, compact=True) for it in items]
     if more:

@@ -129,7 +129,7 @@ def test_save_and_match(tmp_db):
     assert p.region_labels == ["서울 강남구"]
     assert p.inst_type == "dental_clinic"
 
-    f = settings_store.load()["filters"]
+    f = settings_store.load()["people"][0]["filters"]
     assert match(p, f).ok
     f["specialties"] = ["ortho"]
     assert not match(p, f).ok
@@ -147,13 +147,14 @@ def test_save_and_match(tmp_db):
 
 def test_settings_validation(tmp_db):
     s = settings_store.load()
-    s["filters"]["regions"] = ["서울 강남구", "없는곳", "부산"]
+    f = s["people"][0]["filters"]
+    f["regions"] = ["서울 강남구", "없는곳", "부산"]
     s["notify"]["times"] = ["25:00", "08:30", "08:30"]
-    s["filters"]["include_keywords"] = "임상교수, 진료교수\n전임의"
+    f["include_keywords"] = "임상교수, 진료교수\n전임의"
     saved = settings_store.save(s)
-    assert saved["filters"]["regions"] == ["서울 강남구", "부산"]
+    assert saved["people"][0]["filters"]["regions"] == ["서울 강남구", "부산"]
     assert saved["notify"]["times"] == ["08:30"]
-    assert saved["filters"]["include_keywords"] == ["임상교수", "진료교수", "전임의"]
+    assert saved["people"][0]["filters"]["include_keywords"] == ["임상교수", "진료교수", "전임의"]
 
 
 def test_password(tmp_db):
@@ -213,7 +214,7 @@ def test_uncertain_defaults_do_not_filter(tmp_db):
     pid, _ = db.save_raw(raw, source_kind="aggregator", dentist_only=False, default_inst_type=None)
     p = db.get_posting(pid)
     assert "positions" in p.uncertain
-    f = settings_store.load()["filters"]
+    f = settings_store.load()["people"][0]["filters"]
     f["positions"] = ["faculty", "clinical_professor", "fellow"]
     f["specialties"] = ["pedo"]
     assert match(p, f).ok
@@ -221,7 +222,7 @@ def test_uncertain_defaults_do_not_filter(tmp_db):
     # 동네 게시판 글의 '치과의원' 은 확실한 값 → 치과의원을 끄면 걸러진다
     pid2, _ = db.save_raw(_raw("2", "[서울] 원장님 모십니다"), source_kind="local_board", dentist_only=True, default_inst_type=None)
     p2 = db.get_posting(pid2)
-    f["positions"] = list(settings_store.DEFAULT_SETTINGS["filters"]["positions"])
+    f["positions"] = list(settings_store.DEFAULT_FILTERS["positions"])
     f["specialties"] = ["gp"]
     f["inst_types"] = ["dental_univ_hospital"]
     assert not match(p2, f).ok

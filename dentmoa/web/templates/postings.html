@@ -61,7 +61,7 @@
   <p class="empty-title">아직 관심(★) 표시한 공고가 없어요.</p>
   <p>공고 카드의 '☆ 관심' 버튼을 누르면 여기에 모여요.</p>
   {% elif lq.view == 'match' %}
-  <p class="empty-title">이 기간에 내 조건에 맞는 공고가 없어요.</p>
+  <p class="empty-title">이 기간에 {{ mine('내 조건') }}에 맞는 공고가 없어요.</p>
   <p>'전체 공고'를 보거나, 기간을 늘리거나, 알림 조건을 넓혀 보세요.</p>
   <div class="button-row">
     <a class="btn" href="{{ url_with(view='all', page=None) }}">전체 공고 보기</a>

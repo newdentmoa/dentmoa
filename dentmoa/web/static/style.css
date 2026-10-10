@@ -430,3 +430,21 @@ textarea { resize: vertical; }
   .times { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: none; }
   .posting-title { font-size: 1.08rem; }
 }
+
+/* 보는 사람 (SH·JY) — 위쪽 단추와 공고 카드의 이름 표시 */
+.person-switch {
+  display: inline-flex; gap: 2px; margin: 0 8px 0 auto; padding: 2px;
+  border: 1px solid var(--border); border-radius: 999px;
+}
+.person-switch form { margin: 0; }
+.person-switch button {
+  border: 0; background: none; font: inherit; font-size: .88rem; font-weight: 600;
+  min-height: 32px; padding: 4px 12px; border-radius: 999px; color: var(--muted); cursor: pointer;
+}
+.person-switch button.on { background: var(--primary); color: var(--on-primary); }
+.tag-person { background: var(--primary); color: var(--on-primary); font-weight: 700; }
+.person-tabs { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 12px; }
+.person-tabs form { margin: 0; }
+.group-title { font-size: 1rem; color: var(--muted); margin: 24px 4px 8px; }
+.danger-zone { border-color: var(--danger-soft); }
+.person-target { border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; }

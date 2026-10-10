@@ -92,14 +92,20 @@ def _password_fingerprint() -> str:
 
 
 def login_user() -> None:
+    person = session.get("person")  # 이 기기에서 보던 사람(SH·JY)은 다시 로그인해도 그대로
     session.clear()
+    if person:
+        session["person"] = person
     session.permanent = True
     session["auth"] = _password_fingerprint()
     session["csrf"] = secrets.token_urlsafe(32)
 
 
 def logout_user() -> None:
+    person = session.get("person")  # 이 기기에서 보던 사람은 기억해 둔다 (로그인 정보는 지운다)
     session.clear()
+    if person:
+        session["person"] = person
 
 
 def is_logged_in() -> bool:

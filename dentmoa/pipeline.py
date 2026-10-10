@@ -42,11 +42,32 @@ class CollectReport:
 
 
 @dataclass
-class DigestReport:
+class PersonDigest:
+    """한 사람에게 보낸 알림."""
+
+    key: str
+    name: str
     considered: int = 0
     matched: list[Posting] = field(default_factory=list)
     sent: dict[str, str] = field(default_factory=dict)  # 채널 → 'ok' 또는 오류 메시지
     skipped_reason: str = ""
+    warned: bool = False  # 경고를 함께 보냈는지
+
+
+@dataclass
+class DigestReport:
+    people: list[PersonDigest] = field(default_factory=list)
+
+    @property
+    def failed(self) -> bool:
+        """채널을 시도했는데 하나도 성공하지 못한 사람이 있는지."""
+        return any(d.sent and not any(v == "ok" for v in d.sent.values()) for d in self.people)
+
+    def summary(self) -> str:
+        """'SH 3건 · JY 1건' (한 사람이면 '3건')"""
+        if len(self.people) == 1:
+            return f"{len(self.people[0].matched)}건"
+        return " · ".join(f"{d.name} {len(d.matched)}건" for d in self.people)
 
 
 def _log(msg: str) -> None:
@@ -209,49 +230,64 @@ def collect(keys: list[str] | None = None, *, save_debug: bool = False) -> Colle
 # ──────────────────────────── 알림 ────────────────────────────
 
 
-def matched_pending(settings: dict) -> tuple[list[Posting], list[Posting]]:
-    """(알림 판단할 공고 전체, 그중 조건에 맞는 것)"""
-    pending = db.unprocessed()
+def matched_pending(settings: dict, person: dict) -> tuple[list[Posting], list[Posting]]:
+    """이 사람에게: (알림 판단할 공고 전체, 그중 조건에 맞는 것)"""
     cutoff = config.now() - timedelta(days=settings["collect"]["backfill_days"])
+    pending = db.unprocessed(person["key"], since=cutoff)
     matched = []
     for p in pending:
         if p.dup_of is not None or p.hidden:
             continue
-        if p.effective_date < cutoff:
-            continue
-        if match(p, settings["filters"]).ok:
+        if match(p, person["filters"]).ok:
             matched.append(p)
     matched.sort(key=lambda p: p.effective_date, reverse=True)
     return pending, matched
 
 
+def who(settings: dict, person: dict) -> str:
+    """알림 제목에 붙일 이름 — 받는 사람이 둘 이상일 때만."""
+    return person["name"] if len(settings["people"]) > 1 else ""
+
+
 def digest(collect_report: CollectReport | None = None, *, dry_run: bool = False) -> DigestReport:
+    """사람마다 그 사람의 조건에 맞는 새 공고를 그 사람의 텔레그램·메일로 보낸다.
+    사이트 문제 경고는 '경고도 받기'를 켠 사람에게만."""
+    settings = settings_store.load()
+    warnings = _fresh_warnings(collect_report)
+    rep = DigestReport()
+    for person in settings["people"]:
+        mine = warnings if person["alerts"]["warnings"] else []
+        rep.people.append(_digest_person(settings, person, mine, dry_run=dry_run))
+    if any(d.warned for d in rep.people):
+        db.kv_set("warned", {**db.kv_get("warned", {}), **{w.key: config.now().date().isoformat() for w in warnings}})
+    return rep
+
+
+def _digest_person(settings: dict, person: dict, warnings: list[SourceReport], *, dry_run: bool) -> PersonDigest:
     from .notify import send_digest  # 순환 import 방지
 
-    settings = settings_store.load()
-    pending, matched = matched_pending(settings)
-    rep = DigestReport(considered=len(pending), matched=matched)
-    warnings = _fresh_warnings(collect_report)
-
+    ps = settings_store.person_settings(settings, person)
+    pending, matched = matched_pending(settings, person)
+    rep = PersonDigest(person["key"], person["name"], considered=len(pending), matched=matched)
     if dry_run:
         rep.skipped_reason = "미리보기"
         return rep
-    if not matched and not warnings and not settings["notify"]["send_empty"]:
-        db.mark_processed([p.id for p in pending], [])
+    if not matched and not warnings and not ps["notify"]["send_empty"]:
+        db.mark_processed(person["key"], [p.id for p in pending], [])
         rep.skipped_reason = "새로 맞는 공고 없음"
         return rep
 
-    rep.sent = send_digest(matched, warnings, settings)
+    rep.sent = send_digest(matched, warnings, ps, secrets=settings_store.person_secrets(settings, person),
+                           who=who(settings, person))
     if not rep.sent:
         # 텔레그램·메일이 아직 설정되지 않음 → 처리 완료로 표시하지 않고 남겨 둔다.
         # (설정을 마치면 그동안 모인 최근 공고를 한 번에 받는다)
         rep.skipped_reason = "알림 채널 미설정"
         return rep
     if any(v == "ok" for v in rep.sent.values()):
-        shown = matched[: settings["notify"]["max_items"]]
-        db.mark_processed([p.id for p in pending], [p.id for p in shown])
-        if warnings:
-            db.kv_set("warned", {**db.kv_get("warned", {}), **{w.key: config.now().date().isoformat() for w in warnings}})
+        shown = matched[: ps["notify"]["max_items"]]
+        db.mark_processed(person["key"], [p.id for p in pending], [p.id for p in shown])
+        rep.warned = bool(warnings)
     return rep
 
 
@@ -282,21 +318,25 @@ def _failures_in_a_row(source_key: str) -> int:
 
 
 def reminders() -> int:
+    """사람마다 마감 임박 알림. 돌려주는 값: 보낸 공고 수 (사람별 합)."""
     from .notify import send_reminders
 
     settings = settings_store.load()
-    n = settings["notify"]
-    if not n["reminder_enabled"]:
-        return 0
-    due = db.due_reminders(config.now().date(), n["reminder_days"], n["reminder_starred_only"])
-    due = [p for p in due if p.starred or match(p, settings["filters"]).ok]
-    if not due:
-        return 0
-    sent = send_reminders(due, settings)
-    if any(v == "ok" for v in sent.values()):
-        db.mark_reminded([p.id for p in due])
-        return len(due)
-    return 0
+    total = 0
+    for person in settings["people"]:
+        a = person["alerts"]
+        if not a["reminder_enabled"]:
+            continue
+        due = db.due_reminders(person["key"], config.now().date(), a["reminder_days"], a["reminder_starred_only"])
+        due = [p for p in due if p.starred or match(p, person["filters"]).ok]
+        if not due:
+            continue
+        sent = send_reminders(due, settings_store.person_settings(settings, person),
+                              secrets=settings_store.person_secrets(settings, person), who=who(settings, person))
+        if any(v == "ok" for v in sent.values()):
+            db.mark_reminded(person["key"], [p.id for p in due])
+            total += len(due)
+    return total
 
 
 # ──────────────────────────── 한 번 돌리기 ────────────────────────────
@@ -311,9 +351,10 @@ def run_cycle(*, keys: list[str] | None = None) -> dict:
         col = collect(keys)
         dig = digest(col)
         rem = reminders()
-        msg = f"새 글 {col.new_count}건, 알림 {len(dig.matched)}건, 마감알림 {rem}건"
-        if dig.sent:
-            msg += " / " + ", ".join(f"{k}:{v}" for k, v in dig.sent.items())
+        msg = f"새 글 {col.new_count}건, 알림 {dig.summary()}, 마감알림 {rem}건"
+        sent = [f"{d.name} {k}:{v}" if len(dig.people) > 1 else f"{k}:{v}" for d in dig.people for k, v in d.sent.items()]
+        if sent:
+            msg += " / " + ", ".join(sent)
         status = "ok" if not col.warnings else "partial"
         db.run_finish(run_id, status, new=col.new_count, message=msg)
         db.prune_runs()
