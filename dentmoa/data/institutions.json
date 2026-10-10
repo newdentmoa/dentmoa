@@ -151,7 +151,8 @@
   "recruit_url": "https://www3.chosun.ac.kr/chosun/219/subview.do",
   "watch": true,
   "operator": "",
-  "note": "조선대학교 교내채용 board (posts prefixed '[조선대학교치과병원]'); occasionally the 조선대병원 board ht"
+  "note": "조선대학교 교내채용 board (posts prefixed '[조선대학교치과병원]'); occasionally the 조선대병원 board ht | 2026-10-10 확인: 대학 전체 채용 게시판이라 치과 관련 제목만 (연구교수·산학협력단 공고가 치과병원 공고로 잡히던 문제)",
+  "title_filter": "dental"
  },
  {
   "name": "원광대학교 대전치과병원",

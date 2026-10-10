@@ -163,8 +163,10 @@ DENTAL_INST_TYPES = {"dental_univ_hospital", "dental_hospital", "disabled_dental
 
 NON_DENTIST_TITLE_RE = re.compile(
     r"위생사|치위생|간호|조무사|기공사|조교|행정|사무원|사무직|원무|약사|영양사|방사선사|임상병리|물리치료|시설|미화|보안|운전|전산|"
-    r"연구원|코디|상담실장|사회복지|단시간\s*근무자|공무직|사무\s*보조"
+    r"연구원|코디|상담실장|사회복지|단시간\s*근무자|공무직|사무\s*보조|일반직"
 )
+# 연구직 — 치과대학 연구실의 박사후연구원 등 (제목에 '교수연구팀' 처럼 교수가 들어 있어도 연구직)
+RESEARCH_TITLE_RE = re.compile(r"post\s*-?\s*doc|포닥|박사\s*후\s*(?:연구원|과정|연구)", re.I)
 DENTIST_TITLE_RE = re.compile(
     r"치과\s*의사|교수|교원|전임의|임상\s*강사|펠로우|전문의|촉탁의|진료의|레지던트|전공의|(?<!청년)(?<!청년 )(?<!체험형)(?<!체험형 )(?<!채용형)(?<!채용형 )(?<!행정)(?<!행정 )인턴|원장|봉직|페이\s*닥터|의사직|의무|과장"
 )
@@ -178,6 +180,9 @@ HEALTH_CENTER_HEAD_RE = re.compile(r"보건소장|보건의료원장|보건소\s
 def detect_dentist(text: str, title: str, inst_type: str, dentist_only: bool) -> tuple[bool, str]:
     if dentist_only:
         return True, "치과의사 전용 게시판"
+    rs = RESEARCH_TITLE_RE.search(title)
+    if rs and not re.search(r"치과\s*의사|임상|진료", title):
+        return False, f"연구직: {rs.group(0)}"
     nd = NON_DENTIST_TITLE_RE.search(title)
     if nd and not DENTIST_TITLE_RE.search(title):
         return False, f"제목이 다른 직종: {nd.group(0)}"
