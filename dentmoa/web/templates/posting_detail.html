@@ -94,7 +94,7 @@
   <ul class="reasons">{% for r in m.reasons %}<li>{{ r }}</li>{% endfor %}</ul>
   {% endif %}
   {% if m.region_uncertain %}<p class="hint">공고의 지역이 불분명해요. '지역이 불분명한 공고도 받기'가 켜져 있어서 포함됐어요.</p>{% endif %}
-  {% if p.dup_of %}<p class="hint">다른 출처에 먼저 올라온 같은 공고가 있어서 알림에서는 빠져요.</p>{% endif %}
+  {% if p.dup_of %}<p class="hint">{{ '먼저 올라온' if original and original.source == p.source else '다른 출처에 먼저 올라온' }} 같은 공고가 있어서 알림에서는 빠져요.</p>{% endif %}
   {% if p.hidden %}<p class="hint">숨긴 공고라 목록과 알림에서 빠져요.</p>{% endif %}
   <p><a href="{{ url_for('settings.index') }}">알림 조건 바꾸기 →</a></p>
 </section>
@@ -104,7 +104,7 @@
   <h2>같은 공고</h2>
   <ul class="plain-list">
     {% if original %}<li>원본: <a href="{{ url_for('postings.detail', pid=original.id) }}">{{ original.title }}</a> <span class="muted">({{ original.source|source_label }})</span></li>{% endif %}
-    {% for d in dups %}<li>다른 출처: <a href="{{ url_for('postings.detail', pid=d.id) }}">{{ d.title }}</a> <span class="muted">({{ d.source|source_label }})</span></li>{% endfor %}
+    {% for d in dups %}<li>{{ '다시 올린 글' if d.source == p.source else '다른 출처' }}: <a href="{{ url_for('postings.detail', pid=d.id) }}">{{ d.title }}</a> <span class="muted">({{ d.source|source_label }}{{ ' · ' ~ (d.effective_date|fmt_date) if d.source == p.source }})</span></li>{% endfor %}
   </ul>
 </section>
 {% endif %}
