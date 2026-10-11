@@ -528,6 +528,25 @@ def test_hospital_title_filter_dental():
     assert is_relevant_title("[치과병원] 소아치과 임상교수 모집", khmc)
 
 
+
+def test_afmd_board_new_address():
+    # 2026-10-11 국군수도병원이 사이트를 바꿔 채용공고 게시판이 /afmd/5636/subview.do 로 옮겼다 (일반 표 게시판)
+    from dentmoa import institutions
+    from dentmoa.sources.hospitals import is_relevant_title, watched_boards
+
+    url = "https://afmd.mnd.go.kr/afmd/5636/subview.do"
+    items = htmlutil.find_list_items(fx("afmd_list.html"), url, now=NOW)
+    assert len(items) == 5  # 메뉴(채용공고·공지사항)는 글이 아니다
+    assert items[0].title == "26-4차 국군수도병원 주관 한시임기제(대체인력) 군무원 채용 공고"
+    assert items[0].url == "https://afmd.mnd.go.kr/bbs/afmd/5108105/I_14099866/artclView.do"
+    assert items[0].posted_at == datetime(2026, 9, 22, tzinfo=config.TZ)
+    afmd = institutions.find("국군수도병원")
+    assert afmd.recruit_url == url and afmd in watched_boards()
+    assert not any(b.name == "국군수도치과병원" for b in watched_boards())  # 같은 게시판은 한 곳만
+    # 2년 반 동안 올라온 글은 '전문임기제 군무원(의사)'(내과·외과 등)뿐 → 치과 관련 제목만 연다
+    assert not is_relevant_title("2026-5차 국군수도병원 주관 전문임기제 군무원(의사) 경력경쟁 채용", afmd)
+    assert is_relevant_title("2026-6차 국군수도치과병원 전문임기제 군무원(치과의사) 채용 공고", afmd)
+
 # ───────────── 게시판 일반 읽기 (htmlutil) ─────────────
 
 MENU_AND_TABLE = """<div id="gnb"><ul>
