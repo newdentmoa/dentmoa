@@ -110,7 +110,7 @@ def _doc_files() -> list[Path]:
 def test_docs_exist():
     names = {p.name for p in (ROOT / "docs").glob("*.md")}
     for n in ("1-서버-만들기.md", "2-설치하기.md", "3-텔레그램-설정.md", "4-메일-설정.md", "5-사용법.md",
-              "6-문제해결.md", "7-개발-세션-설정.md"):
+              "6-문제해결.md", "7-개발-세션-설정.md", "8-인계노트.md"):
         assert n in names
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     for n in sorted(names):
