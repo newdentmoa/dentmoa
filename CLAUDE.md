@@ -136,6 +136,8 @@ dentmoa/
   (DHCP lease lost 기록도 없음), apt 자동 업데이트도 없음 → 원인 미확정, 재부팅으로 복구. 대책: deploy/netwatch.sh(cron 2분 —
   기본 경로·169.254.169.254 확인, 2번 끊기면 networkd 재시작, 5번이면 재부팅(켜진 지 20분·1시간에 한 번), 끊긴 순간의 상태를
   /var/log/dentmoa-netwatch.log 에 영어로 기록). install.sh 7단계·update.sh 가 등록. 다시 생기면 그 기록부터 본다.
+  2026-10-11 오전 확인: 밤새 끊김 없음(netwatch 기록 파일 없음, 08:10 첫 수집·알림 정상) → DHCP 갱신(1시간) 문제는 아닌 것으로 보임, 일회성일 수 있음.
+  같은 날 카드의 '다른 출처에도 있음: 덴트포토'(같은 사이트 재등록 글) 문구를 고침(PR newdentmoa/dentmoa#6).
   메모리: 서버가 쓸 수 있는 것은 412MB, 재부팅 직후 available 160MB·스왑 111MB(multipathd·snapd·udisksd 등 기본 프로그램이 큼).
   GitHub Actions 예약 실행도 검토해 사용자에게 설명함 —
   대시보드 없음, 상태(DB) 저장을 따로 만들어야 함, 무료 2,000분/월이 빠듯(한 번에 15~20분), 약관상 애매.
