@@ -1033,7 +1033,7 @@
   "recruit_url": "https://recruit.kbsmc.co.kr/jsp/recruit/recruitList.jsp",
   "watch": false,
   "operator": "",
-  "note": "own (recruit.kbsmc.co.kr, 의사직 카테고리) | 2026-10 확인: 끔 — recruit.kbsmc.co.kr 없어짐. 새 채용 사이트 kbsmcrecruit.ninehire.site 는 자동 접속 확인 화면(Vercel)이 있고 공고가 보이지 않음 (하이브레인넷·잡알리오로 모임)"
+  "note": "own (recruit.kbsmc.co.kr, 의사직 카테고리) | 2026-10 확인: 끔 — recruit.kbsmc.co.kr 없어짐. 새 채용 사이트 kbsmcrecruit.ninehire.site 는 자동 접속 확인 화면(Vercel)이 있고 공고가 보이지 않음 (하이브레인넷·잡알리오로 모임) | 2026-10-11 다시 확인: 홈페이지 채용 링크는 여전히 kbsmcrecruit.ninehire.site, Vercel 보안 검문소가 자동 브라우저를 막는다(코드 21). 사이트가 일부러 막는 것이라 우회하지 않고 꺼 둔다"
  },
  {
   "name": "건국대학교병원",
@@ -1429,7 +1429,7 @@
   "recruit_url": "",
   "watch": false,
   "operator": "",
-  "note": "own (dsmc.or.kr 채용) | 2026-10 확인: 끔 — dsmc.or.kr 채용 화면이 서버 오류(500). 하이브레인넷으로 모임"
+  "note": "own (dsmc.or.kr 채용) | 2026-10 확인: 끔 — dsmc.or.kr 채용 화면이 서버 오류(500). 하이브레인넷으로 모임 | 2026-10-11: 이 작업 환경에서는 dsmc.or.kr 접속 자체가 안 됨(www 는 49848 포트로 보냄). 서울 서버·사용자 브라우저로 채용 화면 주소를 확인해야 함"
  },
  {
   "name": "대구가톨릭대학교병원",
@@ -2532,10 +2532,10 @@
    "국군의무사령부"
   ],
   "homepage": "https://afmd.mnd.go.kr",
-  "recruit_url": "https://afmd.mnd.go.kr/user/boardList.action?boardId=I_5108105&siteId=afmd&id=afmd_040500000000",
-  "watch": false,
+  "recruit_url": "https://afmd.mnd.go.kr/afmd/5636/subview.do",
+  "watch": true,
   "operator": "국군의무사령부",
-  "note": "own board + 국방부 채용게시판 + 국방통합모집포털(m-recruit.mnd.go.kr) | 2026-10 확인: 끔 — 게시판 주소 404, 이 작업 환경에서는 사이트 접속도 안 됨 (나라일터로 모임)"
+  "note": "own board + 국방부 채용게시판 + 국방통합모집포털(m-recruit.mnd.go.kr) | 2026-10-11 다시 확인: 사이트를 새로 바꿔 채용공고 게시판이 /afmd/5636/subview.do 로 옮김(예전 boardList.action 은 없어짐). 일반 표 게시판이라 그대로 읽힘. 국군수도치과병원 공고도 이 게시판에 올라온다(같은 사이트). 2024-04~2026-10 글 195건에 치과 공고는 없었다 — '전문임기제 군무원(의사)' 공고(내과·외과 등)뿐이라 제목에 치과 관련 단어가 있는 글만 연다. 해외에서는 가끔 끊김"
  },
  {
   "name": "국군수도치과병원",
@@ -2547,10 +2547,10 @@
    "수도치과병원"
   ],
   "homepage": "https://afmd.mnd.go.kr",
-  "recruit_url": "https://afmd.mnd.go.kr/user/boardList.action?boardId=I_5108105&siteId=afmd&id=afmd_040500000000",
+  "recruit_url": "https://afmd.mnd.go.kr/afmd/5636/subview.do",
   "watch": false,
   "operator": "국군의무사령부",
-  "note": "국군수도병원/국방부 채용게시판"
+  "note": "국군수도병원과 같은 게시판(2026-10-11 새 주소) — 국군수도병원 항목 하나만 watch"
  },
  {
   "name": "국립암센터",
