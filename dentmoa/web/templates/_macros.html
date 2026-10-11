@@ -61,7 +61,11 @@
   </ul>
   {% endif %}
   {% if c.dups %}
-  <p class="dups">다른 출처에도 있음: {{ c.dups|map(attribute='source')|unique|map('source_label')|join(', ') }}</p>
+  {# 같은 공고는 두 가지: 다른 사이트에 함께 올라온 글, 같은 사이트에 다시 올린 글(덴트포토 끌어올리기 등) #}
+  {% set elsewhere = c.dups|rejectattr('source', 'equalto', p.source)|map(attribute='source')|unique|map('source_label')|list %}
+  {% set reposts = c.dups|selectattr('source', 'equalto', p.source)|list|length %}
+  {% if elsewhere %}<p class="dups">다른 출처에도 있음: {{ elsewhere|join(', ') }}</p>{% endif %}
+  {% if reposts %}<p class="dups">{{ p.source|source_label }}에 다시 올린 같은 공고: {{ reposts }}건</p>{% endif %}
   {% endif %}
   <div class="posting-foot">
     <span class="when">{{ p.effective_date|fmt_date }} · {{ p.source|source_label }}</span>

@@ -290,6 +290,24 @@ def test_duplicate_note(client):
     assert "같은 공고" in detail and f"/posting/{dup}" in detail
 
 
+def test_repost_on_same_site_is_not_called_another_source(client):
+    # 2026-10-11 실제 화면: 덴트포토 글에 '다른 출처에도 있음: 덴트포토' — 같은 사이트에 다시 올린 글이었다
+    first = add_posting("1", source="dentphoto", days_ago=2)
+    again = add_posting("2", source="dentphoto", days_ago=1)
+    elsewhere = add_posting("9", source="moreden", days_ago=1)
+    db.set_dup_of(again, first)
+    html = client.get("/").get_data(as_text=True)
+    assert "다른 출처에도 있음" not in html
+    assert "덴트포토에 다시 올린 같은 공고: 1건" in html
+    db.set_dup_of(elsewhere, first)
+    html = client.get("/").get_data(as_text=True)
+    assert "다른 출처에도 있음: 모어덴" in html and "덴트포토에 다시 올린 같은 공고: 1건" in html
+    detail = client.get(f"/posting/{first}").get_data(as_text=True)
+    assert "다시 올린 글:" in detail and "다른 출처:" in detail
+    detail = client.get(f"/posting/{again}").get_data(as_text=True)
+    assert "먼저 올라온 같은 공고가 있어서" in detail and "다른 출처에 먼저" not in detail
+
+
 def test_star_and_hide_toggle(client):
     pid = add_posting()
     t = csrf_of(client)
