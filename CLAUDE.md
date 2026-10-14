@@ -110,7 +110,8 @@ dentmoa/
   LoginError → 하루 한 번만 다시 시도(LOGIN_RETRY_AFTER)라서 며칠 못 읽음. 연결 테스트 때는 크로미움(약 309MB·프로세스 7개)이
   메모리를 다 써서 서버가 스왑으로 아주 느려짐 — 사용자는 '서버가 다운되고 재시작'으로 봤지만 서버 진단(업데이트 전) 결과 재부팅 없음
   (uptime -s 2026-10-10), 컨테이너 재시작 없음(restarts=0, OOMKilled=false), 커널 OOM 기록 없음, netwatch 기록 없음, 스왑 264MB 사용.
-  PR newdentmoa/dentmoa#9 업데이트 뒤 연결 테스트 성공(10-14 15:56). 고침: _wait_ready(목록 JSON 또는 로그인 칸까지 최대 90초), 기다리는 기본 시간 60초,
+  PR newdentmoa/dentmoa#9 업데이트 뒤 연결 테스트 성공(10-14 15:56, 작업 환경에는 사이트 계정이 없어 실제 로그인은 이것으로 확인).
+  이 진단 한 줄은 docs/6 '대시보드가 안 열려요' 5번에 넣었다(업데이트하면 restarts 가 지워지니 업데이트 전에 받는다). 고침: _wait_ready(목록 JSON 또는 로그인 칸까지 최대 90초), 기다리는 기본 시간 60초,
   사이트 경고창(alert)이 뜰 때만 LoginError — 칸을 못 찾음·화면이 안 넘어감은 StructureError(다음 수집 때 다시, 연속 3번이면 경고),
   예전에 잘못 남은 기록은 무시(pipeline.NOT_A_CREDENTIAL_PROBLEM), 연결 테스트가 성공하면 로그인 실패 기록을 지운다(check_source).
   브라우저: browser.LEAN_ARGS(--no-zygote·--in-process-gpu·NetworkServiceInProcess2 등 — --disable-features 는 Playwright 목록을
@@ -165,7 +166,7 @@ dentmoa/
   대시보드 없음, 상태(DB) 저장을 따로 만들어야 함, 무료 2,000분/월이 빠듯(한 번에 15~20분), 약관상 애매.
 
 ## 다음 세션에서 할 일 (= 사용자에게 매번 보여 주는 '나중에 해도 되는 개선 작업')
-- 지금은 남은 개선 작업이 없다(2026-10-11). 사용자에게는 '남은 개선 작업 없음'으로 보여 준다.
+- 지금은 남은 개선 작업이 없다(2026-10-14). 사용자에게는 '남은 개선 작업 없음'으로 보여 준다.
 - 끝난 것(2026-10-11): 꺼 둔 게시판 다시 확인 — 국군수도병원 다시 켬(PR newdentmoa/dentmoa#7), 강북삼성·계명대동산은 그대로 끔.
 - 끝난 것(2026-10-10): 분류 오류 고치기(CLASSIFIER_VERSION 4·5·6, 예전 미해결 사례 포함), 꺼 둔 게시판 새 주소 찾기(9곳 되살림),
   실패 경고는 연속 3번 실패할 때만 + 로그인 실패는 하루 한 번만 다시 시도 + 병원 게시판별 따라잡기,
@@ -176,7 +177,7 @@ dentmoa/
 
 ## 병원 게시판 (data/institutions.json)
 - 리서치로 모은 160개 기관(경기도의료원 분원 4곳·서울 이름 교정시설 4곳은 2026-10-10 추가)(치과대학병원·치과대학·장애인치과·대학병원·공공병원)의 이름/별칭/위치/채용 주소.
-- `watch: true` 인 66곳을 hospitals 수집기가 읽는다. 읽는 방법은 주소로 정해진다:
+- `watch: true` 인 67곳을 hospitals 수집기가 읽는다. 읽는 방법은 주소로 정해진다:
   `*.recruiter.co.kr` → platforms.recruiter_items (화면 주소가 /career/... 로 바뀐 곳도 /app/jobnotice/list.json 은 그대로 동작),
   recruit.cmcnu.or.kr → platforms.cmc_items, 주소에 /prog/recruitNotice/ → platforms.recruit_notice_items(건양대),
   그 밖 → htmlutil.find_list_items (incruit 도 여기서 읽힘).
