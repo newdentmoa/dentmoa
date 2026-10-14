@@ -18,6 +18,10 @@
 - 급여 칸은 비워 둘 수 없어서 '협의'인 글은 0 이나 10000(1만원)을 적는다.
 - 같은 화면에서 목록 JSON 을 두 번 받는다(같은 내용).
 
+2026-10-14: 512MB 서버에서는 로그인 화면이 그려지는 데 수십 초 걸린다(이 작업 환경에서도 10~15초). 예전에는 15초만 기다리고
+칸이 없으면 일반 로그인으로 넘어가 '비밀번호 칸을 찾지 못했습니다' 로 실패했고, 그것을 비밀번호 문제(LoginError)로 보아
+하루 한 번만 다시 시도했다 → 며칠 동안 모어덴을 못 읽음. 이제 칸이 그려질 때까지 기다리고, 사이트가 '틀렸다'고 할 때만 LoginError.
+
 1) 구인 게시판을 연다 → 로그인 화면이 나오면 치과의사 아이디·비밀번호로 로그인
 2) 목록 JSON 에서 글을 읽는다 — 본문까지 들어 있어서 글을 하나씩 열지 않는다 (못 받으면 한 번 더 연다)
 3) 목록 JSON 을 못 받았거나 본문이 비어 있으면: 화면의 링크로 글을 찾고, 처음 보는 글만 열어서 읽는다
@@ -40,6 +44,9 @@ API_RE = r"public-api\.moreden\.co\.kr/.*management/recruit/"
 LIST_API = re.compile(r"/management/recruit/list(?:\?|$)")
 ARTICLE_API = re.compile(r"/management/recruit/article/(\d+)")
 DETAIL_HREF = re.compile(r"/recruit/doctor/(?P<id>\d+)/?$")
+# 작은 서버에서는 화면이 느리게 뜬다 → 넉넉히 기다린다
+PAGE_TIMEOUT_MS = 60000
+READY_WAIT_SECONDS = 90
 REGION_LABELS = ["근무지 위치", "근무지역", "근무 지역", "근무지", "지역", "위치", "주소", "소재지"]
 INST_LABELS = ["병원명", "치과명", "기관명", "업체명", "병원 이름", "치과 이름"]
 
@@ -142,7 +149,7 @@ class MoredenSource(Source):
         if not user or not pw:
             raise MissingCredentials("모어덴 아이디·비밀번호가 설정되지 않았습니다.")
 
-        with open_browser(self.key, capture_json=API_RE) as sess:
+        with open_browser(self.key, capture_json=API_RE, timeout_ms=PAGE_TIMEOUT_MS) as sess:
             self._open_list(sess, ctx, user, pw)
             items = self._collect_list(sess, ctx)
             if not items:
@@ -191,6 +198,7 @@ class MoredenSource(Source):
         page = sess.page
         sess.captured.clear()
         page.goto(LIST_URL, wait_until="domcontentloaded")
+        self._wait_ready(sess)
         self._settle(sess)
         if not _on_login_page(page):
             return
@@ -199,10 +207,25 @@ class MoredenSource(Source):
         if not page.url.startswith(LIST_URL):
             sess.captured.clear()
             page.goto(LIST_URL, wait_until="domcontentloaded")
+            self._wait_ready(sess)
             self._settle(sess)
         if _on_login_page(page):
             ctx.dump("moreden-after-login.html", page.content())
-            raise LoginError("모어덴 로그인 후에도 구인 게시판이 열리지 않습니다.")
+            raise StructureError("모어덴 로그인 후에도 구인 게시판이 열리지 않습니다.")
+
+    def _wait_ready(self, sess: BrowserSession) -> None:
+        """목록 JSON 을 받았거나 로그인 칸이 그려질 때까지 기다린다 (작은 서버에서는 수십 초)."""
+        page = sess.page
+        for _ in range(READY_WAIT_SECONDS):
+            if self._list_payloads(sess):
+                return
+            if "auth.deneer.co.kr" in (page.url or ""):
+                try:
+                    if page.locator("#communityIdInput").count() > 0:
+                        return
+                except Exception:
+                    pass
+            page.wait_for_timeout(1000)
 
     def _login(self, sess: BrowserSession, ctx: FetchContext, user: str, pw: str) -> None:
         page = sess.page
@@ -217,17 +240,20 @@ class MoredenSource(Source):
 
         page.on("dialog", on_dialog)
         try:
-            id_box = page.locator("#communityIdInput")
-            if id_box.count() == 0:
-                # 화면 구조가 바뀜 → 일반적인 방법 (아이디·비밀번호 칸 찾기)
+            try:
+                page.wait_for_selector("#communityIdInput", state="attached", timeout=PAGE_TIMEOUT_MS)
+            except Exception:
+                # 한참 기다려도 치과의사용 칸이 없음 → 화면 구조가 바뀜. 일반적인 방법(아이디·비밀번호 칸 찾기)으로 해 본다
                 ctx.dump("moreden-login.html", page.content())
                 generic_login(sess, page.url, user, pw, success_check=lambda p: not _on_login_page(p))
                 return
+            id_box = page.locator("#communityIdInput")
             if not id_box.is_visible():
                 btn = page.get_by_text("기존 아이디로 로그인", exact=False).first
+                btn.wait_for(state="visible", timeout=30000)
                 btn.click()
                 sess.human_pause()
-            id_box.wait_for(state="visible", timeout=10000)
+            id_box.wait_for(state="visible", timeout=30000)
             id_box.click()
             id_box.type(user, delay=_typing_delay())
             sess.human_pause(0.3, 0.8)
@@ -238,16 +264,20 @@ class MoredenSource(Source):
             page.locator("#communityLoginButton").click()
             # 로그인되면 moreden.co.kr/auth → 원래 화면으로 돌아온다
             try:
-                page.wait_for_url(re.compile(r"^https://(?:www\.)?moreden\.co\.kr/(?!auth)"), timeout=20000)
+                page.wait_for_url(re.compile(r"^https://(?:www\.)?moreden\.co\.kr/(?!auth)"), timeout=PAGE_TIMEOUT_MS)
             except Exception:
                 pass
             self._settle(sess)
             if _on_login_page(page) or "auth.deneer.co.kr" in page.url:
                 ctx.dump("moreden-login.html", page.content())
-                why = f" (사이트 메시지: {alerts[-1]})" if alerts else ""
-                raise LoginError(
-                    "모어덴 로그인에 실패했습니다" + why + ". 카카오·애플 로그인이 아닌 모어덴 아이디·비밀번호인지 확인해 주세요."
-                )
+                if alerts:
+                    # 사이트가 '아이디가 존재하지 않습니다' 같은 경고를 띄움 → 정말 계정 문제 (하루 한 번만 다시 시도)
+                    raise LoginError(
+                        f"모어덴 로그인에 실패했습니다 (사이트 메시지: {alerts[-1]}). "
+                        "카카오·애플 로그인이 아닌 모어덴 아이디·비밀번호인지 확인해 주세요."
+                    )
+                # 경고 없이 화면만 안 넘어감 → 서버가 느리거나 화면이 바뀜 (다음 수집 때 다시 시도)
+                raise StructureError("모어덴 로그인 뒤 화면이 넘어가지 않았습니다 (서버가 느리거나 로그인 화면이 바뀌었을 수 있어요).")
         finally:
             page.remove_listener("dialog", on_dialog)
 

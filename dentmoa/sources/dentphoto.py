@@ -310,9 +310,11 @@ class DentphotoSource(Source):
                         success_check=lambda p: not p.locator("input[type=password]").first.is_visible(timeout=1500),
                     )
                     break
-                except LoginError as e:
+                except (LoginError, StructureError) as e:
                     last_err = e
             else:
+                if isinstance(last_err, StructureError):
+                    raise StructureError(f"덴트포토 로그인 화면을 읽지 못했습니다. ({last_err})")
                 raise LoginError(f"덴트포토 로그인에 실패했습니다. ({last_err})")
             for c in sess.context.cookies():
                 http.cookies.set(c["name"], c["value"], domain=c.get("domain", ""), path=c.get("path", "/"))

@@ -756,3 +756,120 @@ def test_dental_school_ignores_college_list_boilerplate():
     dental = note + "\n치과대학\n통합치의학\n1\n통합치의학과 전문의 자격 취득자"
     assert _hints(inst, "2027학년도 연세대학교 전임교원 초빙 공고\n" + dental)[0] == "연세대학교 치과대학"
     assert _hints(inst, "의과대학·치과대학 교원 초빙\n" + note)[0] == "연세대학교 치과대학"  # 제목은 그대로 본다
+
+
+# ───────────── 모어덴 로그인 (작은 서버에서 느린 화면, 2026-10-14) ─────────────
+
+
+class _FakeLoginPage:
+    """auth.deneer.co.kr 로그인 화면 흉내: '기존 아이디로 로그인'을 눌러야 치과의사용 칸이 보인다."""
+
+    def __init__(self, *, alert=None, succeed=False, slow_rounds=0):
+        self.url = "https://auth.deneer.co.kr/login?client_id=x"
+        self.alert, self.succeed, self.slow_rounds = alert, succeed, slow_rounds
+        self.shown, self.typed, self.handlers = False, {}, []
+
+    # 페이지 API 중 _login 이 쓰는 것만
+    def on(self, ev, fn):
+        self.handlers.append(fn)
+
+    def remove_listener(self, ev, fn):
+        self.handlers.remove(fn)
+
+    def wait_for_selector(self, sel, **kw):
+        if self.slow_rounds:  # 그래도 기다리면 칸이 생긴다
+            self.slow_rounds = 0
+
+    def get_by_text(self, text, **kw):
+        page = self
+
+        class _Btn:
+            first = property(lambda b: b)
+
+            def wait_for(self, **kw):
+                pass
+
+            def click(self):
+                page.shown = True
+
+        return _Btn()
+
+    def locator(self, sel):
+        page = self
+
+        class _L:
+            first = property(lambda l: l)
+
+            def count(self):
+                return 1
+
+            def is_visible(self, **kw):
+                return page.shown and "auth.deneer" in page.url
+
+            def wait_for(self, **kw):
+                if not page.shown:
+                    raise TimeoutError(sel)
+
+            def click(self):
+                if sel == "#communityLoginButton":
+                    if page.alert:
+                        for h in list(page.handlers):
+                            h(type("D", (), {"message": page.alert, "dismiss": lambda s: None})())
+                    elif page.succeed:
+                        page.url = "https://moreden.co.kr/recruit/doctor"
+
+            def type(self, text, **kw):
+                page.typed[sel] = text
+
+        return _L()
+
+    def wait_for_url(self, *a, **kw):
+        if "moreden.co.kr/recruit" not in self.url:
+            raise TimeoutError("still on login")
+
+    def wait_for_load_state(self, *a, **kw):
+        pass
+
+    def wait_for_timeout(self, ms):
+        pass
+
+    def content(self):
+        return "<html></html>"
+
+
+def _moreden_login(page):
+    from dentmoa.sources import moreden
+    from dentmoa.sources.browser import BrowserSession
+
+    sess = BrowserSession(page=page, context=None)
+    moreden.MoredenSource()._login(sess, ctx(), "dr", "pw")
+
+
+def test_moreden_login_waits_and_logs_in():
+    page = _FakeLoginPage(succeed=True, slow_rounds=3)
+    _moreden_login(page)
+    assert page.typed == {"#communityIdInput": "dr", "#communityPwInput": "pw"}
+    assert page.url == "https://moreden.co.kr/recruit/doctor"
+
+
+def test_moreden_wrong_password_is_login_error_but_slow_screen_is_not():
+    with pytest.raises(LoginError, match="아이디가 존재하지 않습니다"):
+        _moreden_login(_FakeLoginPage(alert="아이디가 존재하지 않습니다."))
+    # 경고 없이 화면만 안 넘어가면(서버가 느림) 비밀번호 문제로 보지 않는다 → 하루 한 번 제한에 걸리지 않음
+    with pytest.raises(StructureError, match="화면이 넘어가지 않았습니다"):
+        _moreden_login(_FakeLoginPage())
+
+
+def test_browser_is_light():
+    from dentmoa.sources import browser
+
+    assert {"--no-zygote", "--in-process-gpu", "--renderer-process-limit=1"} <= set(browser.LEAN_ARGS)
+    assert not any(a.startswith("--disable-features") for a in browser.LEAN_ARGS)  # Playwright 기본 목록을 덮어쓰지 않게
+    assert browser.is_blocked("image", "https://moreden.co.kr/a.png")
+    assert browser.is_blocked("font", "https://fonts.example.com/a.woff2")
+    assert browser.is_blocked("script", "https://cdn.channel.io/plugin/ch-plugin-web.js")
+    assert browser.is_blocked("script", "https://www.googletagmanager.com/gtag/js")
+    assert not browser.is_blocked("script", "https://moreden.co.kr/_next/static/app.js")
+    assert not browser.is_blocked("xhr", "https://public-api.moreden.co.kr/community/management/recruit/list")
+    assert not browser.is_blocked("script", "https://t1.kakaocdn.net/kakao_js_sdk/kakao.min.js")
+    assert not browser.is_blocked("document", "https://notchannel.io.example.com/")
