@@ -108,7 +108,9 @@ dentmoa/
   (#communityIdInput 등, '기존 아이디로 로그인'을 눌러야 보임)였고, 화면이 그려지는 데 이 작업 환경에서도 10~15초, 512MB 서버는 더 걸린다.
   예전 코드는 15초 기다린 뒤 칸이 없으면 generic_login 으로 넘어갔고, 거기서 첫 비밀번호 칸(숨은 치과의사용 칸)을 기다리다 실패 →
   LoginError → 하루 한 번만 다시 시도(LOGIN_RETRY_AFTER)라서 며칠 못 읽음. 연결 테스트 때는 크로미움(약 309MB·프로세스 7개)이
-  메모리를 다 써서 서버가 버벅이다 재시작. 고침: _wait_ready(목록 JSON 또는 로그인 칸까지 최대 90초), 기다리는 기본 시간 60초,
+  메모리를 다 써서 서버가 스왑으로 아주 느려짐 — 사용자는 '서버가 다운되고 재시작'으로 봤지만 서버 진단(업데이트 전) 결과 재부팅 없음
+  (uptime -s 2026-10-10), 컨테이너 재시작 없음(restarts=0, OOMKilled=false), 커널 OOM 기록 없음, netwatch 기록 없음, 스왑 264MB 사용.
+  PR newdentmoa/dentmoa#9 업데이트 뒤 연결 테스트 성공(10-14 15:56). 고침: _wait_ready(목록 JSON 또는 로그인 칸까지 최대 90초), 기다리는 기본 시간 60초,
   사이트 경고창(alert)이 뜰 때만 LoginError — 칸을 못 찾음·화면이 안 넘어감은 StructureError(다음 수집 때 다시, 연속 3번이면 경고),
   예전에 잘못 남은 기록은 무시(pipeline.NOT_A_CREDENTIAL_PROBLEM), 연결 테스트가 성공하면 로그인 실패 기록을 지운다(check_source).
   브라우저: browser.LEAN_ARGS(--no-zygote·--in-process-gpu·NetworkServiceInProcess2 등 — --disable-features 는 Playwright 목록을
