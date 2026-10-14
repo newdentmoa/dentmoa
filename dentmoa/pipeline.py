@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import re
 import threading
 import traceback
 from dataclasses import dataclass, field
@@ -126,9 +127,15 @@ def _credential_print(source: Source) -> str:
     return hashlib.sha256(raw.encode()).hexdigest()[:16]
 
 
+# 예전(2026-10-14 전)에는 로그인 화면이 늦게 떠서 칸을 못 찾은 것도 로그인 실패로 기록했다 → 그런 기록은 무시한다
+NOT_A_CREDENTIAL_PROBLEM = re.compile(r"칸을 찾지 못했습니다|열리지 않습니다|넘어가지 않았습니다")
+
+
 def _login_paused(source: Source) -> str:
     entry = db.kv_get("login_failed", {}).get(source.key)
     if not entry or entry.get("creds") != _credential_print(source):
+        return ""
+    if NOT_A_CREDENTIAL_PROBLEM.search(entry.get("message", "")):
         return ""
     if config.now() - datetime.fromisoformat(entry["at"]) >= LOGIN_RETRY_AFTER:
         return ""
@@ -367,10 +374,20 @@ def run_cycle(*, keys: list[str] | None = None) -> dict:
 
 
 def check_source(key: str) -> str:
-    """설정 화면의 연결 테스트."""
+    """설정 화면의 연결 테스트. 로그인하는 출처는 결과를 '로그인 실패 기록'에도 반영한다
+    (성공하면 하루 한 번만 다시 시도하던 것을 풀고, 사이트가 틀렸다고 하면 기록한다)."""
     src = get_source(key)
     settings = settings_store.load()
     ctx = make_context(src, settings)
     ctx.max_pages = 1
     ctx.min_delay, ctx.max_delay = 1.0, 2.0
-    return src.check(ctx)
+    login = getattr(src, "requires_login", False)
+    try:
+        msg = src.check(ctx)
+    except LoginError as e:
+        if login:
+            _remember_login(src, str(e))
+        raise
+    if login:
+        _remember_login(src, None)
+    return msg

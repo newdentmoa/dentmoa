@@ -367,3 +367,39 @@ def test_legacy_posting_records_move_to_first_person(tmp_db):
     assert db.unprocessed("p1") == [] and [p.id for p in db.unprocessed("p2")] == [pid]
     assert db.starred_ids("p1") == {pid} and db.starred_ids("p2") == set()
     assert db.person_records(pid)["p1"]["notified_at"] is not None
+
+
+def test_connection_test_clears_login_pause(monkeypatch, sent):
+    """대시보드의 연결 테스트가 성공하면 '하루 한 번만 다시 시도'를 푼다 (2026-10-14)."""
+    settings_store.update_secrets({"moreden_id": "dr", "moreden_pw": "pw"})
+    src = LoginSource(error=LoginError("모어덴 로그인에 실패했습니다 (사이트 메시지: 비밀번호가 틀렸습니다)."))
+    use_sources(monkeypatch, src)
+    monkeypatch.setattr(pipeline, "get_source", lambda key: src)
+    pipeline.run_cycle()
+    assert "moreden" in db.kv_get("login_failed", {})
+    with pytest.raises(LoginError):  # 연결 테스트도 실패하면 기록은 그대로
+        pipeline.check_source("moreden")
+    assert "moreden" in db.kv_get("login_failed", {})
+    src.error, src.items = None, [raw("1", "소아치과 원장님 모십니다")]
+    assert pipeline.check_source("moreden").startswith("연결 성공")
+    assert "moreden" not in db.kv_get("login_failed", {})
+    pipeline.run_cycle()  # 다음 실행은 바로 로그인한다
+    assert db.last_run("collect", "moreden")["status"] == "ok"
+
+
+def test_slow_login_screen_is_not_a_password_problem(monkeypatch, sent):
+    """로그인 칸을 못 찾은 것(화면이 늦게 뜸)은 비밀번호 문제가 아니다 → 다음 실행에 바로 다시 시도.
+    2026-10-12~14 서버에서 이 실패를 로그인 실패로 기록해 모어덴을 하루 한 번만 시도하던 문제."""
+    from dentmoa.sources.base import StructureError
+
+    settings_store.update_secrets({"moreden_id": "dr", "moreden_pw": "pw"})
+    src = LoginSource(error=StructureError("로그인 화면에서 비밀번호 칸을 찾지 못했습니다 (화면이 늦게 뜨거나 바뀌었을 수 있어요)."))
+    use_sources(monkeypatch, src)
+    pipeline.run_cycle()
+    pipeline.run_cycle()
+    assert len(src.contexts) == 2 and "moreden" not in db.kv_get("login_failed", {})
+    # 예전 버전이 남긴 기록(칸을 못 찾음)은 무시한다
+    db.kv_set("login_failed", {"moreden": {"at": config.now().isoformat(), "creds": pipeline._credential_print(src),
+                                          "message": "로그인 화면에서 비밀번호 칸을 찾지 못했습니다."}})
+    pipeline.run_cycle()
+    assert len(src.contexts) == 3
